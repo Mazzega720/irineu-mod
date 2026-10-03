@@ -3,7 +3,7 @@
 	"id": "irineu",
 	"version": "${version}",
 	"name": "Irineu, Jailson & BamBam",
-	"description": "Irineu, você não sabe nem eu! A dimensão Brasil (6 biomas, plantas e bichos), o Irineu e o Jailson, o BamBam e o Manoel Gomes como bosses animados com o GeckoLib, o Luva de Pedreiro, o chefão final Lula e Bolsonaro, quiosques com o Davi Brito, a economia do Real (notas, Pix, maquininha, inflação e a nota de 3), minérios brasileiros (nióbio, turmalina, hematita, ágata, topázio, aluvião), itens da cultura popular (Havaiana de Pau, Bambu do Silvio, gambiarra, óculos Juliet, filtro de barro, comidas) e estruturas com comerciantes (favela, buteco, vila de cangaceiros, estância gaúcha, palafitas e as ruínas de Carajás).",
+	"description": "Irineu, você não sabe nem eu! A dimensão Brasil (6 biomas, plantas e bichos), o Irineu e o Jailson, o BamBam e o Manoel Gomes como bosses animados com o GeckoLib, o Luva de Pedreiro, o chefão final Lula e Bolsonaro, quiosques com o Davi Brito, a economia do Real (notas, Pix, maquininha, inflação e a nota de 3), minérios brasileiros (nióbio, turmalina, hematita, ágata, topázio, aluvião), itens da cultura popular (Havaiana de Pau, Bambu do Silvio, gambiarra, óculos Juliet, filtro de barro, comidas) e estruturas com comerciantes (favela, buteco, vila de cangaceiros, estância gaúcha, palafitas e as ruínas de Carajás). Projeto 100% vibecodado com o Claude Code.",
 	"authors": [
 		"Mazzega"
 	],
@@ -24,5 +24,8 @@
 		"java": ">=25",
 		"fabric-api": "*",
 		"geckolib": ">=5.5.7"
-	}
+	},
+	"contributors": [
+		"Claude Code (Anthropic) — todo o código e os recursos, por vibe coding"
+	]
 }

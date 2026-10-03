@@ -1,5 +1,8 @@
 # Irineu, Jailson & BamBam — memes BR no Minecraft
 
+> [!NOTE]
+> **Projeto 100% vibecodado com o [Claude Code](https://www.anthropic.com/claude-code).** Todo o código Java, os geradores Python, as texturas, os modelos e animações, os sons sintetizados, as estruturas, os testes automáticos e esta documentação foram escritos pelo Claude Code (Anthropic), a partir das ideias e pedidos do Mazzega. O Mazzega idealizou o mod, testou no jogo e decidiu o que mudar a cada versão; nenhuma linha foi escrita à mão.
+
 Mod para **Minecraft 26.3 / Fabric** (Loader 0.19.5, Fabric API 0.161.0+26.3, Java 25+).
 
 **Precisa do [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib) 5.5.7+ para Fabric 26.3** na pasta `mods` (é ele que anima o BamBam e o Manoel Gomes).
@@ -521,6 +524,7 @@ teste automático: spawna Irineu, Jailson e BamBam (com árvore e mobs para o BI
 A cada push na `main` o fluxo `build.yml` compila e guarda o jar como artefato.
 
 ## Créditos e avisos
+- **Feito inteiramente com vibe coding:** o Claude Code (Anthropic) escreveu o projeto inteiro; o Mazzega deu as ideias, testou e dirigiu.
 - Mod de **paródia e humor**, feito por fã, sem ligação com a Mojang, a Microsoft nem com as pessoas, programas e marcas citados. Os personagens são caricaturas de memes e figuras públicas brasileiras.
 - **Licença:** o código e os recursos feitos para o mod (texturas, modelos, sons sintetizados, estruturas) são [CC0 1.0](LICENSE).
 - **Áudios de terceiros:** as falas tiradas de vídeos (Irineu, Jailson, BamBam, Davi, Manoel Gomes, Luva de Pedreiro, Lula, Bolsonaro, Padre Kelmon e o som da urna) pertencem aos seus autores e são usadas como paródia. Elas não estão sob a CC0. Se você é dono de algum desses áudios e quer que ele saia do mod, abra uma issue.
