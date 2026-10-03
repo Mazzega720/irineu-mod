@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "irineu:block/cadeira_branca"
+    },
+    "facing=east": {
+      "model": "irineu:block/cadeira_branca",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "irineu:block/cadeira_branca",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irineu:block/cadeira_branca",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:bowl",
+    "#minecraft:leaves",
+    "minecraft:water_bucket"
+  ],
+  "result": {
+    "id": "irineu:chimarrao",
+    "count": 1
+  }
+}

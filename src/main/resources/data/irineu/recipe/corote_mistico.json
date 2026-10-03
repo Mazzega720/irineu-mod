@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:glass_bottle",
+    "minecraft:sugar_cane",
+    "minecraft:chorus_fruit"
+  ],
+  "result": {
+    "id": "irineu:corote_mistico",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "AAA",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "A": "irineu:aco_pesado",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "irineu:picareta_industrial",
+    "count": 1
+  }
+}

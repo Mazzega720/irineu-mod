@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "irineu:nota_10_reais",
+    "irineu:nota_10_reais",
+    "irineu:nota_10_reais",
+    "irineu:nota_10_reais",
+    "irineu:nota_10_reais"
+  ],
+  "result": {
+    "id": "irineu:nota_50_reais",
+    "count": 1
+  },
+  "group": "cambio"
+}

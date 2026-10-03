@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "irineu:block/aguape"
+      },
+      {
+        "model": "irineu:block/aguape",
+        "y": 90
+      },
+      {
+        "model": "irineu:block/aguape",
+        "y": 180
+      },
+      {
+        "model": "irineu:block/aguape",
+        "y": 270
+      }
+    ]
+  }
+}

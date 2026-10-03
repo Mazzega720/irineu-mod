@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "irineu",
+	"version": "${version}",
+	"name": "Irineu, Jailson & BamBam",
+	"description": "Irineu, você não sabe nem eu! A dimensão Brasil (6 biomas, plantas e bichos), o Irineu e o Jailson, o BamBam e o Manoel Gomes como bosses animados com o GeckoLib, o Luva de Pedreiro, o chefão final Lula e Bolsonaro, quiosques com o Davi Brito, a economia do Real (notas, Pix, maquininha, inflação e a nota de 3), minérios brasileiros (nióbio, turmalina, hematita, ágata, topázio, aluvião), itens da cultura popular (Havaiana de Pau, Bambu do Silvio, gambiarra, óculos Juliet, filtro de barro, comidas) e estruturas com comerciantes (favela, buteco, vila de cangaceiros, estância gaúcha, palafitas e as ruínas de Carajás).",
+	"authors": [
+		"Mazzega"
+	],
+	"license": "CC0-1.0",
+	"icon": "assets/irineu/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.mazzega.irineu.Irineu"
+		],
+		"client": [
+			"com.mazzega.irineu.client.IrineuClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*",
+		"geckolib": ">=5.5.7"
+	}
+}

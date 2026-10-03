@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "irineu:block/tronco_pau_terra_top",
+    "side": "irineu:block/tronco_pau_terra"
+  }
+}

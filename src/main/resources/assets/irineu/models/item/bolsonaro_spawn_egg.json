@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "irineu:item/bolsonaro_spawn_egg"
+  }
+}

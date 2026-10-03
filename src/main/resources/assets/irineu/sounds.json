@@ -1,0 +1,1124 @@
+{
+  "entity.irineu.ambient": {
+    "subtitle": "subtitles.irineu.entity.irineu.ambient",
+    "sounds": [
+      {
+        "name": "irineu:entity/irineu/irineu_completo",
+        "weight": 4
+      },
+      {
+        "name": "irineu:entity/irineu/irineu_completo",
+        "pitch": 0.9,
+        "weight": 1
+      },
+      {
+        "name": "irineu:entity/irineu/irineu",
+        "weight": 3
+      },
+      {
+        "name": "irineu:entity/irineu/irineu",
+        "pitch": 1.15,
+        "weight": 1
+      },
+      {
+        "name": "irineu:entity/irineu/irineu_irineu",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/irineu/voce_nao_sabe_nem_eu",
+        "weight": 2
+      }
+    ]
+  },
+  "entity.irineu.hurt": {
+    "subtitle": "subtitles.irineu.entity.irineu.hurt",
+    "sounds": [
+      {
+        "name": "irineu:entity/irineu/irineu",
+        "pitch": 1.3
+      },
+      {
+        "name": "irineu:entity/irineu/nem_eu",
+        "pitch": 1.25
+      }
+    ]
+  },
+  "entity.irineu.death": {
+    "subtitle": "subtitles.irineu.entity.irineu.death",
+    "sounds": [
+      {
+        "name": "irineu:entity/irineu/irineu_completo",
+        "pitch": 0.7
+      }
+    ]
+  },
+  "entity.irineu.confuse": {
+    "subtitle": "subtitles.irineu.entity.irineu.confuse",
+    "sounds": [
+      {
+        "name": "irineu:entity/irineu/voce_nao_sabe_nem_eu",
+        "weight": 2
+      },
+      "irineu:entity/irineu/irineu_completo"
+    ]
+  },
+  "entity.irineu.gift": {
+    "subtitle": "subtitles.irineu.entity.irineu.gift",
+    "sounds": [
+      {
+        "name": "irineu:entity/irineu/irineu",
+        "pitch": 1.1
+      },
+      "irineu:entity/irineu/irineu_irineu"
+    ]
+  },
+  "entity.irineu.vanish": {
+    "subtitle": "subtitles.irineu.entity.irineu.vanish",
+    "sounds": [
+      "irineu:entity/irineu/nem_eu",
+      {
+        "name": "irineu:entity/irineu/nem_eu",
+        "pitch": 1.2
+      }
+    ]
+  },
+  "entity.jailson.ambient": {
+    "subtitle": "subtitles.irineu.entity.jailson.ambient",
+    "sounds": [
+      {
+        "name": "irineu:entity/jailson/que_delicia_cara",
+        "weight": 4
+      },
+      {
+        "name": "irineu:entity/jailson/que_delicia_cara",
+        "pitch": 0.9,
+        "weight": 1
+      },
+      {
+        "name": "irineu:entity/jailson/que_delicia_cara",
+        "pitch": 1.1,
+        "weight": 1
+      },
+      {
+        "name": "irineu:entity/jailson/essa_peca",
+        "weight": 3
+      }
+    ]
+  },
+  "entity.jailson.hurt": {
+    "subtitle": "subtitles.irineu.entity.jailson.hurt",
+    "sounds": [
+      {
+        "name": "irineu:entity/jailson/cara",
+        "pitch": 1.2
+      },
+      {
+        "name": "irineu:entity/jailson/cara",
+        "pitch": 1.35
+      },
+      {
+        "name": "irineu:entity/jailson/vai1",
+        "pitch": 1.3
+      }
+    ]
+  },
+  "entity.jailson.death": {
+    "subtitle": "subtitles.irineu.entity.jailson.death",
+    "sounds": [
+      {
+        "name": "irineu:entity/jailson/que_delicia_cara",
+        "pitch": 0.7
+      }
+    ]
+  },
+  "entity.jailson.drink": {
+    "subtitle": "subtitles.irineu.entity.jailson.drink",
+    "sounds": [
+      "irineu:entity/jailson/que_delicia_cara"
+    ]
+  },
+  "entity.jailson.duplicate": {
+    "subtitle": "subtitles.irineu.entity.jailson.duplicate",
+    "sounds": [
+      {
+        "name": "irineu:entity/jailson/que_delicia_cara",
+        "pitch": 1.15
+      },
+      {
+        "name": "irineu:entity/jailson/essa_peca",
+        "pitch": 1.1
+      }
+    ]
+  },
+  "entity.jailson.peca": {
+    "subtitle": "subtitles.irineu.entity.jailson.peca",
+    "sounds": [
+      "irineu:entity/jailson/essa_peca"
+    ]
+  },
+  "entity.jailson.refuse": {
+    "subtitle": "subtitles.irineu.entity.jailson.refuse",
+    "sounds": [
+      {
+        "name": "irineu:entity/jailson/vai1",
+        "pitch": 0.9
+      },
+      {
+        "name": "irineu:entity/jailson/vai2",
+        "pitch": 0.9
+      },
+      {
+        "name": "irineu:entity/jailson/vai3",
+        "pitch": 0.9
+      }
+    ]
+  },
+  "entity.jailson.angry": {
+    "subtitle": "subtitles.irineu.entity.jailson.angry",
+    "sounds": [
+      {
+        "name": "irineu:entity/jailson/vai_vai_vai",
+        "weight": 2
+      },
+      "irineu:entity/jailson/vai1",
+      "irineu:entity/jailson/vai2",
+      "irineu:entity/jailson/vai3"
+    ]
+  },
+  "entity.bambam.ambient": {
+    "subtitle": "subtitles.irineu.entity.bambam.ambient",
+    "sounds": [
+      {
+        "name": "irineu:entity/bambam/fibra2",
+        "weight": 3
+      },
+      {
+        "name": "irineu:entity/bambam/fibra",
+        "weight": 1
+      },
+      {
+        "name": "irineu:entity/bambam/agua_com_musculo",
+        "weight": 3
+      },
+      {
+        "name": "irineu:entity/bambam/trinta_e_sete",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/bambam/verao",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/bambam/maluco",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/bambam/bora",
+        "weight": 1
+      }
+    ]
+  },
+  "entity.bambam.hurt": {
+    "subtitle": "subtitles.irineu.entity.bambam.hurt",
+    "sounds": [
+      "irineu:entity/bambam/porra",
+      "irineu:entity/bambam/porra2",
+      "irineu:entity/bambam/eita_porra"
+    ]
+  },
+  "entity.bambam.death": {
+    "subtitle": "subtitles.irineu.entity.bambam.death",
+    "sounds": [
+      {
+        "name": "irineu:entity/bambam/nao_vai_dar_pai",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/bambam/nao_vai_dar",
+        "weight": 1
+      }
+    ]
+  },
+  "entity.bambam.jaula": {
+    "subtitle": "subtitles.irineu.entity.bambam.jaula",
+    "sounds": [
+      "irineu:entity/bambam/jaula"
+    ]
+  },
+  "entity.bambam.show": {
+    "subtitle": "subtitles.irineu.entity.bambam.show",
+    "sounds": [
+      "irineu:entity/bambam/hora_do_show"
+    ]
+  },
+  "entity.bambam.ibirapuera": {
+    "subtitle": "subtitles.irineu.entity.bambam.ibirapuera",
+    "sounds": [
+      "irineu:entity/bambam/ibirapuera"
+    ]
+  },
+  "entity.bambam.throw": {
+    "subtitle": "subtitles.irineu.entity.bambam.throw",
+    "sounds": [
+      {
+        "name": "irineu:entity/bambam/vem_porra",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/bambam/bora",
+        "weight": 1
+      }
+    ]
+  },
+  "entity.bambam.birl": {
+    "subtitle": "subtitles.irineu.entity.bambam.birl",
+    "sounds": [
+      {
+        "name": "irineu:entity/bambam/birl",
+        "weight": 3
+      },
+      {
+        "name": "irineu:entity/bambam/birl",
+        "pitch": 0.85,
+        "weight": 1
+      }
+    ]
+  },
+  "entity.davi.ambient": {
+    "subtitle": "subtitles.irineu.entity.davi.ambient",
+    "sounds": [
+      {
+        "name": "irineu:entity/davi/calma_calabreso",
+        "weight": 3
+      },
+      {
+        "name": "irineu:entity/davi/calma_calabreso2",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/davi/calma_calabreso3",
+        "weight": 3
+      },
+      {
+        "name": "irineu:entity/davi/calma_calabreso_duplo",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/davi/entao_calma",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/davi/nervoso",
+        "weight": 1
+      },
+      {
+        "name": "irineu:entity/davi/nervoso2",
+        "weight": 1
+      }
+    ]
+  },
+  "entity.davi.hurt": {
+    "subtitle": "subtitles.irineu.entity.davi.hurt",
+    "sounds": [
+      {
+        "name": "irineu:entity/davi/calma",
+        "pitch": 1.2
+      },
+      {
+        "name": "irineu:entity/davi/oi",
+        "pitch": 1.25
+      },
+      {
+        "name": "irineu:entity/davi/oi2",
+        "pitch": 1.25
+      }
+    ]
+  },
+  "entity.davi.death": {
+    "subtitle": "subtitles.irineu.entity.davi.death",
+    "sounds": [
+      {
+        "name": "irineu:entity/davi/calma_calabreso",
+        "pitch": 0.7
+      }
+    ]
+  },
+  "entity.davi.greet": {
+    "subtitle": "subtitles.irineu.entity.davi.greet",
+    "sounds": [
+      "irineu:entity/davi/oi",
+      "irineu:entity/davi/oi2"
+    ]
+  },
+  "entity.davi.yes": {
+    "subtitle": "subtitles.irineu.entity.davi.yes",
+    "sounds": [
+      "irineu:entity/davi/calma_calabreso",
+      "irineu:entity/davi/calma_calabreso3"
+    ]
+  },
+  "entity.davi.no": {
+    "subtitle": "subtitles.irineu.entity.davi.no",
+    "sounds": [
+      "irineu:entity/davi/nervoso",
+      "irineu:entity/davi/nervoso2"
+    ]
+  },
+  "entity.manoel.intro": {
+    "subtitle": "subtitles.irineu.entity.manoel.intro",
+    "sounds": [
+      "irineu:entity/manoel/refrao"
+    ]
+  },
+  "entity.manoel.ambient": {
+    "subtitle": "subtitles.irineu.entity.manoel.ambient",
+    "sounds": [
+      {
+        "name": "irineu:entity/manoel/caneta_azul_azul_caneta",
+        "weight": 3
+      },
+      {
+        "name": "irineu:entity/manoel/caneta_azul_azul_caneta2",
+        "weight": 3
+      },
+      {
+        "name": "irineu:entity/manoel/marcada",
+        "weight": 3
+      },
+      {
+        "name": "irineu:entity/manoel/professora",
+        "weight": 1
+      },
+      {
+        "name": "irineu:entity/manoel/perdi_caneta",
+        "weight": 1
+      },
+      {
+        "name": "irineu:entity/manoel/nao_brigue",
+        "weight": 1
+      }
+    ]
+  },
+  "entity.manoel.hurt": {
+    "subtitle": "subtitles.irineu.entity.manoel.hurt",
+    "sounds": [
+      {
+        "name": "irineu:entity/manoel/caneta",
+        "pitch": 1.2
+      },
+      {
+        "name": "irineu:entity/manoel/azul",
+        "pitch": 1.2
+      }
+    ]
+  },
+  "entity.manoel.death": {
+    "subtitle": "subtitles.irineu.entity.manoel.death",
+    "sounds": [
+      "irineu:entity/manoel/tchau"
+    ]
+  },
+  "entity.manoel.summon_azul": {
+    "subtitle": "subtitles.irineu.entity.manoel.summon_azul",
+    "sounds": [
+      "irineu:entity/manoel/caneta_azul_azul_caneta",
+      "irineu:entity/manoel/caneta_azul_azul_caneta2"
+    ]
+  },
+  "entity.manoel.summon_amarela": {
+    "subtitle": "subtitles.irineu.entity.manoel.summon_amarela",
+    "sounds": [
+      "irineu:entity/manoel/caneta_amarela"
+    ]
+  },
+  "entity.manoel.summon": {
+    "subtitle": "subtitles.irineu.entity.manoel.summon",
+    "sounds": [
+      "irineu:entity/manoel/caneta_azul_tres",
+      "irineu:entity/manoel/nao_brigue"
+    ]
+  },
+  "entity.bambam.quake": {
+    "subtitle": "subtitles.irineu.entity.bambam.quake",
+    "sounds": [
+      {
+        "name": "irineu:entity/bambam/bora",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/bambam/porra2",
+        "weight": 1
+      }
+    ]
+  },
+  "entity.bambam.leap": {
+    "subtitle": "subtitles.irineu.entity.bambam.leap",
+    "sounds": [
+      {
+        "name": "irineu:entity/bambam/vem_porra",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/bambam/verao",
+        "weight": 1
+      }
+    ]
+  },
+  "entity.bambam.grab": {
+    "subtitle": "subtitles.irineu.entity.bambam.grab",
+    "sounds": [
+      {
+        "name": "irineu:entity/bambam/maluco",
+        "weight": 2
+      },
+      {
+        "name": "irineu:entity/bambam/trinta_e_sete",
+        "weight": 1
+      }
+    ]
+  },
+  "entity.manoel.fase2": {
+    "subtitle": "subtitles.irineu.entity.manoel.fase2",
+    "sounds": [
+      "irineu:entity/manoel/vamos_rebentar"
+    ]
+  },
+  "entity.manoel.fusao": {
+    "subtitle": "subtitles.irineu.entity.manoel.fusao",
+    "sounds": [
+      "irineu:entity/manoel/outra_canetinha"
+    ]
+  },
+  "entity.luva.receba": {
+    "subtitle": "subtitles.irineu.entity.luva.receba",
+    "sounds": [
+      "irineu:entity/luva/receba"
+    ]
+  },
+  "item.urna.confirma": {
+    "subtitle": "subtitles.irineu.item.urna.confirma",
+    "sounds": [
+      "irineu:item/urna_confirma"
+    ]
+  },
+  "entity.lula.intro": {
+    "subtitle": "subtitles.irineu.entity.lula.intro",
+    "sounds": [
+      "irineu:entity/lula/intro"
+    ]
+  },
+  "entity.lula.ambient": {
+    "subtitle": "subtitles.irineu.entity.lula.ambient",
+    "sounds": [
+      "irineu:entity/lula/escute",
+      "irineu:entity/lula/patetico",
+      "irineu:entity/lula/mais_forte",
+      "irineu:entity/lula/tres_por_cento",
+      "irineu:entity/lula/povo_picanha"
+    ]
+  },
+  "entity.lula.picanha": {
+    "subtitle": "subtitles.irineu.entity.lula.picanha",
+    "sounds": [
+      "irineu:entity/lula/picanha"
+    ]
+  },
+  "entity.lula.estrela": {
+    "subtitle": "subtitles.irineu.entity.lula.estrela",
+    "sounds": [
+      "irineu:entity/lula/estrela"
+    ]
+  },
+  "entity.lula.gados": {
+    "subtitle": "subtitles.irineu.entity.lula.gados",
+    "sounds": [
+      "irineu:entity/lula/gados"
+    ]
+  },
+  "entity.lula.lula_livre": {
+    "subtitle": "subtitles.irineu.entity.lula.lula_livre",
+    "sounds": [
+      "irineu:entity/lula/lula_livre"
+    ]
+  },
+  "entity.lula.esmola": {
+    "subtitle": "subtitles.irineu.entity.lula.esmola",
+    "sounds": [
+      "irineu:entity/lula/esmola"
+    ]
+  },
+  "entity.lula.dupla": {
+    "subtitle": "subtitles.irineu.entity.lula.dupla",
+    "sounds": [
+      "irineu:entity/lula/nove_dedos"
+    ]
+  },
+  "entity.lula.fusao": {
+    "subtitle": "subtitles.irineu.entity.lula.fusao",
+    "sounds": [
+      "irineu:entity/lula/te_amava"
+    ]
+  },
+  "entity.bolsonaro.chegada": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.chegada",
+    "sounds": [
+      "irineu:entity/bolsonaro/acabou"
+    ]
+  },
+  "entity.bolsonaro.dupla": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.dupla",
+    "sounds": [
+      "irineu:entity/bolsonaro/imbrochavel"
+    ]
+  },
+  "entity.bolsonaro.ambient": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.ambient",
+    "sounds": [
+      "irineu:entity/bolsonaro/picanha_o_que",
+      "irineu:entity/bolsonaro/ta_ok",
+      "irineu:entity/bolsonaro/leite_condensado",
+      "irineu:entity/bolsonaro/imbrochavel"
+    ]
+  },
+  "entity.bolsonaro.fuzilar": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.fuzilar",
+    "sounds": [
+      "irineu:entity/bolsonaro/fuzilar"
+    ]
+  },
+  "entity.bolsonaro.flexoes": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.flexoes",
+    "sounds": [
+      "irineu:entity/bolsonaro/historico"
+    ]
+  },
+  "entity.bolsonaro.pra_cima": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.pra_cima",
+    "sounds": [
+      "irineu:entity/bolsonaro/pra_cima1",
+      "irineu:entity/bolsonaro/pra_cima2",
+      "irineu:entity/bolsonaro/pra_cima3",
+      "irineu:entity/bolsonaro/pra_cima4"
+    ]
+  },
+  "entity.bolsonaro.ataque_forte": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.ataque_forte",
+    "sounds": [
+      "irineu:entity/bolsonaro/ataque_forte"
+    ]
+  },
+  "entity.bolsonaro.mitada": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.mitada",
+    "sounds": [
+      "irineu:entity/bolsonaro/mitada"
+    ]
+  },
+  "entity.bolsonaro.kelmon": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.kelmon",
+    "sounds": [
+      "irineu:entity/bolsonaro/kelmon"
+    ]
+  },
+  "entity.bolsonaro.fusao": {
+    "subtitle": "subtitles.irineu.entity.bolsonaro.fusao",
+    "sounds": [
+      "irineu:entity/bolsonaro/governar"
+    ]
+  },
+  "entity.kelmon.chegada": {
+    "subtitle": "subtitles.irineu.entity.kelmon.chegada",
+    "sounds": [
+      "irineu:entity/kelmon/concordo"
+    ]
+  },
+  "entity.lulonaro.surgir": {
+    "subtitle": "subtitles.irineu.entity.lulonaro.surgir",
+    "sounds": [
+      {
+        "name": "irineu:entity/lula/poder",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.lulonaro.estrela": {
+    "subtitle": "subtitles.irineu.entity.lulonaro.estrela",
+    "sounds": [
+      {
+        "name": "irineu:entity/lula/estrela",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.lulonaro.mitada": {
+    "subtitle": "subtitles.irineu.entity.lulonaro.mitada",
+    "sounds": [
+      {
+        "name": "irineu:entity/bolsonaro/mitada",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.lulonaro.drenar": {
+    "subtitle": "subtitles.irineu.entity.lulonaro.drenar",
+    "sounds": [
+      {
+        "name": "irineu:entity/lula/auxilio",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.lulonaro.golpe": {
+    "subtitle": "subtitles.irineu.entity.lulonaro.golpe",
+    "sounds": [
+      {
+        "name": "irineu:entity/bolsonaro/fraude",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.lulonaro.morte": {
+    "subtitle": "subtitles.irineu.entity.lulonaro.morte",
+    "sounds": [
+      {
+        "name": "irineu:entity/lula/passado",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.lulonaro.ambient": {
+    "subtitle": "subtitles.irineu.entity.lulonaro.ambient",
+    "sounds": [
+      {
+        "name": "irineu:entity/lula/mais_forte",
+        "pitch": 0.8
+      },
+      {
+        "name": "irineu:entity/bolsonaro/ta_ok",
+        "pitch": 0.8
+      },
+      {
+        "name": "irineu:entity/bolsonaro/leite_condensado",
+        "pitch": 0.8
+      },
+      {
+        "name": "irineu:entity/lula/tres_por_cento",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.tamandua.ambient": {
+    "subtitle": "subtitles.irineu.entity.tamandua.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.panda.ambient",
+        "type": "event",
+        "pitch": 1.3
+      }
+    ]
+  },
+  "entity.tamandua.hurt": {
+    "subtitle": "subtitles.irineu.entity.tamandua.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.panda.hurt",
+        "type": "event",
+        "pitch": 1.25
+      }
+    ]
+  },
+  "entity.tamandua.death": {
+    "subtitle": "subtitles.irineu.entity.tamandua.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.panda.death",
+        "type": "event",
+        "pitch": 1.2
+      }
+    ]
+  },
+  "entity.lobo_guara.ambient": {
+    "subtitle": "subtitles.irineu.entity.lobo_guara.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.fox.ambient",
+        "type": "event",
+        "pitch": 0.85
+      }
+    ]
+  },
+  "entity.lobo_guara.hurt": {
+    "subtitle": "subtitles.irineu.entity.lobo_guara.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.fox.hurt",
+        "type": "event",
+        "pitch": 0.85
+      }
+    ]
+  },
+  "entity.lobo_guara.death": {
+    "subtitle": "subtitles.irineu.entity.lobo_guara.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.fox.death",
+        "type": "event",
+        "pitch": 0.85
+      }
+    ]
+  },
+  "entity.ema.ambient": {
+    "subtitle": "subtitles.irineu.entity.ema.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.chicken.ambient",
+        "type": "event",
+        "pitch": 0.55
+      }
+    ]
+  },
+  "entity.ema.hurt": {
+    "subtitle": "subtitles.irineu.entity.ema.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.chicken.hurt",
+        "type": "event",
+        "pitch": 0.55
+      }
+    ]
+  },
+  "entity.ema.death": {
+    "subtitle": "subtitles.irineu.entity.ema.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.chicken.death",
+        "type": "event",
+        "pitch": 0.55
+      }
+    ]
+  },
+  "entity.mico_leao.ambient": {
+    "subtitle": "subtitles.irineu.entity.mico_leao.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.fox.ambient",
+        "type": "event",
+        "pitch": 1.8
+      }
+    ]
+  },
+  "entity.mico_leao.hurt": {
+    "subtitle": "subtitles.irineu.entity.mico_leao.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.fox.hurt",
+        "type": "event",
+        "pitch": 1.7
+      }
+    ]
+  },
+  "entity.mico_leao.death": {
+    "subtitle": "subtitles.irineu.entity.mico_leao.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.fox.death",
+        "type": "event",
+        "pitch": 1.7
+      }
+    ]
+  },
+  "entity.tucano.ambient": {
+    "subtitle": "subtitles.irineu.entity.tucano.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.ambient",
+        "type": "event",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.tucano.hurt": {
+    "subtitle": "subtitles.irineu.entity.tucano.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.hurt",
+        "type": "event",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.tucano.death": {
+    "subtitle": "subtitles.irineu.entity.tucano.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.death",
+        "type": "event",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.carcara.ambient": {
+    "subtitle": "subtitles.irineu.entity.carcara.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.fox.screech",
+        "type": "event",
+        "pitch": 1.35
+      }
+    ]
+  },
+  "entity.carcara.hurt": {
+    "subtitle": "subtitles.irineu.entity.carcara.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.hurt",
+        "type": "event",
+        "pitch": 0.7
+      }
+    ]
+  },
+  "entity.carcara.death": {
+    "subtitle": "subtitles.irineu.entity.carcara.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.death",
+        "type": "event",
+        "pitch": 0.7
+      }
+    ]
+  },
+  "entity.coruja_buraqueira.ambient": {
+    "subtitle": "subtitles.irineu.entity.coruja_buraqueira.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:block.note_block.flute",
+        "type": "event",
+        "pitch": 0.75
+      }
+    ]
+  },
+  "entity.coruja_buraqueira.hurt": {
+    "subtitle": "subtitles.irineu.entity.coruja_buraqueira.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.hurt",
+        "type": "event",
+        "pitch": 1.2
+      }
+    ]
+  },
+  "entity.coruja_buraqueira.death": {
+    "subtitle": "subtitles.irineu.entity.coruja_buraqueira.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.death",
+        "type": "event",
+        "pitch": 1.2
+      }
+    ]
+  },
+  "entity.veado_campeiro.ambient": {
+    "subtitle": "subtitles.irineu.entity.veado_campeiro.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.goat.ambient",
+        "type": "event",
+        "pitch": 1.35
+      }
+    ]
+  },
+  "entity.veado_campeiro.hurt": {
+    "subtitle": "subtitles.irineu.entity.veado_campeiro.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.goat.hurt",
+        "type": "event",
+        "pitch": 1.3
+      }
+    ]
+  },
+  "entity.veado_campeiro.death": {
+    "subtitle": "subtitles.irineu.entity.veado_campeiro.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.goat.death",
+        "type": "event",
+        "pitch": 1.3
+      }
+    ]
+  },
+  "entity.capivara.ambient": {
+    "subtitle": "subtitles.irineu.entity.capivara.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.pig.ambient",
+        "type": "event",
+        "pitch": 1.25
+      }
+    ]
+  },
+  "entity.capivara.hurt": {
+    "subtitle": "subtitles.irineu.entity.capivara.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.pig.hurt",
+        "type": "event",
+        "pitch": 1.2
+      }
+    ]
+  },
+  "entity.capivara.death": {
+    "subtitle": "subtitles.irineu.entity.capivara.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.pig.death",
+        "type": "event",
+        "pitch": 1.2
+      }
+    ]
+  },
+  "entity.jacare.ambient": {
+    "subtitle": "subtitles.irineu.entity.jacare.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.cat.hiss",
+        "type": "event",
+        "pitch": 0.45
+      }
+    ]
+  },
+  "entity.jacare.hurt": {
+    "subtitle": "subtitles.irineu.entity.jacare.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.turtle.hurt",
+        "type": "event",
+        "pitch": 0.6
+      }
+    ]
+  },
+  "entity.jacare.death": {
+    "subtitle": "subtitles.irineu.entity.jacare.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.turtle.death",
+        "type": "event",
+        "pitch": 0.6
+      }
+    ]
+  },
+  "entity.tuiuiu.ambient": {
+    "subtitle": "subtitles.irineu.entity.tuiuiu.ambient",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.ambient",
+        "type": "event",
+        "pitch": 0.5
+      }
+    ]
+  },
+  "entity.tuiuiu.hurt": {
+    "subtitle": "subtitles.irineu.entity.tuiuiu.hurt",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.hurt",
+        "type": "event",
+        "pitch": 0.55
+      }
+    ]
+  },
+  "entity.tuiuiu.death": {
+    "subtitle": "subtitles.irineu.entity.tuiuiu.death",
+    "sounds": [
+      {
+        "name": "minecraft:entity.parrot.death",
+        "type": "event",
+        "pitch": 0.55
+      }
+    ]
+  },
+  "entity.lobo_guara.uivo": {
+    "subtitle": "subtitles.irineu.entity.lobo_guara.uivo",
+    "sounds": [
+      {
+        "name": "minecraft:entity.wolf.whine",
+        "type": "event",
+        "pitch": 0.6,
+        "volume": 1.5
+      }
+    ]
+  },
+  "entity.tuiuiu.bico": {
+    "subtitle": "subtitles.irineu.entity.tuiuiu.bico",
+    "sounds": [
+      {
+        "name": "minecraft:block.note_block.hat",
+        "type": "event",
+        "pitch": 1.7
+      }
+    ]
+  },
+  "block.maquininha_pix.bip": {
+    "sounds": [
+      {
+        "name": "irineu:economia/bip"
+      }
+    ],
+    "subtitle": "subtitles.irineu.block.maquininha_pix.bip"
+  },
+  "block.maquininha_pix.erro": {
+    "sounds": [
+      {
+        "name": "irineu:economia/erro"
+      }
+    ],
+    "subtitle": "subtitles.irineu.block.maquininha_pix.erro"
+  },
+  "entity.comerciante.caixa": {
+    "sounds": [
+      {
+        "name": "irineu:economia/caixa"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.comerciante.caixa"
+  },
+  "economia.inflacao": {
+    "sounds": [
+      {
+        "name": "irineu:economia/inflacao"
+      }
+    ],
+    "subtitle": "subtitles.irineu.economia.inflacao"
+  },
+  "item.cajado_relampago.faisca": {
+    "sounds": [
+      {
+        "name": "irineu:minerios/faisca"
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.cajado_relampago.faisca"
+  },
+  "item.bateia_madeira.peneira": {
+    "sounds": [
+      {
+        "name": "irineu:minerios/bateia"
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.bateia_madeira.peneira"
+  },
+  "item.bambu_do_silvio.mola": {
+    "sounds": [
+      {
+        "name": "irineu:cultura/mola"
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.bambu_do_silvio.mola"
+  },
+  "item.gambiarra_universal.fita": {
+    "sounds": [
+      {
+        "name": "irineu:cultura/fita"
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.gambiarra_universal.fita"
+  }
+}

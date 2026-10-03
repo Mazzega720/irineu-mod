@@ -1,0 +1,19 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "irineu:niobio"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "irineu:niobio"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "irineu:niobio"
+      }
+    ]
+  }
+}

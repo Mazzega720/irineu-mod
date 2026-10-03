@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "IGI",
+    "RCR",
+    "IBI"
+  ],
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "G": "minecraft:glass_pane",
+    "R": "minecraft:redstone",
+    "C": "irineu:caneta_colorida",
+    "B": "minecraft:stone_button"
+  },
+  "result": {
+    "id": "irineu:urna_eletronica"
+  }
+}

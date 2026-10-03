@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 200,
+  "experience": 0.8,
+  "ingredient": "irineu:hematita_bruta",
+  "result": {
+    "id": "irineu:aco_pesado"
+  }
+}

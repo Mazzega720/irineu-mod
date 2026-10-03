@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "AMA",
+    " G "
+  ],
+  "key": {
+    "S": "minecraft:string",
+    "A": "irineu:agata",
+    "M": "minecraft:amethyst_shard",
+    "G": "minecraft:gold_ingot"
+  },
+  "result": {
+    "id": "irineu:amuleto_sorte",
+    "count": 1
+  }
+}

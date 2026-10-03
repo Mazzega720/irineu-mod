@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:disk",
+  "half_height": 1,
+  "radius": {
+    "type": "minecraft:uniform",
+    "min_inclusive": 3,
+    "max_inclusive": 6
+  },
+  "state_provider": {
+    "id": "minecraft:stone"
+  },
+  "target": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "minecraft:grass_block",
+      "minecraft:coarse_dirt",
+      "minecraft:packed_mud",
+      "minecraft:dirt",
+      "minecraft:gravel"
+    ]
+  }
+}

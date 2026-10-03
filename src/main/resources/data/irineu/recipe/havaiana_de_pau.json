@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "GYG",
+    "PPP"
+  ],
+  "key": {
+    "G": "minecraft:green_dye",
+    "Y": "minecraft:yellow_dye",
+    "P": "#minecraft:planks"
+  },
+  "result": {
+    "id": "irineu:havaiana_de_pau",
+    "count": 1
+  }
+}

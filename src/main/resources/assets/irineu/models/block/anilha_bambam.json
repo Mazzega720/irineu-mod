@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "irineu:block/anilha_bambam_side",
+    "top": "irineu:block/anilha_bambam_top",
+    "bottom": "irineu:block/anilha_bambam_top"
+  }
+}

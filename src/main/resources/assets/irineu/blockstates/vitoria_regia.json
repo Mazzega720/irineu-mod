@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "irineu:block/vitoria_regia"
+      },
+      {
+        "model": "irineu:block/vitoria_regia",
+        "y": 90
+      },
+      {
+        "model": "irineu:block/vitoria_regia",
+        "y": 180
+      },
+      {
+        "model": "irineu:block/vitoria_regia",
+        "y": 270
+      }
+    ]
+  }
+}

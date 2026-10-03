@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "irineu:block/saco_de_pancada"
+    },
+    "facing=east": {
+      "model": "irineu:block/saco_de_pancada",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "irineu:block/saco_de_pancada",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irineu:block/saco_de_pancada",
+      "y": 270
+    }
+  }
+}

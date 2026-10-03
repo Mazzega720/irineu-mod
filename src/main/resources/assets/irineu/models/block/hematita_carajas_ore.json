@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "irineu:block/hematita_carajas_ore"
+  }
+}

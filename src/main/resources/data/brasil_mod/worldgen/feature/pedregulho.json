@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:block_blob",
+  "can_place_on": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "minecraft:grass_block",
+      "minecraft:coarse_dirt",
+      "minecraft:packed_mud",
+      "minecraft:dirt",
+      "minecraft:gravel",
+      "minecraft:stone"
+    ]
+  },
+  "state": "minecraft:cobblestone"
+}

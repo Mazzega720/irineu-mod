@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:glass_bottle",
+    "minecraft:apple",
+    "minecraft:sugar",
+    "minecraft:orange_dye"
+  ],
+  "result": {
+    "id": "irineu:suco_de_laranja"
+  }
+}

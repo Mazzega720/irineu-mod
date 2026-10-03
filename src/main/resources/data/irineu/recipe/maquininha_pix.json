@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "IGI",
+    "IRI",
+    "IBI"
+  ],
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "G": "minecraft:lime_stained_glass_pane",
+    "R": "minecraft:redstone",
+    "B": "minecraft:stone_button"
+  },
+  "result": {
+    "id": "irineu:maquininha_pix",
+    "count": 1
+  }
+}

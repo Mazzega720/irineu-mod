@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "irineu:nota_100_reais"
+  ],
+  "result": {
+    "id": "irineu:nota_50_reais",
+    "count": 2
+  },
+  "group": "troco"
+}

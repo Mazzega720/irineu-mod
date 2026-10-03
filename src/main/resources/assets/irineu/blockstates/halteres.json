@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "irineu:block/halteres"
+    },
+    "facing=east": {
+      "model": "irineu:block/halteres",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "irineu:block/halteres",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irineu:block/halteres",
+      "y": 270
+    }
+  }
+}

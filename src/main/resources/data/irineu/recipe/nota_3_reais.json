@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:paper",
+    "minecraft:green_dye"
+  ],
+  "result": {
+    "id": "irineu:nota_3_reais",
+    "count": 1
+  }
+}

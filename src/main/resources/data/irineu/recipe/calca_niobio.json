@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "irineu:molde_niobio",
+  "base": "minecraft:netherite_leggings",
+  "addition": "irineu:lingote_niobio",
+  "result": {
+    "id": "irineu:calca_niobio"
+  }
+}

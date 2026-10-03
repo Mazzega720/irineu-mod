@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "purple_dye",
+  "ingredients": [
+    "irineu:orquidea"
+  ],
+  "result": {
+    "id": "minecraft:purple_dye"
+  }
+}

@@ -1,0 +1,234 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.irineu.carcara",
+    "texture_width": 64,
+    "texture_height": 32,
+    "visible_bounds_width": 1.0,
+    "visible_bounds_height": 1.0,
+    "visible_bounds_offset": [
+     0,
+     0.5,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "carcara",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "pivot": [
+      0,
+      5,
+      0
+     ],
+     "parent": "carcara",
+     "cubes": [
+      {
+       "origin": [
+        -2,
+        3,
+        -3.5
+       ],
+       "size": [
+        4,
+        5,
+        7
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "pivot": [
+      0,
+      8,
+      -3
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -1.5,
+        7,
+        -5.5
+       ],
+       "size": [
+        3,
+        3,
+        3
+       ],
+       "uv": [
+        18,
+        12
+       ]
+      },
+      {
+       "origin": [
+        -0.5,
+        7,
+        -6.5
+       ],
+       "size": [
+        1,
+        2,
+        1
+       ],
+       "uv": [
+        38,
+        12
+       ]
+      }
+     ]
+    },
+    {
+     "name": "wing_r",
+     "pivot": [
+      -2,
+      7,
+      -2
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -3,
+        3,
+        -2
+       ],
+       "size": [
+        1,
+        4,
+        8
+       ],
+       "uv": [
+        22,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "wing_l",
+     "pivot": [
+      2,
+      7,
+      -2
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        2,
+        3,
+        -2
+       ],
+       "size": [
+        1,
+        4,
+        8
+       ],
+       "uv": [
+        40,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "tail",
+     "pivot": [
+      0,
+      4.5,
+      3.5
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -1.5,
+        3.5,
+        3.5
+       ],
+       "size": [
+        3,
+        1,
+        6
+       ],
+       "uv": [
+        0,
+        12
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_r",
+     "pivot": [
+      -1,
+      3,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -1.5,
+        0,
+        -0.5
+       ],
+       "size": [
+        1,
+        3,
+        1
+       ],
+       "uv": [
+        30,
+        12
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_l",
+     "pivot": [
+      1,
+      3,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        0.5,
+        0,
+        -0.5
+       ],
+       "size": [
+        1,
+        3,
+        1
+       ],
+       "uv": [
+        34,
+        12
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

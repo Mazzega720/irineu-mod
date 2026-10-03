@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/lily_pad",
+  "textures": {
+    "particle": "irineu:block/aguape",
+    "texture": "irineu:block/aguape"
+  }
+}

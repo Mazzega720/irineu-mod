@@ -1,0 +1,192 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "veado_campeiro.idle": {
+   "animation_length": 5.0,
+   "bones": {
+    "neck": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "1.0": {
+       "vector": [
+        62,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "3.6": [
+       62,
+       0,
+       0
+      ],
+      "4.6": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "head": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "1.0": {
+       "vector": [
+        10,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "2.0": [
+       14,
+       0,
+       0
+      ],
+      "3.0": [
+       10,
+       0,
+       0
+      ],
+      "4.6": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "tail": {
+     "rotation": [
+      "0.0 + math.sin((query.anim_time + 0.0) * 450.0) * 12",
+      0,
+      0
+     ]
+    }
+   },
+   "loop": true
+  },
+  "veado_campeiro.walk": {
+   "animation_length": 1.0,
+   "bones": {
+    "leg_fl": {
+     "rotation": [
+      "math.cos(query.limb_swing * 38.17 * 1.0) * 34 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "leg_br": {
+     "rotation": [
+      "math.cos(query.limb_swing * 38.17 * 1.0) * 34 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "leg_fr": {
+     "rotation": [
+      "-math.cos(query.limb_swing * 38.17 * 1.0) * 34 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "leg_bl": {
+     "rotation": [
+      "-math.cos(query.limb_swing * 38.17 * 1.0) * 34 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "neck": {
+     "rotation": [
+      "math.sin(query.limb_swing * 38.17 * 2) * 4 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    }
+   },
+   "loop": true
+  },
+  "veado_campeiro.special": {
+   "animation_length": 1.5,
+   "bones": {
+    "neck": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.25": {
+       "vector": [
+        -14,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "1.2": [
+       -14,
+       0,
+       0
+      ],
+      "1.5": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "head": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.25": {
+       "vector": [
+        -6,
+        20,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.8": {
+       "vector": [
+        -6,
+        -20,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "1.5": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   }
+  }
+ }
+}

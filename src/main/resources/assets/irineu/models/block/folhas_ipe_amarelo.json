@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "irineu:block/folhas_ipe_amarelo"
+  }
+}

@@ -1,0 +1,119 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "tucano.idle": {
+   "animation_length": 2.5,
+   "bones": {
+    "head": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.8": {
+       "vector": [
+        0,
+        25,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "1.6": {
+       "vector": [
+        0,
+        -20,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "2.5": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "tail": {
+     "rotation": [
+      "0.0 + math.sin((query.anim_time + 0.0) * 144.0) * 6",
+      0,
+      0
+     ]
+    }
+   },
+   "loop": true
+  },
+  "tucano.walk": {
+   "animation_length": 0.5,
+   "bones": {
+    "leg_r": {
+     "rotation": [
+      "math.cos(query.limb_swing * 38.17 * 1.0) * 30 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "leg_l": {
+     "rotation": [
+      "-math.cos(query.limb_swing * 38.17 * 1.0) * 30 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "tucano": {
+     "position": [
+      0,
+      "math.abs(math.sin(query.limb_swing * 38.17)) * 1 * query.limb_swing_amount",
+      0
+     ]
+    }
+   },
+   "loop": true
+  },
+  "tucano.fly": {
+   "animation_length": 0.4,
+   "bones": {
+    "wing_r": {
+     "rotation": [
+      0,
+      0,
+      "math.sin(query.anim_time * 900.0) * 55 + 22.0"
+     ]
+    },
+    "wing_l": {
+     "rotation": [
+      0,
+      0,
+      "-math.sin(query.anim_time * 900.0) * 55 - 22.0"
+     ]
+    },
+    "leg_r": {
+     "rotation": [
+      50,
+      0,
+      0
+     ]
+    },
+    "leg_l": {
+     "rotation": [
+      50,
+      0,
+      0
+     ]
+    },
+    "body": {
+     "rotation": [
+      5,
+      0,
+      0
+     ]
+    }
+   },
+   "loop": true
+  }
+ }
+}

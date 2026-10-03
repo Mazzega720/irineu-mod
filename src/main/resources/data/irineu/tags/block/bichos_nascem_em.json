@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:grass_block",
+    "minecraft:dirt",
+    "minecraft:coarse_dirt",
+    "minecraft:podzol",
+    "minecraft:mud",
+    "minecraft:packed_mud",
+    "minecraft:sand",
+    "minecraft:gravel",
+    "minecraft:stone",
+    "minecraft:terracotta",
+    "minecraft:red_terracotta"
+  ]
+}

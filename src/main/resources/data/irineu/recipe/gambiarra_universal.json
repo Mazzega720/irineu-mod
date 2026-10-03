@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:black_dye",
+    "minecraft:slime_ball",
+    "minecraft:iron_nugget",
+    "minecraft:string"
+  ],
+  "result": {
+    "id": "irineu:gambiarra_universal",
+    "count": 2
+  }
+}

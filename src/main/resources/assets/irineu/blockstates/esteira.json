@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "irineu:block/esteira"
+    },
+    "facing=east": {
+      "model": "irineu:block/esteira",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "irineu:block/esteira",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irineu:block/esteira",
+      "y": 270
+    }
+  }
+}

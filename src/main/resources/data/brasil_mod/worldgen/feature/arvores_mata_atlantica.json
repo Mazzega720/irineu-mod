@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:random_selector",
+  "default": "minecraft:oak_checked",
+  "features": [
+    {
+      "chance": 0.08,
+      "feature": "minecraft:mega_jungle_tree_checked"
+    },
+    {
+      "chance": 0.3,
+      "feature": "minecraft:jungle_tree"
+    },
+    {
+      "chance": 0.25,
+      "feature": "minecraft:fancy_oak_checked"
+    },
+    {
+      "chance": 0.1,
+      "feature": "minecraft:birch_checked"
+    },
+    {
+      "chance": 0.07,
+      "feature": "brasil_mod:ipe_amarelo_checked"
+    },
+    {
+      "chance": 0.07,
+      "feature": "brasil_mod:ipe_rosa_checked"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    "irineu:tronco_pau_terra"
+  ],
+  "result": {
+    "id": "irineu:tabuas_pau_terra",
+    "count": 4
+  }
+}

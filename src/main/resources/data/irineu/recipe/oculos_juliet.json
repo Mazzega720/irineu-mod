@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "I I",
+    "GIG"
+  ],
+  "key": {
+    "I": "minecraft:iron_nugget",
+    "G": "minecraft:black_stained_glass_pane"
+  },
+  "result": {
+    "id": "irineu:oculos_juliet",
+    "count": 1
+  }
+}

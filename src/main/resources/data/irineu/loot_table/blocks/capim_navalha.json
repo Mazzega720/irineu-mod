@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:match_tool",
+        "predicate": {
+          "items": "minecraft:shears"
+        }
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:capim_navalha"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "irineu:blocks/capim_navalha"
+}

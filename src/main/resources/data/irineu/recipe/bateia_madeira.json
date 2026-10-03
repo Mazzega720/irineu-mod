@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "S S",
+    " B "
+  ],
+  "key": {
+    "S": "minecraft:stick",
+    "B": "minecraft:bowl"
+  },
+  "result": {
+    "id": "irineu:bateia_madeira",
+    "count": 1
+  }
+}

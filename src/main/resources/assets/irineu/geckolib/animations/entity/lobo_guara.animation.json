@@ -1,0 +1,204 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "lobo_guara.idle": {
+   "animation_length": 3.0,
+   "bones": {
+    "tail": {
+     "rotation": [
+      0,
+      0,
+      "0 + math.sin((query.anim_time + 0.0) * 120.0) * 8"
+     ]
+    },
+    "head": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "1.5": {
+       "vector": [
+        0,
+        0,
+        6
+       ],
+       "easing": "easeInOutSine"
+      },
+      "3.0": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   },
+   "loop": true
+  },
+  "lobo_guara.walk": {
+   "animation_length": 1.0,
+   "bones": {
+    "leg_fl": {
+     "rotation": [
+      "math.cos(query.limb_swing * 38.17 * 1.0) * 34 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "leg_br": {
+     "rotation": [
+      "math.cos(query.limb_swing * 38.17 * 1.0) * 34 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "leg_fr": {
+     "rotation": [
+      "-math.cos(query.limb_swing * 38.17 * 1.0) * 34 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "leg_bl": {
+     "rotation": [
+      "-math.cos(query.limb_swing * 38.17 * 1.0) * 34 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "tail": {
+     "rotation": [
+      0,
+      0,
+      "math.cos(query.limb_swing * 38.17) * 10 * query.limb_swing_amount"
+     ]
+    }
+   },
+   "loop": true
+  },
+  "lobo_guara.attack": {
+   "animation_length": 0.5,
+   "bones": {
+    "lobo_guara": {
+     "position": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.15": {
+       "vector": [
+        0,
+        0,
+        -2
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.5": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInQuad"
+      }
+     }
+    },
+    "head": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.15": {
+       "vector": [
+        28,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.5": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInQuad"
+      }
+     }
+    }
+   }
+  },
+  "lobo_guara.special": {
+   "animation_length": 2.5,
+   "bones": {
+    "head": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.4": {
+       "vector": [
+        -55,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "2.1": [
+       -55,
+       0,
+       0
+      ],
+      "2.5": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "body": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.4": {
+       "vector": [
+        -12,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "2.1": [
+       -12,
+       0,
+       0
+      ],
+      "2.5": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   }
+  }
+ }
+}

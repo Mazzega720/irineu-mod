@@ -1,0 +1,7 @@
+{
+  "parent": "irineu:block/plastic_table",
+  "textures": {
+    "top": "irineu:block/mesa_branca_top",
+    "side": "irineu:block/mesa_branca"
+  }
+}

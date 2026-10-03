@@ -1,0 +1,192 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "kelmon.rezar": {
+   "animation_length": 3.0,
+   "bones": {
+    "right_arm": {
+     "rotation": {
+      "0.0": [
+       -72,
+       0,
+       -24
+      ],
+      "1.0": [
+       -72,
+       0,
+       -24
+      ],
+      "1.3": {
+       "vector": [
+        -165,
+        0,
+        22
+       ],
+       "easing": "easeOutBack"
+      },
+      "1.9": [
+       -165,
+       0,
+       22
+      ],
+      "2.2": {
+       "vector": [
+        -72,
+        0,
+        -24
+       ],
+       "easing": "easeInOutSine"
+      },
+      "3.0": [
+       -72,
+       0,
+       -24
+      ]
+     }
+    },
+    "left_arm": {
+     "rotation": {
+      "0.0": [
+       -72,
+       0,
+       24
+      ],
+      "1.0": [
+       -72,
+       0,
+       24
+      ],
+      "1.3": {
+       "vector": [
+        -165,
+        0,
+        -22
+       ],
+       "easing": "easeOutBack"
+      },
+      "1.9": [
+       -165,
+       0,
+       -22
+      ],
+      "2.2": {
+       "vector": [
+        -72,
+        0,
+        24
+       ],
+       "easing": "easeInOutSine"
+      },
+      "3.0": [
+       -72,
+       0,
+       24
+      ]
+     }
+    },
+    "head": {
+     "rotation": {
+      "0.0": [
+       12,
+       0,
+       0
+      ],
+      "1.0": [
+       12,
+       0,
+       0
+      ],
+      "1.3": {
+       "vector": [
+        -30,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "1.9": [
+       -30,
+       0,
+       0
+      ],
+      "2.2": {
+       "vector": [
+        12,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "body": {
+     "position": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "1.5": {
+       "vector": [
+        0,
+        0.4,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "3.0": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   },
+   "loop": true
+  },
+  "kelmon.walk": {
+   "animation_length": 1.0,
+   "bones": {
+    "right_leg": {
+     "rotation": [
+      "math.cos(query.limb_swing * 38.17) * 40 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "left_leg": {
+     "rotation": [
+      "-math.cos(query.limb_swing * 38.17) * 40 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "right_arm": {
+     "rotation": [
+      "-math.cos(query.limb_swing * 38.17) * 30 * query.limb_swing_amount",
+      0,
+      4
+     ]
+    },
+    "left_arm": {
+     "rotation": [
+      "math.cos(query.limb_swing * 38.17) * 30 * query.limb_swing_amount",
+      0,
+      -4
+     ]
+    },
+    "body": {
+     "position": [
+      0,
+      "math.abs(math.sin(query.limb_swing * 38.17)) * 0.4 * query.limb_swing_amount",
+      0
+     ]
+    }
+   },
+   "loop": true
+  }
+ }
+}

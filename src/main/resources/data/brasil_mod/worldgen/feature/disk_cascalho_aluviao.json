@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:disk",
+  "half_height": 1,
+  "radius": {
+    "type": "minecraft:uniform",
+    "min_inclusive": 2,
+    "max_inclusive": 4
+  },
+  "state_provider": {
+    "id": "irineu:cascalho_aluviao"
+  },
+  "target": {
+    "type": "minecraft:matching_blocks",
+    "blocks": [
+      "minecraft:dirt",
+      "minecraft:grass_block",
+      "minecraft:sand",
+      "minecraft:clay",
+      "minecraft:gravel",
+      "minecraft:mud"
+    ]
+  }
+}

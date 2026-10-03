@@ -1,0 +1,11 @@
+{
+  "values": [
+    "brasil_mod:cerrado",
+    "brasil_mod:pampa",
+    "brasil_mod:mata_atlantica",
+    "brasil_mod:caatinga",
+    "brasil_mod:litoral",
+    "brasil_mod:amazonia",
+    "brasil_mod:pantanal"
+  ]
+}

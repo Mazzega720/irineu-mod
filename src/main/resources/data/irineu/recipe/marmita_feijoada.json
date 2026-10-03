@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:iron_nugget",
+    "minecraft:cocoa_beans",
+    "minecraft:cocoa_beans",
+    "minecraft:cooked_porkchop",
+    "minecraft:wheat",
+    "minecraft:carrot"
+  ],
+  "result": {
+    "id": "irineu:marmita_feijoada",
+    "count": 1
+  }
+}

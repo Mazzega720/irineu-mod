@@ -1,0 +1,12 @@
+{
+  "feature": "brasil_mod:pau_terra",
+  "placement": [
+    {
+      "type": "minecraft:block_predicate_filter",
+      "predicate": {
+        "type": "minecraft:would_survive",
+        "state": "irineu:muda_pau_terra"
+      }
+    }
+  ]
+}

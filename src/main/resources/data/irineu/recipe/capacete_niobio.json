@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "irineu:molde_niobio",
+  "base": "minecraft:netherite_helmet",
+  "addition": "irineu:lingote_niobio",
+  "result": {
+    "id": "irineu:capacete_niobio"
+  }
+}

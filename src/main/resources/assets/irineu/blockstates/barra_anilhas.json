@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "irineu:block/barra_anilhas"
+    },
+    "facing=east": {
+      "model": "irineu:block/barra_anilhas",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "irineu:block/barra_anilhas",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irineu:block/barra_anilhas",
+      "y": 270
+    }
+  }
+}

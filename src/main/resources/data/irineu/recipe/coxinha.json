@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:cooked_chicken",
+    "minecraft:wheat",
+    "minecraft:egg"
+  ],
+  "result": {
+    "id": "irineu:coxinha",
+    "count": 2
+  }
+}

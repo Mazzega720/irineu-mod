@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "irineu:item/padre_kelmon_spawn_egg"
+  }
+}

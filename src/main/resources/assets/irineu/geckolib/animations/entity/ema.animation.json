@@ -1,0 +1,106 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "ema.idle": {
+   "animation_length": 3.0,
+   "bones": {
+    "neck": {
+     "rotation": [
+      "0.0 + math.sin((query.anim_time + 0.0) * 120.0) * 5",
+      0,
+      0
+     ]
+    },
+    "head": {
+     "rotation": [
+      0,
+      "0.0 + math.sin((query.anim_time + 0.7) * 120.0) * 14",
+      0
+     ]
+    }
+   },
+   "loop": true
+  },
+  "ema.walk": {
+   "animation_length": 1.0,
+   "bones": {
+    "leg_r": {
+     "rotation": [
+      "math.cos(query.limb_swing * 38.17 * 1.0) * 32 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "leg_l": {
+     "rotation": [
+      "-math.cos(query.limb_swing * 38.17 * 1.0) * 32 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "shin_r": {
+     "rotation": [
+      "math.max(0, math.sin(query.limb_swing * 38.17)) * 30 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "shin_l": {
+     "rotation": [
+      "math.max(0, -math.sin(query.limb_swing * 38.17)) * 30 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "neck": {
+     "rotation": [
+      "math.sin(query.limb_swing * 38.17 * 2) * 8 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    }
+   },
+   "loop": true
+  },
+  "ema.special": {
+   "animation_length": 1.2,
+   "bones": {
+    "neck": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.35": {
+       "vector": [
+        72,
+        0,
+        0
+       ],
+       "easing": "easeInQuad"
+      },
+      "0.55": [
+       60,
+       0,
+       0
+      ],
+      "0.7": [
+       72,
+       0,
+       0
+      ],
+      "1.2": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   }
+  }
+ }
+}

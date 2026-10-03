@@ -1,0 +1,8 @@
+version: 2
+updates:
+  # Só as ações do GitHub. As dependências do Gradle (Minecraft, Fabric, GeckoLib) são atualizadas à mão,
+  # junto com a versão do jogo.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

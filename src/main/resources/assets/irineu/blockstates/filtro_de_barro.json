@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,agua=0": {
+      "model": "irineu:block/filtro_de_barro"
+    },
+    "facing=north,agua=1": {
+      "model": "irineu:block/filtro_de_barro"
+    },
+    "facing=north,agua=2": {
+      "model": "irineu:block/filtro_de_barro"
+    },
+    "facing=north,agua=3": {
+      "model": "irineu:block/filtro_de_barro"
+    },
+    "facing=east,agua=0": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 90
+    },
+    "facing=east,agua=1": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 90
+    },
+    "facing=east,agua=2": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 90
+    },
+    "facing=east,agua=3": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 90
+    },
+    "facing=south,agua=0": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 180
+    },
+    "facing=south,agua=1": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 180
+    },
+    "facing=south,agua=2": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 180
+    },
+    "facing=south,agua=3": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 180
+    },
+    "facing=west,agua=0": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 270
+    },
+    "facing=west,agua=1": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 270
+    },
+    "facing=west,agua=2": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 270
+    },
+    "facing=west,agua=3": {
+      "model": "irineu:block/filtro_de_barro",
+      "y": 270
+    }
+  }
+}

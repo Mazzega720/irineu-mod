@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " T ",
+    "TCT",
+    "TTT"
+  ],
+  "key": {
+    "T": "minecraft:terracotta",
+    "C": "minecraft:charcoal"
+  },
+  "result": {
+    "id": "irineu:filtro_de_barro",
+    "count": 1
+  }
+}

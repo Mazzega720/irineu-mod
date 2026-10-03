@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "irineu:juliet"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "irineu:juliet"
+      }
+    ]
+  }
+}

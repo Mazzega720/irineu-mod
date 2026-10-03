@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:potato",
+    "minecraft:milk_bucket",
+    "minecraft:egg",
+    "minecraft:wheat"
+  ],
+  "result": {
+    "id": "irineu:pao_de_queijo_curado",
+    "count": 4
+  }
+}

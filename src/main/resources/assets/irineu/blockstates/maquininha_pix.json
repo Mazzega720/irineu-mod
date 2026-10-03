@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "irineu:block/maquininha_pix"
+    },
+    "facing=east": {
+      "model": "irineu:block/maquininha_pix",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "irineu:block/maquininha_pix",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irineu:block/maquininha_pix",
+      "y": 270
+    }
+  }
+}

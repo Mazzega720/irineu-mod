@@ -1,0 +1,77 @@
+# Lançamento: ao enviar uma tag v<versão> (ex.: v3.0.0), confere que ela bate com mod_version e com o
+# CHANGELOG.md, compila e cria o Release do GitHub com o jar e as notas daquela versão.
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release (Java 25)
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout tagged source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Validate Gradle wrapper
+        uses: gradle/actions/wrapper-validation@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+
+      - name: Set up Java 25
+        uses: actions/setup-java@dd06d9cba3e5552c54d9f8ea23572deb30010f7c # v6.0.0
+        with:
+          java-version: "25"
+          distribution: "temurin"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+
+      - name: Validate tag and build
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          chmod +x gradlew
+          ./gradlew verifyReleaseVersion build --no-daemon -PreleaseModVersion="${RELEASE_TAG#v}"
+
+      - name: Select jar and release notes
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          shopt -s nullglob
+          mkdir -p release-artifacts
+          jars=()
+          for f in build/libs/irineu-*.jar; do
+            [[ "$f" == *-sources.jar ]] || jars+=("$f")
+          done
+          if (( ${#jars[@]} != 1 )); then
+            echo "Esperava um jar do mod, achei ${#jars[@]}: ${jars[*]:-nenhum}" >&2
+            exit 1
+          fi
+          cp "${jars[0]}" release-artifacts/
+          version="${RELEASE_TAG#v}"
+          awk -v h="## [${version}]" '
+            index($0, h) == 1 { inside = 1; next }
+            inside && /^## \[/ { exit }
+            inside { print }
+          ' CHANGELOG.md > release-notes.md
+          if ! grep -q '[^[:space:]]' release-notes.md; then
+            echo "Seção ## [${version}] vazia ou ausente no CHANGELOG.md" >&2
+            exit 1
+          fi
+          {
+            echo
+            echo "---"
+            echo "**Precisa de:** Minecraft 26.3, Fabric Loader 0.19.5+, Fabric API e GeckoLib 5.5.7+ (Fabric). Coloque o jar na pasta \`mods\`."
+          } >> release-notes.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        with:
+          files: release-artifacts/*.jar
+          body_path: release-notes.md
+          fail_on_unmatched_files: true
+          prerelease: ${{ contains(github.ref_name, '-alpha') || contains(github.ref_name, '-beta') || contains(github.ref_name, '-rc') }}

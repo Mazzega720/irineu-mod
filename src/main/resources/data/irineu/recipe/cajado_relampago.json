@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "  T",
+    " C ",
+    "S  "
+  ],
+  "key": {
+    "T": "irineu:turmalina_paraiba",
+    "C": "minecraft:copper_ingot",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "irineu:cajado_relampago",
+    "count": 1
+  }
+}

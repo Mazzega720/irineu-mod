@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1709300001,
+    "separation": 8,
+    "spacing": 22
+  },
+  "structures": [
+    {
+      "structure": "brasil_mod:buteco",
+      "weight": 1
+    }
+  ]
+}

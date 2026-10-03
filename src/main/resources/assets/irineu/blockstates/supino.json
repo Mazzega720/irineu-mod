@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "irineu:block/supino"
+    },
+    "facing=east": {
+      "model": "irineu:block/supino",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "irineu:block/supino",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irineu:block/supino",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "irineu:block/plastic_chair",
+  "textures": {
+    "plain": "irineu:block/cadeira_vermelha",
+    "back": "irineu:block/cadeira_vermelha_encosto"
+  }
+}

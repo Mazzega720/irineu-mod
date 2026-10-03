@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "irineu:block/mesa_brahma"
+    },
+    "facing=east": {
+      "model": "irineu:block/mesa_brahma",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "irineu:block/mesa_brahma",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irineu:block/mesa_brahma",
+      "y": 270
+    }
+  }
+}

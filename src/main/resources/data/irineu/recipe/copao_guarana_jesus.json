@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:glass_bottle",
+    "minecraft:sugar",
+    "minecraft:pink_dye",
+    "minecraft:sweet_berries"
+  ],
+  "result": {
+    "id": "irineu:copao_guarana_jesus",
+    "count": 1
+  }
+}

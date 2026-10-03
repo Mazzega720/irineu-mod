@@ -1,0 +1,287 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.irineu.lobo_guara",
+    "texture_width": 64,
+    "texture_height": 64,
+    "visible_bounds_width": 1.4,
+    "visible_bounds_height": 1.6,
+    "visible_bounds_offset": [
+     0,
+     0.8,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "lobo_guara",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "body",
+     "pivot": [
+      0,
+      15,
+      0
+     ],
+     "parent": "lobo_guara",
+     "cubes": [
+      {
+       "origin": [
+        -3,
+        12,
+        -7
+       ],
+       "size": [
+        6,
+        6,
+        13
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      },
+      {
+       "origin": [
+        -1.5,
+        17.5,
+        -7
+       ],
+       "size": [
+        3,
+        2,
+        7
+       ],
+       "uv": [
+        40,
+        19
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "pivot": [
+      0,
+      17,
+      -7
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -2.5,
+        15,
+        -12
+       ],
+       "size": [
+        5,
+        5,
+        5
+       ],
+       "uv": [
+        8,
+        19
+       ]
+      },
+      {
+       "origin": [
+        -1.5,
+        15,
+        -15
+       ],
+       "size": [
+        3,
+        2,
+        3
+       ],
+       "uv": [
+        0,
+        33
+       ]
+      },
+      {
+       "origin": [
+        -2.5,
+        20,
+        -10
+       ],
+       "size": [
+        2,
+        3,
+        1
+       ],
+       "uv": [
+        12,
+        33
+       ]
+      },
+      {
+       "origin": [
+        0.5,
+        20,
+        -10
+       ],
+       "size": [
+        2,
+        3,
+        1
+       ],
+       "uv": [
+        18,
+        33
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_fl",
+     "pivot": [
+      1.75,
+      12,
+      -5.5
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        0.75,
+        0,
+        -6.5
+       ],
+       "size": [
+        2,
+        12,
+        2
+       ],
+       "uv": [
+        38,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_fr",
+     "pivot": [
+      -1.75,
+      12,
+      -5.5
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -2.75,
+        0,
+        -6.5
+       ],
+       "size": [
+        2,
+        12,
+        2
+       ],
+       "uv": [
+        46,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_bl",
+     "pivot": [
+      1.75,
+      12,
+      5.5
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        0.75,
+        0,
+        4.5
+       ],
+       "size": [
+        2,
+        12,
+        2
+       ],
+       "uv": [
+        54,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "leg_br",
+     "pivot": [
+      -1.75,
+      12,
+      5.5
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -2.75,
+        0,
+        4.5
+       ],
+       "size": [
+        2,
+        12,
+        2
+       ],
+       "uv": [
+        0,
+        19
+       ]
+      }
+     ]
+    },
+    {
+     "name": "tail",
+     "pivot": [
+      0,
+      17,
+      6
+     ],
+     "parent": "body",
+     "rotation": [
+      35,
+      0,
+      0
+     ],
+     "cubes": [
+      {
+       "origin": [
+        -1.5,
+        10,
+        5
+       ],
+       "size": [
+        3,
+        7,
+        3
+       ],
+       "uv": [
+        28,
+        19
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

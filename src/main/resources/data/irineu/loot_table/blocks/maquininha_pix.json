@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:maquininha_pix"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "irineu:blocks/maquininha_pix"
+}

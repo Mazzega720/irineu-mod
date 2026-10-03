@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GGG",
+    "YBY",
+    "S  "
+  ],
+  "key": {
+    "G": "minecraft:green_wool",
+    "Y": "minecraft:yellow_wool",
+    "B": "minecraft:blue_wool",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "irineu:bandeira_nacional"
+  }
+}

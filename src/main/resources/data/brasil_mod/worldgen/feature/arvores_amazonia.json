@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:random_selector",
+  "default": "minecraft:jungle_tree",
+  "features": [
+    {
+      "chance": 0.06,
+      "feature": "brasil_mod:castanheira_checked"
+    },
+    {
+      "chance": 0.3,
+      "feature": "minecraft:mega_jungle_tree_checked"
+    },
+    {
+      "chance": 0.3,
+      "feature": "minecraft:jungle_bush"
+    },
+    {
+      "chance": 0.04,
+      "feature": "minecraft:fancy_oak_checked"
+    }
+  ]
+}

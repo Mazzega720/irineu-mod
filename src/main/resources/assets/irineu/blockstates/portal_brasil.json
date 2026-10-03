@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "irineu:block/portal_brasil_ns"
+    },
+    "axis=z": {
+      "model": "irineu:block/portal_brasil_ew"
+    }
+  }
+}

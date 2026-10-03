@@ -1,0 +1,19 @@
+{
+  "type": "irineu:palmeira",
+  "min_height": 8,
+  "max_height": 13,
+  "trunk": {
+    "id": "minecraft:jungle_log",
+    "properties": {
+      "axis": "y"
+    }
+  },
+  "leaves": {
+    "id": "irineu:folhas_palmeira",
+    "properties": {
+      "distance": "7",
+      "persistent": "true",
+      "waterlogged": "false"
+    }
+  }
+}

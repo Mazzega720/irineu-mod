@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "TTT",
+    "T T"
+  ],
+  "key": {
+    "T": "irineu:topazio_imperial"
+  },
+  "result": {
+    "id": "irineu:capacete_imperial",
+    "count": 1
+  }
+}

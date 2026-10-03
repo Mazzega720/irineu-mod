@@ -1,0 +1,21 @@
+{
+  "assets": {
+    "angry": "irineu:entity/wolf/caramelo_angry",
+    "tame": "irineu:entity/wolf/caramelo_tame",
+    "wild": "irineu:entity/wolf/caramelo"
+  },
+  "baby_assets": {
+    "angry": "irineu:entity/wolf/caramelo_angry_baby",
+    "tame": "irineu:entity/wolf/caramelo_tame_baby",
+    "wild": "irineu:entity/wolf/caramelo_baby"
+  },
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "#irineu:vira_lata_caramelo"
+      },
+      "priority": 1
+    }
+  ]
+}

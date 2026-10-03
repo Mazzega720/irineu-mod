@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:random_selector",
+  "default": "brasil_mod:pau_terra_checked",
+  "features": [
+    {
+      "chance": 0.1,
+      "feature": "brasil_mod:ipe_amarelo_checked"
+    },
+    {
+      "chance": 0.1,
+      "feature": "minecraft:acacia_checked"
+    }
+  ]
+}
