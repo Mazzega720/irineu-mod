@@ -27,5 +27,10 @@
 	},
 	"contributors": [
 		"Claude Code (Anthropic) — todo o código e os recursos, por vibe coding"
-	]
+	],
+	"contact": {
+		"homepage": "https://github.com/Mazzega720/irineu-mod",
+		"sources": "https://github.com/Mazzega720/irineu-mod",
+		"issues": "https://github.com/Mazzega720/irineu-mod/issues"
+	}
 }

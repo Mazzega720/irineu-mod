@@ -1,5 +1,7 @@
 # Irineu, Jailson & BamBam — memes BR no Minecraft
 
+[![Build](https://github.com/Mazzega720/irineu-mod/actions/workflows/build.yml/badge.svg)](https://github.com/Mazzega720/irineu-mod/actions/workflows/build.yml) [![Release](https://img.shields.io/github/v/release/Mazzega720/irineu-mod?label=vers%C3%A3o)](https://github.com/Mazzega720/irineu-mod/releases/latest) ![Minecraft 26.3](https://img.shields.io/badge/Minecraft-26.3-green) ![Fabric](https://img.shields.io/badge/loader-Fabric-blue)
+
 > [!NOTE]
 > **Projeto 100% vibecodado com o [Claude Code](https://www.anthropic.com/claude-code).** Todo o código Java, os geradores Python, as texturas, os modelos e animações, os sons sintetizados, as estruturas, os testes automáticos e esta documentação foram escritos pelo Claude Code (Anthropic), a partir das ideias e pedidos do Mazzega. O Mazzega idealizou o mod, testou no jogo e decidiu o que mudar a cada versão; nenhuma linha foi escrita à mão.
 
@@ -12,7 +14,7 @@ Adiciona a dimensão **Brasil** (com Amazônia, Cerrado, Mata Atlântica, Caatin
 ## Instalação
 1. Instale o **Fabric Loader 0.19.5+** para o **Minecraft 26.3** (Java 25).
 2. Coloque na pasta `mods`:
-   - o jar do mod (`irineu-<versão>+26.3.jar`, na aba **Releases** do GitHub);
+   - o jar do mod (`irineu-<versão>+26.3.jar`, nos [Releases](https://github.com/Mazzega720/irineu-mod/releases));
    - a [Fabric API](https://modrinth.com/mod/fabric-api) para 26.3;
    - o [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib) 5.5.7+ para Fabric 26.3.
 3. Abra o jogo. O conteúdo novo fica nas abas do criativo (a aba **Brasil** reúne economia, minérios e cultura) e na dimensão Brasil (veja abaixo como entrar).
