@@ -3,6 +3,7 @@ package com.mazzega.irineu.registry;
 import com.mazzega.irineu.Irineu;
 import com.mazzega.irineu.brasil.Brasil;
 import com.mazzega.irineu.brasil.flora.AlagadoFeature;
+import com.mazzega.irineu.brasil.flora.ForaDeEstrutura;
 import com.mazzega.irineu.brasil.flora.MandacaruBlock;
 import com.mazzega.irineu.brasil.flora.MandacaruFeature;
 import com.mazzega.irineu.brasil.flora.PalmeiraFeature;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.registry.LandPathTypeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -50,6 +52,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 /**
@@ -198,6 +201,13 @@ public final class BrasilBlocks {
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, Irineu.id("mandacaru"), MandacaruFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, Irineu.id("seca"), SecaFeature.CODEC);
 		Registry.register(BuiltInRegistries.FEATURE_TYPE, Irineu.id("alagado"), AlagadoFeature.CODEC);
+		Registry.register(BuiltInRegistries.PLACEMENT_MODIFIER_TYPE, Irineu.id("fora_de_estrutura"), ForaDeEstrutura.CODEC);
+		// Espinhos e capim cortante: os mobs desviam como do cacto e do arbusto de frutas (não entram e evitam passar raspando).
+		// DAMAGING nos dois: no 26.3 o Fabric devolve o segundo tipo também para o próprio bloco, e o jogo já transforma
+		// DAMAGING em DAMAGING_IN_NEIGHBOR para quem está do lado.
+		for (Block espinho : List.of(MANDACARU, XIQUE_XIQUE, CAPIM_NAVALHA)) {
+			LandPathTypeRegistry.register(espinho, PathType.DAMAGING, PathType.DAMAGING);
+		}
 		CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.NATURAL_BLOCKS).register(output -> ALL.forEach(output::accept));
 	}
 }

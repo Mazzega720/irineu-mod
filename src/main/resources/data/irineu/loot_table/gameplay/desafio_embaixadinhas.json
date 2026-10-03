@@ -71,6 +71,36 @@
           ]
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:nota_20_reais",
+          "weight": 3,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:nota_50_reais",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:nota_100_reais",
+          "weight": 1
+        }
+      ]
     }
   ],
   "random_sequence": "irineu:gameplay/desafio_embaixadinhas"

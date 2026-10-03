@@ -55,6 +55,9 @@
           }
         ]
       }
+    },
+    {
+      "type": "irineu:fora_de_estrutura"
     }
   ]
 }

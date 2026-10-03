@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -19,18 +20,23 @@ import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContex
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.densityfunction.SamplerContext;
+import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -340,20 +346,13 @@ final class BrasilGameTests {
 		String[][] places = {{"quiosque_praia", "litoral"}, {"academia_bambam", "pampa"}};
 		for (String[] place : places) {
 			ResourceKey<Biome> biome = BIOMES.stream().filter(k -> k.identifier().getPath().equals(place[1])).findFirst().orElseThrow();
-			BlockPos spot = server.computeOnServer(mc -> landSpot(brasil(mc), biome));
-			// O /place só funciona com o lugar carregado: o jogador vai até lá antes.
-			server.runCommand(String.format(Locale.ROOT, "execute in brasil_mod:brasil run tp @p %d %d %d", spot.getX(), spot.getY() + 20, spot.getZ()));
-			context.waitTicks(40);
-			server.runOnServer(mc -> {
-				var source = mc.createCommandSourceStack().withLevel(brasil(mc)).withPosition(Vec3.atCenterOf(spot)).withPermission(net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER);
-				try {
-					int result = mc.getCommands().getDispatcher().execute(
-						String.format(Locale.ROOT, "place structure irineu:%s %d %d %d", place[0], spot.getX(), spot.getY(), spot.getZ()), source);
-					System.out.println("[BrasilTest] place structure " + place[0] + " -> " + result);
-				} catch (com.mojang.brigadier.exceptions.CommandSyntaxException e) {
-					System.out.println("[BrasilTest] place structure " + place[0] + " falhou: " + e.getMessage());
-				}
-			});
+			List<BlockPos> spots = server.computeOnServer(mc -> landSpots(brasil(mc), biome, 16));
+			Identifier id = com.mazzega.irineu.Irineu.id(place[0]);
+			int aceitos = aceitos(server, id, spots);
+			System.out.println("[BrasilTest] " + place[0] + ": o terreno serve em " + aceitos + " de " + spots.size() + " lugares do bioma " + place[1]);
+			if (aceitos * 5 < spots.size()) throw new AssertionError(place[0] + " recusa lugar demais (" + aceitos + " de " + spots.size() + ")");
+			BlockPos spot = placeStructure(context, server, id, spots, "BrasilTest");
+			if (spot == null) throw new AssertionError(place[0] + ": nenhum lugar do bioma serviu");
 			BlockPos built = server.computeOnServer(mc -> {
 				ServerLevel brasil = brasil(mc);
 				for (BlockPos pos : BlockPos.betweenClosed(spot.offset(-40, -30, -40), spot.offset(40, 20, 40))) {
@@ -374,6 +373,7 @@ final class BrasilGameTests {
 			context.waitTicks(60);
 			singleplayer.getConnection().waitForChunksRender();
 			context.takeScreenshot("brasil-" + place[0]);
+			server.runCommand("execute in brasil_mod:brasil run forceload remove " + areaDe(spot));
 		}
 		server.runCommand("gamemode survival @p");
 	}
@@ -481,6 +481,102 @@ final class BrasilGameTests {
 	}
 
 	/** O ponto mais perto do bioma, sem água em cima (para os de terra), com o chunk já gerado; y = topo (com folhas). */
+	/**
+	 * O ponto de landSpot e mais pontos de terra do mesmo bioma em volta (em anéis, a pelo menos 48 blocos um do outro),
+	 * para tentar estruturas. Olha só o terreno-base (sem gerar chunk), então serve até para faixas finas como o Litoral.
+	 */
+	static List<BlockPos> landSpots(ServerLevel brasil, ResourceKey<Biome> key, int n) {
+		BlockPos first = landSpot(brasil, key);
+		List<BlockPos> spots = new ArrayList<>(List.of(first));
+		var generator = brasil.getChunkSource().getGenerator();
+		var random = brasil.getChunkSource().randomState();
+		var biomas = generator.getBiomeSource().createUncachedResolver(random);
+		for (int r = 32; r <= 768 && spots.size() < n; r += 32) {
+			for (int dx = -r; dx <= r && spots.size() < n; dx += 32) {
+				for (int dz = -r; dz <= r && spots.size() < n; dz += 32) {
+					if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
+					int x = first.getX() + dx;
+					int z = first.getZ() + dz;
+					int top = generator.getFirstFreeHeight(x, z, Heightmap.Types.WORLD_SURFACE_WG, brasil, random);
+					int floor = generator.getFirstFreeHeight(x, z, Heightmap.Types.OCEAN_FLOOR_WG, brasil, random);
+					BlockPos pos = new BlockPos(x, top, z);
+					if (top != floor || !biomas.getNoiseBiome(x >> 2, top >> 2, z >> 2).is(key)) continue;
+					if (spots.stream().allMatch(o -> o.distManhattan(pos) >= 48)) spots.add(pos);
+				}
+			}
+		}
+		return spots;
+	}
+
+	/** Quantos dos lugares a estrutura aceitaria (para saber se o terreno não ficou exigente demais). */
+	static int aceitos(TestServerContext server, Identifier id, List<BlockPos> spots) {
+		return server.computeOnServer(mc -> {
+			int n = 0;
+			for (BlockPos spot : spots) {
+				if (gera(brasil(mc), id, spot) != null) n++;
+			}
+			return n;
+		});
+	}
+
+	/** Monta a estrutura no lugar como o /place faz, sem colocar nada; null se o terreno não serve. */
+	static net.minecraft.world.level.levelgen.structure.StructureStart gera(ServerLevel brasil, Identifier id, BlockPos spot) {
+		var holder = brasil.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(ResourceKey.create(Registries.STRUCTURE, id));
+		Structure structure = holder.value();
+		var generator = brasil.getChunkSource().getGenerator();
+		var random = brasil.getChunkSource().randomState();
+		var start = structure.generate(holder, brasil.dimension(), brasil.registryAccess(), generator, generator.getBiomeSource(),
+			random.createClimateSampler(SamplerContext.EMPTY_UNCACHED), random, brasil.getStructureTemplateManager(), brasil.getSeed(),
+			ChunkPos.containing(spot), 0, brasil, b -> true);
+		return start.isValid() ? start : null;
+	}
+
+	/** A área que o /place precisa carregada em volta do lugar (as maiores estruturas vão até ~80 blocos). */
+	static String areaDe(BlockPos spot) {
+		return String.format(Locale.ROOT, "%d %d %d %d", spot.getX() - 80, spot.getZ() - 80, spot.getX() + 80, spot.getZ() + 80);
+	}
+
+	/**
+	 * Coloca a estrutura no primeiro lugar que ela aceitar. As estruturas do Brasil (EstruturaNoTerreno) recusam água e
+	 * barranco, então antes confere o lugar como o /place faz (sem carregar nada); só no que serve carrega a área e
+	 * coloca. A área fica carregada: quem chama tira com {@code forceload remove areaDe(lugar)}. Devolve o lugar ou null.
+	 */
+	static BlockPos placeStructure(ClientGameTestContext context, TestServerContext server, Identifier id, List<BlockPos> spots, String tag) {
+		for (BlockPos spot : spots) {
+			// As peças que a estrutura montou ali (null: o terreno não serve).
+			String pecas = server.computeOnServer(mc -> {
+				var start = gera(brasil(mc), id, spot);
+				if (start == null) return null;
+				Map<String, Integer> conta = new java.util.TreeMap<>();
+				for (var piece : start.getPieces()) {
+					String nome = piece instanceof net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece pe
+						? pe.getElement().toString().replaceAll(".*\\[(?:Left|Right)\\[([^\\]]+)\\].*", "$1") : piece.getClass().getSimpleName();
+					conta.merge(nome.substring(nome.indexOf(':') + 1), 1, Integer::sum);
+				}
+				return start.getPieces().size() + " peças " + conta;
+			});
+			System.out.println("[" + tag + "] " + id + " em " + spot.toShortString() + ": " + (pecas != null ? pecas : "recusou (água ou barranco)"));
+			if (pecas == null) continue;
+			server.runCommand(String.format(Locale.ROOT, "execute in brasil_mod:brasil run tp @p %d %d %d", spot.getX(), spot.getY() + 25, spot.getZ()));
+			server.runCommand("execute in brasil_mod:brasil run forceload add " + areaDe(spot));
+			context.waitTicks(60);
+			int result = server.computeOnServer(mc -> {
+				var source = mc.createCommandSourceStack().withLevel(brasil(mc)).withPosition(Vec3.atCenterOf(spot))
+					.withPermission(net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER);
+				try {
+					return mc.getCommands().getDispatcher().execute(String.format(Locale.ROOT, "place structure %s %d %d %d", id, spot.getX(), spot.getY(),
+						spot.getZ()), source);
+				} catch (com.mojang.brigadier.exceptions.CommandSyntaxException ex) {
+					System.out.println("[" + tag + "] place " + id + " falhou: " + ex.getMessage());
+					return 0;
+				}
+			});
+			if (result > 0) return spot;
+			server.runCommand("execute in brasil_mod:brasil run forceload remove " + areaDe(spot));
+		}
+		return null;
+	}
+
 	static BlockPos landSpot(ServerLevel brasil, ResourceKey<Biome> key) {
 		Pair<BlockPos, Holder<Biome>> result = brasil.findClosestBiome3d(holder -> holder.is(key), new BlockPos(0, 64, 0), 6400, 32, 64);
 		if (result == null) throw new AssertionError("Bioma não encontrado: " + key.identifier());

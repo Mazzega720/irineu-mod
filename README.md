@@ -52,6 +52,8 @@ Tudo o que o mod tem acontece lá: o Irineu e o Jailson nascem nos biomas do Bra
 | **Junco** | Hastes altas na beira d'água |
 | **Capim-Navalha** | Prende e **corta** quem passa no meio (como o arbusto de frutas doces) |
 | **Xique-Xique** e **Mandacaru** | Cactos da Caatinga: **espetam** ao encostar. O mandacaru nasce com braços |
+
+Os mobs enxergam o capim-navalha, o xique-xique e o mandacaru como enxergam o cacto: não entram neles e evitam passar raspando.
 | **Vitória-Régia** e **Aguapé** | Plantas que boiam na água (como a vitória-régia) |
 
 ### Bichos do Brasil
@@ -160,14 +162,22 @@ Use com o **Dono do Buteco** ou os **comerciantes da favela**:
 | **Cerveja Gelada** | Regeneração (10s) | Náusea (8s) |
 | **Chimarrão** | Regeneração e Resistência (1 min) | — |
 
-## Estruturas do Brasil (versão 3)
+## Estruturas do Brasil
+Todas são **montadas por peças que se encaixam**, como as vilas do jogo: cada uma sai diferente, com mais ou menos casas, ruas e anexos.
+Antes de nascer, a estrutura olha o terreno:
+- não nasce em rio, lago ou mar, nem em barranco;
+- as peças que cairiam na água ficam de fora;
+- as palafitas são o contrário: só nascem em cima d'água, e as peças que bateriam numa margem alta ficam de fora.
+
+Os alagados do Pantanal não aparecem dentro delas, e árvores, mandacarus, xique-xiques, cupinzeiros e pedras não nascem no meio das ruas e dos quintais.
+
 | Estrutura | Onde | O que tem |
 |---|---|---|
-| **Favela** | Encostas da **Mata Atlântica** | Montada em peças, como as vilas do jogo: uma praça com a caixa d'água grande, o camelô e os vira-latas, e **becos que seguem o terreno**. Em volta deles, **casas empilhadas** de tijolo e reboco colorido, com laje, vergalhão aparecendo e **caixa d'água azul**; às vezes um **puxadinho** em cima da laje. Tem também as **biroscas** (camelô, mercearia, ferro-velho) e um buteco. Baús com notas, comida e, às vezes, a nota de 3 |
-| **Buteco** | Comum em quase todo o Brasil | Piso de lajota, calçada de pedra portuguesa, toldo listrado, balcão com a **maquininha**, geladeira, as mesas de plástico com as **cadeiras amarelas** na calçada e o **Dono do Buteco** |
-| **Vila de Cangaceiros** | **Caatinga** | Paliçada de **mandacaru**, casas de taipa com telhado de palha, poço seco, fogueira no terreiro e **cangaceiros** armados com peixeira. São neutros: mexeu com um, o bando inteiro vem atrás |
-| **Estância Gaúcha** | **Pampa** | O **galpão** com o **fogo de chão** no meio e bancos em volta, chimarrão no baú, a **mangueira** (curral) com cavalos e o cocho d'água, e o **gaúcho** |
-| **Palafitas** | Rios e lagos da **Amazônia** e do **Pantanal** (só nascem em cima d'água) | Cabanas de tábua com telhado de folha de palmeira sobre esteios, passarelas, a rede e os **pescadores** |
+| **Favela** | Encostas da **Mata Atlântica** | Uma praça com a caixa d'água grande, o camelô e os vira-latas, e **becos que seguem o terreno**. Em volta deles, **casas empilhadas** de tijolo e reboco colorido, com laje, vergalhão aparecendo e **caixa d'água azul**; às vezes um **puxadinho** ou um **churrasco na laje** em cima. Tem também as **biroscas** (camelô, mercearia, ferro-velho), um buteco, o **campinho** de várzea e a **igrejinha**. Baús com notas, comida e, às vezes, a nota de 3 |
+| **Buteco** | Comum em quase todo o Brasil | Piso de lajota, calçada de pedra portuguesa, toldo listrado, balcão com a **maquininha**, geladeira, as mesas de plástico com as **cadeiras amarelas** na calçada e o **Dono do Buteco**. Dos lados da calçada, às vezes, um anexo: **espetinho**, **orelhão**, **sinuca** debaixo da lona ou mais mesas |
+| **Vila de Cangaceiros** | **Caatinga** | O **terreiro** com a fogueira, os bancos, o poço seco, o cruzeiro e o jumento; **trilhas** de terra batida que seguem o chão e terminam numa porteira. Nos lados das trilhas: **casas de taipa** com telhado de palha, a **casa do capitão** (com o baú do bando), a **casa de farinha**, a **capelinha** com o sino, o **curral de bodes** e a **cisterna**. Os **cangaceiros** andam com peixeira: são neutros, mas mexeu com um, o bando inteiro vem atrás |
+| **Estância Gaúcha** | **Pampa** | O **galpão** com o **fogo de chão** e o **gaúcho**; dele saem **corredores** de chão batido com moirões até a **mangueira** (cavalos), a **casa sede** com varanda, o **aprisco** (ovelhas), o **cata-vento**, a **churrasqueira**, a **horta** com espantalho e o **capão** de árvores |
+| **Palafitas** | Rios e lagos da **Amazônia** e do **Pantanal** | O **trapiche** no meio da água com a banca de peixe e o **pescador**; dele saem **passarelas** sobre esteios (retas e em L) até as **cabanas** de tábua com telhado de folha de palmeira (do pescador, da família, o depósito) e plataformas de pesca |
 | **Ruínas de Carajás** | Debaixo da **Amazônia** | A boca da mina (com alçapão) na superfície e a escada até as galerias. Corredores escorados, cheios de veios de **ferro e hematita**, salas de minério, **salas com spawner** (zumbi, esqueleto ou aranha da caverna) e a sala do tesouro (aço pesado, notas de 100 e 200, a picareta industrial) |
 
 ### Vira-lata caramelo
@@ -382,7 +392,8 @@ Prédio grande (37 x 27 blocos, pé-direito de 12) que aparece raramente no **Br
 - **Fachada** preta e amarela com o letreiro gigante **"BAMBAM"** e vitrines.
 - **Dentro**: parede de espelhos com racks de halteres e supinos, esteiras, sacos de pancada pendurados, barras com anilhas no chão, arena cinza com faixa amarela no meio, palco com troféus e o letreiro **"BIRL"**, placas com as frases dele, recepção com bebedouro e armários, claraboias e luzes no teto.
 - **Árvores naturais** em volta e em dois canteiros dentro, para ele ter o que arremessar.
-- **Baús**: recepção e armários com frango, batata (doce), ovos, suco de laranja, ferro, ouro, esmeraldas e poções de força; o **baú do campeão** no palco tem poções de força melhores, diamantes, maçãs douradas e chance de maçã encantada ou totem.
+- **Baús**: recepção e armários com frango, batata (doce), ovos, suco de laranja, marmita de feijoada, cafezinho, água filtrada, ferro, ouro, esmeraldas, aço pesado, poções de força e as mensalidades (notas e moedas); o **baú do campeão** no palco tem poções de força melhores, diamantes, maçãs douradas, marmitas, notas de 50 a 200 e chance de maçã encantada, totem, nióbio, peitoral de nióbio ou o amuleto da sorte.
+- Só nasce em chão firme e sem muito desnível (nunca em cima de rio ou lago).
 - Ele passeia só por dentro da academia; quando acha alguém para brigar, vai atrás onde for.
 
 ### Aparelhos da academia
@@ -393,7 +404,13 @@ Quiosque de praia brasileiro que **nasce sozinho no Brasil**:
 - **Praia:** comum no **Litoral** (tentativa a cada ~12 chunks).
 - **Beira de estrada:** raro, no **Pampa** e no **Cerrado**.
 
-Tem teto de palha, balcão de bambu com cardápio ("espetinho, pastel, peixe frito, água de coco, suco de laranja"), letreiro da marca, chopeiras (barris), churrasqueira (defumador), baú com comida e bebida, coqueiros com coco, lampiões, guarda-sóis listrados, cadeiras bagunçadas e uma pilha de cadeiras no canto.
+Tem teto de palha, balcão de bambu com cardápio ("espetinho, pastel, peixe frito, água de coco, suco de laranja"), letreiro da marca, chopeiras (barris), churrasqueira (defumador), baú com comida e bebida (coxinha, cerveja gelada, copão, o troco do caixa em notas e moedas, às vezes uma havaiana ou os óculos Juliet esquecidos), coqueiros com coco, lampiões, guarda-sóis listrados, cadeiras bagunçadas e uma pilha de cadeiras no canto.
+
+Dos lados do deck podem vir **anexos**:
+- na praia: posto de salva-vidas, quadra de vôlei, chuveirão, barraca de água de coco, guarda-sóis com cadeiras e cangas, castelo de areia;
+- na estrada: banca de fruta, borracharia e orelhão.
+
+O quiosque não nasce no mar nem em barranco, e o anexo que cairia na água fica de fora.
 
 | Variação | Tamanho | O que tem |
 |---|---|---|
@@ -515,7 +532,7 @@ gradlew runClientGameTest
 <details>
 <summary>O que os testes conferem</summary>
 
-teste automático: spawna Irineu, Jailson e BamBam (com árvore e mobs para o BIRL), testa habilidades e IA, senta na cadeira, negocia com o Davi, coloca os 5 quiosques (conferindo o Davi no balcão) e gera um pelo worldgen, testa cada caneta do Manoel Gomes (inclusive o quanto as pretas empurram) e uma briga de 15s com ele, monta o totem do Manoel com as anilhas que o BamBam deixa, acende as velas com o isqueiro e confere as cinco canetas aparecendo uma por uma (e que quebrar o totem cancela e só aparece um Manoel por vez), confere o nerf da caneta amarela, testa as fases 2 e 3 dele (caneta verde explodindo, teleporte, campo de força, fusão na caneta colorida, golpe com teleporte e clones, armadura da fase 3 e clones ao apanhar), traz a visita do Luva e do Allan, abre a proposta clicando no Allan, aceita pelo botão, confere as embaixadinhas do Luva, bate na bola até ganhar (e confere o prêmio no inventário) e testa a derrota, joga a luta inteira do chefão final (urna, cada habilidade das 4 fases, o Padre Kelmon, a fusão e a Faixa Presidencial), coloca a academia (e gera uma pelo worldgen), testa a transformação e cada golpe da fase 2 do BamBam, confere se o GeckoLib carregou os modelos e se cada pose toca a animação certa (galeria de poses), constrói o portal do Brasil, acende com a Bandeira Nacional, vai e volta (chegando na superfície, em chão firme, com o portal de volta), confere que um portal enterrado num morro do Brasil é ignorado, faz crescer as três mudas e confere que as folhas delas dão muda, confere que os quiosques e a academia só nascem no Brasil, mede a fatia de cada bioma num mapa de 8192 blocos, fotografa cada bioma, a galeria de plantas e árvores e os bichos, testa o câmbio, a maquininha (depósito, nota falsa recusada e saque), o Pix no buteco, a inflação mudando os preços e o sorteio semanal, a nota de 3 (recusa com os vira-latas e o desconto quando cola), as notas dos micos no Brasil, cada minério e as receitas (fornalha, alto-forno e ferraria), o peitoral de nióbio, o cajado no seco e na chuva, a picareta 3x3, o amuleto, a bateia e a armadura imperial, confere que cada minério só gera no seu bioma e acha cada um no terreno, testa a havaiana (bumerangue e crítico pelas costas), o bambu, a cadeira (regenerar e escudo contra fogo), o filtro e a água filtrada, a gambiarra, os óculos e cada comida, coloca as 6 estruturas no Brasil (e uma sala de spawner das ruínas) e fotografa tudo e a galeria de gente, armaduras e itens, tira screenshots
+teste automático: spawna Irineu, Jailson e BamBam (com árvore e mobs para o BIRL), testa habilidades e IA, senta na cadeira, negocia com o Davi, coloca os 5 quiosques (conferindo o Davi no balcão) e gera um pelo worldgen, testa cada caneta do Manoel Gomes (inclusive o quanto as pretas empurram) e uma briga de 15s com ele, monta o totem do Manoel com as anilhas que o BamBam deixa, acende as velas com o isqueiro e confere as cinco canetas aparecendo uma por uma (e que quebrar o totem cancela e só aparece um Manoel por vez), confere o nerf da caneta amarela, testa as fases 2 e 3 dele (caneta verde explodindo, teleporte, campo de força, fusão na caneta colorida, golpe com teleporte e clones, armadura da fase 3 e clones ao apanhar), traz a visita do Luva e do Allan, abre a proposta clicando no Allan, aceita pelo botão, confere as embaixadinhas do Luva, bate na bola até ganhar (e confere o prêmio no inventário) e testa a derrota, joga a luta inteira do chefão final (urna, cada habilidade das 4 fases, o Padre Kelmon, a fusão e a Faixa Presidencial), coloca a academia (e gera uma pelo worldgen), testa a transformação e cada golpe da fase 2 do BamBam, confere se o GeckoLib carregou os modelos e se cada pose toca a animação certa (galeria de poses), constrói o portal do Brasil, acende com a Bandeira Nacional, vai e volta (chegando na superfície, em chão firme, com o portal de volta), confere que um portal enterrado num morro do Brasil é ignorado, faz crescer as três mudas e confere que as folhas delas dão muda, confere que os quiosques e a academia só nascem no Brasil, mede a fatia de cada bioma num mapa de 8192 blocos, fotografa cada bioma, a galeria de plantas e árvores e os bichos, testa o câmbio, a maquininha (depósito, nota falsa recusada e saque), o Pix no buteco, a inflação mudando os preços e o sorteio semanal, a nota de 3 (recusa com os vira-latas e o desconto quando cola), as notas dos micos no Brasil, cada minério e as receitas (fornalha, alto-forno e ferraria), o peitoral de nióbio, o cajado no seco e na chuva, a picareta 3x3, o amuleto, a bateia e a armadura imperial, confere que cada minério só gera no seu bioma e acha cada um no terreno, testa a havaiana (bumerangue e crítico pelas costas), o bambu, a cadeira (regenerar e escudo contra fogo), o filtro e a água filtrada, a gambiarra, os óculos e cada comida, confere que os mobs desviam do mandacaru, do xique-xique e do capim-navalha, coloca as 6 estruturas no Brasil (no primeiro lugar que o terreno aceitar, mostrando as peças que cada uma montou) e uma sala de spawner das ruínas e fotografa tudo e a galeria de gente, armaduras e itens, tira screenshots
 </details>
 
 ### Lançando uma versão

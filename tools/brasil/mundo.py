@@ -195,6 +195,8 @@ def weighted(*pairs):
 IN_SQUARE = {"type": "minecraft:in_square"}
 BIOME = {"type": "minecraft:biome"}
 NO_WATER = {"type": "minecraft:surface_water_depth_filter", "max_water_depth": 0}
+# Nada de árvore, cacto ou pedra dentro das estruturas (BrasilBlocks: irineu:fora_de_estrutura).
+FORA = {"type": "irineu:fora_de_estrutura"}
 
 
 def heightmap(kind):
@@ -202,7 +204,7 @@ def heightmap(kind):
 
 
 def tree_placement(n):
-    return [count(n), IN_SQUARE, NO_WATER, heightmap("OCEAN_FLOOR"), BIOME]
+    return [count(n), IN_SQUARE, NO_WATER, heightmap("OCEAN_FLOOR"), BIOME, FORA]
 
 
 # Castanheira: tronco 2x2 altíssimo e reto, com a copa em guarda-chuva lá em cima (cipós e cacau).
@@ -262,7 +264,7 @@ placed("capoes_pampa", "capoes_pampa", [
     {"type": "minecraft:rarity_filter", "chance": 12}, IN_SQUARE, count(6),
     {"type": "minecraft:offset", "x": {"type": "minecraft:uniform", "min_inclusive": -5, "max_inclusive": 5}, "y": 0,
      "z": {"type": "minecraft:uniform", "min_inclusive": -5, "max_inclusive": 5}},
-    NO_WATER, heightmap("OCEAN_FLOOR"), BIOME,
+    NO_WATER, heightmap("OCEAN_FLOOR"), BIOME, FORA,
 ])
 
 feature("arvores_pantanal", {
@@ -284,7 +286,7 @@ feature("cupinzeiro", {
     "prioritize_tip": False,
 })
 placed("cupinzeiros", "cupinzeiro", [
-    {"type": "minecraft:rarity_filter", "chance": 2}, IN_SQUARE, heightmap("MOTION_BLOCKING"), BIOME,
+    {"type": "minecraft:rarity_filter", "chance": 2}, IN_SQUARE, heightmap("MOTION_BLOCKING"), BIOME, FORA,
     {"type": "minecraft:block_predicate_filter", "predicate": {"type": "minecraft:all_of", "predicates": [
         {"type": "minecraft:matching_block_tag", "tag": "minecraft:air"},
         {"type": "minecraft:matching_blocks", "blocks": ["minecraft:grass_block", "minecraft:coarse_dirt", "minecraft:terracotta", "minecraft:red_terracotta"],
@@ -301,13 +303,13 @@ feature("lajedo", {
     "state_provider": {"id": "minecraft:stone"},
     "target": {"type": "minecraft:matching_blocks", "blocks": SOLO_CAATINGA},
 })
-placed("lajedos", "lajedo", [count(weighted((0, 2), (1, 2), (2, 1))), IN_SQUARE, heightmap("WORLD_SURFACE_WG"), BIOME])
+placed("lajedos", "lajedo", [count(weighted((0, 2), (1, 2), (2, 1))), IN_SQUARE, heightmap("WORLD_SURFACE_WG"), BIOME, FORA])
 feature("pedregulho", {
     "type": "minecraft:block_blob",
     "can_place_on": {"type": "minecraft:matching_blocks", "blocks": SOLO_CAATINGA + ["minecraft:stone"]},
     "state": "minecraft:cobblestone",
 })
-placed("pedregulhos", "pedregulho", [{"type": "minecraft:rarity_filter", "chance": 3}, IN_SQUARE, heightmap("MOTION_BLOCKING"), BIOME])
+placed("pedregulhos", "pedregulho", [{"type": "minecraft:rarity_filter", "chance": 3}, IN_SQUARE, heightmap("MOTION_BLOCKING"), BIOME, FORA])
 
 # Cachoeiras da Mata Atlântica: muitas nascentes nas encostas das serras.
 placed("cachoeiras", "minecraft:spring_water", [
@@ -361,13 +363,13 @@ ipe("rosa")
 
 feature("buriti", {"type": "irineu:palmeira", "min_height": 8, "max_height": 13, "trunk": state("minecraft:jungle_log", axis="y"),
                    "leaves": state("irineu:folhas_palmeira", distance=7, persistent=True, waterlogged=False)})
-placed("buritis", "buriti", [count(weighted((0, 1), (1, 2), (2, 2), (3, 1))), IN_SQUARE, NO_WATER, heightmap("OCEAN_FLOOR"), BIOME])
+placed("buritis", "buriti", [count(weighted((0, 1), (1, 2), (2, 2), (3, 1))), IN_SQUARE, NO_WATER, heightmap("OCEAN_FLOOR"), BIOME, FORA])
 feature("coqueiro", {"type": "irineu:palmeira", "min_height": 6, "max_height": 9, "trunk": state("minecraft:jungle_log", axis="y"),
                      "leaves": state("irineu:folhas_palmeira", distance=7, persistent=True, waterlogged=False), "coconuts": True})
-placed("coqueiros", "coqueiro", [count(weighted((0, 3), (1, 2), (2, 1))), IN_SQUARE, NO_WATER, heightmap("OCEAN_FLOOR"), BIOME])
+placed("coqueiros", "coqueiro", [count(weighted((0, 3), (1, 2), (2, 1))), IN_SQUARE, NO_WATER, heightmap("OCEAN_FLOOR"), BIOME, FORA])
 
 feature("mandacaru", {"type": "irineu:mandacaru"})
-placed("mandacarus", "mandacaru", [count(weighted((0, 1), (1, 2), (2, 2), (3, 1))), IN_SQUARE, NO_WATER, heightmap("MOTION_BLOCKING"), BIOME])
+placed("mandacarus", "mandacaru", [count(weighted((0, 1), (1, 2), (2, 2), (3, 1))), IN_SQUARE, NO_WATER, heightmap("MOTION_BLOCKING"), BIOME, FORA])
 
 feature("seca", {"type": "irineu:seca"})
 placed("seca", "seca", [])
@@ -380,13 +382,14 @@ NEAR_WATER = {"type": "minecraft:any_of", "predicates": [
     {"type": "minecraft:matching_fluids", "fluids": ["minecraft:water", "minecraft:flowing_water"], "offset": off} for off in ([1, -1, 0], [-1, -1, 0], [0, -1, 1], [0, -1, -1])]}
 
 
-def patch(name, block_id, tries, first=None, water_surface=False, near_water=False):
+def patch(name, block_id, tries, first=None, water_surface=False, near_water=False, fora=False):
     feature(name, {"type": "minecraft:simple_block", "to_place": {"id": block_id}})
     checks = [{"type": "minecraft:matching_block_tag", "tag": "minecraft:air"}, {"type": "minecraft:would_survive", "state": block_id}]
     if near_water:
         checks.append(NEAR_WATER)
     placed(name, name, (first or []) + [IN_SQUARE, heightmap("WORLD_SURFACE_WG" if water_surface else "MOTION_BLOCKING"), BIOME, count(tries), TRAPEZOID,
-                                        {"type": "minecraft:block_predicate_filter", "predicate": {"type": "minecraft:all_of", "predicates": checks}}])
+                                        {"type": "minecraft:block_predicate_filter", "predicate": {"type": "minecraft:all_of", "predicates": checks}}]
+           + ([FORA] if fora else []))
 
 
 def rarity(n):
@@ -398,8 +401,8 @@ patch("aguapes", "irineu:aguape", 18, [count(6)], water_surface=True)
 patch("orquideas", "irineu:orquidea", 20, [rarity(3)])
 patch("bromelias", "irineu:bromelia", 24, [count(2)])
 patch("juncos", "irineu:junco", 28, [count(4)], near_water=True)
-patch("capim_navalha", "irineu:capim_navalha", 16, [rarity(2)])
-patch("xique_xiques", "irineu:xique_xique", 12, [count(2)])
+patch("capim_navalha", "irineu:capim_navalha", 16, [rarity(2)], fora=True)
+patch("xique_xiques", "irineu:xique_xique", 12, [count(2)], fora=True)
 
 # ====================================================================== Biomas
 # Ordem global de cada etapa (todos os biomas da dimensão têm de concordar com ela).

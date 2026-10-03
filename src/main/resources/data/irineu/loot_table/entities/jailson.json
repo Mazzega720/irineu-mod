@@ -8,11 +8,19 @@
           "modifier": [
             {
               "type": "minecraft:set_count",
-              "count": { "type": "minecraft:uniform", "min": 0, "max": 3 }
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0,
+                "max": 3
+              }
             },
             {
               "type": "minecraft:enchanted_count_increase",
-              "count": { "type": "minecraft:uniform", "min": 0.0, "max": 1.0 },
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0.0,
+                "max": 1.0
+              },
               "enchantment": "minecraft:looting"
             }
           ],
@@ -25,19 +33,86 @@
       "condition": {
         "type": "minecraft:all_of",
         "terms": [
-          { "type": "minecraft:killed_by_player" },
+          {
+            "type": "minecraft:killed_by_player"
+          },
           {
             "type": "minecraft:random_chance_with_enchanted_bonus",
-            "enchanted_chance": { "type": "minecraft:linear", "base": 0.4, "per_level_above_first": 0.1 },
+            "enchanted_chance": {
+              "type": "minecraft:linear",
+              "base": 0.4,
+              "per_level_above_first": 0.1
+            },
             "enchantment": "minecraft:looting",
             "unenchanted_chance": 0.3
           }
         ]
       },
       "entries": [
-        { "type": "minecraft:item", "name": "irineu:suco_de_laranja" }
+        {
+          "type": "minecraft:item",
+          "name": "irineu:suco_de_laranja"
+        }
       ],
       "rolls": 1
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:moeda_1_real",
+          "weight": 8,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:nota_5_reais",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:nota_10_reais",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:copao_guarana_jesus",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:corote_mistico",
+          "weight": 3
+        }
+      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:killed_by_player"
+          },
+          {
+            "type": "minecraft:random_chance_with_enchanted_bonus",
+            "enchantment": "minecraft:looting",
+            "unenchanted_chance": 0.35,
+            "enchanted_chance": {
+              "type": "minecraft:linear",
+              "base": 0.37,
+              "per_level_above_first": 0.02
+            }
+          }
+        ]
+      }
     }
   ],
   "random_sequence": "irineu:entities/jailson"

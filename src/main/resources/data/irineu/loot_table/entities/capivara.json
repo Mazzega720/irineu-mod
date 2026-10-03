@@ -38,6 +38,34 @@
           ]
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:pao_de_queijo_curado",
+          "weight": 1
+        }
+      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:killed_by_player"
+          },
+          {
+            "type": "minecraft:random_chance_with_enchanted_bonus",
+            "enchantment": "minecraft:looting",
+            "unenchanted_chance": 0.05,
+            "enchanted_chance": {
+              "type": "minecraft:linear",
+              "base": 0.060000000000000005,
+              "per_level_above_first": 0.01
+            }
+          }
+        ]
+      }
     }
   ],
   "random_sequence": "irineu:entities/capivara"

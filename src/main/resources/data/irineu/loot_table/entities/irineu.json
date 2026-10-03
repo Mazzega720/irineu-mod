@@ -8,11 +8,19 @@
           "modifier": [
             {
               "type": "minecraft:set_count",
-              "count": { "type": "minecraft:uniform", "min": 0, "max": 2 }
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0,
+                "max": 2
+              }
             },
             {
               "type": "minecraft:enchanted_count_increase",
-              "count": { "type": "minecraft:uniform", "min": 0.0, "max": 1.0 },
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0.0,
+                "max": 1.0
+              },
               "enchantment": "minecraft:looting"
             }
           ],
@@ -25,19 +33,101 @@
       "condition": {
         "type": "minecraft:all_of",
         "terms": [
-          { "type": "minecraft:killed_by_player" },
+          {
+            "type": "minecraft:killed_by_player"
+          },
           {
             "type": "minecraft:random_chance_with_enchanted_bonus",
-            "enchanted_chance": { "type": "minecraft:linear", "base": 0.35, "per_level_above_first": 0.1 },
+            "enchanted_chance": {
+              "type": "minecraft:linear",
+              "base": 0.35,
+              "per_level_above_first": 0.1
+            },
             "enchantment": "minecraft:looting",
             "unenchanted_chance": 0.25
           }
         ]
       },
       "entries": [
-        { "type": "minecraft:item", "name": "minecraft:emerald" }
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:emerald"
+        }
       ],
       "rolls": 1
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:moeda_1_real",
+          "weight": 10,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:nota_2_reais",
+          "weight": 6
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:nota_5_reais",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:pao_de_queijo_curado",
+          "weight": 5,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:cafezinho",
+          "weight": 4
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:nota_3_reais",
+          "weight": 1
+        }
+      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:killed_by_player"
+          },
+          {
+            "type": "minecraft:random_chance_with_enchanted_bonus",
+            "enchantment": "minecraft:looting",
+            "unenchanted_chance": 0.35,
+            "enchanted_chance": {
+              "type": "minecraft:linear",
+              "base": 0.37,
+              "per_level_above_first": 0.02
+            }
+          }
+        ]
+      }
     }
   ],
   "random_sequence": "irineu:entities/irineu"

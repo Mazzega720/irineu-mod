@@ -1,7 +1,7 @@
 package com.mazzega.irineu;
 
 import com.mazzega.irineu.block.ManoelTotem;
-import com.mazzega.irineu.brasil.PalafitasStructure;
+import com.mazzega.irineu.brasil.EstruturaNoTerreno;
 import com.mazzega.irineu.cultura.CulturaEventos;
 import com.mazzega.irineu.economia.Inflacao;
 import com.mazzega.irineu.economia.NotasDrop;
@@ -41,7 +41,7 @@ public class Irineu implements ModInitializer {
 		BrasilEffects.init();
 		BrasilItems.init();
 		BrasilMenus.init();
-		PalafitasStructure.init();
+		EstruturaNoTerreno.init();
 		ModEntities.init();
 		BrasilEntities.init();
 		ModItems.init();

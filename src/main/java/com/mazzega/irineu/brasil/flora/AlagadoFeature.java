@@ -1,8 +1,10 @@
 package com.mazzega.irineu.brasil.flora;
 
 import com.mazzega.irineu.brasil.Brasil;
+import com.mazzega.irineu.brasil.EstruturaNoTerreno;
 import com.mazzega.irineu.registry.BrasilBlocks;
 import com.mojang.serialization.MapCodec;
+import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -13,12 +15,14 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.synth.SimplexNoise;
 
 /**
  * Alagados do Pantanal: metade do chão vira lagoas rasas (1 ou 2 blocos de água em cima de lama), em manchas que se
  * juntam, com ilhas de terra no meio. Só alaga onde nenhum vizinho é mais baixo (chão plano ou o fundo de uma baixada),
- * então a água fica contida e não escorre. Algumas lagoas têm fundo de cascalho de aluvião.
+ * então a água fica contida e não escorre. Algumas lagoas têm fundo de cascalho de aluvião. Não alaga embaixo nem em volta
+ * das estruturas (o buteco e as palafitas não ficam com uma lagoa dentro).
  */
 public record AlagadoFeature() implements Feature {
 	public static final MapCodec<AlagadoFeature> CODEC = MapCodec.unit(AlagadoFeature::new);
@@ -39,6 +43,7 @@ public record AlagadoFeature() implements Feature {
 		int cx = origin.getX() & ~15;
 		int cz = origin.getZ() & ~15;
 		SimplexNoise noise = new SimplexNoise(new LegacyRandomSource(level.getSeed() ^ 0x50A7A4A1L));
+		List<BoundingBox> estruturas = EstruturaNoTerreno.pecasPerto(level, cx >> 4, cz >> 4, 3);
 		// Alturas originais (com uma borda), antes de alagar qualquer coisa.
 		int[][] floor = new int[18][18];
 		for (int i = 0; i < 18; i++) {
@@ -59,7 +64,7 @@ public record AlagadoFeature() implements Feature {
 				int x = cx + i - 1;
 				int z = cz + j - 1;
 				double n = noise.get(x * 0.035, z * 0.035) + 0.25 * noise.get(x * 0.12, z * 0.12);
-				if (n < FLOOD) continue;
+				if (n < FLOOD || EstruturaNoTerreno.dentro(estruturas, x, z)) continue;
 				if (!level.getBiome(pos.set(x, y, z)).is(Brasil.PANTANAL)) continue;
 				BlockState top = level.getBlockState(pos.set(x, y - 1, z));
 				if (!top.is(BlockTags.DIRT)) continue;
