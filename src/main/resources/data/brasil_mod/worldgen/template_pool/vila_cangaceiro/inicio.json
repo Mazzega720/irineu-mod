@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "brasil_mod:vila_cangaceiro/vila",
+        "location": "brasil_mod:vila_cangaceiro/terreiro",
         "processors": "minecraft:empty",
         "projection": "rigid"
       },

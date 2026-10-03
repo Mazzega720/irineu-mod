@@ -700,7 +700,7 @@ final class BrasilV3GameTests {
 		Object[][] estruturas = {
 			{"buteco", Brasil.CERRADO, BrasilEntities.DONO_DO_BUTECO, BrasilBlocks.MAQUININHA_PIX, 1},
 			{"favela", Brasil.MATA_ATLANTICA, BrasilEntities.CAMELO, Blocks.CONCRETE.blue(), 1},
-			{"vila_cangaceiro", Brasil.CAATINGA, BrasilEntities.CANGACEIRO, BrasilBlocks.MANDACARU, 4},
+			{"vila_cangaceiro", Brasil.CAATINGA, BrasilEntities.CANGACEIRO, Blocks.CAMPFIRE, 2},
 			{"estancia_gaucha", Brasil.PAMPA, BrasilEntities.GAUCHO, Blocks.CAMPFIRE, 1},
 			{"palafitas", Brasil.PANTANAL, BrasilEntities.PESCADOR, BrasilBlocks.FOLHAS_PALMEIRA, 1},
 			{"ruinas_carajas", Brasil.AMAZONIA, null, Blocks.LADDER, 0}};
@@ -714,28 +714,19 @@ final class BrasilV3GameTests {
 				check(placements > 0, "Estrutura sem conjunto no Brasil: " + e[0]);
 			}
 		});
+		espinhos(context, singleplayer);
 		server.runCommand("gamemode spectator @p");
 		for (Object[] e : estruturas) {
 			String name = (String) e[0];
 			@SuppressWarnings("unchecked") ResourceKey<Biome> biome = (ResourceKey<Biome>) e[1];
-			BlockPos spot = server.computeOnServer(mc -> name.equals("palafitas") ? aguaSpot(BrasilGameTests.brasil(mc), biome)
-				: BrasilGameTests.landSpot(BrasilGameTests.brasil(mc), biome));
-			server.runCommand(String.format(Locale.ROOT, "execute in brasil_mod:brasil run tp @p %d %d %d", spot.getX(), spot.getY() + 25, spot.getZ()));
-			// O /place exige a área inteira carregada (a favela e as ruínas se espalham até ~64 blocos).
-			String carregar = String.format(Locale.ROOT, "%d %d %d %d", spot.getX() - 80, spot.getZ() - 80, spot.getX() + 80, spot.getZ() + 80);
-			server.runCommand("execute in brasil_mod:brasil run forceload add " + carregar);
-			context.waitTicks(60);
-			int result = server.computeOnServer(mc -> {
-				var source = mc.createCommandSourceStack().withLevel(BrasilGameTests.brasil(mc)).withPosition(Vec3.atCenterOf(spot))
-					.withPermission(net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER);
-				try {
-					return mc.getCommands().getDispatcher().execute(String.format(Locale.ROOT, "place structure brasil_mod:%s %d %d %d", name,
-						spot.getX(), spot.getY(), spot.getZ()), source);
-				} catch (com.mojang.brigadier.exceptions.CommandSyntaxException ex) {
-					log("EstruturasTest", "place " + name + " falhou: " + ex.getMessage());
-					return 0;
-				}
-			});
+			// O terreno decide: tenta pontos do bioma até a estrutura aceitar um (as palafitas, só pontos de rio).
+			List<BlockPos> lugares = server.computeOnServer(mc -> name.equals("palafitas") ? aguaSpots(BrasilGameTests.brasil(mc), biome, 12)
+				: BrasilGameTests.landSpots(BrasilGameTests.brasil(mc), biome, 12));
+			int aceitos = BrasilGameTests.aceitos(server, Brasil.id(name), lugares);
+			log("EstruturasTest", name + ": o terreno serve em " + aceitos + " de " + lugares.size() + " lugares do bioma");
+			BlockPos spot = BrasilGameTests.placeStructure(context, server, Brasil.id(name), lugares, "EstruturasTest");
+			check(spot != null, "Nenhum lugar serviu para " + name);
+			String carregar = BrasilGameTests.areaDe(spot);
 			context.waitTicks(20);
 			String resumo = server.computeOnServer(mc -> {
 				ServerLevel brasil = BrasilGameTests.brasil(mc);
@@ -751,9 +742,8 @@ final class BrasilV3GameTests {
 				return gente + "," + blocos + "," + caramelos + "," + comerciantes;
 			});
 			String[] r = resumo.split(",");
-			log("EstruturasTest", String.format(Locale.ROOT, "%s em %s (%d %d %d): place = %d, %s gente da estrutura, %s blocos de marca, %s vira-latas, %s comerciantes",
-				name, biome.identifier().getPath(), spot.getX(), spot.getY(), spot.getZ(), result, r[0], r[1], r[2], r[3]));
-			check(result > 0, "Não colocou " + name);
+			log("EstruturasTest", String.format(Locale.ROOT, "%s em %s (%d %d %d): %s gente da estrutura, %s blocos de marca, %s vira-latas, %s comerciantes",
+				name, biome.identifier().getPath(), spot.getX(), spot.getY(), spot.getZ(), r[0], r[1], r[2], r[3]));
 			check(Integer.parseInt(r[0]) >= (int) e[4] && Integer.parseInt(r[1]) > 0, name + " sem a gente ou os blocos esperados");
 			server.runCommand(String.format(Locale.ROOT, "execute in brasil_mod:brasil run tp @p %d %d %d -35 35", spot.getX() - 14, spot.getY() + 20, spot.getZ() - 18));
 			context.waitTicks(50);
@@ -810,12 +800,13 @@ final class BrasilV3GameTests {
 		server.runCommand("tp @p 0 -60 0");
 	}
 
-	/** Um ponto de rio/lago (água já no terreno-base, como as palafitas exigem) no bioma, perto do meio dele. */
-	private static BlockPos aguaSpot(ServerLevel brasil, ResourceKey<Biome> key) {
+	/** Pontos de rio/lago (água já no terreno-base, como as palafitas exigem) no bioma, a pelo menos 48 blocos um do outro. */
+	private static List<BlockPos> aguaSpots(ServerLevel brasil, ResourceKey<Biome> key, int n) {
 		BlockPos center = BrasilGameTests.landSpot(brasil, key);
 		var generator = brasil.getChunkSource().getGenerator();
 		var random = brasil.getChunkSource().randomState();
-		for (int r = 0; r <= 640; r += 16) {
+		List<BlockPos> spots = new ArrayList<>();
+		for (int r = 0; r <= 640 && spots.size() < n; r += 16) {
 			for (int dx = -r; dx <= r; dx += 16) {
 				for (int dz = -r; dz <= r; dz += 16) {
 					if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
@@ -823,11 +814,59 @@ final class BrasilV3GameTests {
 					int z = ((center.getZ() + dz) & ~15) + 8;
 					int surface = generator.getFirstFreeHeight(x, z, net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE_WG, brasil, random);
 					int floor = generator.getFirstFreeHeight(x, z, net.minecraft.world.level.levelgen.Heightmap.Types.OCEAN_FLOOR_WG, brasil, random);
-					if (surface - floor >= 2 && brasil.getBiome(new BlockPos(x, surface, z)).is(key)) return new BlockPos(x, surface, z);
+					BlockPos pos = new BlockPos(x, surface, z);
+					if (surface - floor >= 2 && brasil.getBiome(pos).is(key) && spots.stream().allMatch(o -> o.distManhattan(pos) >= 48)) spots.add(pos);
 				}
 			}
 		}
-		throw new AssertionError("Sem rio em " + key.identifier());
+		if (spots.isEmpty()) throw new AssertionError("Sem rio em " + key.identifier());
+		return spots;
+	}
+
+	/**
+	 * Os espinhos (mandacaru, xique-xique, capim-navalha): os mobs não pisam neles e evitam passar raspando, como no
+	 * cacto. Confere o tipo de caminho que o pathfinding vê, e um zumbi atrás de um muro de xique-xique dá a volta em vez
+	 * de atravessar.
+	 */
+	private static void espinhos(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		TestServerContext server = singleplayer.getServer();
+		server.runCommand("tp @p 15000 -59 30");
+		context.waitTicks(10);
+		server.runOnServer(mc -> {
+			ServerLevel level = mc.overworld();
+			Mob zumbi = EntityTypes.ZOMBIE.create(level, EntitySpawnReason.COMMAND);
+			zumbi.snapTo(15000.5, -60, 0.5);
+			level.addFreshEntity(zumbi);
+			zumbi.addTag("irineu_teste");
+			for (Block espinho : new Block[] {BrasilBlocks.MANDACARU, BrasilBlocks.XIQUE_XIQUE, BrasilBlocks.CAPIM_NAVALHA}) {
+				BlockPos pos = new BlockPos(15004, -60, 0);
+				level.setBlockAndUpdate(pos, espinho.defaultBlockState());
+				var em = net.minecraft.world.level.pathfinder.WalkNodeEvaluator.getPathTypeStatic(zumbi, pos);
+				var aoLado = net.minecraft.world.level.pathfinder.WalkNodeEvaluator.getPathTypeStatic(zumbi, pos.east());
+				log("EspinhosTest", espinho.getName().getString() + ": no bloco " + em + " (custo " + zumbi.getPathfindingMalus(em) + "), do lado " + aoLado
+					+ " (custo " + zumbi.getPathfindingMalus(aoLado) + ")");
+				check(em == net.minecraft.world.level.pathfinder.PathType.DAMAGING && zumbi.getPathfindingMalus(em) < 0, espinho + " não bloqueia o caminho");
+				check(aoLado == net.minecraft.world.level.pathfinder.PathType.DAMAGING_IN_NEIGHBOR && zumbi.getPathfindingMalus(aoLado) > 0,
+					espinho + " não afasta quem passa do lado");
+				level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+			}
+			// Muro de xique-xique de z = -3 a 3 em x = 15004, com uma passagem em z = 6: o caminho do zumbi até x = 15008 dá a volta.
+			for (int z = -3; z <= 3; z++) level.setBlockAndUpdate(new BlockPos(15004, -60, z), BrasilBlocks.XIQUE_XIQUE.defaultBlockState());
+			zumbi.setOnGround(true);                                                // recém-criado: sem isso a navegação não calcula
+			var path = zumbi.getNavigation().createPath(new BlockPos(15008, -60, 0), 0);
+			boolean atravessa = false;
+			int maxZ = 0;
+			for (int i = 0; path != null && i < path.getNodeCount(); i++) {
+				var node = path.getNode(i);
+				if (level.getBlockState(new BlockPos(node.x, node.y, node.z)).is(BrasilBlocks.XIQUE_XIQUE)) atravessa = true;
+				maxZ = Math.max(maxZ, Math.abs(node.z));
+			}
+			log("EspinhosTest", "caminho do zumbi: " + (path == null ? "nenhum" : path.getNodeCount() + " nós, chega " + path.canReach()
+				+ ", afasta até z = " + maxZ + ", pisa no xique-xique " + atravessa));
+			check(path != null && path.canReach() && !atravessa && maxZ >= 4, "O zumbi não deu a volta no xique-xique");
+			for (int z = -3; z <= 3; z++) level.setBlockAndUpdate(new BlockPos(15004, -60, z), Blocks.AIR.defaultBlockState());
+			zumbi.discard();
+		});
 	}
 
 	/** Galeria no Overworld plano: a gente das estruturas, o vira-lata, as armaduras e os itens novos em molduras. */

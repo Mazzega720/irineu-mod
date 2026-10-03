@@ -1,10 +1,14 @@
 {
-  "type": "brasil_mod:palafitas",
+  "type": "brasil_mod:encaixe_no_terreno",
   "biomes": "#brasil_mod:has_structure/palafitas",
   "spawn_overrides": {},
   "step": "surface_structures",
   "terrain_adaptation": "none",
   "start_pool": "brasil_mod:palafitas/inicio",
-  "deck_height": 6,
-  "min_water_depth": 2
+  "size": 4,
+  "start_height": -8,
+  "max_distance_from_center": 48,
+  "terreno": "agua",
+  "max_desnivel": 6,
+  "min_agua_no_inicio": 0.5
 }

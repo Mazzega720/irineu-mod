@@ -3,6 +3,26 @@
 Todas as versões são para **Minecraft 26.3 / Fabric** e precisam da Fabric API e do GeckoLib 5.5.7+.
 O jar de cada versão sai como `irineu-<versão>+26.3.jar`.
 
+## [3.1.0] — 2026-10-03
+### Corrigido
+- Os mobs passavam encostados no **capim-navalha**, no **xique-xique** e no **mandacaru** e tomavam dano como se fosse um bloco qualquer. Agora o caminho deles trata essas plantas como o cacto: não entram nelas e evitam passar raspando.
+- Estruturas nascendo na água: nenhuma estrutura do Brasil nasce mais em rio, lago ou mar (nem num barranco), e as peças que cairiam na água ficam de fora. Os alagados do Pantanal não aparecem mais dentro delas.
+
+### Mudado
+- **Estruturas montadas por peças** (variam a cada vez):
+  - **Vila de cangaceiros:** terreiro com fogueira, poço, cruzeiro e jumento; trilhas que seguem o chão; casas de taipa, casa do capitão, casa de farinha, capelinha, curral de bodes e cisterna. Sem a paliçada de mandacaru.
+  - **Estância gaúcha:** o galpão e corredores de chão batido levando à mangueira, casa sede, aprisco, cata-vento, churrasqueira, horta e capão.
+  - **Palafitas:** trapiche no meio do rio, passarelas sobre esteios e cabanas (do pescador, da família, depósito) com plataformas de pesca.
+  - **Buteco:** anexos na calçada (espetinho, orelhão, sinuca, mais mesas).
+  - **Quiosque:** anexos de praia (salva-vidas, vôlei, chuveirão, água de coco, guarda-sóis, castelo de areia) e de estrada (banca de fruta, borracharia, orelhão).
+  - **Favela:** campinho de várzea, igrejinha e churrasco na laje.
+- Árvores, mandacarus, xique-xiques, cupinzeiros e pedras não nascem mais no meio das ruas e quintais das estruturas.
+- **Loot com as coisas da 3.0** nos mobs e baús que vieram antes:
+  - Irineu, Jailson, BamBam, Manoel Gomes, Lulonaro, Padre Kelmon e o gado deixam notas, moedas e comidas da 3.0. O Lulonaro deixa também topázio, nióbio e a nota de 3.
+  - Boto (Lágrima da Iara), tatu-bola (ágata, nióbio), jacaré (havaiana) e capivara (pão de queijo), de vez em quando.
+  - Baús do quiosque e da academia com notas, comidas, aço pesado e nióbio.
+  - O prêmio das embaixadinhas do Luva com notas de 20 a 100.
+
 ## [3.0.0] — 2026-10-02
 ### Adicionado
 - **Economia do Real:**

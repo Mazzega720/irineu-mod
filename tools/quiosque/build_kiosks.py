@@ -3,6 +3,9 @@ Gera os templates .nbt dos quiosques (formato de estrutura do Minecraft 26.3, Da
 
 Frente do quiosque = +Z (sul). Piso (deck) em y=0; tudo acima começa em y=1.
 O comerciante (Davi Brito) fica logo atrás do balcão, de frente para os clientes.
+Dos lados do deck há encaixes (jigsaw) para os anexos, gerados aqui também (quiosque/anexos/): na praia, posto de
+salva-vidas, quadra de vôlei, chuveirão, barraca de coco, guarda-sóis e castelo de areia; na estrada (o quiosque_estrada
+troca a pool por apelido, veja worldgen.py), banca de fruta, borracharia e orelhão.
 """
 import json, os, random, sys
 import nbtlib
@@ -42,6 +45,12 @@ class Template:
             for y in range(y0, y1 + 1):
                 for z in range(z0, z1 + 1):
                     self.set(x, y, z, block, props)
+
+    def jigsaw(self, x, y, z, orientation, name, target, pool, final_state):
+        self.set(x, y, z, "minecraft:jigsaw", {"orientation": orientation}, Compound({
+            "id": String("minecraft:jigsaw"), "name": String(name), "target": String(target), "pool": String(pool),
+            "final_state": String(final_state), "joint": String("rollable"), "selection_priority": Int(0), "placement_priority": Int(0),
+        }))
 
     def add_entity(self, x, y, z, entity_id, yaw=0.0):
         """Entidade no centro do bloco (x, y, z). yaw 0 = olhando para +Z (frente do quiosque)."""
@@ -188,6 +197,9 @@ INTERIOR_7 = [CHEST, BARREL, EMPTY, SMOKER, BARREL]
 INTERIOR_9 = [BARREL, BARREL, CHEST, EMPTY, EMPTY, SMOKER, BARREL]
 
 
+ANEXO = "irineu:anexo_quiosque"
+
+
 def deck(t):
     t.fill(0, 0, 0, t.w - 1, 0, t.d - 1, "minecraft:spruce_planks")
     for x in range(t.w):
@@ -196,6 +208,9 @@ def deck(t):
     for z in range(t.d):
         t.set(0, 0, z, "minecraft:stripped_spruce_wood", {"axis": "y"})
         t.set(t.w - 1, 0, z, "minecraft:stripped_spruce_wood", {"axis": "y"})
+    # Um anexo de cada lado do deck (ou nada, se a pool sortear vazio).
+    for (x, o) in ((0, "west_up"), (t.w - 1, "east_up")):
+        t.jigsaw(x, 0, t.d // 2, o, ANEXO, ANEXO, "irineu:quiosque/anexos", "minecraft:stripped_spruce_wood[axis=y]")
 
 
 def small(theme_name):
@@ -274,3 +289,138 @@ for name, build in VARIANTS.items():
 
 with open(os.path.join(sys.argv[2], "merchant_spots.json"), "w") as f:
     json.dump(merchants, f, indent=2)
+
+# ------------------------------------------------------------------ Anexos (encaixe na frente, virado para o quiosque)
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "estruturas"))
+from molde import Molde, sign_nbt as placa, slab  # noqa: E402
+
+ANEXOS = os.path.join(OUT, "anexos")
+os.makedirs(ANEXOS, exist_ok=True)
+
+
+def anexo(w, h, d, chao):
+    m = Molde(w, h, d)
+    m.fill(0, 0, 0, w - 1, 0, d - 1, chao)
+    return m
+
+
+def fecha(m, nome, chao):
+    m.jigsaw(m.w // 2, 0, m.d - 1, "south_up", ANEXO, ANEXO, "minecraft:empty", final_state=chao)
+    m.save(os.path.join(ANEXOS, nome + ".nbt"))
+
+
+def letreiro(m, x, y, z, linhas, madeira="oak"):
+    m.set(x, y, z, f"minecraft:{madeira}_wall_sign", {"facing": "south", "waterlogged": "false"}, placa(linhas, "black"))
+
+
+AREIA = "minecraft:sand"
+TERRA = "minecraft:coarse_dirt"
+
+# Posto de salva-vidas: a torre de madeira branca com o toldo listrado e a escada.
+m = anexo(5, 10, 5, AREIA)
+for (x, z) in ((1, 1), (3, 1), (1, 3), (3, 3)):
+    m.fill(x, 1, z, x, 4, z, "minecraft:stripped_birch_log", {"axis": "y"})
+    m.fill(x, 6, z, x, 7, z, "minecraft:birch_fence")
+m.fill(2, 1, 3, 2, 4, 3, "minecraft:birch_planks")
+m.fill(1, 5, 1, 3, 5, 3, "minecraft:birch_planks")
+for (x, z) in ((2, 1), (1, 2), (3, 2)):
+    m.set(x, 6, z, "minecraft:birch_fence")
+for x in range(5):
+    m.fill(x, 8, 0, x, 8, 4, "minecraft:red_wool" if x % 2 == 0 else "minecraft:white_wool")
+for y in range(1, 6):
+    m.set(2, y, 4, "minecraft:ladder", {"facing": "south", "waterlogged": "false"})
+letreiro(m, 1, 5, 4, ["SALVA-VIDAS", "", "não nade", "depois de comer"], "birch")
+m.set(2, 9, 2, "minecraft:red_wool")
+fecha(m, "posto_salva_vidas", AREIA)
+
+# Quadra de vôlei de praia: linhas de tapete branco e a rede no meio.
+m = anexo(9, 5, 14, AREIA)
+for z in range(13):
+    m.set(0, 1, z, "minecraft:white_carpet")
+    m.set(8, 1, z, "minecraft:white_carpet")
+for x in range(1, 8):
+    m.set(x, 1, 0, "minecraft:white_carpet")
+    m.set(x, 1, 12, "minecraft:white_carpet")
+for x in (0, 8):
+    m.fill(x, 1, 6, x, 3, 6, "minecraft:birch_fence")
+m.fill(1, 2, 6, 7, 3, 6, "minecraft:white_stained_glass_pane")
+fecha(m, "quadra_volei", AREIA)
+
+# Chuveirão: o cano com o chuveiro e o ralo.
+m = anexo(3, 5, 3, "minecraft:smooth_stone")
+m.fill(1, 1, 0, 1, 3, 0, "minecraft:iron_bars")
+m.set(1, 3, 1, "minecraft:iron_trapdoor", {"facing": "south", "half": "top", "open": "false", "powered": "false", "waterlogged": "false"})
+m.set(1, 0, 1, "minecraft:iron_trapdoor", {"facing": "south", "half": "top", "open": "false", "powered": "false", "waterlogged": "false"})
+fecha(m, "chuveirao", "minecraft:smooth_stone")
+
+# Barraca de coco: balcão de bambu com os cocos verdes e o toldo.
+m = anexo(5, 6, 4, AREIA)
+m.fill(1, 1, 1, 3, 1, 1, "minecraft:bamboo_mosaic")
+m.set(1, 2, 1, "minecraft:melon")
+m.set(3, 2, 1, "minecraft:melon")
+m.set(2, 1, 0, "minecraft:melon")
+for x in (0, 4):
+    m.fill(x, 1, 0, x, 3, 0, "minecraft:bamboo_fence")
+for x in range(5):
+    m.fill(x, 4, 0, x, 4, 2, "minecraft:lime_wool" if x % 2 == 0 else "minecraft:white_wool")
+letreiro(m, 2, 1, 2, ["ÁGUA DE COCO", "R$ 5", "", "geladinha"], "bamboo")
+fecha(m, "barraca_coco", AREIA)
+
+# Guarda-sóis com as cadeiras de praia e as cangas.
+m = anexo(9, 6, 5, AREIA)
+for (cx, cor) in ((2, "minecraft:orange_wool"), (6, "minecraft:light_blue_wool")):
+    m.fill(cx, 1, 2, cx, 3, 2, "minecraft:chain", {"axis": "y", "waterlogged": "false"})
+    for dx in (-1, 0, 1):
+        for dz in (-1, 0, 1):
+            m.set(cx + dx, 4, 2 + dz, cor if (dx + dz) % 2 == 0 else "minecraft:white_wool")
+for (x, c) in ((1, "irineu:cadeira_amarela"), (3, "irineu:cadeira_amarela"), (5, "irineu:cadeira_branca"), (7, "irineu:cadeira_branca")):
+    m.set(x, 1, 3, c, {"facing": "south"})
+for (x, cor) in ((1, "red"), (2, "red"), (6, "yellow"), (7, "yellow")):
+    m.set(x, 1, 0, f"minecraft:{cor}_carpet")
+fecha(m, "guarda_sois", AREIA)
+
+# Castelo de areia com o baldinho.
+m = anexo(5, 4, 5, AREIA)
+for (x, z) in ((1, 1), (3, 1), (1, 3), (3, 3)):
+    m.fill(x, 1, z, x, 2, z, "minecraft:sandstone")
+for (x, z) in ((2, 1), (1, 2), (3, 2), (2, 3)):
+    m.set(x, 1, z, "minecraft:sandstone_slab", slab())
+m.set(2, 2, 2, "minecraft:chiseled_sandstone")
+m.set(4, 1, 3, "minecraft:decorated_pot", {"facing": "south", "cracked": "false", "waterlogged": "false"})
+fecha(m, "castelo_de_areia", AREIA)
+
+# Estrada: banca de fruta, borracharia e orelhão.
+m = anexo(5, 6, 4, TERRA)
+m.set(1, 1, 1, "minecraft:barrel", {"facing": "up", "open": "false"})
+m.set(2, 1, 1, "minecraft:melon")
+m.set(3, 1, 1, "minecraft:pumpkin")
+m.set(1, 2, 1, "minecraft:melon")
+m.set(3, 2, 1, "minecraft:hay_block", {"axis": "y"})
+for x in (0, 4):
+    m.fill(x, 1, 0, x, 3, 0, "minecraft:oak_fence")
+for x in range(5):
+    m.fill(x, 4, 0, x, 4, 2, "minecraft:orange_wool" if x % 2 == 0 else "minecraft:white_wool")
+letreiro(m, 2, 1, 2, ["FRUTA DO PÉ", "", "melancia", "abóbora"])
+fecha(m, "banca_de_fruta", TERRA)
+
+m = anexo(7, 6, 6, TERRA)
+m.fill(0, 1, 0, 6, 3, 0, "minecraft:gray_concrete")
+for x in (0, 6):
+    m.fill(x, 1, 4, x, 3, 4, "minecraft:iron_bars")
+m.fill(0, 4, 0, 6, 4, 4, "minecraft:smooth_stone_slab", slab())
+for (x, y) in ((1, 1), (1, 2), (2, 1)):
+    m.set(x, y, 1, "minecraft:black_concrete")                               # os pneus
+m.set(4, 1, 1, "minecraft:anvil", {"facing": "east"})
+m.set(5, 1, 1, "minecraft:cauldron")
+letreiro(m, 3, 2, 1, ["BORRACHARIA", "24H", "", "conserto na hora"])
+fecha(m, "borracharia", TERRA)
+
+m = anexo(3, 5, 3, "minecraft:gravel")
+m.set(1, 1, 0, "minecraft:iron_bars")
+m.fill(0, 2, 0, 2, 3, 0, "minecraft:orange_terracotta")
+m.fill(0, 4, 0, 2, 4, 1, "minecraft:orange_concrete")
+m.set(1, 2, 1, "minecraft:stone_button", {"face": "wall", "facing": "south", "powered": "false"})
+m.set(0, 1, 0, "minecraft:gray_concrete")
+letreiro(m, 0, 1, 1, ["ORELHÃO", "", "só cartão", "telefônico"])
+fecha(m, "orelhao", "minecraft:gravel")
+print("anexos dos quiosques ok")

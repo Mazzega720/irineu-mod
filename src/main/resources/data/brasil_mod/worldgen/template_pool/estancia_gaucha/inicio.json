@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "brasil_mod:estancia_gaucha/estancia",
+        "location": "brasil_mod:estancia_gaucha/galpao",
         "processors": "minecraft:empty",
         "projection": "rigid"
       },

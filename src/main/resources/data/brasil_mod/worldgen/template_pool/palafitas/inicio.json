@@ -3,7 +3,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "brasil_mod:palafitas/palafitas",
+        "location": "brasil_mod:palafitas/trapiche",
         "processors": "minecraft:empty",
         "projection": "rigid"
       },

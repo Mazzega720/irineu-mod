@@ -19,6 +19,39 @@
           ]
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:agata",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irineu:niobio_bruto",
+          "weight": 1
+        }
+      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:killed_by_player"
+          },
+          {
+            "type": "minecraft:random_chance_with_enchanted_bonus",
+            "enchantment": "minecraft:looting",
+            "unenchanted_chance": 0.08,
+            "enchanted_chance": {
+              "type": "minecraft:linear",
+              "base": 0.1,
+              "per_level_above_first": 0.02
+            }
+          }
+        ]
+      }
     }
   ],
   "random_sequence": "irineu:entities/tatu_bola"

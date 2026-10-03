@@ -7,12 +7,21 @@
         "processors": "minecraft:empty",
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "brasil_mod:favela/puxadinhos/puxadinho_2",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "brasil_mod:favela/puxadinhos/churrasco_na_laje",
         "processors": "minecraft:empty",
         "projection": "rigid"
       },

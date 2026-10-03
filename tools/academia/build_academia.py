@@ -367,18 +367,21 @@ def write(rel, data):
         f.write("\n")
 
 
+# Tipo brasil_mod:encaixe_no_terreno (EstruturaNoTerreno.java): a academia não nasce em cima de rio ou lago nem num
+# morro (no máximo 10 blocos de desnível embaixo dela; o beard_box aplaina o resto).
 write("worldgen/structure/academia_bambam.json", {
-    "type": "minecraft:jigsaw",
+    "type": "brasil_mod:encaixe_no_terreno",
     "biomes": "#irineu:has_structure/academia_bambam",
     "max_distance_from_center": 80,
-    "project_start_to_heightmap": "WORLD_SURFACE_WG",
     "size": 1,
     "spawn_overrides": {},
-    "start_height": {"absolute": -1},
+    "start_height": -1,
     "start_pool": "irineu:academia/inicio",
     "step": "surface_structures",
     "terrain_adaptation": "beard_box",
-    "use_expansion_hack": False,
+    "terreno": "seco",
+    "max_agua_no_inicio": 0.0,
+    "max_desnivel": 10,
 })
 write("worldgen/template_pool/academia/inicio.json", {
     "elements": [{"element": {"element_type": "minecraft:single_pool_element", "location": "irineu:academia_bambam",
@@ -420,6 +423,9 @@ write("loot_table/chests/academia.json", {
             item("irineu:suco_de_laranja", 1, 2, 6),
             item("minecraft:milk_bucket", 1, 1, 3),          # whey
             item("minecraft:apple", 1, 3, 5),
+            item("irineu:marmita_feijoada", 1, 2, 6),        # a marmita do bulking
+            item("irineu:cafezinho", 1, 2, 5),               # pré-treino
+            item("irineu:agua_filtrada", 1, 3, 5),
         ]},
         {"rolls": {"type": "minecraft:uniform", "min": 1, "max": 2}, "entries": [
             item("minecraft:iron_ingot", 2, 6, 8),           # anilha
@@ -428,6 +434,13 @@ write("loot_table/chests/academia.json", {
             potion("minecraft:strength", 5),
             potion("minecraft:swiftness", 3),
             item("minecraft:golden_apple", 1, 1, 2),
+            item("irineu:aco_pesado", 1, 2, 3),              # anilha de aço de Carajás
+        ]},
+        {"rolls": {"type": "minecraft:uniform", "min": 1, "max": 2}, "entries": [   # a mensalidade
+            item("irineu:nota_10_reais", 1, 2, 8),
+            item("irineu:nota_20_reais", 1, 2, 6),
+            item("irineu:nota_50_reais", 1, 1, 3),
+            item("irineu:moeda_1_real", 2, 6, 6),
         ]},
     ],
     "random_sequence": "irineu:chests/academia",
@@ -442,10 +455,20 @@ write("loot_table/chests/academia_campeao.json", {
             item("minecraft:diamond", 1, 3, 4),
             item("minecraft:gold_ingot", 3, 8, 6),
             item("minecraft:cooked_beef", 4, 10, 6),
+            item("irineu:marmita_feijoada", 2, 4, 6),
+            item("irineu:aco_pesado", 2, 4, 4),
+        ]},
+        {"rolls": {"type": "minecraft:uniform", "min": 1, "max": 2}, "entries": [   # o prêmio do campeão
+            item("irineu:nota_100_reais", 1, 2, 6),
+            item("irineu:nota_200_reais", 1, 1, 3),
+            item("irineu:nota_50_reais", 1, 3, 6),
         ]},
         {"rolls": 1, "entries": [
             item("minecraft:enchanted_golden_apple", 1, 1, 1),
             item("minecraft:totem_of_undying", 1, 1, 1),
+            item("irineu:lingote_niobio", 1, 2, 2),
+            item("irineu:peitoral_niobio", 1, 1, 1),
+            item("irineu:amuleto_sorte", 1, 1, 1),
             {"type": "minecraft:empty", "weight": 6},
         ]},
     ],

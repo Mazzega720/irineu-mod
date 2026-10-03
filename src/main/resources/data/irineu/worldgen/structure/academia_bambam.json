@@ -1,15 +1,14 @@
 {
-  "type": "minecraft:jigsaw",
+  "type": "brasil_mod:encaixe_no_terreno",
   "biomes": "#irineu:has_structure/academia_bambam",
   "max_distance_from_center": 80,
-  "project_start_to_heightmap": "WORLD_SURFACE_WG",
   "size": 1,
   "spawn_overrides": {},
-  "start_height": {
-    "absolute": -1
-  },
+  "start_height": -1,
   "start_pool": "irineu:academia/inicio",
   "step": "surface_structures",
   "terrain_adaptation": "beard_box",
-  "use_expansion_hack": false
+  "terreno": "seco",
+  "max_agua_no_inicio": 0.0,
+  "max_desnivel": 10
 }

@@ -1,15 +1,14 @@
 {
-  "type": "minecraft:jigsaw",
+  "type": "brasil_mod:encaixe_no_terreno",
   "biomes": "#brasil_mod:has_structure/buteco",
-  "max_distance_from_center": 80,
-  "size": 1,
   "spawn_overrides": {},
-  "start_height": {
-    "absolute": 0
-  },
-  "start_pool": "brasil_mod:buteco/inicio",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin",
-  "use_expansion_hack": false,
-  "project_start_to_heightmap": "WORLD_SURFACE_WG"
+  "start_pool": "brasil_mod:buteco/inicio",
+  "size": 2,
+  "start_height": 0,
+  "max_distance_from_center": 40,
+  "terreno": "seco",
+  "max_desnivel": 4,
+  "max_agua_no_inicio": 0.0
 }
