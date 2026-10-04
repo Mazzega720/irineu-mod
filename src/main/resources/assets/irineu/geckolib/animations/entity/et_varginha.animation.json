@@ -302,6 +302,145 @@
    },
    "loop": true
   },
+  "et.raio": {
+   "animation_length": 0.4,
+   "bones": {
+    "right_arm": {
+     "rotation": {
+      "0.0": [
+       -8,
+       0,
+       10
+      ],
+      "0.22": {
+       "vector": [
+        -104,
+        0,
+        4
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.4": {
+       "vector": [
+        -88,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "right_hand": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.22": {
+       "vector": [
+        -30,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.4": {
+       "vector": [
+        -10,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "left_arm": {
+     "rotation": {
+      "0.0": [
+       -8,
+       0,
+       -10
+      ],
+      "0.4": {
+       "vector": [
+        -55,
+        -30,
+        0
+       ],
+       "easing": "easeOutQuad"
+      }
+     }
+    },
+    "left_forearm": {
+     "rotation": {
+      "0.0": [
+       -20,
+       0,
+       0
+      ],
+      "0.4": {
+       "vector": [
+        -40,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      }
+     }
+    },
+    "chest": {
+     "rotation": {
+      "0.0": [
+       4,
+       0,
+       0
+      ],
+      "0.22": {
+       "vector": [
+        -6,
+        -16,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.4": {
+       "vector": [
+        0,
+        -12,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "head": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.22": {
+       "vector": [
+        -10,
+        12,
+        6
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.4": {
+       "vector": [
+        8,
+        10,
+        6
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   }
+  },
   "et.telecinese": {
    "animation_length": 2.2,
    "bones": {

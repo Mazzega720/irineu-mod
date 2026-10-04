@@ -269,6 +269,15 @@ def et():
         "chest": {"rotation": [0, -12, 0]}, "head": {"rotation": [f"8 + math.sin({T} * 1440) * 2", 10, 6]},
         "right_leg": {"rotation": [-15, 0, 6]}, "left_leg": {"rotation": [12, 0, -6]}, "right_shin": {"rotation": [18, 0, 0]},
     }, loop=True)
+    # Liga o raio: ergue o braço direito num tranco e para na pose do raio_loop (que segue depois).
+    A["et.raio"] = anim(0.4, {
+        "right_arm": {"rotation": {0: (-8, 0, 10), 0.22: ((-104, 0, 4), "easeOutQuad"), 0.4: ((-88, 0, 0), "easeInOutSine")}},
+        "right_hand": {"rotation": {0: (0, 0, 0), 0.22: ((-30, 0, 0), "easeOutQuad"), 0.4: ((-10, 0, 0), "easeInOutSine")}},
+        "left_arm": {"rotation": {0: (-8, 0, -10), 0.4: ((-55, -30, 0), "easeOutQuad")}},
+        "left_forearm": {"rotation": {0: (-20, 0, 0), 0.4: ((-40, 0, 0), "easeOutQuad")}},
+        "chest": {"rotation": {0: (4, 0, 0), 0.22: ((-6, -16, 0), "easeOutQuad"), 0.4: ((0, -12, 0), "easeInOutSine")}},
+        "head": {"rotation": {0: (0, 0, 0), 0.22: ((-10, 12, 6), "easeOutQuad"), 0.4: ((8, 10, 6), "easeInOutSine")}},
+    })
     # Telecinese: os dois braços sobem devagar com as palmas para cima, a cabeça vai para trás.
     A["et.telecinese"] = anim(2.2, {
         "right_arm": {"rotation": {0: (-8, 0, 10), 1.8: ((-30, 0, 120), "easeInOutSine"), 2.2: ((-8, 0, 10), "easeInOutSine")}},

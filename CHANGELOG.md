@@ -3,7 +3,7 @@
 Todas as versões são para **Minecraft 26.3 / Fabric** e precisam da Fabric API e do GeckoLib 5.5.7+.
 O jar de cada versão sai como `irineu-<versão>+26.3.jar`.
 
-## [3.2.0] — 2026-10-03
+## [3.2.0] — 2026-10-04
 ### Adicionado
 - **Bestiário do Brasil:** 5 mobs novos, que nascem nos biomas da dimensão:
   - **Dois Caras numa Moto:** bate e foge, volta empinando; 40% dos golpes são assalto (leva de 1 a 3 notas, devolvidas quando a moto morre, ou derruba o item da mão).
