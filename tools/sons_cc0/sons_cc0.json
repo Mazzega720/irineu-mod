@@ -31,6 +31,7 @@
     {"arquivo": "bestiario/cajado_escudo", "pico": 0.75, "fade": [0.02, 0.4], "partes": [{"freesound": 351408, "trecho": [1.35, 3.45]}]},
     {"arquivo": "bestiario/modulo_puxar", "pico": 0.75, "fade": [0.05, 0.25], "partes": [{"freesound": 414694, "trecho": [0.12, 1.3]}]},
     {"arquivo": "bestiario/zarabatana_sopro", "pico": 0.8, "fade": [0.003, 0.08], "partes": [{"freesound": 714257, "trecho": [0.0, 0.36]}]},
+    {"arquivo": "bestiario/botijao_chiado", "pico": 0.8, "fade": [0.4, 0.15], "partes": [{"freesound": 453443, "trecho": [5.0, 7.5]}]},
     {"arquivo": "economia/bip", "pico": 0.7, "fade": [0.002, 0.03], "partes": [
       {"freesound": 144418, "trecho": [0.0, 0.14]},
       {"freesound": 144418, "trecho": [0.0, 0.14], "em": 0.2}

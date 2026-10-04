@@ -23,8 +23,9 @@ import net.minecraft.world.item.equipment.Equippable;
 /**
  * Itens do bestiário do Brasil: os drops dos mobs (paninho sujo, couro sombrio, ferrão da dengue, mola saltadora), o
  * que se faz com eles (dardo envenenado e zarabatana, botas de pulo duplo; a poção da sombra e o repelente saem do
- * suporte de poções), os drops lendários dos chefões (Cajado do Julgamento e Módulo Antigravitacional) e os ícones dos
- * projéteis (orbes, nota musical, lodo), que não aparecem no criativo.
+ * suporte de poções), os drops lendários dos chefões (Cajado do Julgamento e Módulo Antigravitacional), os drops dos
+ * monstros da 4.0 (casca podre e sementes ancestrais do Corpo Seco; chapa de metal e botijão vazio do Botijão de Gás) e
+ * os ícones dos projéteis (orbes, nota musical, lodo), que não aparecem no criativo.
  */
 public final class BestiarioItems {
 	private static final List<Item> TAB = new ArrayList<>();
@@ -43,6 +44,16 @@ public final class BestiarioItems {
 	public static final Item MODULO_ANTIGRAVITACIONAL = register("modulo_antigravitacional", ModuloAntigravitacionalItem::new,
 		new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()
 			.component(net.minecraft.core.component.DataComponents.EQUIPPABLE, Equippable.builder(EquipmentSlot.CHEST).build()), true);
+
+	// ---------------------------------------------------------------- Monstros da 4.0
+	/** Do Corpo Seco: assa no forno e vira carvão vegetal. */
+	public static final Item CASCA_PODRE = register("casca_podre", Item::new, new Item.Properties(), true);
+	/** Do Corpo Seco (às vezes): moídas, viram farinha de osso. */
+	public static final Item SEMENTES_ANCESTRAIS = register("sementes_ancestrais", Item::new, new Item.Properties(), true);
+	/** Do Botijão de Gás: derrete em pepita de ferro. */
+	public static final Item CHAPA_DE_METAL = register("chapa_de_metal", Item::new, new Item.Properties(), true);
+	/** Do Botijão de Gás (às vezes): o casco vazio, que o alto-forno derrete num lingote de ferro. */
+	public static final Item BOTIJAO_VAZIO = register("botijao_vazio", Item::new, new Item.Properties().stacksTo(16), true);
 
 	// Ícones dos projéteis.
 	public static final Item ORBE_DOURADO = register("orbe_dourado", Item::new, new Item.Properties(), false);

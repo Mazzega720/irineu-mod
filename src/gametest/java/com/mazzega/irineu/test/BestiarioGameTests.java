@@ -33,11 +33,13 @@ import net.fabricmc.fabric.api.client.gametest.v1.context.TestServerContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.client.sounds.JOrbisAudioStream;
 import net.minecraft.client.sounds.WeighedSoundEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerBossEvent;
@@ -214,16 +216,7 @@ public final class BestiarioGameTests {
 				Sound som = sons.getSound(RandomSource.create());
 				check(som.getLocation().equals(Irineu.id((String) ev[1])), evento + " aponta para " + som.getLocation() + ", não para irineu:" + ev[1]);
 				check(mc.getResourceManager().getResource(som.getPath()).isPresent(), "Falta o arquivo " + som.getPath());
-				float seg;
-				try (InputStream in = mc.getResourceManager().open(som.getPath()); JOrbisAudioStream ogg = new JOrbisAudioStream(in)) {
-					AudioFormat formato = ogg.getFormat();
-					long[] amostras = {0};
-					while (ogg.readChunk(x -> amostras[0]++)) {
-					}
-					seg = amostras[0] / (formato.getSampleRate() * formato.getChannels());
-				} catch (IOException e) {
-					throw new AssertionError("Não deu para ler " + som.getPath(), e);
-				}
+				float seg = segundosOgg(mc, som.getPath());
 				float min, max;
 				if (ev[2] instanceof FalaChefe fala) {
 					check(fala.jawAnimation() != null, "A boca do Ednaldo não mexe em " + fala + " (duração 0 no FalaChefe)");
@@ -240,6 +233,19 @@ public final class BestiarioGameTests {
 		});
 		log("vozes reais: moto, flanelinha, as 3 falas do Ednaldo e o refrão do disco apontam para os .ogg com a duração certa; boca no "
 			+ FalaChefe.EDNALDO_BANIMENTO.jawAnimation());
+	}
+
+	/** Quantos segundos dura o .ogg (decodificado inteiro), no cliente. As fases da 4.0 também usam. */
+	static float segundosOgg(Minecraft mc, Identifier caminho) {
+		try (InputStream in = mc.getResourceManager().open(caminho); JOrbisAudioStream ogg = new JOrbisAudioStream(in)) {
+			AudioFormat formato = ogg.getFormat();
+			long[] amostras = {0};
+			while (ogg.readChunk(x -> amostras[0]++)) {
+			}
+			return amostras[0] / (formato.getSampleRate() * formato.getChannels());
+		} catch (IOException e) {
+			throw new AssertionError("Não deu para ler " + caminho, e);
+		}
 	}
 
 	// ====================================================================== Galeria (GeckoLib tocando a animação de cada um)

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.3,
+  "ingredient": "irineu:botijao_vazio",
+  "result": {
+    "id": "minecraft:iron_ingot"
+  }
+}

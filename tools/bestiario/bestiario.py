@@ -1,13 +1,18 @@
 """
 O bestiário do Brasil (BestiarioEntities / BestiarioItems / BestiarioSounds): os 5 mobs (Dois Caras numa Moto,
-Chupa-Cu de Goianinha, Flanelinha, Mosquitão da Dengue, Dançarino da Carreta Furacão) e os 2 chefões lendários (Ednaldo
-Pereira e o E.T. de Varginha).
+Chupa-Cu de Goianinha, Flanelinha, Mosquitão da Dengue, Dançarino da Carreta Furacão), os 2 chefões lendários (Ednaldo
+Pereira e o E.T. de Varginha) e os monstros da 4.0 (seção "Monstros da 4.0": Corpo Seco e Botijão de Gás, o efeito
+Ressecamento com o tipo de dano irineu:ressecamento e as tags dele, os drops e os usos deles).
 
 Gera: os modelos e animações do GeckoLib com as texturas (modelos_gente.py e modelos_criaturas.py), as texturas dos
 itens e dos ovos, os sons sintetizados (e as entradas das falas dos chefões: as com voz real apontam para os .ogg de
 tools/audios_terceiros, que não são sobrescritos, e as outras ficam vazias, o espaço para as vozes), as traduções, o
 loot, as receitas (dardo, zarabatana, botas de pulo duplo; a poção da sombra e o repelente no suporte de poções) e a
-tag c:bosses. Os spawns ficam nos biomas (tools/brasil/mundo.py).
+tag c:bosses. Da seção "Monstros da 4.0": o ícone do efeito (textures/mob_effect/ressecamento.png), o tipo de dano
+data/irineu/damage_type/ressecamento.json com as tags minecraft de damage_type (bypasses_armor, bypasses_wolf_armor,
+no_knockback e panic_causes, as mesmas do wither), as tags minecraft de entity_type do Corpo Seco (undead,
+burn_in_daylight, sensitive_to_smite) e as receitas dos drops (casca podre e chapa de metal no forno, botijão vazio no
+alto-forno, sementes ancestrais em farinha de osso). Os spawns ficam nos biomas (tools/brasil/mundo.py).
 
 Uso: python bestiario.py <src/main/resources> [pasta da prévia]
 """
@@ -422,6 +427,130 @@ brewing("pocao_da_sombra", "irineu:couro_sombrio", [{"id": "minecraft:invisibili
 # Repelente (ferrão da dengue): o mosquitão não pica por 5 minutos.
 brewing("repelente", "irineu:ferrao_dengue", [{"id": "irineu:repelente", "duration": 6000}], 0xC9E86A, "repelente")
 
+# ====================================================================== Monstros da 4.0
+# O Corpo Seco e o Botijão de Gás (os modelos estão em modelos_gente.py e modelos_criaturas.py), o efeito Ressecamento
+# e o tipo de dano dele. Tudo nesta seção, com dicionários próprios, para não mexer nas listas de cima.
+MONSTROS_4 = {"corpo_seco": ("Corpo Seco", "Corpo Seco", "5a4632", "3c6e2a"),
+              "botijao_gas": ("Botijão de Gás", "Gas Cylinder", "1f4fa8", "c8ccd2")}
+ITENS_4 = {
+    "casca_podre": ("Casca Podre", "Rotten Bark"),
+    "sementes_ancestrais": ("Sementes Ancestrais", "Ancestral Seeds"),
+    "chapa_de_metal": ("Chapa de Metal", "Metal Plate"),
+    "botijao_vazio": ("Botijão Vazio", "Empty Gas Cylinder"),
+}
+
+# Casca podre: lasca de casca de árvore curvada, cinza-marrom com veios escuros e musgo.
+img = k.new(); px = img.load()
+for y in range(2, 14):
+    x0 = 4 + (y - 2) // 3
+    for x in range(x0, x0 + 6 + (y % 3 == 0)):
+        c = hexc("5c5040") if (x + y) % 3 else hexc("3a3228")
+        px[x, y] = k.vary(c, 8)
+    px[x0, y] = k.vary(hexc("2a241c"), 4)                                    # a borda enrolada
+for (x, y) in ((7, 4), (8, 5), (9, 9), (10, 10), (8, 12)):
+    px[x, y] = k.vary(hexc("5a6a28"), 10)                                    # musgo
+item("casca_podre", img)
+
+# Sementes ancestrais: cinco sementes escuras, uma brotando um fiapo verde-pálido.
+img = k.new(); px = img.load()
+for (cx, cy) in ((4, 9), (8, 11), (11, 7), (6, 5), (10, 12)):
+    for (dx, dy) in ((0, 0), (1, 0), (0, 1), (1, 1), (2, 1), (1, 2)):
+        px[cx + dx, cy + dy] = k.vary(hexc("4a3420"), 8)
+    px[cx, cy] = k.vary(hexc("7a5a34"), 6)                                   # brilho
+for (x, y) in ((12, 6), (12, 5), (13, 4), (13, 3), (14, 3)):
+    px[x, y] = k.vary(hexc("b8e0a0"), 6)
+item("sementes_ancestrais", img)
+
+# Chapa de metal: chapa azul do botijão, amassada, com a tinta descascando no metal.
+img = k.new(); px = img.load()
+for y in range(3, 13):
+    for x in range(2, 14):
+        borda = x in (2, 13) or y in (3, 12)
+        c = hexc("173c80") if borda else hexc("1f4fa8")
+        if (x * 7 + y * 3) % 11 == 0 or (x, y) in ((9, 6), (10, 6), (10, 7), (4, 10), (5, 10)):
+            c = hexc("9aa0a6")                                                # tinta descascada
+        px[x, y] = k.vary(c, 6)
+for x in range(4, 12):
+    px[x, 7 + (x % 2)] = k.vary(hexc("2a5cb8"), 4)                           # o amassado
+item("chapa_de_metal", img)
+
+# Botijão vazio: o botijão azul pequeno (genérico), com a alça cinza e uns amassados.
+img = k.new(); px = img.load()
+for y in range(4, 15):
+    w = 4 if y in (4, 14) else 5
+    for x in range(8 - w, 8 + w):
+        c = hexc("1f4fa8")
+        if x == 8 - w + 1:
+            c = hexc("3a6cc4")                                                # brilho
+        if x >= 8 + w - 2 or y == 14:
+            c = hexc("173c80")
+        px[x, y] = k.vary(c, 5)
+for (x, y) in ((6, 1), (7, 1), (8, 1), (9, 1), (5, 2), (10, 2), (5, 3), (10, 3)):
+    px[x, y] = k.vary(hexc("9aa0a6"), 4)                                     # alça
+px[7, 3] = px[8, 3] = k.vary(hexc("6a7076"), 3)                               # válvula
+for (x, y) in ((9, 8), (10, 9), (6, 11)):
+    px[x, y] = k.vary(hexc("0e1e40"), 4)                                     # amassados
+item("botijao_vazio", img)
+
+for ident, (pt, en, base, spot) in MONSTROS_4.items():
+    k.egg(ident, base, spot)
+
+# Ícone do Ressecamento (18x18): gota marrom seca, rachada.
+icon = k.new(18, 18); ip = icon.load()
+for y in range(18):
+    for x in range(18):
+        r = math.hypot((x - 8.5) / 5.5, (y - 10.5) / 5.5)
+        if r <= 1.0 or (abs(x - 8.5) < (y - 2) * 0.55 and 2 <= y <= 10):
+            ip[x, y] = k.vary(hexc("7a5c3a") if r < 0.7 else hexc("5a4028"), 6)
+for (x, y) in ((8, 6), (8, 7), (9, 8), (9, 9), (8, 10), (7, 11), (10, 10), (11, 11), (8, 12), (9, 13), (6, 12)):
+    ip[x, y] = k.vary(hexc("2a1c10"), 4)                                     # rachaduras
+ip[6, 9] = ip[6, 8] = (200, 168, 120, 255)                                    # brilho
+k.save(icon, "mob_effect", "ressecamento")
+
+# Sons: o Corpo Seco usa os do husk, mais graves, e o estalo de cipó no golpe; o Botijão, o chiado (gravação CC0 em
+# tools/sons_cc0; o sintetizado abaixo é só a reserva) e sons de metal do jogo.
+vanilla("entity.corpo_seco.ambient", [f"minecraft:mob/husk/idle{i}" for i in (1, 2, 3)], "Corpo Seco geme", "Corpo Seco groans", 0.8)
+vanilla("entity.corpo_seco.hurt", [f"minecraft:mob/husk/hurt{i}" for i in (1, 2)], "Corpo Seco apanha", "Corpo Seco hurts", 0.8)
+vanilla("entity.corpo_seco.death", [f"minecraft:mob/husk/death{i}" for i in (1, 2)], "Corpo Seco desmancha", "Corpo Seco crumbles", 0.8)
+vanilla("entity.corpo_seco.step", [f"minecraft:mob/husk/step{i}" for i in range(1, 6)], "Passos arrastados", "Dragging footsteps", 0.8)
+vanilla("entity.corpo_seco.ataque", [f"minecraft:block/vine/break{i}" for i in range(1, 5)], "Corpo Seco arranha", "Corpo Seco scratches", 0.7)
+n = int(2.5 * 44100)
+chiado = noise(2.5, seed=4001) - lowpass(noise(2.5, seed=4001), 0.45)          # passa-alta: só o chiado agudo
+chiado = lowpass(chiado, 0.8) * np.linspace(0.25, 1.0, n) ** 1.5                 # corta o mais agudo; vai abrindo
+som("entity.botijao_gas.chiado", "botijao_chiado", env(chiado, 0.08, 0.15), "Gás vazando: tsiiii", "Gas leaking: hiss", 0.7)
+vanilla("entity.botijao_gas.passo", [f"minecraft:block/chain/step{i}" for i in range(1, 7)], "Passinhos de metal", "Metal footsteps", 1.1)
+vanilla("entity.botijao_gas.hurt", ["minecraft:random/anvil_land"], "Botijão amassa", "Gas cylinder dents", 1.8, 0.5)
+vanilla("entity.botijao_gas.death", [f"minecraft:block/chain/break{i}" for i in range(1, 5)], "Botijão cai", "Gas cylinder falls", 0.9)
+
+# Traduções.
+for ident, (pt, en, base, spot) in MONSTROS_4.items():
+    L(f"entity.irineu.{ident}", pt, en)
+    L(f"item.irineu.{ident}_spawn_egg", f"Ovo Gerador de {pt}", f"{en} Spawn Egg")
+for ident, (pt, en) in ITENS_4.items():
+    L(f"item.irineu.{ident}", pt, en)
+L("effect.irineu.ressecamento", "Ressecamento", "Desiccation")
+L("death.attack.irineu.ressecamento", "%1$s secou até virar um Corpo Seco", "%1$s dried up like a Corpo Seco")
+L("death.attack.irineu.ressecamento.player", "%1$s secou de vez fugindo de %2$s", "%1$s dried up for good while fleeing %2$s")
+
+# Loot (explodir não deixa drop: o Botijão some sem morrer).
+loot("corpo_seco", [pool([it("casca_podre", 0, 2, looting=True)]), pool([it("sementes_ancestrais")], condition=chance(0.25)),
+                    pool([it("minecraft:coal", 0, 1)])])
+loot("botijao_gas", [pool([it("chapa_de_metal", 1, 2, looting=True)]), pool([it("botijao_vazio")], condition=chance(0.35))])
+
+# O tipo de dano do Ressecamento (como o do wither) e as tags dele; o Corpo Seco é morto-vivo e queima ao sol.
+k.wj(k.data("irineu", "damage_type", "ressecamento.json"),
+     {"exhaustion": 0.0, "message_id": "irineu.ressecamento", "scaling": "when_caused_by_living_non_player"})
+for tag in ("bypasses_armor", "bypasses_wolf_armor", "no_knockback", "panic_causes"):
+    k.tag("minecraft", "damage_type", tag, ["irineu:ressecamento"])
+for tag in ("undead", "burn_in_daylight", "sensitive_to_smite"):
+    k.tag("minecraft", "entity_type", tag, ["irineu:corpo_seco"])
+
+# Usos simples dos drops.
+k.cooking("carvao_de_casca_podre", "smelting", "irineu:casca_podre", "minecraft:charcoal", 0.1)
+k.shapeless("farinha_de_sementes_ancestrais", ["irineu:sementes_ancestrais"], "minecraft:bone_meal", 2, group="bonemeal")
+k.cooking("pepita_de_chapa_de_metal", "smelting", "irineu:chapa_de_metal", "minecraft:iron_nugget", 0.1)
+k.cooking("ferro_de_botijao_vazio", "blasting", "irineu:botijao_vazio", "minecraft:iron_ingot", 0.3, time=100)
+
 # ====================================================================== Tags
 k.tag("c", "entity_type", "bosses", ["irineu:ednaldo_pereira", "irineu:et_varginha", "irineu:lula", "irineu:bolsonaro", "irineu:lulonaro",
                                       "irineu:bambam", "irineu:manoel_gomes"])
@@ -441,4 +570,6 @@ if PREVIEW:
     out.save(os.path.join(PREVIEW, "bestiario_texturas.png"))
     k.preview(os.path.join(PREVIEW, "bestiario_itens.png"), [f"item/{n}" for n in ITENS if f"item/{n}" in k.textures] +
               [f"item/{n}_spawn_egg" for n in ("dois_caras_moto", "chupa_cu", "flanelinha", "mosquito_dengue", "dancarino_carreta", "ednaldo_pereira", "et_varginha")])
+    k.preview(os.path.join(PREVIEW, "monstros_itens.png"), [f"item/{n}" for n in ITENS_4] + [f"item/{n}_spawn_egg" for n in MONSTROS_4]
+              + ["mob_effect/ressecamento"])
 print("ok: bestiário")

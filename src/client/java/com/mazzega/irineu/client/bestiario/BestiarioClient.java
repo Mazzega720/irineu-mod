@@ -42,6 +42,9 @@ public final class BestiarioClient {
 		EntityRenderers.register(BestiarioEntities.DANCARINO_CARRETA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.DANCARINO_CARRETA, 0.5F, "head", false, false));
 		EntityRenderers.register(BestiarioEntities.EDNALDO_PEREIRA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.EDNALDO_PEREIRA, 0.6F, "head", false, true));
 		EntityRenderers.register(BestiarioEntities.ET_VARGINHA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.ET_VARGINHA, 0.5F, "head", false, true));
+		// Monstros da 4.0: o Corpo Seco com os olhos verde-pálidos brilhando; o Botijão não tem cabeça (vira o corpo todo).
+		EntityRenderers.register(BestiarioEntities.CORPO_SECO, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.CORPO_SECO, 0.5F, "head", false, true));
+		EntityRenderers.register(BestiarioEntities.BOTIJAO_GAS, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.BOTIJAO_GAS, 0.45F, null, false, false));
 
 		EntityRenderers.register(BestiarioEntities.PEDRA_PROJETIL, c -> new ThrownItemRenderer<>(c, 0.9F, false));
 		EntityRenderers.register(BestiarioEntities.ORBE_JULGAMENTO, c -> new ThrownItemRenderer<>(c, 1.6F, true));

@@ -1,7 +1,7 @@
 """
 Modelos GeckoLib de gente do bestiário (corpo detalhado com cotovelo, joelho e mandíbula): Ednaldo Pereira, o
-Flanelinha, o Dançarino da Carreta Furacão e os Dois Caras numa Moto (os dois na moto, que empina e tem as rodas
-girando). Geometria, animações e texturas (com a máscara de brilho onde tiver). Chamado por bestiario.py.
+Flanelinha, o Dançarino da Carreta Furacão, os Dois Caras numa Moto (os dois na moto, que empina e tem as rodas
+girando) e o Corpo Seco (monstro da 4.0: mumificado, com cipós e cascas podres). Geometria, animações e texturas (com a máscara de brilho onde tiver). Chamado por bestiario.py.
 """
 from corpo_humano import BOXES, EYE_W, Pessoa, ossos
 from geo import (AMT, SWING, T, Packer, Tex, anim, bone, cube, geometry, hexc, jaw_anims, merge, shade, walk_detailed)
@@ -456,4 +456,219 @@ def moto():
     return "dois_caras_moto", geometry("geometry.irineu.dois_caras_moto", W, H, bones, (3, 3)), A, t, None
 
 
-TODOS = [ednaldo, flanelinha, dancarino, moto]
+# ====================================================================== Corpo Seco
+def corpo_seco():
+    """
+    O Corpo Seco: cadáver mumificado, pele marrom ressecada colada nas costelas, tanga em trapos, cipós enrolados nos
+    braços e nas pernas, cascas podres nos ombros e nas costas, e os olhos verde-pálidos (que brilham) no fundo das
+    órbitas. Anda duro, de braços esticados para a frente.
+    """
+    pk = Packer(64, 0, 128, 128)
+    cipo_uv = pk.place((5, 1, 5))                   # anel de cipó (o mesmo UV para todos)
+    cipo2_uv = pk.place((5, 1, 5))                  # o mesmo, com folhinhas
+    faixa_uv = pk.place((11, 1, 1))                 # cipó atravessado no peito
+    tanga_uv = pk.place((9, 4, 5))
+    casca_uv = pk.place((5, 2, 5))                  # casca podre no ombro
+    casca_costas_uv = pk.place((6, 5, 1))
+    cabelo_uv = pk.place((9, 1, 9))
+    bones = [bone("corpo_seco")] + ossos("corpo_seco", extras={
+        "body": [((-4.3, 9.5, -2.3), (8.6, 4, 4.6), tanga_uv)],
+        "chest": [((-3, 18, 2.05), (6, 5, 0.75), casca_costas_uv)],
+        "head": [((-4.4, 31.2, -4.4), (8.8, 0.6, 8.8), cabelo_uv)],
+    })
+    por_nome = {b["name"]: b for b in bones}
+
+    def anel(osso, cx, y, cz, w, d, rot, uv=cipo_uv):
+        """Um anel de cipó em volta do membro (centro cx, cz), inclinado (rot) para parecer enrolado."""
+        por_nome[osso].setdefault("cubes", []).append(
+            cube((cx - w / 2 - 0.35, y, cz - d / 2 - 0.35), (w + 0.7, 1.0, d + 0.7), uv, rotation=rot, pivot=(cx, y + 0.5, cz)))
+
+    for lado, s in (("right", -1), ("left", 1)):
+        # braço (centro x = ±6), antebraço, coxa (±1,9) e canela
+        anel(f"{lado}_arm", 6 * s, 19.0, 0, 4, 4, (0, 0, 16 * s))
+        anel(f"{lado}_arm", 6 * s, 22.3, 0, 4, 4, (14, 0, -10 * s), cipo2_uv)
+        anel(f"{lado}_forearm", 6 * s, 15.6, 0, 4, 4, (-12, 0, 12 * s))
+        anel(f"{lado}_leg", 1.9 * s, 10.2, 0, 4, 4, (0, 0, -15 * s), cipo2_uv)
+        anel(f"{lado}_leg", 1.9 * s, 7.2, 0, 4, 4, (12, 0, 8 * s))
+        anel(f"{lado}_shin", 1.9 * s, 3.4, 0, 4, 4, (-14, 0, -12 * s), cipo2_uv)
+        # casca podre no ombro
+        por_nome[f"{lado}_arm"]["cubes"].append(
+            cube((6 * s - 2.5, 23.2, -2.5), (5, 2, 5), casca_uv, rotation=(0, 0, 12 * s), pivot=(6 * s, 24, 0)))
+    # cipó atravessado no peito (de um ombro ao quadril), na frente e atrás
+    for z, rot in ((-2.45, 38), (1.85, -38)):
+        por_nome["chest"]["cubes"].append(cube((-5.5, 20, z), (11, 1, 0.6), faixa_uv, rotation=(0, 0, rot), pivot=(0, 20.5, z + 0.3)))
+
+    t = Tex(128, 128, 5501)
+    g = Tex(128, 128, 5502)
+    p = Pessoa(t)
+    pg = Pessoa(g)
+    PELE = hexc("5a4632")
+    PELE_D = hexc("33261a")
+    PELE_L = hexc("7c6446")
+    OSSO = hexc("9a8662")
+    CIPO = hexc("5a7a26")
+    CIPO_D = hexc("3a5018")
+    FOLHA = hexc("86b034")
+    CASCA = hexc("5c5040")
+    CASCA_D = hexc("3a3228")
+    TRAPO = hexc("7a6a4a")
+    TRAPO_D = hexc("5a4c34")
+    OLHO = hexc("c8f5b0")
+    p.pele(PELE)
+    # Rachaduras e manchas da pele seca em todo o corpo.
+    for box in BOXES:
+        for lado in ("front", "back", "right", "left", "top"):
+            w, h = p.size(box, lado)
+            put = p.face(box, lado)
+            for _ in range(max(1, w * h // 9)):
+                xx, yy = t.rnd.randrange(w), t.rnd.randrange(h)
+                put(xx, yy, shade(PELE, 0.85) if t.rnd.random() < 0.6 else shade(PELE, 1.15), 3)
+            if t.rnd.random() < 0.5 and h > 2:                                # uma rachadura comprida
+                x0, y0 = t.rnd.randrange(w), t.rnd.randrange(h - 2)
+                for k in range(3):
+                    put(min(w - 1, x0 + k // 2), y0 + k, PELE_D, 2)
+    p.cabeca(PELE, PELE_D, eyes=PELE_D, bald=True, lips=PELE_D)
+    # A boca por dentro: escura e seca (não vermelha), com os dentes amarelados.
+    for box, nome in (("head", "bottom"), ("jaw", "top")):
+        w, d = p.size(box, nome)
+        put = p.face(box, nome)
+        for yy in range(d):
+            for xx in range(w):
+                put(xx, yy, hexc("c8b890") if yy in (0, d - 1) and 0 < xx < w - 1 else hexc("2a1a10"), 3)
+    # Órbitas fundas e os olhos verde-pálidos (que brilham); bochechas chupadas; nariz que sumiu.
+    F = p.face("head", "front")
+    G = pg.face("head", "front")
+    for x in range(8):
+        F(x, 0, PELE_D, 3)
+    for (x0, x1) in ((1, 2), (5, 6)):
+        for x in (x0, x1):
+            F(x, 1, hexc("1e140c"))
+            F(x, 3, hexc("1e140c"))
+            F(x, 2, OLHO)
+            G(x, 2, OLHO)
+        F(x0 - 1, 2, hexc("2a1c10")); F(x1 + 1, 2, hexc("2a1c10"))
+    F(3, 3, hexc("1e140c")); F(4, 3, hexc("1e140c"))                         # o buraco do nariz
+    for x in (0, 7):
+        F(x, 4, PELE_D, 2)
+    # Boca: lábio seco e dentes à mostra.
+    J = p.face("jaw", "front")
+    for x in range(1, 7):
+        J(x, 0, OSSO if x % 2 else hexc("c8b890"), 3)
+    for x in (0, 7):
+        J(x, 1, PELE_D)
+    # Tufos de cabelo ralo e cinza, colado no crânio.
+    t.box(cabelo_uv, (9, 1, 9), (0, 0, 0, 0), 0)
+    for lado in ("top", "front", "back", "right", "left"):
+        w, h = t.face_size(cabelo_uv, (9, 1, 9), lado)
+        put = t.face(cabelo_uv, (9, 1, 9), lado)
+        for xx in range(w):
+            for yy in range(h):
+                if t.rnd.random() < 0.35:
+                    put(xx, yy, hexc("6a645a") if t.rnd.random() < 0.6 else hexc("4a463e"), 4)
+    # Costelas no peito e nas costas; o osso do esterno; a barriga funda.
+    for lado in ("front", "back"):
+        C = p.face("chest", lado)
+        for y in range(7):
+            for x in range(8):
+                if y in (1, 3, 5) and x not in (3, 4):
+                    C(x, y, OSSO, 5)
+                elif y in (2, 4, 6) and x not in (3, 4):
+                    C(x, y, PELE_D, 3)
+        for y in range(1, 6):
+            C(3, y, PELE_L, 3); C(4, y, PELE_L, 3)
+    W = p.face("waist", "front")
+    for x in range(1, 7):
+        W(x, 0, PELE_D, 3)
+    W(3, 2, hexc("2a1c10")); W(4, 2, hexc("2a1c10"))                          # o umbigo murcho
+    # Ossos dos joelhos e cotovelos aparecendo; mãos e pés com unhas compridas.
+    for lado in ("r", "l"):
+        p.ring(lado + "_shin", 0, 1, OSSO, 4, only=("front",))
+        p.ring(lado + "_fore", 0, 1, OSSO, 4, only=("back",))
+        p.fill(lado + "_hand", PELE_D, 4)
+        p.fill(lado + "_finger", hexc("b8a878"), 3)
+        p.fill(lado + "_thumb", hexc("b8a878"), 3)
+        p.fill(lado + "_toe", PELE_D, 4)
+        put = p.face(lado + "_toe", "front")
+        for x in (0, 1, 2, 3):
+            put(x, 1, hexc("b8a878"), 3)
+    # Cipós: verde-musgo com nós escuros; a variante com folhinhas.
+    for uv, folhas in ((cipo_uv, False), (cipo2_uv, True)):
+        t.box(uv, (5, 1, 5), CIPO, 6)
+        for lado in ("front", "back", "right", "left", "top", "bottom"):
+            w, h = t.face_size(uv, (5, 1, 5), lado)
+            put = t.face(uv, (5, 1, 5), lado)
+            for xx in range(w):
+                for yy in range(h):
+                    r = t.rnd.random()
+                    if r < 0.25:
+                        put(xx, yy, CIPO_D, 4)
+                    elif folhas and r > 0.82:
+                        put(xx, yy, FOLHA, 8)
+    t.box(faixa_uv, (11, 1, 1), CIPO, 6)
+    for lado in ("front", "back"):
+        put = t.face(faixa_uv, (11, 1, 1), lado)
+        for xx in range(0, 11, 3):
+            put(xx, 0, FOLHA, 8)
+    # Cascas podres: cinza-marrom com veios escuros e musgo.
+    for uv, size in ((casca_uv, (5, 2, 5)), (casca_costas_uv, (6, 5, 1))):
+        t.box(uv, size, CASCA, 6)
+        for lado in ("front", "back", "right", "left", "top"):
+            w, h = t.face_size(uv, size, lado)
+            put = t.face(uv, size, lado)
+            for xx in range(w):
+                for yy in range(h):
+                    if (xx + yy * 2) % 3 == 0:
+                        put(xx, yy, CASCA_D, 4)
+                    elif t.rnd.random() < 0.12:
+                        put(xx, yy, CIPO, 6)
+    # Tanga em trapos: pano encardido, a barra rasgada (furos transparentes) e sem fundo.
+    t.box(tanga_uv, (9, 4, 5), TRAPO, 6)
+    t.box(tanga_uv, (9, 4, 5), (0, 0, 0, 0), 0, only=("top", "bottom"))
+    for lado in ("front", "back", "right", "left"):
+        w, h = t.face_size(tanga_uv, (9, 4, 5), lado)
+        put = t.face(tanga_uv, (9, 4, 5), lado)
+        for xx in range(w):
+            put(xx, 0, TRAPO_D, 3)
+            corte = t.rnd.choice((1, 2, 2, 3, 4))                             # comprimento do farrapo
+            for yy in range(corte, h):
+                put(xx, yy, (0, 0, 0, 0))
+            if corte > 1 and t.rnd.random() < 0.3:
+                put(xx, corte - 1, TRAPO_D, 3)
+    # Animações: em pé, curvado, braços duros meio esticados; anda arrastando, braços para a frente.
+    REST = {"chest": {"rotation": (10, 0, 0)}, "head": {"rotation": (-6, 0, 8)}, "jaw": {"rotation": (6, 0, 0)},
+            "right_arm": {"rotation": (-38, 0, 6)}, "left_arm": {"rotation": (-30, 0, -6)},
+            "right_forearm": {"rotation": (-14, 0, 0)}, "left_forearm": {"rotation": (-20, 0, 0)},
+            "right_hand": {"rotation": (-10, 0, 0)}, "left_hand": {"rotation": (-10, 0, 0)}}
+    A = {}
+    A["corpo_seco.idle"] = anim(4.0, merge(pose(REST), {
+        "body": {"rotation": {0: (0, 0, 0), 2.0: ((0, 0, 3), "easeInOutSine"), 4.0: ((0, 0, 0), "easeInOutSine")}},
+        "chest": {"rotation": {0: (10, 0, 0), 2.0: ((13, 0, -2), "easeInOutSine"), 4.0: ((10, 0, 0), "easeInOutSine")}},
+        "head": {"rotation": {0: (-6, 0, 8), 1.4: ((-6, 0, 8), "linear"), 1.5: ((-6, 22, 18), "easeOutExpo"), 2.6: ((-6, 22, 18), "linear"),
+                              2.8: ((-2, -8, -4), "easeOutExpo"), 4.0: ((-6, 0, 8), "easeInOutSine")}},
+        "jaw": {"rotation": {0: (6, 0, 0), 2.0: ((14, 0, 0), "easeInOutSine"), 2.3: ((4, 0, 0), "easeInQuad"), 4.0: ((6, 0, 0), "easeInOutSine")}},
+        "right_hand": {"rotation": [f"-10 + math.sin({T} * 1100) * 4", 0, 0]},
+        "left_hand": {"rotation": [f"-10 + math.cos({T} * 900) * 4", 0, 0]},
+    }), loop=True)
+    A["corpo_seco.walk"] = anim(1.0, merge(walk_detailed(8, 30, 30, 0, 0.5, 6), {
+        "right_arm": {"rotation": [f"-78 - math.cos({SWING}) * 8 * {AMT}", 0, 4]},
+        "left_arm": {"rotation": [f"-74 + math.cos({SWING}) * 8 * {AMT}", 0, -4]},
+        "right_forearm": {"rotation": [-6, 0, 0]}, "left_forearm": {"rotation": [-8, 0, 0]},
+        "right_hand": {"rotation": [-15, 0, 0]}, "left_hand": {"rotation": [-15, 0, 0]},
+        "chest": {"rotation": [f"8 + 2 * {AMT}", f"math.cos({SWING}) * 6 * {AMT}", 0]},
+        "head": {"rotation": [f"-10 + math.abs(math.cos({SWING})) * 4 * {AMT}", 0, f"math.sin({SWING}) * 6 * {AMT}"]},
+        "jaw": {"rotation": [8, 0, 0]},
+        "body": {"position": [0, f"math.abs(math.sin({SWING})) * 0.5 * {AMT}", 0],
+                 "rotation": [0, 0, f"math.cos({SWING}) * 5 * {AMT}"]},
+    }), loop=True)
+    # O golpe rápido (0,4 s, cabe nos 12 ticks): as duas mãos arranham de cima para baixo e a boca abre.
+    A["corpo_seco.ataque"] = anim(0.4, {
+        "right_arm": {"rotation": {0: (-75, 0, 4), 0.1: ((-140, 0, 25), "easeOutQuad"), 0.22: ((-45, 0, -10), "easeInExpo"), 0.4: ((-75, 0, 4), "easeInOutSine")}},
+        "left_arm": {"rotation": {0: (-75, 0, -4), 0.14: ((-135, 0, -25), "easeOutQuad"), 0.26: ((-45, 0, 10), "easeInExpo"), 0.4: ((-75, 0, -4), "easeInOutSine")}},
+        "chest": {"rotation": {0: (8, 0, 0), 0.1: ((-6, 0, 0), "easeOutQuad"), 0.24: ((24, 0, 0), "easeInExpo"), 0.4: ((8, 0, 0), "easeInOutSine")}},
+        "jaw": {"rotation": {0: (8, 0, 0), 0.12: ((38, 0, 0), "easeOutQuad"), 0.3: ((38, 0, 0), "linear"), 0.4: ((8, 0, 0), "easeInOutSine")}},
+        "head": {"rotation": {0: (-8, 0, 0), 0.12: ((-22, 0, 0), "easeOutQuad"), 0.26: ((8, 0, 0), "easeInExpo"), 0.4: ((-8, 0, 0), "easeInOutSine")}},
+    })
+    return "corpo_seco", geometry("geometry.irineu.corpo_seco", 128, 128, bones, (2, 3)), A, t, g
+
+
+TODOS = [ednaldo, flanelinha, dancarino, moto, corpo_seco]

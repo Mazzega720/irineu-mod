@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "irineu:sementes_ancestrais"
+  ],
+  "result": {
+    "id": "minecraft:bone_meal",
+    "count": 2
+  },
+  "group": "bonemeal"
+}

@@ -63,6 +63,19 @@ public final class BestiarioSounds {
 	public static final SoundEvent MODULO_PUXAR = register("item.modulo_antigravitacional.puxar");
 	public static final SoundEvent ZARABATANA = register("item.zarabatana.sopro");
 
+	// ---------------------------------------------------------------- Monstros da 4.0
+	// Corpo Seco: sons do husk mais graves e o estalo de cipó do golpe.
+	public static final SoundEvent CORPO_SECO_AMBIENT = register("entity.corpo_seco.ambient");
+	public static final SoundEvent CORPO_SECO_HURT = register("entity.corpo_seco.hurt");
+	public static final SoundEvent CORPO_SECO_DEATH = register("entity.corpo_seco.death");
+	public static final SoundEvent CORPO_SECO_STEP = register("entity.corpo_seco.step");
+	public static final SoundEvent CORPO_SECO_ATAQUE = register("entity.corpo_seco.ataque");
+	// Botijão de Gás: o "tsiiii" do vazamento (gravação CC0), passos de metal, a lata amassando.
+	public static final SoundEvent BOTIJAO_CHIADO = register("entity.botijao_gas.chiado");
+	public static final SoundEvent BOTIJAO_PASSO = register("entity.botijao_gas.passo");
+	public static final SoundEvent BOTIJAO_HURT = register("entity.botijao_gas.hurt");
+	public static final SoundEvent BOTIJAO_DEATH = register("entity.botijao_gas.death");
+
 	// ---------------------------------------------------------------- Falas dos chefões (as sem voz real ficam vazias)
 	public static final SoundEvent FALA_EDNALDO_CHEGADA = register("fala.ednaldo.chegada");
 	public static final SoundEvent FALA_EDNALDO_VALE_TUDO = register("fala.ednaldo.vale_tudo");
