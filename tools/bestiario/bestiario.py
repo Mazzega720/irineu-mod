@@ -8,16 +8,16 @@ dele, os drops e os usos deles).
 Gera: os modelos e animações do GeckoLib com as texturas (modelos_gente.py e modelos_criaturas.py), as texturas dos
 itens e dos ovos, os sons sintetizados (e as entradas das falas dos chefões: as com voz real apontam para os .ogg de
 tools/audios_terceiros, que não são sobrescritos, e as outras ficam vazias, o espaço para as vozes), as traduções, o
-loot, as receitas (dardo, zarabatana, botas de pulo duplo; a poção da sombra e o repelente no suporte de poções) e a
-tag c:bosses. Da seção "Monstros da 4.0": o ícone do efeito (textures/mob_effect/ressecamento.png), o tipo de dano
-data/irineu/damage_type/ressecamento.json com as tags minecraft de damage_type (bypasses_armor, bypasses_wolf_armor,
-no_knockback e panic_causes, as mesmas do wither), as tags minecraft de entity_type do Corpo Seco (undead,
-burn_in_daylight, sensitive_to_smite), as da Armadeira (arthropod, sensitive_to_bane_of_arthropods), a tradução da
-Garrafada Sinistra (a poção de arremesso do jogo com o nome próprio, que a Cuca joga) e as receitas dos drops (casca
-podre e chapa de metal no forno, botijão vazio e canos de ferro no alto-forno, sementes ancestrais em farinha de osso,
-teia reforçada em teia, escamas duras em escudo de tatu; no suporte de poções, o Veneno da Armadeira e a Garrafada da
-Cura). O tiro do bacamarte é gravação CC0 (tools/sons_cc0); o sintetizado daqui é a reserva. Os spawns ficam nos biomas
-(tools/brasil/mundo.py).
+loot (o E.T. e o Ednaldo derrubam sempre a relíquia deles, da Jornada da 4.0), as receitas (dardo, zarabatana, botas de
+pulo duplo; a poção da sombra e o repelente no suporte de poções) e a tag c:bosses. Da seção "Monstros da 4.0": o ícone
+do efeito (textures/mob_effect/ressecamento.png), o tipo de dano data/irineu/damage_type/ressecamento.json com as tags
+minecraft de damage_type (bypasses_armor, bypasses_wolf_armor, no_knockback e panic_causes, as mesmas do wither), as
+tags minecraft de entity_type do Corpo Seco (undead, burn_in_daylight, sensitive_to_smite), as da Armadeira (arthropod,
+sensitive_to_bane_of_arthropods), a tradução da Garrafada Sinistra (a poção de arremesso do jogo com o nome próprio, que
+a Cuca joga) e as receitas dos drops (casca podre e chapa de metal no forno, botijão vazio e canos de ferro no
+alto-forno, sementes ancestrais em farinha de osso, teia reforçada em teia, escamas duras em escudo de tatu; no suporte
+de poções, o Veneno da Armadeira e a Garrafada da Cura). O tiro do bacamarte é gravação CC0 (tools/sons_cc0); o
+sintetizado daqui é a reserva. Os spawns ficam nos biomas (tools/brasil/mundo.py).
 
 Uso: python bestiario.py <src/main/resources> [pasta da prévia]
 """
@@ -402,10 +402,11 @@ loot("flanelinha", [pool([it("paninho_sujo")], condition=chance(0.5)), pool([it(
                     pool([it("minecraft:cobblestone", 0, 2)])])
 loot("mosquito_dengue", [pool([it("ferrao_dengue", 0, 1, looting=True)])])
 loot("dancarino_carreta", [pool([it("mola_saltadora", 0, 2, looting=True)], condition=JOGADOR), pool([it("minecraft:string", 0, 2)])])
+# A relíquia de cada um (4.0, a Jornada) cai sempre, sem condição: sem ela não se abre a Câmara dos Três Poderes.
 loot("ednaldo_pereira", [pool([it("cajado_do_julgamento")]), pool([it("nota_100_reais", 2, 5)]), pool([it("nota_200_reais", 1, 3)]),
-                         pool([it("minecraft:experience_bottle", 4, 8)])])
+                         pool([it("minecraft:experience_bottle", 4, 8)]), pool([it("reliquia_ednaldo")])])
 loot("et_varginha", [pool([it("modulo_antigravitacional")]), pool([it("minecraft:redstone", 6, 14)]), pool([it("minecraft:ender_pearl", 2, 5)]),
-                     pool([it("nota_100_reais", 1, 4)])])
+                     pool([it("nota_100_reais", 1, 4)]), pool([it("reliquia_varginha")])])
 
 # ====================================================================== Receitas e poções
 k.shapeless("dardo_envenenado", ["irineu:ferrao_dengue", "minecraft:stick", "minecraft:feather"],

@@ -22,6 +22,49 @@ public final class JornadaItems {
 	private static final List<Item> TAB = new ArrayList<>();
 
 	// ---------------------------------------------------------------- M4 relíquias e rituais
+	/** O que as relíquias aguentam (fogo, lava e explosão): data/irineu/tags/damage_type/reliquia_resiste.json. */
+	public static final net.minecraft.tags.TagKey<net.minecraft.world.damagesource.DamageType> RELIQUIA_RESISTE =
+		net.minecraft.tags.TagKey.create(Registries.DAMAGE_TYPE, Irineu.id("reliquia_resiste"));
+	/** Circuito de Antimatéria: cai do E.T. de Varginha. */
+	public static final Item RELIQUIA_VARGINHA = reliquia("reliquia_varginha");
+	/** Selo do Juízo Universal: cai do Ednaldo Pereira. */
+	public static final Item RELIQUIA_EDNALDO = reliquia("reliquia_ednaldo");
+	/** Caneta Azul Primordial: cai do Manoel Gomes. */
+	public static final Item RELIQUIA_MANOEL = reliquia("reliquia_manoel");
+	/** Haltere do Trapézio Descendente: cai do Kléber BamBam. */
+	public static final Item RELIQUIA_BAMBAM = reliquia("reliquia_bambam");
+	/** Repara o núcleo da nave caída e chama o E.T. (baú da cratera, ou cobre, ferro e redstone). */
+	public static final Item BATERIA_SUCATA = register("bateria_sucata", Item::new, new Item.Properties().stacksTo(16)
+		.rarity(net.minecraft.world.item.Rarity.UNCOMMON).component(net.minecraft.core.component.DataComponents.LORE, dicas("bateria_sucata", 2)), true);
+	/** Tocado na mesa do julgamento chama o Ednaldo; na jukebox, toca o refrão (baú do altar, ou ouro, corante roxo e bloco musical). */
+	public static final Item DISCO_VALE_TUDO = register("disco_vale_tudo", Item::new, new Item.Properties().stacksTo(1)
+		.rarity(net.minecraft.world.item.Rarity.RARE)
+		.jukeboxPlayable(ResourceKey.create(Registries.JUKEBOX_SONG, Irineu.id("vale_tudo")))
+		.component(net.minecraft.core.component.DataComponents.LORE, dicas("disco_vale_tudo", 2)), true);
+
+	/**
+	 * Relíquia: uma só por pilha, épica, brilhando, resistente a fogo e explosão (a resistência lê a tag pelos registros,
+	 * como o {@code fireResistant()} do jogo), e as 2 linhas de dica: o que ela é e onde vai.
+	 */
+	private static Item reliquia(String name) {
+		return register(name, Item::new, new Item.Properties().stacksTo(1)
+			.rarity(net.minecraft.world.item.Rarity.EPIC)
+			.component(net.minecraft.core.component.DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+			.delayedComponent(net.minecraft.core.component.DataComponents.DAMAGE_RESISTANT,
+				registros -> new net.minecraft.world.item.component.DamageResistant(registros.getOrThrow(RELIQUIA_RESISTE)))
+			.component(net.minecraft.core.component.DataComponents.LORE, new net.minecraft.world.item.component.ItemLore(java.util.List.of(
+				net.minecraft.network.chat.Component.translatable("item.irineu." + name + ".dica").withStyle(net.minecraft.ChatFormatting.GRAY),
+				net.minecraft.network.chat.Component.translatable("item.irineu.reliquia.pedestal").withStyle(net.minecraft.ChatFormatting.GOLD)))), true);
+	}
+
+	/** As linhas de dica (item.irineu.&lt;nome&gt;.dica_1 ... _n), em cinza. */
+	private static net.minecraft.world.item.component.ItemLore dicas(String name, int linhas) {
+		List<net.minecraft.network.chat.Component> lore = new ArrayList<>();
+		for (int i = 1; i <= linhas; i++) {
+			lore.add(net.minecraft.network.chat.Component.translatable("item.irineu." + name + ".dica_" + i).withStyle(net.minecraft.ChatFormatting.GRAY));
+		}
+		return new net.minecraft.world.item.component.ItemLore(lore);
+	}
 
 	// ---------------------------------------------------------------- M5 Praça
 

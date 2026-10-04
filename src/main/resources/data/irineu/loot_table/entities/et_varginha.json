@@ -70,6 +70,16 @@
           ]
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:reliquia_varginha",
+          "weight": 1
+        }
+      ]
     }
   ],
   "random_sequence": "irineu:entities/et_varginha"

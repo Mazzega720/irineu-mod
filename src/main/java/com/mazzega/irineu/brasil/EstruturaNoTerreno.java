@@ -43,6 +43,8 @@ import org.jspecify.annotations.Nullable;
  * outras peças que cairiam na água ficam de fora, e se for gente demais na água o lugar é descartado;</li>
  * <li>{@link Terreno#AGUA} (palafitas): a peça inicial precisa de água embaixo, e as peças que bateriam numa margem
  * mais alta que o deck ficam de fora.</li>
+ * <li>{@code altura_minima} (opcional): o chão embaixo da peça inicial não pode ficar abaixo desse Y, para estruturas
+ * que só nascem nos picos (o altar do Ednaldo).</li>
  * </ul>
  * Se o lugar não serve, tenta de novo um chunk para cada lado antes de desistir.
  */
@@ -76,7 +78,8 @@ public class EstruturaNoTerreno extends Structure {
 		Codec.floatRange(0.0F, 1.0F).optionalFieldOf("min_agua_no_inicio", 0.5F).forGetter(s -> s.minAgua),
 		Codec.intRange(0, 64).optionalFieldOf("max_desnivel", 6).forGetter(s -> s.maxDesnivel),
 		Codec.BOOL.optionalFieldOf("so_o_inicio", false).forGetter(s -> s.soOInicio),
-		Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(s -> s.poolAliases)
+		Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(s -> s.poolAliases),
+		Codec.INT.optionalFieldOf("altura_minima", Integer.MIN_VALUE).forGetter(s -> s.alturaMinima)
 	).apply(i, EstruturaNoTerreno::new));
 	public static final StructureType<EstruturaNoTerreno> TYPE = Registry.register(BuiltInRegistries.STRUCTURE_TYPE, Brasil.id("encaixe_no_terreno"),
 		() -> CODEC);
@@ -97,9 +100,12 @@ public class EstruturaNoTerreno extends Structure {
 	private final boolean soOInicio;
 	/** Troca de pools (o quiosque de estrada usa os mesmos moldes do de praia, com outros anexos). */
 	private final List<PoolAliasBinding> poolAliases;
+	/** O chão mais baixo embaixo da peça inicial precisa estar nesse Y ou acima (o altar do Ednaldo, só nos picos). */
+	private final int alturaMinima;
 
 	public EstruturaNoTerreno(StructureSettings settings, Holder<StructureTemplatePool> startPool, int size, int startHeight, int maxDistance,
-		LiquidSettings liquidSettings, Terreno terreno, float maxAgua, float minAgua, int maxDesnivel, boolean soOInicio, List<PoolAliasBinding> poolAliases) {
+		LiquidSettings liquidSettings, Terreno terreno, float maxAgua, float minAgua, int maxDesnivel, boolean soOInicio, List<PoolAliasBinding> poolAliases,
+		int alturaMinima) {
 		super(settings);
 		this.startPool = startPool;
 		this.size = size;
@@ -112,6 +118,12 @@ public class EstruturaNoTerreno extends Structure {
 		this.maxDesnivel = maxDesnivel;
 		this.soOInicio = soOInicio;
 		this.poolAliases = poolAliases;
+		this.alturaMinima = alturaMinima;
+	}
+
+	/** O Y mínimo do chão embaixo da peça inicial ({@code altura_minima}; sem ele, qualquer altura serve). */
+	public int alturaMinima() {
+		return this.alturaMinima;
 	}
 
 	@Override
@@ -150,6 +162,8 @@ public class EstruturaNoTerreno extends Structure {
 			baixo = Math.min(baixo, c.chao());
 			alto = Math.max(alto, c.chao());
 		}
+		// Picos (o altar do Ednaldo): nem um canto da peça inicial abaixo da altura mínima.
+		if (baixo < this.alturaMinima) return null;
 		float agua = molhadas / (float) total;
 		if (this.terreno == Terreno.SECO ? agua > this.maxAgua || alto - baixo > this.maxDesnivel : agua < this.minAgua) return null;
 		StructurePiecesBuilder escolhidas = new StructurePiecesBuilder();

@@ -630,8 +630,13 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		int plates = server.computeOnServer(mc -> mc.overworld().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
 				new AABB(5190, -64, -10, 5210, -50, 20), item -> item.getItem().is(ModBlocks.ANILHA_BAMBAM.asItem()))
 			.stream().mapToInt(item -> item.getItem().getCount()).sum());
-		System.out.println("[TotemTest] o BamBam deixou " + plates + " anilhas");
+		// Desde a 4.0, também a relíquia dele (o Haltere do Trapézio Descendente), sempre uma.
+		int reliquias = server.computeOnServer(mc -> mc.overworld().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+				new AABB(5190, -64, -10, 5210, -50, 20), item -> item.getItem().is(com.mazzega.irineu.registry.JornadaItems.RELIQUIA_BAMBAM))
+			.stream().mapToInt(item -> item.getItem().getCount()).sum());
+		System.out.println("[TotemTest] o BamBam deixou " + plates + " anilhas e " + reliquias + " relíquia(s)");
 		if (plates < 4) throw new AssertionError("O BamBam devia deixar 4 anilhas: " + plates);
+		if (reliquias != 1) throw new AssertionError("O BamBam devia deixar a relíquia dele: " + reliquias);
 		server.runCommand("kill @e[type=!minecraft:player]");
 		// Espera a animação de morte do BamBam acabar (a barra dele some junto).
 		context.waitTicks(25);

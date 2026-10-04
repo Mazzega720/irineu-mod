@@ -26,6 +26,30 @@ public final class JornadaBlocks {
 	private static final List<Item> TAB = new ArrayList<>();
 
 	// ---------------------------------------------------------------- M4 relíquias e rituais
+	/** Núcleo da nave do E.T. (na cratera de Varginha): com a bateria, carrega e chama o E.T. Inquebrável e sem loot. */
+	public static final Block NUCLEO_NAVE = register("nucleo_nave", com.mazzega.irineu.bestiario.chefes.NucleoNaveBlock::new,
+		ritual(net.minecraft.world.level.material.MapColor.METAL, net.minecraft.world.level.block.SoundType.NETHERITE_BLOCK)
+			.lightLevel(s -> s.getValue(com.mazzega.irineu.bestiario.chefes.NucleoNaveBlock.CARREGANDO) ? 12 : 5),
+		itemDoRitual("nucleo_nave"));
+	/** Mesa do Julgamento (no altar do Ednaldo): com o disco, toca o refrão e chama o Ednaldo. Inquebrável e sem loot. */
+	public static final Block MESA_DO_JULGAMENTO = register("mesa_do_julgamento", com.mazzega.irineu.bestiario.chefes.MesaDoJulgamentoBlock::new,
+		ritual(net.minecraft.world.level.material.MapColor.COLOR_PURPLE, net.minecraft.world.level.block.SoundType.METAL).noOcclusion()
+			.lightLevel(s -> s.getValue(com.mazzega.irineu.bestiario.chefes.MesaDoJulgamentoBlock.TOCANDO) ? 12 : 5),
+		itemDoRitual("mesa_do_julgamento"));
+
+	/** Bloco de ritual: inquebrável (como a bedrock), sem loot e sem pistão que o mova. */
+	private static BlockBehaviour.Properties ritual(net.minecraft.world.level.material.MapColor cor, net.minecraft.world.level.block.SoundType som) {
+		return BlockBehaviour.Properties.of().mapColor(cor).sound(som).strength(-1.0F, 3600000.0F).noLootTable()
+			.pushReaction(net.minecraft.world.level.material.PushReaction.IMMOVEABLE);
+	}
+
+	/** O item do bloco de ritual: épico, com 2 linhas de dica (block.irineu.&lt;nome&gt;.dica_1 e _2). */
+	private static Item.Properties itemDoRitual(String name) {
+		return new Item.Properties().rarity(net.minecraft.world.item.Rarity.EPIC).component(net.minecraft.core.component.DataComponents.LORE,
+			new net.minecraft.world.item.component.ItemLore(List.of(
+				net.minecraft.network.chat.Component.translatable("block.irineu." + name + ".dica_1").withStyle(net.minecraft.ChatFormatting.GRAY),
+				net.minecraft.network.chat.Component.translatable("block.irineu." + name + ".dica_2").withStyle(net.minecraft.ChatFormatting.GRAY))));
+	}
 
 	// ---------------------------------------------------------------- M5 Praça
 

@@ -12,6 +12,12 @@ Se for igual, volta o arquivo do HEAD (git checkout HEAD -- <arquivo>). Arquivos
 índice) ficam.
 
 Rode depois dos geradores (é o último da ordem canônica). Precisa de numpy, soundfile e Pillow.
+
+Exceção conhecida: o tools/bestiario/bestiario.py deriva de novo sounds/bestiario/dancarino_batida.ogg e
+mosquito_picada.ogg com o áudio um pouco diferente do commitado (diferença de até 0,015, acima da tolerância), embora a
+síntese tenha semente fixa: o ruído curto e agudo desses dois passa diferente pelo codificador Vorbis deste ambiente.
+O HEAD já fazia isso; eles aparecem como "mudou" e, se o som não mudou de propósito, volte-os à mão
+(git checkout HEAD -- <arquivo>).
 Uso: python reverter_iguais.py [--dry-run]
 """
 import gzip

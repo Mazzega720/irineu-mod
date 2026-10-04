@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "DGD",
+    "GNG",
+    "DGD"
+  ],
+  "key": {
+    "D": "minecraft:purple_dye",
+    "G": "minecraft:gold_ingot",
+    "N": "minecraft:note_block"
+  },
+  "result": {
+    "id": "irineu:disco_vale_tudo",
+    "count": 1
+  }
+}

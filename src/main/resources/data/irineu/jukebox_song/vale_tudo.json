@@ -1,0 +1,8 @@
+{
+  "comparator_output": 13,
+  "description": {
+    "translate": "jukebox_song.irineu.vale_tudo"
+  },
+  "length_in_seconds": 13.5,
+  "sound_event": "irineu:item.disco_vale_tudo.ritual"
+}

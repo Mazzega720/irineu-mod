@@ -2007,5 +2007,22 @@
       }
     ],
     "subtitle": "subtitles.irineu.entity.cuca_feiticeira.risada"
+  },
+  "block.nucleo_nave.reparo": {
+    "sounds": [
+      {
+        "name": "minecraft:block/beacon/activate",
+        "pitch": 1.4
+      },
+      {
+        "name": "minecraft:block/respawn_anchor/charge1",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:block/respawn_anchor/charge2",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.irineu.block.nucleo_nave.reparo"
   }
 }

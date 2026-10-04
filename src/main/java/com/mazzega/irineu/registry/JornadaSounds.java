@@ -15,6 +15,10 @@ import net.minecraft.sounds.SoundEvent;
  */
 public final class JornadaSounds {
 	// ---------------------------------------------------------------- M4 relíquias e rituais
+	/** A bateria entrando no núcleo da nave (tools/jornada/reliquias.py, sons do jogo). */
+	public static final SoundEvent NUCLEO_REPARO = register("block.nucleo_nave.reparo");
+	/** O refrão de "Vale Nada Vale Tudo" (tools/audios_terceiros): o ritual da mesa e a música do disco na jukebox. */
+	public static final SoundEvent DISCO_VALE_TUDO_RITUAL = register("item.disco_vale_tudo.ritual");
 
 	// ---------------------------------------------------------------- M5 Praça
 
