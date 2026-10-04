@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "minecraft:potion",
+    "potion_contents": {
+      "potions": "minecraft:awkward"
+    }
+  },
+  "reagent": {
+    "item": "irineu:ervas_pantaneiras"
+  },
+  "output": {
+    "id": "minecraft:potion",
+    "components": {
+      "minecraft:potion_contents": {
+        "custom_color": 8040522,
+        "custom_effects": [
+          {
+            "id": "minecraft:regeneration",
+            "duration": 900
+          }
+        ]
+      },
+      "minecraft:item_name": {
+        "translate": "item.irineu.garrafada_da_cura"
+      }
+    }
+  }
+}

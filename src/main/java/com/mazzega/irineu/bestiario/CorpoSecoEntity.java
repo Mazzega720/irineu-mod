@@ -18,6 +18,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -139,6 +140,19 @@ public class CorpoSecoEntity extends Monster implements GeoEntity {
 		public void tick() {
 			this.recarga = Math.max(this.recarga - 1, 0);
 			super.tick();
+		}
+
+		/**
+		 * Sem seguir o alvo às cegas, o {@code MeleeAttackGoal} do jogo para quando o caminho termina (colado no alvo,
+		 * logo depois do golpe) e só volta a ser escolhido 20 ticks depois (o intervalo entre os {@code canUse}): o golpe
+		 * voltaria a sair a cada 20 ticks. Então continua enquanto o alvo estiver ao alcance e à vista.
+		 */
+		@Override
+		public boolean canContinueToUse() {
+			if (super.canContinueToUse()) return true;
+			LivingEntity alvo = this.mob.getTarget();
+			return alvo != null && alvo.isAlive() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(alvo)
+				&& this.mob.isWithinMeleeAttackRange(alvo) && this.mob.getSensing().hasLineOfSight(alvo);
 		}
 
 		@Override

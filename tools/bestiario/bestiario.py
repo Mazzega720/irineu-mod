@@ -1,8 +1,9 @@
 """
 O bestiário do Brasil (BestiarioEntities / BestiarioItems / BestiarioSounds): os 5 mobs (Dois Caras numa Moto,
 Chupa-Cu de Goianinha, Flanelinha, Mosquitão da Dengue, Dançarino da Carreta Furacão), os 2 chefões lendários (Ednaldo
-Pereira e o E.T. de Varginha) e os monstros da 4.0 (seção "Monstros da 4.0": Corpo Seco e Botijão de Gás, o efeito
-Ressecamento com o tipo de dano irineu:ressecamento e as tags dele, os drops e os usos deles).
+Pereira e o E.T. de Varginha) e os monstros da 4.0 (seção "Monstros da 4.0": Corpo Seco, Botijão de Gás,
+Bacamarteiro, Aranha Armadeira e Cuca Feiticeira, o efeito Ressecamento com o tipo de dano irineu:ressecamento e as tags
+dele, os drops e os usos deles).
 
 Gera: os modelos e animações do GeckoLib com as texturas (modelos_gente.py e modelos_criaturas.py), as texturas dos
 itens e dos ovos, os sons sintetizados (e as entradas das falas dos chefões: as com voz real apontam para os .ogg de
@@ -11,8 +12,12 @@ loot, as receitas (dardo, zarabatana, botas de pulo duplo; a poção da sombra e
 tag c:bosses. Da seção "Monstros da 4.0": o ícone do efeito (textures/mob_effect/ressecamento.png), o tipo de dano
 data/irineu/damage_type/ressecamento.json com as tags minecraft de damage_type (bypasses_armor, bypasses_wolf_armor,
 no_knockback e panic_causes, as mesmas do wither), as tags minecraft de entity_type do Corpo Seco (undead,
-burn_in_daylight, sensitive_to_smite) e as receitas dos drops (casca podre e chapa de metal no forno, botijão vazio no
-alto-forno, sementes ancestrais em farinha de osso). Os spawns ficam nos biomas (tools/brasil/mundo.py).
+burn_in_daylight, sensitive_to_smite), as da Armadeira (arthropod, sensitive_to_bane_of_arthropods), a tradução da
+Garrafada Sinistra (a poção de arremesso do jogo com o nome próprio, que a Cuca joga) e as receitas dos drops (casca
+podre e chapa de metal no forno, botijão vazio e canos de ferro no alto-forno, sementes ancestrais em farinha de osso,
+teia reforçada em teia, escamas duras em escudo de tatu; no suporte de poções, o Veneno da Armadeira e a Garrafada da
+Cura). O tiro do bacamarte é gravação CC0 (tools/sons_cc0); o sintetizado daqui é a reserva. Os spawns ficam nos biomas
+(tools/brasil/mundo.py).
 
 Uso: python bestiario.py <src/main/resources> [pasta da prévia]
 """
@@ -410,12 +415,14 @@ k.shapeless("botas_pulo_duplo", ["minecraft:leather_boots", "irineu:mola_saltado
             "irineu:botas_pulo_duplo", category="equipment")
 
 
-def brewing(nome, reagente, efeitos, cor, item_name):
+def brewing(nome, reagente, efeitos, cor, item_name, saida="minecraft:potion"):
+    """Receita do suporte de poções a partir da poção estranha. `saida` é o item da poção (minecraft:splash_potion para uma
+    de arremesso: as receitas do jogo com pólvora só convertem poções com poção-base, não as de efeitos próprios)."""
     k.wj(k.data("irineu", "recipe", "brewing", nome + ".json"), {
         "type": "minecraft:brewing",
         "input": {"item": "minecraft:potion", "potion_contents": {"potions": "minecraft:awkward"}},
         "reagent": {"item": reagente},
-        "output": {"id": "minecraft:potion", "components": {
+        "output": {"id": saida, "components": {
             "minecraft:potion_contents": {"custom_color": cor, "custom_effects": efeitos},
             "minecraft:item_name": {"translate": f"item.irineu.{item_name}"}}},
     })
@@ -428,15 +435,25 @@ brewing("pocao_da_sombra", "irineu:couro_sombrio", [{"id": "minecraft:invisibili
 brewing("repelente", "irineu:ferrao_dengue", [{"id": "irineu:repelente", "duration": 6000}], 0xC9E86A, "repelente")
 
 # ====================================================================== Monstros da 4.0
-# O Corpo Seco e o Botijão de Gás (os modelos estão em modelos_gente.py e modelos_criaturas.py), o efeito Ressecamento
-# e o tipo de dano dele. Tudo nesta seção, com dicionários próprios, para não mexer nas listas de cima.
+# O Corpo Seco, o Botijão de Gás, o Bacamarteiro, a Aranha Armadeira e a Cuca Feiticeira (os modelos estão em
+# modelos_gente.py e modelos_criaturas.py), o efeito Ressecamento e o tipo de dano dele. Tudo nesta seção, com
+# dicionários próprios, para não mexer nas listas de cima.
 MONSTROS_4 = {"corpo_seco": ("Corpo Seco", "Corpo Seco", "5a4632", "3c6e2a"),
-              "botijao_gas": ("Botijão de Gás", "Gas Cylinder", "1f4fa8", "c8ccd2")}
+              "botijao_gas": ("Botijão de Gás", "Gas Cylinder", "1f4fa8", "c8ccd2"),
+              "bacamarteiro": ("Bacamarteiro", "Blunderbuss Bandit", "7a4a24", "d8a838"),
+              "aranha_armadeira": ("Aranha Armadeira", "Wandering Spider", "6a4a32", "d8641e"),
+              "cuca_feiticeira": ("Cuca Feiticeira", "Cuca the Sorceress", "5a3448", "3d5a2a")}
 ITENS_4 = {
     "casca_podre": ("Casca Podre", "Rotten Bark"),
     "sementes_ancestrais": ("Sementes Ancestrais", "Ancestral Seeds"),
     "chapa_de_metal": ("Chapa de Metal", "Metal Plate"),
     "botijao_vazio": ("Botijão Vazio", "Empty Gas Cylinder"),
+    "canos_de_ferro": ("Canos de Ferro", "Iron Pipes"),
+    "balas_de_chumbo": ("Balas de Chumbo", "Lead Shot"),
+    "glandula_veneno": ("Glândula de Veneno", "Venom Gland"),
+    "teia_reforcada": ("Teia Reforçada", "Reinforced Web"),
+    "ervas_pantaneiras": ("Ervas Pantaneiras", "Pantanal Herbs"),
+    "escamas_duras": ("Escamas Duras", "Hard Scales"),
 }
 
 # Casca podre: lasca de casca de árvore curvada, cinza-marrom com veios escuros e musgo.
@@ -550,6 +567,146 @@ k.cooking("carvao_de_casca_podre", "smelting", "irineu:casca_podre", "minecraft:
 k.shapeless("farinha_de_sementes_ancestrais", ["irineu:sementes_ancestrais"], "minecraft:bone_meal", 2, group="bonemeal")
 k.cooking("pepita_de_chapa_de_metal", "smelting", "irineu:chapa_de_metal", "minecraft:iron_nugget", 0.1)
 k.cooking("ferro_de_botijao_vazio", "blasting", "irineu:botijao_vazio", "minecraft:iron_ingot", 0.3, time=100)
+
+# ---------------------------------------------------------------------- Bacamarteiro, Aranha Armadeira e Cuca Feiticeira
+# Canos de ferro: dois canos de bacamarte lado a lado na diagonal, ferro escuro com o brilho em cima e a boca larga de
+# latão na ponta.
+img = k.new(); px = img.load()
+for (x0, y0) in ((1, 10), (5, 14)):
+    for i in range(10):
+        x, y = x0 + i, y0 - i
+        for (dx, dy, c) in ((0, 0, "8a9098"), (1, 0, "4a4e54"), (0, 1, "4a4e54"), (1, 1, "2a2c30")):
+            if 0 <= x + dx < 16 and 0 <= y + dy < 16:
+                px[x + dx, y + dy] = k.vary(hexc(c), 4)
+    xb, yb = x0 + 10, y0 - 10
+    for (dx, dy) in ((0, -1), (1, -1), (-1, -1), (1, 0), (1, 1), (2, 0), (2, -1)):
+        if 0 <= xb + dx < 16 and 0 <= yb + dy < 16:
+            px[xb + dx, yb + dy] = k.vary(hexc("d8a838"), 6)                    # a boca de latão
+    if 0 <= xb < 16 and 0 <= yb < 16:
+        px[xb, yb] = k.vary(hexc("1a1a1a"), 2)
+item("canos_de_ferro", img)
+
+# Balas de chumbo: um montinho de bolinhas redondas cinza-chumbo, cada uma com o brilho em cima.
+img = k.new(); px = img.load()
+for (cx, cy) in ((4.5, 12.5), (8.5, 12.5), (12.0, 12.0), (6.5, 9.0), (10.5, 9.0), (8.5, 5.5)):
+    for y in range(16):
+        for x in range(16):
+            r = math.hypot(x + 0.5 - cx, y + 0.5 - cy)
+            if r <= 2.0:
+                px[x, y] = k.vary(hexc("3a3d44") if r > 1.4 or (y + 0.5 > cy and x + 0.5 > cx) else hexc("5e626a"), 4)
+    px[int(cx - 1), int(cy - 1)] = k.vary(hexc("b8bcc4"), 3)
+item("balas_de_chumbo", img)
+
+# Glândula de veneno: o saquinho roxo-avermelhado, úmido, com a gota verde pingando.
+img = k.new(); px = img.load()
+for y in range(16):
+    for x in range(16):
+        r = math.hypot((x - 7.5) / 5.0, (y - 7.0) / 5.5)
+        if r <= 1.0:
+            px[x, y] = k.vary(hexc("8a2a4a") if r > 0.75 else hexc("b0405e"), 8)
+for (x, y) in ((5, 4), (6, 4), (5, 5)):
+    px[x, y] = k.vary(hexc("e890a8"), 4)                                        # brilho
+for (x, y) in ((8, 12), (8, 13), (7, 13), (9, 13), (8, 14), (8, 15)):
+    px[x, y] = k.vary(hexc("7ad040"), 8)                                        # a gota de veneno
+item("glandula_veneno", img)
+
+# Teia reforçada: a teia branca com os fios grossos (raios e voltas), mais densa que a do jogo.
+img = k.new(); px = img.load()
+for ang in range(0, 360, 45):
+    for r in range(8):
+        x = int(round(7.5 + r * math.cos(math.radians(ang))))
+        y = int(round(7.5 + r * math.sin(math.radians(ang))))
+        if 0 <= x < 16 and 0 <= y < 16:
+            px[x, y] = k.vary(hexc("f0f0ea"), 6)
+for raio in (2.5, 4.5, 6.5):
+    for a in range(0, 360, 6):
+        x = int(round(7.5 + raio * math.cos(math.radians(a))))
+        y = int(round(7.5 + raio * math.sin(math.radians(a))))
+        if 0 <= x < 16 and 0 <= y < 16 and px[x, y][3] == 0:
+            px[x, y] = k.vary(hexc("c8c8c0"), 6)
+item("teia_reforcada", img)
+
+# Ervas pantaneiras: um maço de ervas de folhas compridas abrindo em leque, amarrado com barbante.
+img = k.new(); px = img.load()
+for ang, cor in ((-62, "4a8a2a"), (-80, "5aa034"), (-96, "3a7a24"), (-112, "6ab03c"), (-128, "4a9030")):
+    for r in range(1, 10):
+        x = int(round(8 + r * math.cos(math.radians(ang)) * 0.8))
+        y = int(round(11 + r * math.sin(math.radians(ang))))
+        if 0 <= x < 16 and 0 <= y < 16:
+            px[x, y] = k.vary(hexc(cor), 8)
+            if r in (4, 6, 8):
+                lado = 1 if ang > -96 else -1
+                if 0 <= x + lado < 16:
+                    px[x + lado, y] = k.vary(hexc("8ac850"), 8)                # folhinha
+for y in range(11, 15):
+    for x in range(7, 10):
+        px[x, y] = k.vary(hexc("3a6a20"), 5)                                    # os talos
+for x in range(6, 11):
+    px[x, 11] = k.vary(hexc("c8a070"), 4)                                       # o barbante
+item("ervas_pantaneiras", img)
+
+# Escamas duras: três placas de couro de jacaré verde-escuras, sobrepostas, com as cristas.
+img = k.new(); px = img.load()
+for (cx, cy) in ((5, 6), (10, 7), (7, 11)):
+    for y in range(cy - 3, cy + 3):
+        for x in range(cx - 3, cx + 3):
+            if abs(x - cx + 0.5) + abs(y - cy + 0.5) <= 3.5 and 0 <= x < 16 and 0 <= y < 16:
+                px[x, y] = k.vary(hexc("3d5a2a") if (x + y) % 3 else hexc("26381a"), 6)
+    px[cx, cy - 1] = px[cx - 1, cy - 1] = k.vary(hexc("6a8a3a"), 6)            # a crista
+item("escamas_duras", img)
+
+# Sons: o tiro do bacamarte é gravação CC0 (tools/sons_cc0; o sintetizado abaixo é só a reserva: estalo de ruído e o
+# estrondo descendo de 120 para 40 Hz); a recarga é a da besta do jogo; a voz é a do saqueador, um pouco mais grave.
+n = int(0.9 * 44100)
+estalo = noise(0.9, seed=4301) * np.exp(-np.arange(n) / 44100 / 0.025)
+estrondo = sweep(120, 40, 0.9, curve=lambda x: x ** 0.5) * np.exp(-np.arange(n) / 44100 / 0.22)
+rumor = lowpass(noise(0.9, seed=4302), 0.04) * np.exp(-np.arange(n) / 44100 / 0.3) * 6
+som("entity.bacamarteiro.tiro", "bacamarteiro_tiro", env(estalo * 0.9 + estrondo * 0.8 + rumor, 0.001, 0.2), "Bacamarte dispara", "Blunderbuss fires", 0.9)
+vanilla("entity.bacamarteiro.recarga", [f"minecraft:item/crossbow/loading_middle{i}" for i in range(1, 5)], "Bacamarteiro recarrega", "Blunderbuss Bandit reloads", 0.8)
+vanilla("entity.bacamarteiro.coronhada", [f"minecraft:entity/player/attack/strong{i}" for i in range(1, 7)], "Coronhada", "Rifle butt strike", 0.8)
+vanilla("entity.bacamarteiro.ambient", [f"minecraft:mob/pillager/idle{i}" for i in range(1, 5)], "Bacamarteiro resmunga", "Blunderbuss Bandit mutters", 0.95)
+vanilla("entity.bacamarteiro.hurt", [f"minecraft:mob/pillager/hurt{i}" for i in range(1, 4)], "Bacamarteiro apanha", "Blunderbuss Bandit hurts", 0.95)
+vanilla("entity.bacamarteiro.death", [f"minecraft:mob/pillager/death{i}" for i in (1, 2)], "Bacamarteiro morre", "Blunderbuss Bandit dies", 0.95)
+# Armadeira: a aranha do jogo, mais aguda; o bote é o chiado mais agudo de todos.
+vanilla("entity.aranha_armadeira.ambient", [f"minecraft:mob/spider/say{i}" for i in range(1, 5)], "Armadeira chia", "Wandering Spider hisses", 1.3)
+vanilla("entity.aranha_armadeira.hurt", [f"minecraft:mob/spider/say{i}" for i in range(1, 5)], "Armadeira apanha", "Wandering Spider hurts", 1.3)
+vanilla("entity.aranha_armadeira.death", ["minecraft:mob/spider/death"], "Armadeira morre", "Wandering Spider dies", 1.3)
+vanilla("entity.aranha_armadeira.step", [f"minecraft:mob/spider/step{i}" for i in range(1, 5)], "Patinhas", "Spider steps", 1.3)
+vanilla("entity.aranha_armadeira.bote", ["minecraft:mob/spider/say3"], "Armadeira dá o bote", "Wandering Spider lunges", 1.7)
+# Cuca: a bruxa do jogo, mais grave; no ambiente, às vezes o rosnado do jacaré.
+vanilla("entity.cuca_feiticeira.ambient", [f"minecraft:entity/witch/ambient{i}" for i in range(1, 6)], "Cuca resmunga", "Cuca mutters", 0.75)
+k.sound_defs["entity.cuca_feiticeira.ambient"]["sounds"].append({"name": "irineu:fauna/jacare", "pitch": 0.9, "volume": 0.8})
+vanilla("entity.cuca_feiticeira.hurt", [f"minecraft:entity/witch/hurt{i}" for i in range(1, 4)], "Cuca apanha", "Cuca hurts", 0.75)
+vanilla("entity.cuca_feiticeira.death", [f"minecraft:entity/witch/death{i}" for i in range(1, 4)], "Cuca morre", "Cuca dies", 0.75)
+vanilla("entity.cuca_feiticeira.arremesso", [f"minecraft:entity/witch/throw{i}" for i in range(1, 4)], "Cuca arremessa a garrafada", "Cuca throws a brew", 0.75)
+vanilla("entity.cuca_feiticeira.risada", ["minecraft:entity/witch/celebrate"], "Cuca gargalha", "Cuca cackles", 0.75)
+
+# Traduções que não são de entidade nem de item comum: o projétil do bacamarte, a garrafada que a Cuca arremessa (a
+# poção do jogo com o nome próprio) e as duas poções novas.
+L("entity.irineu.tiro_paiol", "Tiro de Paiol", "Blunderbuss Shot")
+L("item.minecraft.splash_potion.effect.garrafada_sinistra", "Garrafada Sinistra", "Sinister Brew")
+L("item.irineu.veneno_da_armadeira", "Veneno da Armadeira", "Wandering Spider Venom")
+L("item.irineu.garrafada_da_cura", "Garrafada da Cura", "Healing Brew")
+
+# Loot.
+loot("bacamarteiro", [pool([it("minecraft:gunpowder", 0, 2, looting=True)]), pool([it("canos_de_ferro")], condition=chance(0.3)),
+                      pool([it("balas_de_chumbo", 1, 4)])])
+loot("aranha_armadeira", [pool([it("glandula_veneno")], condition=chance(0.3)), pool([it("teia_reforcada", 0, 1)])])
+loot("cuca_feiticeira", [pool([it("minecraft:glass_bottle", 0, 2)]), pool([it("ervas_pantaneiras", 1, 2)]),
+                         pool([it("escamas_duras")], condition=chance(0.3))])
+
+# A Armadeira é artrópode (Ruína dos Artrópodes acerta mais).
+for tag in ("arthropod", "sensitive_to_bane_of_arthropods"):
+    k.tag("minecraft", "entity_type", tag, ["irineu:aranha_armadeira"])
+
+# Usos: a teia vira teia do jogo; os canos derretem num lingote; duas escamas fazem um escudo de tatu; e duas poções no
+# suporte (a partir da poção estranha). O veneno já sai de arremesso: é para jogar nos outros, não para beber.
+k.shapeless("teia_de_teia_reforcada", ["irineu:teia_reforcada"], "minecraft:cobweb")
+k.cooking("ferro_de_canos_de_ferro", "blasting", "irineu:canos_de_ferro", "minecraft:iron_ingot", 0.3, time=100)
+k.shapeless("escudo_de_tatu_de_escamas_duras", ["irineu:escamas_duras", "irineu:escamas_duras"], "minecraft:armadillo_scute")
+brewing("veneno_da_armadeira", "irineu:glandula_veneno", [{"id": "minecraft:poison", "duration": 440, "amplifier": 1}], 0x6A2A5A,
+        "veneno_da_armadeira", saida="minecraft:splash_potion")
+brewing("garrafada_da_cura", "irineu:ervas_pantaneiras", [{"id": "minecraft:regeneration", "duration": 900}], 0x7AB04A, "garrafada_da_cura")
 
 # ====================================================================== Tags
 k.tag("c", "entity_type", "bosses", ["irineu:ednaldo_pereira", "irineu:et_varginha", "irineu:lula", "irineu:bolsonaro", "irineu:lulonaro",

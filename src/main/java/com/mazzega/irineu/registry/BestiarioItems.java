@@ -24,8 +24,10 @@ import net.minecraft.world.item.equipment.Equippable;
  * Itens do bestiário do Brasil: os drops dos mobs (paninho sujo, couro sombrio, ferrão da dengue, mola saltadora), o
  * que se faz com eles (dardo envenenado e zarabatana, botas de pulo duplo; a poção da sombra e o repelente saem do
  * suporte de poções), os drops lendários dos chefões (Cajado do Julgamento e Módulo Antigravitacional), os drops dos
- * monstros da 4.0 (casca podre e sementes ancestrais do Corpo Seco; chapa de metal e botijão vazio do Botijão de Gás) e
- * os ícones dos projéteis (orbes, nota musical, lodo), que não aparecem no criativo.
+ * monstros da 4.0 (casca podre e sementes ancestrais do Corpo Seco; chapa de metal e botijão vazio do Botijão de Gás;
+ * canos de ferro e balas de chumbo do Bacamarteiro; glândula de veneno e teia reforçada da Aranha Armadeira; ervas
+ * pantaneiras e escamas duras da Cuca Feiticeira) e os ícones dos projéteis (orbes, nota musical, lodo), que não
+ * aparecem no criativo.
  */
 public final class BestiarioItems {
 	private static final List<Item> TAB = new ArrayList<>();
@@ -54,6 +56,18 @@ public final class BestiarioItems {
 	public static final Item CHAPA_DE_METAL = register("chapa_de_metal", Item::new, new Item.Properties(), true);
 	/** Do Botijão de Gás (às vezes): o casco vazio, que o alto-forno derrete num lingote de ferro. */
 	public static final Item BOTIJAO_VAZIO = register("botijao_vazio", Item::new, new Item.Properties().stacksTo(16), true);
+	/** Do Bacamarteiro (às vezes): os canos do bacamarte, que o alto-forno derrete num lingote de ferro. */
+	public static final Item CANOS_DE_FERRO = register("canos_de_ferro", Item::new, new Item.Properties(), true);
+	/** Do Bacamarteiro: o chumbo do bacamarte (também o ícone do {@code TiroPaiolEntity}). */
+	public static final Item BALAS_DE_CHUMBO = register("balas_de_chumbo", Item::new, new Item.Properties(), true);
+	/** Da Aranha Armadeira (às vezes): no suporte de poções, vira o Veneno da Armadeira. */
+	public static final Item GLANDULA_VENENO = register("glandula_veneno", Item::new, new Item.Properties(), true);
+	/** Da Aranha Armadeira: vira teia. */
+	public static final Item TEIA_REFORCADA = register("teia_reforcada", Item::new, new Item.Properties(), true);
+	/** Da Cuca Feiticeira: no suporte de poções, vira a Garrafada da Cura. */
+	public static final Item ERVAS_PANTANEIRAS = register("ervas_pantaneiras", Item::new, new Item.Properties(), true);
+	/** Da Cuca Feiticeira (às vezes): duas fazem um escudo de tatu. */
+	public static final Item ESCAMAS_DURAS = register("escamas_duras", Item::new, new Item.Properties(), true);
 
 	// Ícones dos projéteis.
 	public static final Item ORBE_DOURADO = register("orbe_dourado", Item::new, new Item.Properties(), false);

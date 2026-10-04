@@ -45,6 +45,11 @@ public final class BestiarioClient {
 		// Monstros da 4.0: o Corpo Seco com os olhos verde-pálidos brilhando; o Botijão não tem cabeça (vira o corpo todo).
 		EntityRenderers.register(BestiarioEntities.CORPO_SECO, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.CORPO_SECO, 0.5F, "head", false, true));
 		EntityRenderers.register(BestiarioEntities.BOTIJAO_GAS, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.BOTIJAO_GAS, 0.45F, null, false, false));
+		// O bacamarte faz parte do modelo do Bacamarteiro (sem item na mão); a Armadeira (sem cabeça separada: vira o corpo
+		// todo) e a Cuca com os olhos brilhando.
+		EntityRenderers.register(BestiarioEntities.BACAMARTEIRO, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.BACAMARTEIRO, 0.5F, "head", false, false));
+		EntityRenderers.register(BestiarioEntities.ARANHA_ARMADEIRA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.ARANHA_ARMADEIRA, 0.6F, null, false, true));
+		EntityRenderers.register(BestiarioEntities.CUCA_FEITICEIRA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.CUCA_FEITICEIRA, 0.5F, "head", false, true));
 
 		EntityRenderers.register(BestiarioEntities.PEDRA_PROJETIL, c -> new ThrownItemRenderer<>(c, 0.9F, false));
 		EntityRenderers.register(BestiarioEntities.ORBE_JULGAMENTO, c -> new ThrownItemRenderer<>(c, 1.6F, true));
@@ -52,6 +57,7 @@ public final class BestiarioClient {
 		EntityRenderers.register(BestiarioEntities.BLOCO_TELECINETICO, c -> new ThrownItemRenderer<>(c, 2.4F, false));
 		EntityRenderers.register(BestiarioEntities.LODO_PROJETIL, c -> new ThrownItemRenderer<>(c, 1.0F, false));
 		EntityRenderers.register(BestiarioEntities.DARDO_ENVENENADO, c -> new ThrownItemRenderer<>(c, 0.7F, false));
+		EntityRenderers.register(BestiarioEntities.TIRO_PAIOL, c -> new ThrownItemRenderer<>(c, 0.5F, false));
 
 		ClientTickEvents.END_CLIENT_TICK.register(BestiarioClient::tick);
 	}

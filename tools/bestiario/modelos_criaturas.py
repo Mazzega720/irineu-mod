@@ -1,9 +1,12 @@
 """
 Modelos GeckoLib das criaturas do bestiário (esqueletos próprios): o Chupa-Cu de Goianinha (magro, comprido, garras),
 o Mosquitão da Dengue (listrado como o Aedes aegypti, asas que zumbem) e o E.T. de Varginha (cabeção com três
-cristas, olhos vermelhos que brilham, membros finos e a boca que mexe nas falas) e o Botijão de Gás (monstro da 4.0: o
-botijão azul de cozinha com duas perninhas). Chamado por bestiario.py.
+cristas, olhos vermelhos que brilham, membros finos e a boca que mexe nas falas) e dois monstros da 4.0: o Botijão de
+Gás (o botijão azul de cozinha com duas perninhas) e a Aranha Armadeira (patas listradas com joelho, quelíceras de pelo
+alaranjado, os oito olhos que brilham, e a postura de ameaça, erguida nas patas de trás). Chamado por bestiario.py.
 """
+import math
+
 from geo import AMT, SWING, T, Packer, Tex, anim, bone, cube, geometry, hexc, jaw_anims, merge, shade
 
 PRETO = hexc("141414")
@@ -437,4 +440,186 @@ def botijao_gas():
     return "botijao_gas", geometry("geometry.irineu.botijao_gas", 128, 64, bones, (2, 2)), A, m.t, None
 
 
-TODOS = [chupa_cu, mosquito, et, botijao_gas]
+# ====================================================================== Aranha Armadeira
+def armadeira():
+    """
+    A Aranha Armadeira (Phoneutria): marrom e peluda, abdômen comprido com as divisas claras, patas grossas listradas de
+    escuro (por baixo das patas da frente, as faixas pretas e brancas que ela mostra quando se ergue), as quelíceras com
+    os pelos alaranjados e os oito olhos (dois grandes no meio) que brilham no escuro.
+
+    Cada pata tem quadril e joelho. Os ossos "leg_*" (no corpo, sem rotação de repouso) e "joelho_*" (no joelho) são os
+    que as animações giram; "quadril_*" só dá a abertura da pata para a frente ou para trás (rotação de repouso em y) e
+    as caixas da coxa e da canela levam a inclinação (rotação de caixa em z). A conta das direções: com o GeckoLib, a
+    rotação de caixa (rx, ry, rz) vira Rz(-rz)·Ry(ry)·Rx(-rx) no espaço do modelo (o mesmo do braço: rx negativo ergue
+    para a frente).
+    """
+    m = Montador(128, 64, 6401)
+    MARROM = hexc("6a4a32")
+    MARROM_D = hexc("3e2a1c")
+    MARROM_L = hexc("9a7a52")
+    FAIXA = hexc("33231a")
+    PRETO_ = hexc("1a120c")
+    CLARO = hexc("c8b08a")
+    LARANJA = hexc("d8641e")
+    LARANJA_L = hexc("f09040")
+    bones = [bone("aranha_armadeira"),
+             bone("body", "aranha_armadeira", (0, 5, 2), [m.caixa("torax", (-3.5, 4.5, -4.5), (7, 3, 7), MARROM, 5)]),
+             bone("abdomen", "body", (0, 6, 2.5), [m.caixa("abd", (-3, 4.2, 2.5), (6, 5, 8), MARROM, 5),
+                                                    m.caixa("fiandeiras", (-0.75, 5, 10.5), (1.5, 1, 1), MARROM_D, 3)]),
+             bone("queliceras", "body", (0, 5.5, -4.5), [m.caixa("quel_d", (-2, 3.0, -6.0), (2, 3, 2), LARANJA, 8),
+                                                          m.caixa("quel_e", (0, 3.0, -6.0), (2, 3, 2), LARANJA, 8),
+                                                          m.caixa("presa_d", (-1.5, 2.2, -5.9), (0.7, 1, 0.7), PRETO_, 2),
+                                                          m.caixa("presa_e", (0.8, 2.2, -5.9), (0.7, 1, 0.7), PRETO_, 2)])]
+    for lado, s in (("r", -1), ("l", 1)):
+        bones.append(bone(f"palpo_{lado}", "body", (2.4 * s, 5.4, -4.5), [
+            m.caixa(f"palpo_{lado}", (2.4 * s - 0.6, 4.8, -8.0), (1.2, 1.2, 3.5), MARROM, 4),
+            m.caixa(f"palpo_ponta_{lado}", (2.4 * s - 0.6, 3.2, -8.1), (1.2, 1.8, 1.2), MARROM_D, 3)]))
+    # As patas: abertura para a frente (graus, positivo = para a frente), onde prendem no tórax e o comprimento da coxa
+    # e da canela. Grossas e peludas (é uma aranha grande); as da frente, mais compridas.
+    PATAS = ((52, -3.2, 5.5, 9), (20, -1.4, 4.5, 8), (-14, 0.4, 4.5, 8), (-42, 2.0, 5, 9))
+    ELEV = 45.0
+    for lado, s in (("r", -1), ("l", 1)):
+        for i, (abertura, z, coxa, canela) in enumerate(PATAS):
+            ax, ay = 3.2 * s, 6.0
+            kx, ky = ax + s * coxa * math.cos(math.radians(ELEV)), ay + coxa * math.sin(math.radians(ELEV))
+            desce = math.degrees(math.asin(min(1.0, (ky - 0.6) / canela)))
+            x0 = ax if s > 0 else ax - coxa
+            k0 = kx if s > 0 else kx - canela
+            bones.append(bone(f"leg_{lado}{i}", "body", (ax, ay, z)))
+            bones.append(bone(f"quadril_{lado}{i}", f"leg_{lado}{i}", (ax, ay, z), [
+                m.caixa(f"coxa_{lado}{i}", (x0, ay - 1, z - 1), (coxa, 2, 2), MARROM, 5, rotation=(0, 0, -ELEV * s), pivot=(ax, ay, z))],
+                rotation=(0, abertura * s, 0)))
+            bones.append(bone(f"joelho_{lado}{i}", f"quadril_{lado}{i}", (round(kx, 3), round(ky, 3), z), [
+                m.caixa(f"canela_{lado}{i}", (k0, ky - 0.75, z - 0.75), (canela, 1.5, 1.5), MARROM, 5, rotation=(0, 0, round(desce * s, 2)),
+                        pivot=(round(kx, 3), round(ky, 3), z))]))
+    # Listras nas patas: anéis marrom-escuros ao longo do comprimento, pelos claros salpicados e a junta clara; por baixo
+    # das patas da frente, as faixas pretas e brancas (que ela mostra quando se ergue).
+    for nome in list(m.boxes):
+        if not (nome.startswith("coxa") or nome.startswith("canela")):
+            continue
+        uv, size = m.boxes[nome]
+        frente = nome.endswith("0") or nome.endswith("1")
+        for lado in ("top", "bottom", "front", "back"):
+            put = m.face(nome, lado)
+            w, h = m.t.face_size(uv, size, lado)
+            for xx in range(w):
+                for yy in range(h):
+                    if lado == "bottom" and frente:
+                        c = PRETO_ if (xx // 2) % 2 else hexc("e8e2d4")
+                    elif xx % 3 == 2:
+                        c = FAIXA
+                    elif xx == 0:
+                        c = CLARO
+                    else:
+                        c = MARROM_L if m.t.rnd.random() < 0.25 else MARROM
+                    put(xx, yy, c, 5)
+        if nome.startswith("canela"):
+            for lado in ("right", "left"):
+                m.pintar(nome, FAIXA, 2, only=(lado,))                         # a ponta da pata
+    # Tórax: pelos claros nas bordas, a faixa escura no meio; os oito olhos (2-4-2) na frente, que brilham.
+    T_ = m.face("torax", "top")
+    for y in range(7):
+        T_(3, y, MARROM_D, 3)
+        T_(0, y, MARROM_L, 4); T_(6, y, MARROM_L, 4)
+        T_(2, y, hexc("7a5a3e"), 4); T_(4, y, hexc("7a5a3e"), 4)
+    # Os olhos (2-4-2): na frente, a fileira de 2 pequenos embaixo e a de 4 em cima (os 2 do meio grandes); no alto do
+    # tórax, o par de trás.
+    F = m.face("torax", "front")
+    G = m.face("torax", "front", glow=True)
+    for (x, y) in ((1, 0), (2, 0), (4, 0), (5, 0), (2, 1), (4, 1)):
+        F(x, y, PRETO_)
+        G(x, y, hexc("b8301a"))
+    for (x, y) in ((2, 0), (4, 0)):
+        F(x, y, hexc("4a0c06")); G(x, y, hexc("ff5a2a"))                      # os dois olhos grandes
+    GT = m.face("torax", "top", glow=True)
+    for (x, y) in ((2, 1), (4, 1)):
+        T_(x, y, PRETO_); GT(x, y, hexc("b8301a"))
+    # Abdômen: divisas claras (as "setas" da armadeira) e pontos escuros.
+    A_ = m.face("abd", "top")
+    for y in range(8):
+        for x in range(6):
+            if y > 0 and abs(2 * x - 5) == 2 * (y % 3) + 1:
+                A_(x, y, CLARO, 5)
+            elif (x + y) % 4 == 0:
+                A_(x, y, MARROM_D, 4)
+    for lado in ("right", "left"):
+        put = m.face("abd", lado)
+        for y in range(5):
+            for x in range(8):
+                if m.t.rnd.random() < 0.3:
+                    put(x, y, MARROM_D, 4)
+    m.pintar("abd", hexc("4a3424"), 4, only=("bottom",))
+    # Quelíceras com os pelos alaranjados.
+    for nome in ("quel_d", "quel_e"):
+        for lado in ("front", "right", "left"):
+            put = m.face(nome, lado)
+            for y in range(3):
+                for x in range(2):
+                    if m.t.rnd.random() < 0.45:
+                        put(x, y, LARANJA_L, 6)
+                    elif m.t.rnd.random() < 0.2:
+                        put(x, y, hexc("a8401a"), 6)
+    # Animações. Em pé: as patas mexem de leve, os palpos tateiam.
+    PALPOS = {f"palpo_{l}": {"rotation": [f"math.sin(({T} + {o}) * 400) * 8", 0, 0]} for l, o in (("r", 0), ("l", 0.4))}
+    A = {}
+    idle = dict(PALPOS)
+    for lado, s in (("r", -1), ("l", 1)):
+        for i in range(4):
+            idle[f"leg_{lado}{i}"] = {"rotation": [0, f"math.sin(({T} + {i * 0.7 + (s > 0) * 0.3}) * 120) * 3 * {s}", 0]}
+    idle["abdomen"] = {"rotation": [f"math.sin({T} * 120) * 2", 0, 0]}
+    A["aranha_armadeira.idle"] = anim(3.0, idle, loop=True)
+    # Andar: patas alternadas em dois grupos (L0, R1, L2, R3 contra R0, L1, R2, L3); cada pata gira para a frente e
+    # levanta o joelho enquanto volta pelo ar.
+    walk = dict(PALPOS)
+    for lado, s in (("r", -1), ("l", 1)):
+        for i in range(4):
+            fase = 180 * ((i + (0 if s > 0 else 1)) % 2)
+            walk[f"leg_{lado}{i}"] = {"rotation": [0, f"math.sin({SWING} * 1.5 + {fase}) * 22 * {AMT} * {s}", 0]}
+            walk[f"joelho_{lado}{i}"] = {"rotation": [0, 0, f"-math.max(0, math.cos({SWING} * 1.5 + {fase})) * 20 * {AMT} * {s}"]}
+    walk["body"] = {"position": [0, f"math.abs(math.sin({SWING} * 1.5)) * 0.3 * {AMT}", 0]}
+    walk["abdomen"] = {"rotation": [0, f"math.cos({SWING} * 1.5) * 4 * {AMT}", 0]}
+    A["aranha_armadeira.walk"] = anim(1.0, walk, loop=True)
+    # Erguer: a postura de ameaça. O corpo empina, as duas pares de patas da frente sobem abertas (mostrando as faixas
+    # de baixo), as de trás firmam, os palpos sobem e as quelíceras abrem.
+    ERGUIDA = {"body": {"rotation": (-32, 0, 0), "position": (0, 1.5, 0)}, "abdomen": {"rotation": (22, 0, 0)},
+               "queliceras": {"rotation": (-18, 0, 0)}, "palpo_r": {"rotation": (-40, 0, 0)}, "palpo_l": {"rotation": (-40, 0, 0)}}
+    for lado, s in (("r", -1), ("l", 1)):
+        ERGUIDA[f"leg_{lado}0"] = {"rotation": (-62, 0, 0)}
+        ERGUIDA[f"joelho_{lado}0"] = {"rotation": (0, 0, -40 * s)}
+        ERGUIDA[f"leg_{lado}1"] = {"rotation": (-42, 0, 0)}
+        ERGUIDA[f"joelho_{lado}1"] = {"rotation": (0, 0, -28 * s)}
+        ERGUIDA[f"leg_{lado}2"] = {"rotation": (12, 0, 0)}
+        ERGUIDA[f"leg_{lado}3"] = {"rotation": (26, 0, 0)}
+        ERGUIDA[f"joelho_{lado}3"] = {"rotation": (0, 0, 10 * s)}
+
+    def ate(pose_final, dur, easing="easeOutBack"):
+        out = {}
+        for b, chans in pose_final.items():
+            out[b] = {ch: {0: (0, 0, 0), dur: (v, easing)} for ch, v in chans.items()}
+        return out
+    A["aranha_armadeira.erguer"] = anim(0.5, ate(ERGUIDA, 0.5))
+    # Ameaça (erguida, em loop): balança de um lado para o outro e agita as patas da frente.
+    ameaca = merge(pose(ERGUIDA), {
+        "body": {"rotation": [-32, 0, f"math.sin({T} * 360) * 6"], "position": [0, 1.5, 0]},
+        "leg_r0": {"rotation": [f"-62 + math.sin({T} * 720) * 8", 0, 0]}, "leg_l0": {"rotation": [f"-62 - math.sin({T} * 720) * 8", 0, 0]},
+        "leg_r1": {"rotation": [f"-42 + math.cos({T} * 720) * 5", 0, 0]}, "leg_l1": {"rotation": [f"-42 - math.cos({T} * 720) * 5", 0, 0]},
+        "queliceras": {"rotation": [f"-18 + math.sin({T} * 1440) * 6", 0, 0]},
+    })
+    A["aranha_armadeira.ameaca"] = anim(1.0, ameaca, loop=True)
+    # O bote: de erguida, joga o corpo para a frente com as patas da frente esticadas e crava as quelíceras.
+    A["aranha_armadeira.bote"] = anim(0.6, merge({
+        "body": {"rotation": {0: (-32, 0, 0), 0.12: ((14, 0, 0), "easeInExpo"), 0.6: ((0, 0, 0), "easeInOutSine")},
+                 "position": {0: (0, 1.5, 0), 0.12: ((0, 1, -2), "easeInExpo"), 0.6: ((0, 0, 0), "easeInOutSine")}},
+        "queliceras": {"rotation": {0: (-18, 0, 0), 0.1: ((-30, 0, 0), "easeOutQuad"), 0.2: ((10, 0, 0), "easeInExpo"), 0.6: ((0, 0, 0), "easeInOutSine")}},
+        "abdomen": {"rotation": {0: (22, 0, 0), 0.12: ((-6, 0, 0), "easeInExpo"), 0.6: ((0, 0, 0), "easeInOutSine")}},
+    }, {f"leg_{l}{i}": {"rotation": {0: ((-62 if i == 0 else -42), 0, 0), 0.12: ((-10, 0, 0), "easeInExpo"), 0.6: ((0, 0, 0), "easeInOutSine")}}
+        for l in ("r", "l") for i in (0, 1)}))
+    return "aranha_armadeira", geometry("geometry.irineu.aranha_armadeira", 128, 64, bones, (2, 2)), A, m.t, m.g
+
+
+def pose(bones):
+    """Pose fixa (só o quadro 0) para misturar nas animações em loop."""
+    return {b: {ch: {0: v} for ch, v in chans.items()} for b, chans in bones.items()}
+
+
+TODOS = [chupa_cu, mosquito, et, botijao_gas, armadeira]

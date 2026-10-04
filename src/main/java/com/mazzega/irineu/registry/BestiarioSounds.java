@@ -75,6 +75,25 @@ public final class BestiarioSounds {
 	public static final SoundEvent BOTIJAO_PASSO = register("entity.botijao_gas.passo");
 	public static final SoundEvent BOTIJAO_HURT = register("entity.botijao_gas.hurt");
 	public static final SoundEvent BOTIJAO_DEATH = register("entity.botijao_gas.death");
+	// Bacamarteiro: o tiro do bacamarte (gravação CC0), a recarga, a coronhada e a voz do saqueador mais grave.
+	public static final SoundEvent BACAMARTEIRO_AMBIENT = register("entity.bacamarteiro.ambient");
+	public static final SoundEvent BACAMARTEIRO_HURT = register("entity.bacamarteiro.hurt");
+	public static final SoundEvent BACAMARTEIRO_DEATH = register("entity.bacamarteiro.death");
+	public static final SoundEvent BACAMARTEIRO_TIRO = register("entity.bacamarteiro.tiro");
+	public static final SoundEvent BACAMARTEIRO_RECARGA = register("entity.bacamarteiro.recarga");
+	public static final SoundEvent BACAMARTEIRO_CORONHADA = register("entity.bacamarteiro.coronhada");
+	// Aranha Armadeira: a aranha do jogo mais aguda; o bote, o chiado mais agudo.
+	public static final SoundEvent ARMADEIRA_AMBIENT = register("entity.aranha_armadeira.ambient");
+	public static final SoundEvent ARMADEIRA_HURT = register("entity.aranha_armadeira.hurt");
+	public static final SoundEvent ARMADEIRA_DEATH = register("entity.aranha_armadeira.death");
+	public static final SoundEvent ARMADEIRA_STEP = register("entity.aranha_armadeira.step");
+	public static final SoundEvent ARMADEIRA_BOTE = register("entity.aranha_armadeira.bote");
+	// Cuca Feiticeira: a bruxa do jogo mais grave (e o rosnado do jacaré), o arremesso e a gargalhada.
+	public static final SoundEvent CUCA_AMBIENT = register("entity.cuca_feiticeira.ambient");
+	public static final SoundEvent CUCA_HURT = register("entity.cuca_feiticeira.hurt");
+	public static final SoundEvent CUCA_DEATH = register("entity.cuca_feiticeira.death");
+	public static final SoundEvent CUCA_ARREMESSO = register("entity.cuca_feiticeira.arremesso");
+	public static final SoundEvent CUCA_RISADA = register("entity.cuca_feiticeira.risada");
 
 	// ---------------------------------------------------------------- Falas dos chefões (as sem voz real ficam vazias)
 	public static final SoundEvent FALA_EDNALDO_CHEGADA = register("fala.ednaldo.chegada");

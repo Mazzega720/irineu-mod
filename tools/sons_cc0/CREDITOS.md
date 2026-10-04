@@ -32,6 +32,7 @@ Gravações em domínio público ([Creative Commons 0](https://creativecommons.o
 | `sounds/bestiario/modulo_puxar.ogg` | [Sucking in](https://freesound.org/people/Mafon2/sounds/414694/) | Mafon2 |
 | `sounds/bestiario/zarabatana_sopro.ogg` | [Puff of Smoke](https://freesound.org/people/qubodup/sounds/714257/) | qubodup |
 | `sounds/bestiario/botijao_chiado.ogg` | [hiss small pipe ext like propane gas.flac](https://freesound.org/people/kyles/sounds/453443/) | kyles |
+| `sounds/bestiario/bacamarteiro_tiro.ogg` | [S21-01 Musket shots.wav](https://freesound.org/people/craigsmith/sounds/675622/) + [Musket Shot.wav](https://freesound.org/people/mlsulli/sounds/234869/) | craigsmith, mlsulli |
 | `sounds/economia/bip.ogg` | [Store Scanner Beep](https://freesound.org/people/zerolagtime/sounds/144418/) | zerolagtime |
 | `sounds/economia/erro.ogg` | [acess denied buzz](https://freesound.org/people/Jacco18/sounds/419023/) | Jacco18 |
 | `sounds/economia/caixa.ogg` | [Cash Register Purchase](https://freesound.org/people/Zott820/sounds/209578/) | Zott820 |

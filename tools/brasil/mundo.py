@@ -1,7 +1,8 @@
 """
 A dimensão Brasil (brasil_mod:brasil): tipo de dimensão, gerador (o terreno do Overworld com o solo de cada bioma),
 os biomas (Amazônia, Cerrado, Mata Atlântica, Caatinga, Pampa, Pantanal, mais Litoral e Oceano para o mar que o
-terreno do Overworld tem), a vegetação de cada um e a distribuição pelo clima (multi_noise).
+terreno do Overworld tem), a vegetação e os spawns de cada um (desde a 4.0, os monstros são só os do bestiário: os do
+jogo e as masmorras com spawner não aparecem no Brasil) e a distribuição pelo clima (multi_noise).
 
 Os arquivos vanilla de referência (noise_settings do Overworld) são lidos do jar do Minecraft no cache do Loom.
 
@@ -410,7 +411,9 @@ STEPS = [
     [],
     ["minecraft:lake_lava_underground", "minecraft:lake_lava_surface"],
     ["minecraft:amethyst_geode", f"{NS}:geodo_agata_ametista", f"{NS}:seca", f"{NS}:alagados", f"{NS}:lajedos", f"{NS}:pedregulhos"],
-    ["minecraft:monster_room", "minecraft:monster_room_deep"],
+    # Sem as masmorras do jogo no Brasil (4.0): o monster_room e o monster_room_deep tinham spawners de zumbi, esqueleto
+    # e aranha. Os monstros daqui são os do bestiário.
+    [],
     [],
     [],
     ["minecraft:ore_dirt", "minecraft:ore_gravel", "minecraft:ore_granite_upper", "minecraft:ore_granite_lower", "minecraft:ore_diorite_upper",
@@ -459,8 +462,16 @@ def spawn(mob, weight, lo, hi=None):
     return {"type": mob if ":" in mob else "minecraft:" + mob, "count": c, "weight": weight}
 
 
-MONSTERS = [spawn("spider", 100, 4), spawn("zombie", 95, 4), spawn("zombie_villager", 5, 1), spawn("skeleton", 100, 4), spawn("creeper", 100, 4),
-            spawn("slime", 100, 4), spawn("enderman", 10, 1, 4), spawn("witch", 5, 1)]
+# Os monstros do Brasil (4.0) substituem os do jogo (zumbi, esqueleto, creeper, aranha, bruxa, enderman, slime e
+# aldeão zumbi): cada bioma tem os seus (BestiarioEntities). A Cuca nasce no Pantanal à noite e, no resto do Brasil, só
+# em caverna úmida (CucaFeiticeiraEntity.checkSpawn): por isso o peso baixo fora do Pantanal, para não gastar as
+# tentativas de spawn.
+CORPO_SECO = spawn("irineu:corpo_seco", 90, 2, 4)
+BACAMARTEIRO = spawn("irineu:bacamarteiro", 70, 1, 3)
+BOTIJAO = spawn("irineu:botijao_gas", 60, 1, 2)
+ARMADEIRA = spawn("irineu:aranha_armadeira", 80, 1, 3)
+CUCA_BREJO = spawn("irineu:cuca_feiticeira", 30, 1, 2)
+CUCA_CAVERNA = spawn("irineu:cuca_feiticeira", 8, 1)
 CAVE = {"ambient": [spawn("bat", 10, 8)], "underground_water_creature": [spawn("glow_squid", 10, 4, 6)]}
 # Bestiário (BestiarioEntities): o Chupa-Cu nasce em todo o Brasil, mas só embaixo da terra (abaixo de y 50, sem ver o
 # céu: ChupaCuEntity.checkSpawn); a moto nas estradas do Cerrado, Pampa e Mata Atlântica; o dançarino na Mata Atlântica e
@@ -517,7 +528,7 @@ make_biome("amazonia", 0.95, 0.95, True,
            {"sky": "#77a8ff", "fog_color": "#b4d2bc", "grass_color": "#3c7d26", "foliage_color": "#2a6a1c", "water_color": "#3b7a64",
             "water_fog_color": "#24503f"},
            {"creature": [spawn("parrot", 40, 1, 2), spawn("irineu:tucano", 10, 1, 2)],
-            "monster": MONSTERS + [spawn("ocelot", 4, 1, 2), CHUPA_CU, MOSQUITO],
+            "monster": [CORPO_SECO, BOTIJAO, CUCA_CAVERNA, spawn("ocelot", 4, 1, 2), CHUPA_CU, MOSQUITO],
             "water_creature": [spawn("irineu:boto", 4, 1, 2)],
             "water_ambient": [spawn("tropical_fish", 25, 4, 8)]},
            features(f"{NS}:arvores_amazonia", "minecraft:patch_grass_jungle", f"{NS}:orquideas", "minecraft:flower_warm",
@@ -529,7 +540,7 @@ make_biome("cerrado", 1.2, 0.2, True,
            {"sky": "#7cb3f2", "grass_color": "#bdb052", "foliage_color": "#9caa3e", "dry_foliage_color": "#a88a4a", "water_color": "#4a8db0"},
            {"creature": [spawn("irineu:tamandua", 6, 1, 2), spawn("irineu:lobo_guara", 4, 1, 2), spawn("irineu:ema", 8, 2, 4), spawn("irineu:irineu", 4, 1, 2),
                          spawn("rabbit", 6, 2, 3), spawn("armadillo", 3, 1, 2), spawn("horse", 2, 2, 4), FLANELINHA],
-            "monster": MONSTERS + [CHUPA_CU, MOTO]},
+            "monster": [CORPO_SECO, BACAMARTEIRO, BOTIJAO, CUCA_CAVERNA, CHUPA_CU, MOTO]},
            features(f"{NS}:arvores_cerrado", f"{NS}:cupinzeiros", "minecraft:patch_dead_bush_2", "minecraft:patch_dry_grass_badlands",
                     "minecraft:patch_grass_savanna", "minecraft:patch_tall_grass", f"{NS}:capim_navalha", "minecraft:flower_warm",
                     f"{NS}:ore_niobio"),
@@ -540,7 +551,7 @@ make_biome("mata_atlantica", 0.7, 0.85, True,
             "water_fog_color": "#2c6ea8"},
            {"creature": [spawn("irineu:mico_leao", 10, 2, 4), spawn("irineu:tucano", 8, 1, 2), spawn("parrot", 6, 1, 2), spawn("chicken", 4, 2, 4),
                          spawn("irineu:jailson", 3, 1, 2), FLANELINHA],
-            "monster": MONSTERS + [spawn("ocelot", 3, 1, 2), CHUPA_CU, MOTO, DANCARINO]},
+            "monster": [CORPO_SECO, BOTIJAO, ARMADEIRA, CUCA_CAVERNA, spawn("ocelot", 3, 1, 2), CHUPA_CU, MOTO, DANCARINO]},
            features(f"{NS}:arvores_mata_atlantica", "minecraft:bamboo_light", f"{NS}:bromelias", f"{NS}:orquideas", "minecraft:patch_large_fern",
                     "minecraft:patch_grass_jungle", "minecraft:patch_sugar_cane", "minecraft:patch_firefly_bush_near_water", "minecraft:vines",
                     f"{NS}:cachoeiras", f"{NS}:ore_topazio_imperial"),
@@ -550,7 +561,7 @@ make_biome("caatinga", 2.0, 0.0, False,
            {"sky": "#90c4ff", "fog_color": "#e4dcc6", "grass_color": "#a49a69", "foliage_color": "#8b8858", "dry_foliage_color": "#9a7d4c",
             "water_color": "#5a8ba6"},
            {"creature": [spawn("irineu:tatu_bola", 10, 1, 2), spawn("goat", 6, 1, 3), spawn("irineu:carcara", 5, 1, 1), spawn("rabbit", 4, 2, 3)],
-            "monster": MONSTERS + [CHUPA_CU]},
+            "monster": [BACAMARTEIRO, BOTIJAO, CUCA_CAVERNA, CHUPA_CU]},
            features(f"{NS}:seca", f"{NS}:lajedos", f"{NS}:pedregulhos", f"{NS}:mandacarus", f"{NS}:xique_xiques",
                     "minecraft:patch_dead_bush_2", "minecraft:patch_dry_grass_desert", f"{NS}:ore_turmalina_paraiba"),
            {"minecraft:gameplay/creature_world_gen_spawn_probability": 0.05}, "minecraft:music.overworld.desert")
@@ -560,7 +571,7 @@ make_biome("pampa", 0.5, 0.5, True,
            {"creature": [spawn("sheep", 12, 4), spawn("horse", 6, 2, 6), spawn("cow", 6, 4), spawn("irineu:coruja_buraqueira", 6, 1, 3),
                          spawn("irineu:veado_campeiro", 6, 2, 4), spawn("rabbit", 3, 2, 3), spawn("irineu:irineu", 4, 1, 2), spawn("irineu:jailson", 3, 1, 2),
                          FLANELINHA],
-            "monster": MONSTERS + [CHUPA_CU, MOTO]},
+            "monster": [BACAMARTEIRO, BOTIJAO, CUCA_CAVERNA, CHUPA_CU, MOTO]},
            features(f"{NS}:capoes_pampa", "minecraft:patch_tall_grass_2", "minecraft:flower_plains", "minecraft:patch_grass_plain",
                     "minecraft:patch_sugar_cane", f"{NS}:geodo_agata_ametista"),
            sound="minecraft:music.overworld.meadow")
@@ -568,7 +579,7 @@ make_biome("pampa", 0.5, 0.5, True,
 make_biome("pantanal", 0.95, 0.9, True,
            {"sky": "#78a9ff", "grass_color": "#5ea43a", "foliage_color": "#4c982e", "water_color": "#47a8cc", "water_fog_color": "#5ab3d4"},
            {"creature": [spawn("irineu:capivara", 14, 2, 5), spawn("irineu:jacare", 6, 1, 2), spawn("irineu:tuiuiu", 6, 1, 3), spawn("frog", 6, 2, 5),
-                         spawn("cow", 3, 2, 4)], "monster": MONSTERS + [CHUPA_CU, MOSQUITO],
+                         spawn("cow", 3, 2, 4)], "monster": [BOTIJAO, ARMADEIRA, CUCA_BREJO, CHUPA_CU, MOSQUITO],
             "water_ambient": [spawn("tropical_fish", 20, 4, 8)]},
            features(f"{NS}:alagados", f"{NS}:arvores_pantanal", f"{NS}:buritis", "minecraft:patch_grass_normal", f"{NS}:juncos",
                     f"{NS}:capim_navalha", f"{NS}:aguapes", f"{NS}:vitorias_regias", "minecraft:patch_firefly_bush_near_water",
@@ -580,12 +591,12 @@ make_biome("pantanal", 0.95, 0.9, True,
 make_biome("litoral", 0.9, 0.5, True,
            {"sky": "#7ab0ff", "water_color": "#33b4d9", "water_fog_color": "#2aa3c8"},
            {"creature": [spawn("turtle", 5, 2, 5), spawn("irineu:irineu", 3, 1, 2), spawn("irineu:jailson", 3, 1, 2), FLANELINHA],
-            "monster": MONSTERS + [DANCARINO]},
+            "monster": [CORPO_SECO, BACAMARTEIRO, BOTIJAO, DANCARINO]},
            features(f"{NS}:coqueiros", "minecraft:patch_sugar_cane", "minecraft:patch_grass_normal"))
 
 make_biome("oceano", 0.7, 0.5, True,
            {"sky": "#7ab0ff", "water_color": "#1f8fd0", "water_fog_color": "#1a70a8"},
-           {"monster": [spawn("drowned", 5, 1)] + MONSTERS,
+           {"monster": [spawn("drowned", 5, 1)],
             "water_ambient": [spawn("pufferfish", 15, 1, 3), spawn("tropical_fish", 25, 8)],
             "water_creature": [spawn("squid", 10, 4), spawn("dolphin", 2, 1, 2)]},
            features("minecraft:warm_ocean_vegetation", "minecraft:seagrass_warm", "minecraft:sea_pickle"))

@@ -776,7 +776,8 @@ final class BrasilV3GameTests {
 			}
 			server.runCommand("execute in brasil_mod:brasil run forceload remove " + carregar);
 		}
-		// Uma sala de spawner das ruínas (o sorteio pode não trazer nenhuma): o molde direto no mundo plano.
+		// Uma sala de spawner das ruínas (o sorteio pode não trazer nenhuma): o molde direto no mundo plano. Desde a 4.0 os
+		// spawners das ruínas são dos monstros do Brasil (a sala do Corpo Seco no lugar da do zumbi).
 		server.runCommand("gamemode survival @p");
 		server.runCommand("tp @p 16004.5 -60 -6.5 0 20");
 		context.waitTicks(20);
@@ -785,17 +786,20 @@ final class BrasilV3GameTests {
 			var source = mc.createCommandSourceStack().withLevel(level).withPosition(new Vec3(16004.5, -60, -6.5))
 				.withPermission(net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER);
 			try {
-				mc.getCommands().getDispatcher().execute("place template brasil_mod:ruinas_carajas/sala_zumbi 16000 -61 0", source);
+				mc.getCommands().getDispatcher().execute("place template brasil_mod:ruinas_carajas/sala_corpo_seco 16000 -61 0", source);
 			} catch (com.mojang.brigadier.exceptions.CommandSyntaxException ex) {
 				throw new AssertionError(ex.getMessage());
 			}
 			BlockPos spawner = new BlockPos(16004, -60, 4);
 			boolean ok = level.getBlockState(spawner).is(Blocks.SPAWNER)
 				&& level.getBlockEntity(spawner) instanceof net.minecraft.world.level.block.entity.SpawnerBlockEntity;
+			String dados = ok ? level.getBlockEntity(spawner).saveWithoutMetadata(level.registryAccess()).toString() : "";
+			boolean corpoSeco = dados.contains("irineu:corpo_seco");
 			int baus = 0;
 			for (BlockPos p : BlockPos.betweenClosed(16000, -60, 0, 16008, -58, 8)) if (level.getBlockState(p).is(Blocks.CHEST)) baus++;
-			log("EstruturasTest", "sala de spawner das ruínas (molde): spawner " + ok + ", baús " + baus);
+			log("EstruturasTest", "sala de spawner das ruínas (molde): spawner " + ok + " (de corpo seco: " + corpoSeco + "), baús " + baus);
 			check(ok && baus == 2, "A sala de spawner das ruínas está errada");
+			check(corpoSeco, "O spawner da sala do Corpo Seco devia ser de irineu:corpo_seco: " + dados);
 		});
 		server.runCommand("tp @p 0 -60 0");
 	}

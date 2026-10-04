@@ -12,7 +12,8 @@ Estruturas do Brasil (brasil_mod), todas montadas por peças de encaixe (jigsaw)
 Todas usam o tipo brasil_mod:encaixe_no_terreno (EstruturaNoTerreno.java): não nascem na água (as palafitas só nascem
 nela) nem em barranco, e as peças que cairiam num rio ficam de fora. Moldes .nbt, pools, estruturas, conjuntos, tags de
 bioma e o loot dos baús. Os moldes inteiros da 3.0.0 (vila_cangaceiro/vila, estancia_gaucha/estancia e
-palafitas/palafitas) ficam no jar sem uso, para mundos que já tinham começado essas estruturas.
+palafitas/palafitas) e as salas de spawner da 3.0 das ruínas (sala_zumbi, sala_esqueleto e sala_aranha; na 4.0, as
+salas têm os monstros do Brasil) ficam no jar sem uso, para mundos que já tinham começado essas estruturas.
 
 Uso: python estruturas.py <src/main/resources> [pasta da prévia]
 """
@@ -1432,16 +1433,25 @@ corredor("ruinas_carajas/corredor_2")
 curva("ruinas_carajas/curva")
 cruzamento("ruinas_carajas/cruzamento")
 sala_minerio("ruinas_carajas/sala_minerio")
+# As salas de spawner da 3.0 (zumbi, esqueleto e aranha da caverna) saíram das pools na 4.0, mas os moldes continuam
+# no jar: mundos que já começaram as ruínas apontam para eles. Saem iguais (o sorteio deles não muda).
 sala_spawner("ruinas_carajas/sala_zumbi", "minecraft:zombie")
 sala_spawner("ruinas_carajas/sala_esqueleto", "minecraft:skeleton")
 sala_spawner("ruinas_carajas/sala_aranha", "minecraft:cave_spider")
+# As da 4.0, com os monstros do Brasil, num sorteio à parte (para não mudar o resto das peças).
+_sorteio = rng.getstate()
+rng.seed(4003)
+sala_spawner("ruinas_carajas/sala_corpo_seco", "irineu:corpo_seco")
+sala_spawner("ruinas_carajas/sala_bacamarteiro", "irineu:bacamarteiro")
+sala_spawner("ruinas_carajas/sala_armadeira", "irineu:aranha_armadeira")
+rng.setstate(_sorteio)
 sala_tesouro("ruinas_carajas/sala_tesouro")
 fim("ruinas_carajas/fim")
 pool("ruinas_carajas/inicio", [("ruinas_carajas/entrada", 1, "rigid")])
 pool("ruinas_carajas/caminhos", [("ruinas_carajas/corredor_1", 4, "rigid"), ("ruinas_carajas/corredor_2", 4, "rigid"),
                                  ("ruinas_carajas/curva", 3, "rigid"), ("ruinas_carajas/cruzamento", 2, "rigid"),
-                                 ("ruinas_carajas/sala_minerio", 2, "rigid"), ("ruinas_carajas/sala_zumbi", 1, "rigid"),
-                                 ("ruinas_carajas/sala_esqueleto", 1, "rigid"), ("ruinas_carajas/sala_aranha", 1, "rigid"),
+                                 ("ruinas_carajas/sala_minerio", 2, "rigid"), ("ruinas_carajas/sala_corpo_seco", 1, "rigid"),
+                                 ("ruinas_carajas/sala_bacamarteiro", 1, "rigid"), ("ruinas_carajas/sala_armadeira", 1, "rigid"),
                                  ("ruinas_carajas/sala_tesouro", 1, "rigid")], fallback=f"{NS}:ruinas_carajas/fins")
 pool("ruinas_carajas/galerias", [("ruinas_carajas/corredor_1", 2, "rigid"), ("ruinas_carajas/corredor_2", 2, "rigid"),
                                  ("ruinas_carajas/cruzamento", 3, "rigid")], fallback=f"{NS}:ruinas_carajas/fins")

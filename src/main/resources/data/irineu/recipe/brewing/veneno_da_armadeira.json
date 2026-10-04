@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "minecraft:potion",
+    "potion_contents": {
+      "potions": "minecraft:awkward"
+    }
+  },
+  "reagent": {
+    "item": "irineu:glandula_veneno"
+  },
+  "output": {
+    "id": "minecraft:splash_potion",
+    "components": {
+      "minecraft:potion_contents": {
+        "custom_color": 6957658,
+        "custom_effects": [
+          {
+            "id": "minecraft:poison",
+            "duration": 440,
+            "amplifier": 1
+          }
+        ]
+      },
+      "minecraft:item_name": {
+        "translate": "item.irineu.veneno_da_armadeira"
+      }
+    }
+  }
+}
