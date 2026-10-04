@@ -17,6 +17,25 @@
       "0.0 + math.sin((query.anim_time + 0.5) * 90.0) * 8",
       0
      ]
+    },
+    "body": {
+     "position": [
+      0,
+      "math.sin(query.anim_time * 180.0) * 0.12",
+      0
+     ],
+     "rotation": [
+      "math.sin(query.anim_time * 180.0) * 0.8",
+      0,
+      0
+     ]
+    },
+    "head": {
+     "rotation": [
+      "math.sin(query.anim_time * 90.0) * 4",
+      "math.sin(query.anim_time * 90.0 + 40) * 18",
+      "math.sin(query.anim_time * 180.0) * 3"
+     ]
     }
    },
    "loop": true
@@ -57,12 +76,31 @@
       0,
       "math.cos(query.limb_swing * 38.17) * 6 * query.limb_swing_amount",
       0
+     ],
+     "position": [
+      0,
+      "math.abs(math.sin(query.limb_swing * 38.17)) * 0.3 * query.limb_swing_amount",
+      0
      ]
     },
     "tail1": {
      "rotation": [
       0,
       "-math.cos(query.limb_swing * 38.17) * 12 * query.limb_swing_amount",
+      0
+     ]
+    },
+    "head": {
+     "rotation": [
+      "-math.sin(query.limb_swing * 38.17 * 2) * 5 * query.limb_swing_amount",
+      "-math.cos(query.limb_swing * 38.17) * 4 * query.limb_swing_amount",
+      "-math.cos(query.limb_swing * 38.17) * 1.5 * query.limb_swing_amount"
+     ]
+    },
+    "tail2": {
+     "rotation": [
+      0,
+      "math.cos(query.limb_swing * 38.17 - 40) * 22 * query.limb_swing_amount",
       0
      ]
     }

@@ -43,6 +43,18 @@
        "easing": "easeInOutSine"
       }
      }
+    },
+    "body": {
+     "position": [
+      0,
+      "math.sin(query.anim_time * 180.0) * 0.12",
+      0
+     ],
+     "rotation": [
+      "math.sin(query.anim_time * 180.0) * 0.8",
+      0,
+      0
+     ]
     }
    },
    "loop": true
@@ -90,6 +102,18 @@
       "math.abs(math.sin(query.limb_swing * 38.17)) * 5 * query.limb_swing_amount",
       0,
       0
+     ]
+    },
+    "body": {
+     "position": [
+      0,
+      "math.abs(math.sin(query.limb_swing * 38.17)) * 0.3 * query.limb_swing_amount",
+      0
+     ],
+     "rotation": [
+      "math.sin(query.limb_swing * 38.17 * 2) * 2 * query.limb_swing_amount",
+      "math.cos(query.limb_swing * 38.17) * 3 * query.limb_swing_amount",
+      "math.cos(query.limb_swing * 38.17) * 2.5 * query.limb_swing_amount"
      ]
     }
    },

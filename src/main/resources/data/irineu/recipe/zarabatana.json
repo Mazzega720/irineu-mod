@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "B  ",
+    " B ",
+    "  B"
+  ],
+  "key": {
+    "B": "minecraft:bamboo"
+  },
+  "result": {
+    "id": "irineu:zarabatana",
+    "count": 1
+  }
+}

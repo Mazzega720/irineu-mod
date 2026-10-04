@@ -145,6 +145,23 @@ def merge(*parts):
 SWING = "query.limb_swing * 38.17"          # 0,6662 rad por bloco, como no modelo Java
 AMT = "query.limb_swing_amount"
 
+
+def walk(arm_swing=60, leg_swing=75, bob=0.8):
+    """
+    Andar simples (corpo de jogador): Lulonaro, Kelmon, Allan e gados. O corpo sobe e desce, o tronco torce e balança de
+    lado com o passo, e a cabeça compensa (sem isso o andar fica duro).
+    """
+    return {
+        "right_leg": {"rotation": [f"math.cos({SWING}) * {leg_swing} * {AMT}", 0, 0]},
+        "left_leg": {"rotation": [f"-math.cos({SWING}) * {leg_swing} * {AMT}", 0, 0]},
+        "right_arm": {"rotation": [f"-math.cos({SWING}) * {arm_swing} * {AMT}", 0, f"4 + math.abs(math.cos({SWING})) * 3 * {AMT}"]},
+        "left_arm": {"rotation": [f"math.cos({SWING}) * {arm_swing} * {AMT}", 0, f"-4 - math.abs(math.cos({SWING})) * 3 * {AMT}"]},
+        "body": {"position": [0, f"math.abs(math.sin({SWING})) * {bob} * {AMT}", 0],
+                 "rotation": [f"2 * {AMT}", f"math.cos({SWING}) * 6 * {AMT}", f"math.cos({SWING}) * 2 * {AMT}"]},
+        "head": {"rotation": [f"math.abs(math.cos({SWING})) * 3 * {AMT}", f"-math.cos({SWING}) * 5 * {AMT}", 0]},
+    }
+
+
 B = {}
 # ---------------------------------------------------------------- BamBam: estado (controlador "corpo")
 B["bambam.idle"] = anim(3.0, merge(
@@ -560,12 +577,7 @@ J["allan.idle"] = anim(3.0, {
     "body": {"position": {0: (0, 0, 0), 1.5: ((0, -0.3, 0), "easeInOutSine"), 3.0: ((0, 0, 0), "easeInOutSine")}},
     "head": {"rotation": {0: (0, 0, 0), 1.5: ((-3, 0, 0), "easeInOutSine"), 3.0: ((0, 0, 0), "easeInOutSine")}},
 }, loop=True)
-J["allan.walk"] = anim(1.0, {
-    "right_leg": {"rotation": [f"math.cos({SWING}) * 70 * {AMT}", 0, 0]},
-    "left_leg": {"rotation": [f"-math.cos({SWING}) * 70 * {AMT}", 0, 0]},
-    "right_arm": {"rotation": [f"-math.cos({SWING}) * 40 * {AMT}", 0, 0]},
-    "left_arm": {"rotation": [f"math.cos({SWING}) * 40 * {AMT}", 0, 0]},
-}, loop=True)
+J["allan.walk"] = anim(1.0, walk(40, 70, 0.6), loop=True)
 # Apresenta o desafio: abre o braço direito com a palma para cima.
 J["allan.apresentar"] = anim(1.3, {
     "right_arm": {"rotation": {0: CLASPED_R, 0.3: ((-75, 0, 55), "easeOutBack"), 1.0: (-72, 0, 50), 1.3: (CLASPED_R, "easeInOutSine")}},
@@ -670,17 +682,6 @@ def t_pose():
         "left_leg": {"rotation": {0: (0, 0, 0), 0.5: ((10, 0, 3), "easeOutQuad")}},
         "right_shin": {"rotation": {0: (0, 0, 0), 0.5: ((25, 0, 0), "easeOutQuad")}},
         "left_shin": {"rotation": {0: (0, 0, 0), 0.5: ((15, 0, 0), "easeOutQuad")}},
-    }
-
-
-def walk(arm_swing=60, leg_swing=75, bob=0.8):
-    """Andar simples (corpo de jogador): Lulonaro, Kelmon e gados."""
-    return {
-        "right_leg": {"rotation": [f"math.cos({SWING}) * {leg_swing} * {AMT}", 0, 0]},
-        "left_leg": {"rotation": [f"-math.cos({SWING}) * {leg_swing} * {AMT}", 0, 0]},
-        "right_arm": {"rotation": [f"-math.cos({SWING}) * {arm_swing} * {AMT}", 0, 4]},
-        "left_arm": {"rotation": [f"math.cos({SWING}) * {arm_swing} * {AMT}", 0, -4]},
-        "body": {"position": [0, f"math.abs(math.sin({SWING})) * {bob} * {AMT}", 0]},
     }
 
 

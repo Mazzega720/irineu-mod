@@ -166,22 +166,31 @@ def paint_person(s, skin, hair, shirt, pants, shoes, hair_rows=2, bald=False, be
 
 
 def anims(prefix, walk_arms=40, feliz=None, nao=None, extra=None):
-    SWING, AMT = "query.anim_time * 360 * 1.2", "query.ground_speed * 3"
+    # O passo acompanha a distância andada (como o andar do jogador), com o corpo subindo e descendo, o tronco torcendo
+    # e balançando de lado, a cabeça compensando e o braço abrindo um pouco; parado, ele respira, troca o apoio de perna
+    # e olha em volta (6 s, para não ficar repetitivo).
+    SWING, AMT = "query.limb_swing * 38.17", "query.limb_swing_amount"
+    T = "query.anim_time"
     A = {
-        f"{prefix}.idle": {"animation_length": 3.0, "loop": True, "bones": {
-            "body": {"position": {"0.0": [0, 0, 0], "1.5": {"vector": [0, -0.3, 0], "easing": "easeInOutSine"},
-                                  "3.0": {"vector": [0, 0, 0], "easing": "easeInOutSine"}}},
-            "right_arm": {"rotation": {"0.0": [0, 0, 3], "1.5": {"vector": [-3, 0, 5], "easing": "easeInOutSine"},
-                                       "3.0": {"vector": [0, 0, 3], "easing": "easeInOutSine"}}},
-            "left_arm": {"rotation": {"0.0": [0, 0, -3], "1.5": {"vector": [-3, 0, -5], "easing": "easeInOutSine"},
-                                      "3.0": {"vector": [0, 0, -3], "easing": "easeInOutSine"}}},
-            "head": {"rotation": {"0.0": [0, 0, 0], "1.5": {"vector": [-2, 0, 0], "easing": "easeInOutSine"},
-                                  "3.0": {"vector": [0, 0, 0], "easing": "easeInOutSine"}}}}},
+        f"{prefix}.idle": {"animation_length": 6.0, "loop": True, "bones": {
+            "body": {"position": [f"math.sin({T} * 60) * 0.35", f"math.sin({T} * 120) * 0.25", 0],
+                     "rotation": [f"math.sin({T} * 120) * 1.2", 0, f"math.sin({T} * 60) * 1.6"]},
+            "right_leg": {"rotation": [0, 0, f"1.5 + math.sin({T} * 60) * 1.5"]},
+            "left_leg": {"rotation": [0, 0, f"-1.5 + math.sin({T} * 60) * 1.5"]},
+            "right_arm": {"rotation": [f"-2 + math.sin({T} * 120 + 30) * 3", 0, f"4 + math.sin({T} * 120) * 2"]},
+            "left_arm": {"rotation": [f"-2 + math.sin({T} * 120 + 60) * 3", 0, f"-4 - math.sin({T} * 120) * 2"]},
+            "head": {"rotation": {"0.0": [0, 0, 0], "1.2": {"vector": [-3, 0, 0], "easing": "easeInOutSine"},
+                                  "2.0": {"vector": [-2, 28, 3], "easing": "easeInOutSine"}, "3.0": {"vector": [-2, 28, 3], "easing": "linear"},
+                                  "3.8": {"vector": [2, -22, -2], "easing": "easeInOutSine"}, "4.8": {"vector": [2, -22, -2], "easing": "linear"},
+                                  "6.0": {"vector": [0, 0, 0], "easing": "easeInOutSine"}}}}},
         f"{prefix}.walk": {"animation_length": 1.0, "loop": True, "bones": {
-            "right_leg": {"rotation": [f"math.cos({SWING}) * 60 * {AMT}", 0, 0]},
-            "left_leg": {"rotation": [f"-math.cos({SWING}) * 60 * {AMT}", 0, 0]},
-            "right_arm": {"rotation": [f"-math.cos({SWING}) * {walk_arms} * {AMT}", 0, 0]},
-            "left_arm": {"rotation": [f"math.cos({SWING}) * {walk_arms} * {AMT}", 0, 0]}}},
+            "right_leg": {"rotation": [f"math.cos({SWING}) * 55 * {AMT}", 0, 0]},
+            "left_leg": {"rotation": [f"-math.cos({SWING}) * 55 * {AMT}", 0, 0]},
+            "right_arm": {"rotation": [f"-math.cos({SWING}) * {walk_arms} * {AMT}", 0, f"(3 + math.abs(math.cos({SWING})) * 4) * {AMT}"]},
+            "left_arm": {"rotation": [f"math.cos({SWING}) * {walk_arms} * {AMT}", 0, f"-(3 + math.abs(math.cos({SWING})) * 4) * {AMT}"]},
+            "body": {"position": [0, f"math.abs(math.sin({SWING})) * 0.8 * {AMT}", 0],
+                     "rotation": [f"2 * {AMT}", f"math.cos({SWING}) * 6 * {AMT}", f"math.cos({SWING}) * 2 * {AMT}"]},
+            "head": {"rotation": [f"math.abs(math.cos({SWING})) * 3 * {AMT}", f"-math.cos({SWING}) * 5 * {AMT}", 0]}}},
         # "Não": balança a cabeça e o dedo.
         f"{prefix}.nao": nao or {"animation_length": 1.1, "bones": {
             "right_arm": {"rotation": {"0.0": [0, 0, 0], "0.2": {"vector": [-95, 0, -8], "easing": "easeOutBack"},

@@ -117,6 +117,11 @@
               "type": "minecraft:witch",
               "count": 1,
               "weight": 5
+            },
+            {
+              "type": "irineu:chupa_cu",
+              "count": 1,
+              "weight": 25
             }
           ]
         }

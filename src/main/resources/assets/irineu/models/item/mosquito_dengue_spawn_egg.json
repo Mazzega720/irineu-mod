@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "irineu:item/mosquito_dengue_spawn_egg"
+  }
+}

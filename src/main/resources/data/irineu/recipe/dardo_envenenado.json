@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "irineu:ferrao_dengue",
+    "minecraft:stick",
+    "minecraft:feather"
+  ],
+  "result": {
+    "id": "irineu:dardo_envenenado",
+    "count": 4
+  }
+}

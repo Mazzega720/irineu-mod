@@ -77,6 +77,7 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			if (runs("minerios")) BrasilV3GameTests.testMinerios(context, singleplayer);
 			if (runs("cultura")) BrasilV3GameTests.testCultura(context, singleplayer);
 			if (runs("estruturas")) BrasilV3GameTests.testEstruturas(context, singleplayer);
+			if (runs("bestiario")) BestiarioGameTests.testBestiario(context, singleplayer);
 		}
 	}
 
@@ -2173,7 +2174,7 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 	}
 
 	/** Nome da animação que o controlador está tocando agora (no cliente), ou null. */
-	private static String currentAnimation(com.geckolib.animatable.GeoEntity entity, String controller) {
+	static String currentAnimation(com.geckolib.animatable.GeoEntity entity, String controller) {
 		var manager = entity.getAnimatableInstanceCache().getManagerForId(((net.minecraft.world.entity.Entity) entity).getId());
 		var point = manager.getAnimationControllers().get(controller).getCurrentAnimationPoint();
 		return point == null ? null : point.animation().name();

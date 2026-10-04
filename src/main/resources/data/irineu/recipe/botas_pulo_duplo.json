@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:leather_boots",
+    "irineu:mola_saltadora",
+    "irineu:mola_saltadora"
+  ],
+  "result": {
+    "id": "irineu:botas_pulo_duplo",
+    "count": 1
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "irineu:item/ednaldo_pereira_spawn_egg"
+  }
+}

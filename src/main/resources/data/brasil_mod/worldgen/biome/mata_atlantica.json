@@ -84,6 +84,11 @@
                 "max_inclusive": 2
               },
               "weight": 3
+            },
+            {
+              "type": "irineu:flanelinha",
+              "count": 1,
+              "weight": 3
             }
           ],
           "monster": [
@@ -139,6 +144,21 @@
                 "max_inclusive": 2
               },
               "weight": 3
+            },
+            {
+              "type": "irineu:chupa_cu",
+              "count": 1,
+              "weight": 25
+            },
+            {
+              "type": "irineu:dois_caras_moto",
+              "count": 1,
+              "weight": 15
+            },
+            {
+              "type": "irineu:dancarino_carreta",
+              "count": 1,
+              "weight": 12
             }
           ]
         }
