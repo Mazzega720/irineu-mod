@@ -43,6 +43,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -438,7 +439,11 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			int davis = server.computeOnServer(mc -> mc.overworld().getEntitiesOfClass(DaviEntity.class,
 				new AABB(x, -61, 0, x + w, -50, d)).size());
 			if (davis != 1) throw new AssertionError(variants[i] + ": esperava 1 Davi no balcão, achei " + davis);
-			System.out.println("[QuiosqueTest] " + variants[i] + " OK (" + furniture + " mesas/cadeiras, Davi no balcão)");
+			// O mastro dos guarda-sóis é corrente: no 26.3 o bloco se chama minecraft:iron_chain (o nome velho, minecraft:chain,
+			// saía como ar, porque o molde é gravado já na versão nova e o DataFixer não converte).
+			int chains = server.computeOnServer(mc -> countBlock(mc.overworld(), new BlockPos(x, -60, 0), new BlockPos(x + w, -50, d), Blocks.IRON_CHAIN));
+			if (chains == 0) throw new AssertionError(variants[i] + ": guarda-sóis sem o mastro de corrente (minecraft:iron_chain)");
+			System.out.println("[QuiosqueTest] " + variants[i] + " OK (" + furniture + " mesas/cadeiras, Davi no balcão, " + chains + " correntes)");
 		}
 
 		// De perto, na altura dos olhos: mesas com as marcas no quiosque misto (x = 260)
@@ -474,6 +479,14 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		if (generatedDavis != 1) throw new AssertionError("Quiosque gerado pelo worldgen sem o Davi: " + generatedDavis);
 		System.out.println("[QuiosqueTest] /place structure gerou quiosque (" + generated + " móveis, com o Davi)");
 		server.runCommand("gamemode survival @p");
+	}
+
+	private static int countBlock(ServerLevel level, BlockPos from, BlockPos to, Block block) {
+		int count = 0;
+		for (BlockPos pos : BlockPos.betweenClosed(from, to)) {
+			if (level.getBlockState(pos).is(block)) count++;
+		}
+		return count;
 	}
 
 	private static int countFurniture(ServerLevel level, BlockPos from, BlockPos to) {

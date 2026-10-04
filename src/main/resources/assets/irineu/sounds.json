@@ -1421,7 +1421,11 @@
     "subtitle": "subtitles.irineu.item.zarabatana.sopro"
   },
   "fala.ednaldo.chegada": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/chegada"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.chegada"
   },
   "fala.ednaldo.vale_tudo": {
@@ -1449,15 +1453,27 @@
     "subtitle": "subtitles.irineu.fala.ednaldo.banimento"
   },
   "fala.ednaldo.furia": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/furia"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.furia"
   },
   "fala.ednaldo.ambiente": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/ambiente"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.ambiente"
   },
   "fala.ednaldo.derrota": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/derrota"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.derrota"
   },
   "fala.et.chegada": {

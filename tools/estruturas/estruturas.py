@@ -1008,7 +1008,7 @@ m.fill(0, 4, 0, 8, 4, 6, "minecraft:spruce_slab", slab())
 m.set(4, 1, 2, "minecraft:campfire", {"facing": "south", "lit": "true", "signal_fire": "false", "waterlogged": "false"})
 m.set(3, 1, 2, "minecraft:cobblestone_slab", slab())
 m.set(5, 1, 2, "minecraft:cobblestone_slab", slab())
-m.set(4, 3, 2, "minecraft:chain", {"axis": "y", "waterlogged": "false"})
+m.set(4, 3, 2, "minecraft:iron_chain", {"axis": "y", "waterlogged": "false"})
 m.fill(2, 1, 4, 6, 1, 4, "minecraft:spruce_slab", slab("top"))              # a mesa
 m.set(6, 1, 1, "minecraft:barrel", {"facing": "up", "open": "false"}, barrel_nbt(f"{NS}:chests/estancia"))
 m.set(1, 1, 3, "minecraft:barrel", {"facing": "up", "open": "false"})

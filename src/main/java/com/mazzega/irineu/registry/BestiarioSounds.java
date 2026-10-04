@@ -11,8 +11,8 @@ import net.minecraft.sounds.SoundEvent;
  * {@code tools/bestiario/bestiario.py}) e as falas dos dois chefões lendários.
  * <p>
  * Vozes reais de terceiros ({@code tools/audios_terceiros}, com crédito): o "Perdeu, playboy!" do assalto da moto, o
- * "Valeu, patrão!" do flanelinha pago e, nas falas do Ednaldo, o "BANIDO!" e os trechos de "Vale Nada Vale Tudo".
- * As outras falas ({@code irineu:fala.ednaldo.*} e todas as {@code irineu:fala.et.*}) estão registradas mas vazias no
+ * "Valeu, patrão!" do flanelinha pago e todas as falas do Ednaldo (o "BANIDO!" e seis trechos de "Vale Nada Vale Tudo",
+ * achados pela transcrição do Whisper). As falas do E.T. ({@code irineu:fala.et.*}) estão registradas mas vazias no
  * {@code sounds.json}: a voz entra pelo {@code tools/audios_terceiros} (que grava o .ogg em
  * {@code assets/irineu/sounds/falas/<chefe>/<fala>.ogg} e aponta a entrada para ele), e a duração vai em
  * {@link com.mazzega.irineu.bestiario.chefes.FalaChefe} (a boca mexe esse tempo).
@@ -95,7 +95,7 @@ public final class BestiarioSounds {
 	public static final SoundEvent CUCA_ARREMESSO = register("entity.cuca_feiticeira.arremesso");
 	public static final SoundEvent CUCA_RISADA = register("entity.cuca_feiticeira.risada");
 
-	// ---------------------------------------------------------------- Falas dos chefões (as sem voz real ficam vazias)
+	// ---------------------------------------------------------------- Falas dos chefões (as do E.T. ainda vazias)
 	public static final SoundEvent FALA_EDNALDO_CHEGADA = register("fala.ednaldo.chegada");
 	public static final SoundEvent FALA_EDNALDO_VALE_TUDO = register("fala.ednaldo.vale_tudo");
 	public static final SoundEvent FALA_EDNALDO_NAO_VALE_NADA = register("fala.ednaldo.nao_vale_nada");

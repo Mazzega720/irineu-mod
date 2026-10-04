@@ -195,17 +195,22 @@ public final class BestiarioGameTests {
 	// ====================================================================== Vozes reais (tools/audios_terceiros)
 	/**
 	 * Os eventos com áudio de terceiros apontam para o .ogg cortado (que existe, com a duração do recorte: os sons
-	 * sintetizados de antes, no mesmo caminho, tinham menos de 1 s), e a boca do Ednaldo mexe nas 3 falas com voz, cada
-	 * uma com a duração do .ogg (a mesma conta do audios_terceiros.py --conferir).
+	 * sintetizados de antes, no mesmo caminho, tinham menos de 1 s), e a boca do Ednaldo mexe nas 7 falas (todas com voz,
+	 * os trechos de "Vale Nada Vale Tudo" achados pelo Whisper), cada uma com a duração do .ogg (a mesma conta do
+	 * audios_terceiros.py --conferir). As falas do E.T. continuam vazias, esperando a voz.
 	 */
 	private static void audios(ClientGameTestContext context) {
 		// evento, caminho, duração mínima e máxima do .ogg (s)
 		Object[][] eventos = {
 			{"entity.dois_caras_moto.assalto", "bestiario/moto_assalto", 1.0F, 3.0F},
 			{"entity.flanelinha.pago", "bestiario/flanelinha_pago", 1.0F, 3.0F},
+			{"fala.ednaldo.chegada", "falas/ednaldo/chegada", FalaChefe.EDNALDO_CHEGADA},
 			{"fala.ednaldo.banimento", "falas/ednaldo/banimento", FalaChefe.EDNALDO_BANIMENTO},
 			{"fala.ednaldo.vale_tudo", "falas/ednaldo/vale_tudo", FalaChefe.EDNALDO_VALE_TUDO},
 			{"fala.ednaldo.nao_vale_nada", "falas/ednaldo/nao_vale_nada", FalaChefe.EDNALDO_NAO_VALE_NADA},
+			{"fala.ednaldo.furia", "falas/ednaldo/furia", FalaChefe.EDNALDO_FURIA},
+			{"fala.ednaldo.ambiente", "falas/ednaldo/ambiente", FalaChefe.EDNALDO_AMBIENTE},
+			{"fala.ednaldo.derrota", "falas/ednaldo/derrota", FalaChefe.EDNALDO_DERROTA},
 			{"item.disco_vale_tudo.ritual", "item/disco_vale_tudo", 12.0F, 15.5F},
 		};
 		context.runOnClient(mc -> {
@@ -231,7 +236,7 @@ public final class BestiarioGameTests {
 			check(mc.getSoundManager().getSoundEvent(Irineu.id("item.disco_vale_tudo.ritual")).getSound(RandomSource.create()).shouldStream(),
 				"O refrão do disco devia tocar em streaming");
 		});
-		log("vozes reais: moto, flanelinha, as 3 falas do Ednaldo e o refrão do disco apontam para os .ogg com a duração certa; boca no "
+		log("vozes reais: moto, flanelinha, as 7 falas do Ednaldo e o refrão do disco apontam para os .ogg com a duração certa; boca no "
 			+ FalaChefe.EDNALDO_BANIMENTO.jawAnimation());
 	}
 

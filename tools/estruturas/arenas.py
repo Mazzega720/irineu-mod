@@ -7,7 +7,8 @@ As arenas dos rituais da Jornada pelo Brasil (4.0, marco M4), com o Encaixe (too
 - brasil_mod:altar_do_julgamento (picos da Mata Atlântica, só com o chão a partir de y = ALTURA_ALTAR): o Tribunal do
   Juízo Universal do Ednaldo Pereira. Plataforma redonda de calcita com degraus, 8 pilares de quartzo com ouro e
   barras do End, o trono roxo e dourado ao norte, a Mesa do Julgamento (irineu:mesa_do_julgamento, chama o Ednaldo com o
-  disco) virada para o sul, jukeboxes e blocos musicais de caixa de som, a plateia, o baú com o disco garantido e a placa.
+  disco) virada para o sul, jukeboxes e blocos musicais de caixa de som, a plateia, o baú com o disco garantido e a placa;
+  em volta, uma clareira de pedra até o raio ~16 (a caixa larga deixa as árvores da mata longe da plataforma).
 Cada baú tem a pool garantida (bateria ou disco), o loot comum, o mapa de explorador até a Câmara dos Três Poderes (tag
 brasil_mod:camara_no_mapa, com required false: a câmara entra no M6; até lá o mapa não sai) e o livro "Profecia dos
 Três Poderes" (as traduções do mapa e do livro ficam no tools/jornada/reliquias.py). Do livro, só o nome do item e as
@@ -16,7 +17,7 @@ páginas se traduzem: o título e o autor de um livro escrito são texto cru no 
 Gera: data/brasil_mod/structure/{cratera_varginha/cratera,altar_do_julgamento/altar}.nbt, as pools, as estruturas
 (brasil_mod:encaixe_no_terreno), os conjuntos, as tags de bioma, a tag de estrutura camara_no_mapa e o loot dos baús.
 Posições no molde que o teste (ReliquiasGameTests) usa: núcleo (15, 4, 15) e baú (13, 4, 15) na cratera; mesa
-(11, 2, 7) virada para o sul, trono (11, 2, 3) e baú (14, 2, 4) no altar.
+(16, 2, 12) virada para o sul, trono (16, 2, 8) e baú (19, 2, 9) no altar (centro da plataforma em (16, 1, 16)).
 
 Uso: python arenas.py <src/main/resources>
 """
@@ -200,26 +201,48 @@ e.biome_tag("cratera_varginha", ["cerrado"])
 
 # ====================================================================== Altar do Julgamento
 rng.seed("altar_do_julgamento")
-A = 11                      # centro do molde 23 x 14 x 23 (o piso da plataforma em y 1; start_height -1)
-m = Molde(23, 14, 23, clear=True)
-for x in range(23):
-    for z in range(23):
+A = 16                      # centro do molde 33 x 14 x 33 (o piso da plataforma em y 1; start_height -1)
+R_CLAREIRA = 15.2           # raio mínimo da clareira de pedra (a borda varia até ~16,4)
+m = Molde(33, 14, 33, clear=True)
+
+
+def borda(x, z):
+    """O raio da clareira na direção de (x, z): uma borda irregular (soma de ondas pelo ângulo), entre 15,2 e ~16,4."""
+    ang = math.atan2(z - A, x - A)
+    return R_CLAREIRA + 0.6 + 0.35 * math.sin(3 * ang + 0.7) + 0.25 * math.sin(7 * ang + 2.1)
+
+
+# A clareira: as árvores da Mata Atlântica (features de vegetação, que rodam depois das estruturas) não nascem dentro
+# da caixa da estrutura nem colado nela (irineu:fora_de_estrutura), então a caixa larga deixa a copa das de fora longe
+# da plataforma. O chão em volta é de pedra (sem terra, grama, musgo nem cascalho, onde nascem mato e bambu); nos cantos
+# da caixa, fora da borda, fica o chão do lugar.
+for x in range(33):
+    for z in range(33):
         r = math.hypot(x - A, z - A)
-        if r > 11.0:
+        if r > borda(x, z):
             continue
-        m.set(x, 0, z, mato(("stone_bricks", 3), ("polished_andesite", 2), ("cracked_stone_bricks", 1)))
+        if r <= 11.0:
+            m.set(x, 0, z, mato(("stone_bricks", 3), ("polished_andesite", 2), ("cracked_stone_bricks", 1)))
+        elif r <= 12.6:
+            # A calçada em volta dos degraus.
+            m.set(x, 0, z, mato(("polished_andesite", 4), ("stone_bricks", 2), ("cracked_stone_bricks", 1)))
+        else:
+            # O chão de pedra solta, mais rústico para a borda.
+            m.set(x, 0, z, mato(("stone", 4), ("andesite", 4), ("cobblestone", 2), ("tuff", 1)))
         if r <= 9.5:
             # Anéis de calcita e concreto branco, com a borda de andesito polido.
             anel = int(r) % 3
             m.set(x, 1, z, "polished_andesite" if r > 8.6 else ("white_concrete" if anel == 0 else "calcite"))
         elif r <= 10.6:
             m.set(x, 1, z, "polished_andesite_stairs", stairs(facing_para(A - x, A - z)))     # os degraus em volta
-# O caminho roxo do sul até a mesa, e o tapete em volta do trono.
-for z in range(8, 21):
-    m.set(A, 1, z, "purple_concrete")
-for (x, z) in ((A - 1, 4), (A, 4), (A + 1, 4), (A - 1, 5), (A + 1, 5), (A, 5), (A, 6)):
+# O caminho roxo do sul até a mesa (com a calçada de pedra dos lados até a borda da clareira), e o tapete do trono.
+for z in range(A - 3, A + 16):
+    m.set(A, 1 if z <= A + 10 else 0, z, "purple_concrete")
+    if z > A + 10:
+        for x in (A - 1, A + 1):
+            m.set(x, 0, z, "polished_andesite")
+for (x, z) in ((A - 1, A - 7), (A, A - 7), (A + 1, A - 7), (A - 1, A - 6), (A + 1, A - 6), (A, A - 6), (A, A - 5)):
     m.set(x, 1, z, "purple_concrete")
-m.set(A, 1, 21, "purple_concrete")
 # 8 pilares de quartzo no raio 9 (meio passo fora do sul, para não fechar o caminho), com ouro e a barra do End em cima.
 for i in range(8):
     ang = math.radians(22.5 + 45 * i)
@@ -229,28 +252,28 @@ for i in range(8):
     m.set(x, 8, z, "gold_block")
     m.set(x, 9, z, "end_rod", {"facing": "up"})
 # O trono ao norte: assento de escada de quartzo virado para o sul, braços e encosto roxos, a coroa de ouro.
-m.set(A, 2, 3, "quartz_stairs", stairs("north"))
+m.set(A, 2, A - 8, "quartz_stairs", stairs("north"))
 for x in (A - 1, A + 1):
-    m.set(x, 2, 3, "purple_concrete")
-    m.set(x, 3, 3, "gold_block")
+    m.set(x, 2, A - 8, "purple_concrete")
+    m.set(x, 3, A - 8, "gold_block")
 for x in (A - 1, A, A + 1):
     for y in (2, 3, 4):
-        m.set(x, y, 2, "purple_concrete")
-m.set(A - 1, 5, 2, "gold_block"); m.set(A + 1, 5, 2, "gold_block"); m.set(A, 5, 2, "purple_concrete"); m.set(A, 6, 2, "gold_block")
-m.set(A, 7, 2, "end_rod", {"facing": "up"})
+        m.set(x, y, A - 9, "purple_concrete")
+m.set(A - 1, 5, A - 9, "gold_block"); m.set(A + 1, 5, A - 9, "gold_block"); m.set(A, 5, A - 9, "purple_concrete"); m.set(A, 6, A - 9, "gold_block")
+m.set(A, 7, A - 9, "end_rod", {"facing": "up"})
 # A Mesa do Julgamento virada para a plateia (sul), as jukeboxes dos lados e as caixas de som (blocos musicais).
-MESA = (A, 2, 7)
-BAU = (14, 2, 4)
+MESA = (A, 2, A - 4)
+BAU = (A + 3, 2, A - 7)
 m.set(*MESA, "irineu:mesa_do_julgamento", {"facing": "south", "tocando": "false"})
 for x in (A - 2, A + 2):
-    m.set(x, 2, 7, "jukebox", {"has_record": "false"})
+    m.set(x, 2, A - 4, "jukebox", {"has_record": "false"})
 for x in (A - 3, A + 3):
     for y in (2, 3):
-        m.set(x, y, 7, "note_block", {"instrument": "bass" if y == 2 else "harp", "note": "0", "powered": "false"})
-    m.set(x, 4, 7, "gold_block")
+        m.set(x, y, A - 4, "note_block", {"instrument": "bass" if y == 2 else "harp", "note": "0", "powered": "false"})
+    m.set(x, 4, A - 4, "gold_block")
 m.set(*BAU, "minecraft:chest", {"facing": "west", "type": "single", "waterlogged": "false"}, chest_nbt(f"{NS}:chests/altar_do_julgamento"))
 # A plateia: fileiras de escadas de quartzo viradas para a mesa, com o corredor roxo no meio; a de trás mais alta.
-for (z, y) in ((13, 2), (15, 2), (17, 3)):
+for (z, y) in ((A + 2, 2), (A + 4, 2), (A + 6, 3)):
     for x in list(range(A - 6, A - 1)) + list(range(A + 2, A + 7)):
         if math.hypot(x - A, z - A) > 8.6:
             continue
@@ -258,14 +281,36 @@ for (z, y) in ((13, 2), (15, 2), (17, 3)):
             m.set(x, 2, z, "quartz_block")
         m.set(x, y, z, "quartz_stairs", stairs("south"))
 # A placa na entrada (sul) e as lanternas.
-m.set(A, 2, 19, "minecraft:dark_oak_sign", {"rotation": "0", "waterlogged": "false"},
+m.set(A, 2, A + 8, "minecraft:dark_oak_sign", {"rotation": "0", "waterlogged": "false"},
       sign_nbt(["TRIBUNAL DO", "JUÍZO UNIVERSAL", "Toque o disco", "na mesa"], color="yellow", glow=True))
-for (x, z) in ((A - 2, 3), (A + 2, 3)):
+for (x, z) in ((A - 2, A - 8), (A + 2, A - 8)):
     m.set(x, 2, z, "lantern", {"hanging": "false", "waterlogged": "false"})
+# Na clareira: 4 postes de lampião nas diagonais, vasos com arbustos e flores perto da calçada e pedras soltas na borda.
+for i in range(4):
+    ang = math.radians(45 + 90 * i)
+    x, z = A + arred(13.5 * math.cos(ang)), A + arred(13.5 * math.sin(ang))
+    m.set(x, 1, z, "stone_brick_wall", {"up": "true", "north": "none", "south": "none", "east": "none", "west": "none", "waterlogged": "false"})
+    m.set(x, 2, z, "lantern", {"hanging": "false", "waterlogged": "false"})
+VASOS = ["potted_azalea_bush", "potted_flowering_azalea_bush", "potted_fern", "potted_blue_orchid", "potted_red_tulip", "potted_dandelion"]
+for i in range(12):
+    ang = math.radians(7.5 + 30 * i)
+    x, z = A + arred(12.2 * math.cos(ang)), A + arred(12.2 * math.sin(ang))
+    if abs(x - A) <= 2 and z > A:
+        continue    # o caminho do sul fica livre
+    m.set(x, 1, z, VASOS[i % len(VASOS)])
+for i in range(9):
+    ang = rng.uniform(0, 2 * math.pi)
+    if math.sin(ang) > 0.9:
+        continue    # longe do caminho do sul
+    rr = rng.uniform(14.0, 15.0)
+    x, z = A + arred(rr * math.cos(ang)), A + arred(rr * math.sin(ang))
+    m.set(x, 1, z, mato(("cobblestone", 2), ("andesite", 2), ("tuff", 1)))
+    if rng.random() < 0.5:
+        m.set(x, 2, z, mato(("cobblestone_slab", 1), ("andesite_slab", 1)), {"type": "bottom", "waterlogged": "false"})
 e.save(m, "altar_do_julgamento/altar")
 e.pool("altar_do_julgamento/inicio", [("altar_do_julgamento/altar", 1, "rigid")])
 e.estrutura("altar_do_julgamento", "altar_do_julgamento/inicio", 1, "altar_do_julgamento", adaptation="beard_box", start_y=-1, desnivel=10,
-            altura_minima=ALTURA_ALTAR)
+            altura_minima=ALTURA_ALTAR, margem_terreno=5)
 e.structure_set("altares_do_julgamento", "altar_do_julgamento", 24, 8, 1709300009)
 e.biome_tag("altar_do_julgamento", ["mata_atlantica"])
 

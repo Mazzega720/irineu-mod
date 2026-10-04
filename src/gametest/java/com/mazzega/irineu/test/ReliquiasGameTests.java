@@ -19,6 +19,7 @@ import com.mazzega.irineu.jornada.Reliquia;
 import com.mazzega.irineu.registry.BestiarioEntities;
 import com.mazzega.irineu.registry.JornadaBlocks;
 import com.mazzega.irineu.registry.JornadaItems;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Locale;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
@@ -47,15 +48,20 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.WorldOptions;
 import net.minecraft.world.level.levelgen.densityfunction.SamplerContext;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Fase "reliquias" (versão 4.0): as 4 relíquias dos chefões intermediários e os rituais que invocam o E.T. e o Ednaldo
@@ -67,7 +73,8 @@ import net.minecraft.world.phys.Vec3;
  * <li>cratera: o molde direto no mundo plano; a bateria (pelo clique de verdade) carrega o núcleo e o E.T. chega fora
  * do disco; de novo, carregando ou com o E.T. perto, não gasta; o baú tem a bateria;</li>
  * <li>altar: o mesmo com o disco na mesa, e o Ednaldo surge entre a mesa e o trono;</li>
- * <li>receitas de reserva e o worldgen (a altura mínima do altar e a cratera no Cerrado do Brasil).</li>
+ * <li>receitas de reserva e o worldgen (a altura mínima do altar, a cratera no Cerrado do Brasil e um altar que o
+ * worldgen pôs sozinho, com a mata em volta: nenhum tronco nem folha sobre a plataforma).</li>
  * </ul>
  */
 final class ReliquiasGameTests {
@@ -79,11 +86,20 @@ final class ReliquiasGameTests {
 	private static final BlockPos BAU_CRATERA = CRATERA.offset(13, 4, 15);
 	/** Raio do disco voador no molde (o casco vai até 6,5 blocos do núcleo). */
 	private static final double RAIO_DISCO = 6.5;
-	private static final BlockPos ALTAR = new BlockPos(X, -61, 320);
-	private static final BlockPos MESA = ALTAR.offset(11, 2, 7);
-	private static final BlockPos BAU_ALTAR = ALTAR.offset(14, 2, 4);
+	/** O canto do molde do altar (33 x 33, com a clareira de pedra em volta): a mesa fica em (X + 11, -59, 327). */
+	private static final BlockPos ALTAR = new BlockPos(X - 5, -61, 315);
+	private static final BlockPos MESA = ALTAR.offset(16, 2, 12);
+	private static final BlockPos BAU_ALTAR = ALTAR.offset(19, 2, 9);
 	/** Onde o Ednaldo surge: 3 blocos atrás da mesa, para o lado do trono (o norte). */
-	private static final BlockPos DIANTE_DO_TRONO = ALTAR.offset(11, 2, 4);
+	private static final BlockPos DIANTE_DO_TRONO = ALTAR.offset(16, 2, 9);
+	/** A plataforma do altar (até os degraus) e quantos blocos acima dela não pode ter tronco nem folha. */
+	private static final int RAIO_PLATAFORMA = 10;
+	private static final int CEU_DA_PLATAFORMA = 30;
+	/** O anel em volta do altar onde a mata tem de existir (fora da clareira de pedra, r ≈ 16, e dentro dos chunks gerados). */
+	private static final int RAIO_DA_CLAREIRA = 17;
+	private static final int RAIO_DA_MATA = 32;
+	/** Quanto o anel da mata desce abaixo da plataforma (a encosta do pico). */
+	private static final int DESCIDA_DA_MATA = 24;
 
 	private ReliquiasGameTests() {
 	}
@@ -389,6 +405,126 @@ final class ReliquiasGameTests {
 		return !peloJogo.consumesAction() && doBloco == InteractionResult.FAIL && stack.getCount() == antes;
 	}
 
+	/**
+	 * Um altar gerado junto com o mundo, com a mata em volta (o /place cai por cima da mata já crescida, então não serve).
+	 * O mundo de teste não gera estruturas (nem o /locate acha), então o teste faz o que o worldgen faria: longe de tudo o
+	 * que já foi gerado, num pico da Mata Atlântica que o altar aceita (com o bioma), põe o começo da estrutura no chunk
+	 * ainda em STRUCTURE_STARTS e gera os chunks em volta até o fim, com a colocação de estruturas ligada só nesse meio
+	 * tempo. Aí as referências, o beard_box, a estrutura e depois as árvores (que não nascem dentro da caixa do altar,
+	 * irineu:fora_de_estrutura) vêm na ordem de verdade, e a clareira de pedra larga deixa a copa das de fora longe:
+	 * sobre a plataforma não pode haver tronco nem folha.
+	 */
+	private static void altarNatural(ClientGameTestContext context, TestSingleplayerContext singleplayer, BlockPos perto, int altura) {
+		TestServerContext server = singleplayer.getServer();
+		BoundingBox caixa = server.computeOnServer(mc -> {
+			ServerLevel brasil = BrasilGameTests.brasil(mc);
+			Holder<Structure> holder = brasil.registryAccess().lookupOrThrow(Registries.STRUCTURE).getOrThrow(ResourceKey.create(Registries.STRUCTURE,
+				Brasil.id("altar_do_julgamento")));
+			var generator = brasil.getChunkSource().getGenerator();
+			var random = brasil.getChunkSource().randomState();
+			var biomas = generator.getBiomeSource().createUncachedResolver(random);
+			// Em anéis a partir de 768 blocos (onde nada foi gerado), só nos picos da Mata Atlântica (o terreno-base).
+			for (int r = 768; r <= 4096; r += 64) {
+				for (int dx = -r; dx <= r; dx += 64) {
+					for (int dz = -r; dz <= r; dz += 64) {
+						if (Math.max(Math.abs(dx), Math.abs(dz)) != r) continue;
+						int x = perto.getX() + dx;
+						int z = perto.getZ() + dz;
+						int top = generator.getFirstFreeHeight(x, z, Heightmap.Types.WORLD_SURFACE_WG, brasil, random);
+						if (top < altura || !biomas.getNoiseBiome(x >> 2, top >> 2, z >> 2).is(Brasil.MATA_ATLANTICA)) continue;
+						var start = holder.value().generate(holder, brasil.dimension(), brasil.registryAccess(), generator, generator.getBiomeSource(),
+							random.createClimateSampler(SamplerContext.EMPTY_UNCACHED), random, brasil.getStructureTemplateManager(), brasil.getSeed(), ChunkPos.containing(new BlockPos(x, top, z)), 0, brasil, holder.value().biomes()::contains);
+						if (!start.isValid()) continue;
+						BoundingBox box = start.getBoundingBox();
+						boolean virgem = true;
+						for (int cx = (box.minX() >> 4) - 1; cx <= (box.maxX() >> 4) + 1 && virgem; cx++) {
+							for (int cz = (box.minZ() >> 4) - 1; cz <= (box.maxZ() >> 4) + 1 && virgem; cz++) {
+								virgem = !brasil.getChunk(cx, cz, ChunkStatus.STRUCTURE_STARTS, true).getPersistedStatus().isOrAfter(ChunkStatus.STRUCTURE_REFERENCES);
+							}
+						}
+						if (!virgem) continue;
+						brasil.getChunk(start.getChunkPos().x(), start.getChunkPos().z(), ChunkStatus.STRUCTURE_STARTS, true).setStartForStructure(holder.value(), start);
+						var antes = comEstruturas(brasil, null);
+						try {
+							for (int cx = (box.minX() >> 4) - 1; cx <= (box.maxX() >> 4) + 1; cx++) {
+								for (int cz = (box.minZ() >> 4) - 1; cz <= (box.maxZ() >> 4) + 1; cz++) {
+									brasil.getChunk(cx, cz);
+								}
+							}
+						} finally {
+							comEstruturas(brasil, antes);
+						}
+						return start.getPieces().getFirst().getBoundingBox();
+					}
+				}
+			}
+			return null;
+		});
+		check(caixa != null, "Nenhum pico da Mata Atlântica longe de " + perto.toShortString() + " aceitou o altar");
+		BlockPos centro = new BlockPos((caixa.minX() + caixa.maxX()) / 2, caixa.minY() + 1, (caixa.minZ() + caixa.maxZ()) / 2);
+		int[] achados = server.computeOnServer(mc -> {
+			ServerLevel brasil = BrasilGameTests.brasil(mc);
+			int mesas = 0;
+			for (BlockPos p : BlockPos.betweenClosed(caixa.minX(), caixa.minY(), caixa.minZ(), caixa.maxX(), caixa.maxY(), caixa.maxZ())) {
+				if (brasil.getBlockState(p).is(JornadaBlocks.MESA_DO_JULGAMENTO)) mesas++;
+			}
+			int mata = 0;
+			for (BlockPos p : BlockPos.betweenClosed(centro.offset(-RAIO_PLATAFORMA, 0, -RAIO_PLATAFORMA),
+				centro.offset(RAIO_PLATAFORMA, CEU_DA_PLATAFORMA, RAIO_PLATAFORMA))) {
+				if ((p.getX() - centro.getX()) * (p.getX() - centro.getX()) + (p.getZ() - centro.getZ()) * (p.getZ() - centro.getZ())
+					> RAIO_PLATAFORMA * RAIO_PLATAFORMA) continue;
+				var state = brasil.getBlockState(p);
+				if (state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES)) {
+					if (mata == 0) log(TAG, "altar: " + state.getBlock() + " sobre a plataforma em " + p.toShortString());
+					mata++;
+				}
+			}
+			// O controle: a mata em volta da clareira (sem ela, o pico é careca e o 0 de cima não prova nada). O anel fica
+			// dentro dos chunks gerados até o fim (a caixa e um chunk de cada lado) e desce pela encosta.
+			int fora = 0;
+			for (BlockPos p : BlockPos.betweenClosed(centro.offset(-RAIO_DA_MATA, -DESCIDA_DA_MATA, -RAIO_DA_MATA),
+				centro.offset(RAIO_DA_MATA, CEU_DA_PLATAFORMA, RAIO_DA_MATA))) {
+				int d2 = (p.getX() - centro.getX()) * (p.getX() - centro.getX()) + (p.getZ() - centro.getZ()) * (p.getZ() - centro.getZ());
+				if (d2 <= RAIO_DA_CLAREIRA * RAIO_DA_CLAREIRA || d2 > RAIO_DA_MATA * RAIO_DA_MATA) continue;
+				var state = brasil.getBlockState(p);
+				if (state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES)) fora++;
+			}
+			return new int[] {mesas, mata, fora};
+		});
+		log(TAG, String.format(Locale.ROOT, "altar gerado com o mundo em %s: plataforma em %s, %d mesa(s), %d tronco(s)/folha(s) sobre a plataforma"
+			+ " e %d em volta (%d < r <= %d)", caixa, centro.toShortString(), achados[0], achados[1], achados[2], RAIO_DA_CLAREIRA, RAIO_DA_MATA));
+		check(centro.getY() >= altura, "O altar gerado com o mundo ficou abaixo da altura mínima: " + centro);
+		check(achados[0] == 1, "O altar gerado com o mundo devia ter a mesa");
+		check(achados[1] == 0, "A clareira do altar não segurou a mata: " + achados[1] + " tronco(s)/folha(s) sobre a plataforma");
+		check(achados[2] > 0, "O pico escolhido não tem mata em volta do altar: o teste não prova a clareira");
+		// A foto do alto, com os chunks carregados (forceload) e renderizados.
+		String area = String.format(Locale.ROOT, "%d %d %d %d", centro.getX() - 40, centro.getZ() - 40, centro.getX() + 40, centro.getZ() + 40);
+		server.runCommand("execute in brasil_mod:brasil run forceload add " + area);
+		server.runCommand(String.format(Locale.ROOT, "execute in brasil_mod:brasil run tp @p %d %d %d facing %d %d %d", centro.getX() - 10, centro.getY() + 24,
+			centro.getZ() + 18, centro.getX(), centro.getY(), centro.getZ()));
+		context.waitTicks(60);
+		singleplayer.getConnection().waitForChunksRender();
+		context.takeScreenshot("reliquias-altar-brasil");
+		server.runCommand("execute in brasil_mod:brasil run forceload remove " + area);
+	}
+
+	/**
+	 * Liga a colocação das estruturas na geração do Brasil e devolve as opções de antes (o mundo de teste nasce sem
+	 * estruturas, e as features só põem as peças com o {@code StructureManager.shouldGenerateStructures()}); com as
+	 * opções de antes, desliga de novo.
+	 */
+	private static WorldOptions comEstruturas(ServerLevel level, @Nullable WorldOptions voltar) {
+		try {
+			Field campo = StructureManager.class.getDeclaredField("worldOptions");
+			campo.setAccessible(true);
+			WorldOptions antes = (WorldOptions) campo.get(level.structureManager());
+			campo.set(level.structureManager(), voltar != null ? voltar : antes.withStructures(true));
+			return antes;
+		} catch (ReflectiveOperationException e) {
+			throw new AssertionError("Não deu para ligar as estruturas na geração", e);
+		}
+	}
+
 	/** O molde direto no mundo plano, pelo /place template com permissão de dono. */
 	private static void placeTemplate(TestServerContext server, String molde, BlockPos onde) {
 		server.runOnServer(mc -> {
@@ -530,25 +666,7 @@ final class ReliquiasGameTests {
 		check(baixosAceitos[0] == 0, "O altar não pode nascer abaixo da altura mínima");
 		check(baixosAceitos[1] > 0, "Sem a altura mínima o altar devia aceitar algum lugar baixo (senão o teste não prova o filtro)");
 		check(altares > 0, "O altar não aceitou nenhum pico da Mata Atlântica: a altura mínima (" + altura + ") está alta demais");
-		BlockPos pico = BrasilGameTests.placeStructure(context, server, Brasil.id("altar_do_julgamento"), picos, TAG);
-		check(pico != null, "O altar não foi posto num pico da Mata Atlântica");
-		context.waitTicks(20);
-		int mesas = server.computeOnServer(mc -> {
-			ServerLevel brasil = BrasilGameTests.brasil(mc);
-			int n = 0;
-			for (BlockPos p : BlockPos.betweenClosed(pico.offset(-40, -24, -40), pico.offset(40, 16, 40))) {
-				if (brasil.getBlockState(p).is(JornadaBlocks.MESA_DO_JULGAMENTO)) n++;
-			}
-			return n;
-		});
-		log(TAG, "altar na Mata Atlântica em " + pico.toShortString() + ": " + mesas + " mesa(s)");
-		check(mesas == 1, "O altar posto na Mata Atlântica devia ter a mesa");
-		server.runCommand(String.format(Locale.ROOT, "execute in brasil_mod:brasil run tp @p %d %d %d -35 35", pico.getX() - 12, pico.getY() + 18,
-			pico.getZ() - 16));
-		context.waitTicks(50);
-		singleplayer.getConnection().waitForChunksRender();
-		context.takeScreenshot("reliquias-altar-brasil");
-		server.runCommand("execute in brasil_mod:brasil run forceload remove " + BrasilGameTests.areaDe(pico));
+		altarNatural(context, singleplayer, mata.getFirst(), altura);
 		server.runCommand("gamemode survival @p");
 		server.runCommand(String.format(Locale.ROOT, "execute in minecraft:overworld run tp @p %d.5 -60 0.5 0 0", X));
 		context.waitTicks(20);

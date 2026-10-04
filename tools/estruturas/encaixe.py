@@ -51,12 +51,15 @@ class Encaixe:
                                                        "fallback": fallback})
 
     def estrutura(self, nome, start_pool, size, biomes_tag, step="surface_structures", adaptation="beard_thin", start_y=0, max_dist=64,
-                  terreno="seco", max_agua=0.0, min_agua=0.6, desnivel=6, so_inicio=False, liquid=None, altura_minima=None):
+                  terreno="seco", max_agua=0.0, min_agua=0.6, desnivel=6, so_inicio=False, liquid=None, altura_minima=None,
+                  margem_terreno=0):
         """
         Estrutura de encaixe que olha o terreno (EstruturaNoTerreno), igual à do estruturas.py: terreno "seco" não deixa
         a peça inicial cair na água (mais que max_agua das colunas) nem num desnível maior que 'desnivel', e tira as
         outras peças que caem na água; "agua" exige min_agua de água embaixo da peça inicial. start_y é relativo ao chão.
         altura_minima (só escrito se dado): o chão da peça inicial precisa estar nesse Y ou acima (picos).
+        margem_terreno (só escrito se > 0): os blocos da borda da peça inicial que ficam fora da conferência do chão
+        (água, desnível e altura mínima olham só o miolo; a clareira do altar desce pela encosta).
         """
         data = {"type": f"{self.ns}:encaixe_no_terreno", "biomes": f"#{self.ns}:has_structure/{biomes_tag}", "spawn_overrides": {}, "step": step,
                 "terrain_adaptation": adaptation, "start_pool": f"{self.ns}:{start_pool}", "size": size, "start_height": start_y,
@@ -71,6 +74,8 @@ class Encaixe:
             data["liquid_settings"] = liquid
         if altura_minima is not None:
             data["altura_minima"] = altura_minima
+        if margem_terreno:
+            data["margem_do_terreno"] = margem_terreno
         self.wj(f"worldgen/structure/{nome}.json", data)
 
     def structure_set(self, nome, estrutura, spacing, separation, salt):

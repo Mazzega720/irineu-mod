@@ -260,7 +260,7 @@ for z in range(Z0 + 2, Z0 + 14, 2):
     t.set(X1 - 1, 1, z, "irineu:esteira", {"facing": "west"})
 for z in (Z0 + 17, Z0 + 20, Z0 + 23):
     t.set(X1 - 4, 2, z, "irineu:saco_de_pancada", {"facing": "west"})
-    t.fill(X1 - 4, 3, z, X1 - 4, TOP - 1, z, "minecraft:chain", {"axis": "y", "waterlogged": "false"})
+    t.fill(X1 - 4, 3, z, X1 - 4, TOP - 1, z, "minecraft:iron_chain", {"axis": "y", "waterlogged": "false"})
 for z in (Z0 + 17, Z0 + 21):
     t.set(X1 - 8, 1, z, "irineu:barra_anilhas", {"facing": "west"})
 wall_sign_w = {"facing": "west", "waterlogged": "false"}

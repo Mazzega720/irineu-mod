@@ -11,5 +11,6 @@
   "terreno": "seco",
   "max_desnivel": 10,
   "max_agua_no_inicio": 0.0,
-  "altura_minima": 100
+  "altura_minima": 100,
+  "margem_do_terreno": 5
 }

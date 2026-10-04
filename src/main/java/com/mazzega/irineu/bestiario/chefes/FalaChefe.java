@@ -6,9 +6,10 @@ import net.minecraft.sounds.SoundEvent;
 /**
  * As falas dos chefões lendários: em que momento cada uma toca e quanto tempo a boca mexe.
  * <p>
- * As vozes vêm de {@code tools/audios_terceiros} (áudios de terceiros, com crédito): o "BANIDO!" do Ednaldo e os trechos
- * de "Vale Nada Vale Tudo" ("vale tudo" e "não vale nada"). As outras falas, e todas as do E.T., continuam registradas
- * mas vazias no {@code sounds.json} (o espaço para as vozes). Para pôr uma fala:
+ * As vozes vêm de {@code tools/audios_terceiros} (áudios de terceiros, com crédito): todas as falas do Ednaldo têm voz, o
+ * "BANIDO!" e seis trechos de "Vale Nada Vale Tudo" achados pela transcrição do Whisper medium (cada recorte transcrito
+ * de novo sozinho, para a frase sair inteira). As do E.T. continuam registradas mas vazias no {@code sounds.json} (o
+ * espaço para a voz). Para pôr uma fala:
  * <ol>
  * <li>ponha o original em {@code tools/audios_terceiros/originais/} e o trecho em {@code audios_terceiros.json}
  * (arquivo {@code falas/<chefe>/<fala>}, evento {@code fala.<chefe>.<fala>});</li>
@@ -18,20 +19,20 @@ import net.minecraft.sounds.SoundEvent;
  * </ol>
  */
 public enum FalaChefe {
-	/** Ednaldo aparece (ou é provocado pela primeira vez). */
-	EDNALDO_CHEGADA(BestiarioSounds.FALA_EDNALDO_CHEGADA, 0.0F),
+	/** Ednaldo aparece (ou é provocado pela primeira vez): "Eu sou Ednaldo Pereira". */
+	EDNALDO_CHEGADA(BestiarioSounds.FALA_EDNALDO_CHEGADA, 3.45F),
 	/** Solta o Orbe Dourado: "Você vale tudo". */
-	EDNALDO_VALE_TUDO(BestiarioSounds.FALA_EDNALDO_VALE_TUDO, 1.84F),
+	EDNALDO_VALE_TUDO(BestiarioSounds.FALA_EDNALDO_VALE_TUDO, 1.95F),
 	/** Solta o Orbe Sombrio: "Você não vale nada". */
-	EDNALDO_NAO_VALE_NADA(BestiarioSounds.FALA_EDNALDO_NAO_VALE_NADA, 1.67F),
+	EDNALDO_NAO_VALE_NADA(BestiarioSounds.FALA_EDNALDO_NAO_VALE_NADA, 2.12F),
 	/** Começa o Banimento Supremo: "BANIDO!" (a sirene toca depois, no arremesso). */
 	EDNALDO_BANIMENTO(BestiarioSounds.FALA_EDNALDO_BANIMENTO, 1.3F),
-	/** Entra na Fúria do Irmão (abaixo de 30% da vida). */
-	EDNALDO_FURIA(BestiarioSounds.FALA_EDNALDO_FURIA, 0.0F),
-	/** De vez em quando, durante a luta. */
-	EDNALDO_AMBIENTE(BestiarioSounds.FALA_EDNALDO_AMBIENTE, 0.0F),
-	/** Ao ser derrotado. */
-	EDNALDO_DERROTA(BestiarioSounds.FALA_EDNALDO_DERROTA, 0.0F),
+	/** Entra na Fúria do Irmão (abaixo de 30% da vida): "Não jogue para perder!". */
+	EDNALDO_FURIA(BestiarioSounds.FALA_EDNALDO_FURIA, 2.19F),
+	/** De vez em quando, durante a luta: "Você topa qualquer parada". */
+	EDNALDO_AMBIENTE(BestiarioSounds.FALA_EDNALDO_AMBIENTE, 2.4F),
+	/** Ao ser derrotado: "A vida é assim, cheia de dificuldades". */
+	EDNALDO_DERROTA(BestiarioSounds.FALA_EDNALDO_DERROTA, 4.97F),
 
 	/** O E.T. aparece (ou é provocado pela primeira vez). */
 	ET_CHEGADA(BestiarioSounds.FALA_ET_CHEGADA, 0.0F),

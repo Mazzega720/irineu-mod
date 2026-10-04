@@ -221,10 +221,10 @@ Mobs novos que nascem nos biomas do Brasil, todos animados no GeckoLib. Cada um 
 | **Repelente** | Poção estranha + Ferrão da Dengue | 5 min em que os mosquitos não te perseguem. |
 
 ### Falas dos chefões (espaço para vozes)
-O Ednaldo e o E.T. já têm as falas ligadas, só que **sem áudio**: chegada, cada habilidade, a fúria/raio quebrado, falas soltas e a derrota. Para colocar as vozes:
-1. Ponha o `.ogg` (vorbis, mono) em `src/main/resources/assets/irineu/sounds/falas/ednaldo/` ou `.../falas/et/` (cada pasta tem um `LEIA-ME.txt`).
-2. No `sounds.json`, aponte a entrada `fala.ednaldo.<fala>` (ou `fala.et.<fala>`) para `"irineu:falas/ednaldo/<fala>"`.
-3. Em `bestiario/chefes/FalaChefe.java`, troque o `0F` da fala pela duração em segundos: a mandíbula do chefão passa a mexer enquanto ele fala.
+O Ednaldo já fala com a voz dele (trechos de "Vale Nada Vale Tudo" e o "Banido!", cortados pelo `tools/audios_terceiros`, com crédito no `CREDITOS.md`). O E.T. tem as falas ligadas (chegada, cada habilidade, a fúria/raio quebrado, falas soltas e a derrota), só que ainda **sem áudio**. Para colocar uma voz:
+1. Ponha o original em `tools/audios_terceiros/originais/` (fica fora do git).
+2. Em `tools/audios_terceiros/audios_terceiros.json`, acrescente o trecho com `arquivo` `falas/et/<fala>` e `evento` `fala.et.<fala>`, e rode `audios_terceiros.py`: ele grava o `.ogg` (vorbis, mono) e aponta o `sounds.json` (não edite o `sounds.json` à mão).
+3. Em `bestiario/chefes/FalaChefe.java`, troque o `0F` da fala pela duração em segundos (o `audios_terceiros.py --conferir` compara): a mandíbula do chefão passa a mexer enquanto ele fala.
 
 ## Irineu
 Mob neutro. Ele anda por aí soltando as falas icônicas e só briga se apanhar.
@@ -594,6 +594,6 @@ A cada push na `main` o fluxo `build.yml` compila e guarda o jar como artefato.
 - Mod de **paródia e humor**, feito por fã, sem ligação com a Mojang, a Microsoft nem com as pessoas, programas e marcas citados. Os personagens são caricaturas de memes e figuras públicas brasileiras.
 - **Licença:** o código e os recursos feitos para o mod (texturas, modelos, sons sintetizados, estruturas) são [CC0 1.0](LICENSE).
 - **Sons do Freesound:** os efeitos gravados (bestiário, maquininha, caixa, bichos e outros) são gravações em domínio público (CC0) de vários autores do [Freesound](https://freesound.org/). A lista com o link e o autor de cada um está em [`tools/sons_cc0/CREDITOS.md`](tools/sons_cc0/CREDITOS.md).
-- **Áudios de terceiros:** as falas tiradas de vídeos (Irineu, Jailson, BamBam, Davi, Manoel Gomes, Luva de Pedreiro, Lula, Bolsonaro, Padre Kelmon e o som da urna) pertencem aos seus autores e são usadas como paródia. Elas não estão sob a CC0. Se você é dono de algum desses áudios e quer que ele saia do mod, abra uma issue.
-- As falas do Ednaldo Pereira e do E.T. de Varginha ainda não têm áudio (veja "Falas dos chefões").
+- **Áudios de terceiros:** as falas tiradas de vídeos (Irineu, Jailson, BamBam, Davi, Manoel Gomes, Luva de Pedreiro, Lula, Bolsonaro, Padre Kelmon, Ednaldo Pereira e o som da urna) e o trecho de "Vale Nada Vale Tudo" pertencem aos seus autores e são usados como paródia. Eles não estão sob a CC0. Se você é dono de algum desses áudios e quer que ele saia do mod, abra uma issue.
+- As falas do E.T. de Varginha ainda não têm áudio (veja "Falas dos chefões").
 - Feito com [Fabric](https://fabricmc.net/) e [GeckoLib](https://github.com/bernie-g/geckolib).
