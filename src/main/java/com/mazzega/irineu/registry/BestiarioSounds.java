@@ -7,7 +7,8 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 
 /**
- * Sons do bestiário do Brasil (sintetizados em {@code tools/bestiario/sons.py}) e as falas dos dois chefões lendários.
+ * Sons do bestiário do Brasil (gravações CC0 de {@code tools/sons_cc0}; os que faltam são sintetizados em
+ * {@code tools/bestiario/bestiario.py}) e as falas dos dois chefões lendários.
  * <p>
  * As falas ({@code irineu:fala.ednaldo.*} e {@code irineu:fala.et.*}) estão registradas mas vazias no {@code sounds.json}:
  * para pôr a voz, coloque o .ogg em {@code assets/irineu/sounds/falas/<chefe>/<fala>.ogg}, aponte a entrada para ele e

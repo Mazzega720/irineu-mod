@@ -720,16 +720,22 @@ NOMES = {
 sounds_path = os.path.join(A, "sounds.json")
 with open(sounds_path, encoding="utf-8") as f:
     sounds = json.load(f)
+# Os eventos que viraram gravações CC0 (tools/sons_cc0) ficam como estão.
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "sons_cc0", "sons_cc0.json"), encoding="utf-8") as f:
+    EVENTOS_CC0 = {s["evento"] for s in json.load(f)["sons"] if "evento" in s}
 subtitles = {}
 for bicho, entries in SONS.items():
     for kind, (event, pitch) in zip(("ambient", "hurt", "death"), entries):
         key = f"entity.{bicho}.{kind}"
+        if key in EVENTOS_CC0:
+            continue
         sounds[key] = {"subtitle": f"subtitles.irineu.{key}", "sounds": [{"name": "minecraft:" + event, "type": "event", "pitch": pitch}]}
 nome = {k: v[0] for k, v in NOMES.items()}
 sounds["entity.lobo_guara.uivo"] = {"subtitle": "subtitles.irineu.entity.lobo_guara.uivo",
                                     "sounds": [{"name": "minecraft:entity.wolf.whine", "type": "event", "pitch": 0.6, "volume": 1.5}]}
-sounds["entity.tuiuiu.bico"] = {"subtitle": "subtitles.irineu.entity.tuiuiu.bico",
-                                "sounds": [{"name": "minecraft:block.note_block.hat", "type": "event", "pitch": 1.7}]}
+if "entity.tuiuiu.bico" not in EVENTOS_CC0:
+    sounds["entity.tuiuiu.bico"] = {"subtitle": "subtitles.irineu.entity.tuiuiu.bico",
+                                    "sounds": [{"name": "minecraft:block.note_block.hat", "type": "event", "pitch": 1.7}]}
 with open(sounds_path, "w", encoding="utf-8") as f:
     json.dump(sounds, f, ensure_ascii=False, indent=2)
     f.write("\n")

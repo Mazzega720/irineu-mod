@@ -16,6 +16,9 @@ import numpy as np
 from PIL import Image
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
+# Sons que viraram gravações CC0 (tools/sons_cc0): os geradores não sobrescrevem esses .ogg.
+with open(os.path.join(ROOT, "tools", "sons_cc0", "sons_cc0.json"), encoding="utf-8") as _f:
+    SONS_CC0 = {s["arquivo"] for s in json.load(_f)["sons"]}
 
 
 def hexc(s):
@@ -250,6 +253,8 @@ class Kit:
         self.sound_defs[event] = data
 
     def ogg(self, rel, samples, rate=44100):
+        if rel in SONS_CC0:
+            return f"irineu:{rel}"
         import soundfile as sf
         path = self.asset("sounds", *rel.split("/")) + ".ogg"
         os.makedirs(os.path.dirname(path), exist_ok=True)

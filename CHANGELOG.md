@@ -23,6 +23,11 @@ O jar de cada versão sai como `irineu-<versão>+26.3.jar`.
   - Os **bichos do Brasil** gingam no passo (corpo, cabeça, rabo e pescoço) e, parados, respiram e olham em volta.
   - A **gente das estruturas** (comerciantes, cangaceiro, gaúcho, pescador) anda no ritmo do passo e tem um parado mais vivo.
   - O andar do Allan Jesus, dos gados, do Padre Kelmon e do Lulonaro ficou menos duro.
+- **Sons gravados no lugar dos sintetizados:** 35 efeitos agora são gravações em domínio público (CC0) do Freesound:
+  - bestiário (moto, Chupa-Cu, flanelinha, mosquito, dançarino, Ednaldo, E.T. e os itens);
+  - maquininha Pix, caixa registradora, vinheta da inflação, Bambu do Silvio, fita da gambiarra, faísca do cajado e bateia.
+- **Bichos com voz de verdade:** o tucano, a ema, o mico-leão e o jacaré têm som próprio (antes usavam sons do jogo), e o tuiuiú bate o bico como uma cegonha.
+- Continuam sintetizados, esperando gravação: o "Perdeu, playboy!" da moto, o "obrigado" do flanelinha, a picada do mosquito, a batida da Carreta e o "vale tudo / não vale nada" do Ednaldo. A origem de cada som está em `tools/sons_cc0/CREDITOS.md`.
 
 ## [3.1.0] — 2026-10-03
 ### Corrigido

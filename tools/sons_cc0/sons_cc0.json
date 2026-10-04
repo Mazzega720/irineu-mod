@@ -1,0 +1,54 @@
+{
+  "_leia": "Sons gravados (CC0, do Freesound) que substituem os sintetizados. Cada som é feito de 'partes': trecho [início, fim] em segundos de um som do Freesound, posto 'em' segundos no resultado, com 'ganho'. 'pico' é o volume final (0 a 1) e 'fade' o [fade-in, fade-out] em segundos. Com 'evento', o sounds.json passa a apontar esse evento para o arquivo (os bichos, que antes usavam sons do jogo). Gerado por sons_cc0.py; tools/comum/kit.py e tools/brasil/fauna.py não sobrescrevem o que está aqui.",
+  "sons": [
+    {"arquivo": "bestiario/moto_motor", "pico": 0.8, "fade": [0.05, 0.3], "partes": [{"freesound": 450020, "trecho": [10.8, 13.3]}]},
+    {"arquivo": "bestiario/moto_escapamento", "pico": 0.9, "fade": [0.02, 0.15], "partes": [{"freesound": 361406, "trecho": [7.8, 8.8]}]},
+    {"arquivo": "bestiario/chupa_cu_ambient", "pico": 0.7, "fade": [0.1, 0.25], "partes": [{"freesound": 261464, "trecho": [2.0, 3.5]}]},
+    {"arquivo": "bestiario/chupa_cu_grito", "pico": 0.9, "fade": [0.005, 0.2], "partes": [{"freesound": 587354, "trecho": [0.28, 1.5]}]},
+    {"arquivo": "bestiario/chupa_cu_hurt", "pico": 0.85, "fade": [0.005, 0.1], "partes": [{"freesound": 344037, "trecho": [0.0, 0.76]}]},
+    {"arquivo": "bestiario/chupa_cu_death", "pico": 0.85, "fade": [0.01, 0.3], "partes": [{"freesound": 442564, "trecho": [1.65, 3.25]}]},
+    {"arquivo": "bestiario/flanelinha_assobio", "pico": 0.75, "fade": [0.01, 0.08], "partes": [{"freesound": 241258, "trecho": [0.84, 1.66]}]},
+    {"arquivo": "bestiario/flanelinha_arremesso", "pico": 0.8, "fade": [0.005, 0.05], "partes": [{"freesound": 422506, "trecho": [0.05, 0.3]}]},
+    {"arquivo": "bestiario/mosquito_zumbido", "pico": 0.6, "fade": [0.25, 0.4], "partes": [{"freesound": 662970, "trecho": [6.0, 8.0]}]},
+    {"arquivo": "bestiario/mosquito_death", "pico": 0.85, "fade": [0.002, 0.08], "partes": [{"freesound": 771247, "trecho": [0.58, 0.86]}]},
+    {"arquivo": "bestiario/dancarino_voadora", "pico": 0.8, "fade": [0.01, 0.3], "partes": [{"freesound": 475888, "trecho": [0.0, 1.1]}]},
+    {"arquivo": "bestiario/dancarino_pulo", "pico": 0.8, "fade": [0.005, 0.06], "partes": [{"freesound": 802451, "trecho": [0.04, 0.3]}]},
+    {"arquivo": "bestiario/ednaldo_orbe", "pico": 0.75, "fade": [0.01, 0.4], "partes": [{"freesound": 211624, "trecho": [0.1, 1.4]}]},
+    {"arquivo": "bestiario/ednaldo_banido", "pico": 0.7, "fade": [0.01, 0.15], "partes": [{"freesound": 420661, "trecho": [0.0, 1.5]}]},
+    {"arquivo": "bestiario/ednaldo_nota", "pico": 0.7, "fade": [0.005, 0.15], "partes": [{"freesound": 660667, "trecho": [0.0, 1.0]}]},
+    {"arquivo": "bestiario/ednaldo_furia", "pico": 0.9, "fade": [0.005, 0.8], "partes": [{"freesound": 513110, "trecho": [0.0, 3.0]}]},
+    {"arquivo": "bestiario/et_ambient", "pico": 0.8, "fade": [0.02, 0.15], "partes": [{"freesound": 512209, "trecho": [0.0, 2.1]}]},
+    {"arquivo": "bestiario/et_hurt", "pico": 0.8, "fade": [0.01, 0.12], "partes": [{"freesound": 539308, "trecho": [0.15, 0.9]}]},
+    {"arquivo": "bestiario/et_death", "pico": 0.9, "fade": [0.01, 0.6], "partes": [{"freesound": 545484, "trecho": [22.4, 25.6]}]},
+    {"arquivo": "bestiario/et_telecinese", "pico": 0.8, "fade": [0.05, 0.3], "partes": [{"freesound": 524943, "trecho": [0.3, 2.3]}]},
+    {"arquivo": "bestiario/et_raio", "pico": 0.6, "fade": [0.08, 0.2], "partes": [{"freesound": 200463, "trecho": [0.0, 1.2]}]},
+    {"arquivo": "bestiario/et_raio_quebrado", "pico": 0.9, "fade": [0.002, 0.2], "partes": [
+      {"freesound": 160421, "trecho": [0.0, 0.6]},
+      {"freesound": 221528, "trecho": [0.3, 0.8], "em": 0.05, "ganho": 0.8}
+    ]},
+    {"arquivo": "bestiario/et_lodo", "pico": 0.85, "fade": [0.005, 0.08], "partes": [{"freesound": 751338, "trecho": [0.0, 0.32]}]},
+    {"arquivo": "bestiario/cajado_banir", "pico": 0.8, "fade": [0.01, 0.15], "partes": [{"freesound": 560124, "trecho": [0.08, 0.95]}]},
+    {"arquivo": "bestiario/cajado_escudo", "pico": 0.75, "fade": [0.02, 0.4], "partes": [{"freesound": 351408, "trecho": [1.35, 3.45]}]},
+    {"arquivo": "bestiario/modulo_puxar", "pico": 0.75, "fade": [0.05, 0.25], "partes": [{"freesound": 414694, "trecho": [0.12, 1.3]}]},
+    {"arquivo": "bestiario/zarabatana_sopro", "pico": 0.8, "fade": [0.003, 0.08], "partes": [{"freesound": 714257, "trecho": [0.0, 0.36]}]},
+    {"arquivo": "economia/bip", "pico": 0.7, "fade": [0.002, 0.03], "partes": [
+      {"freesound": 144418, "trecho": [0.0, 0.14]},
+      {"freesound": 144418, "trecho": [0.0, 0.14], "em": 0.2}
+    ]},
+    {"arquivo": "economia/erro", "pico": 0.7, "fade": [0.003, 0.05], "partes": [{"freesound": 419023, "trecho": [0.0, 0.31]}]},
+    {"arquivo": "economia/caixa", "pico": 0.8, "fade": [0.005, 0.2], "partes": [{"freesound": 209578, "trecho": [0.05, 1.4]}]},
+    {"arquivo": "economia/inflacao", "pico": 0.75, "fade": [0.005, 0.3], "partes": [{"freesound": 156060, "trecho": [0.0, 2.35]}]},
+    {"arquivo": "cultura/mola", "pico": 0.85, "fade": [0.003, 0.15], "partes": [{"freesound": 161122, "trecho": [0.1, 0.96]}]},
+    {"arquivo": "cultura/fita", "pico": 0.75, "fade": [0.01, 0.1], "partes": [{"freesound": 118612, "trecho": [13.2, 14.0]}]},
+    {"arquivo": "minerios/faisca", "pico": 0.85, "fade": [0.002, 0.1], "partes": [{"freesound": 136542, "trecho": [0.0, 0.72]}]},
+    {"arquivo": "minerios/bateia", "pico": 0.8, "fade": [0.03, 0.2], "partes": [
+      {"freesound": 393494, "trecho": [0.0, 0.45]},
+      {"freesound": 212039, "trecho": [0.82, 1.52], "em": 0.1, "ganho": 0.7}
+    ]},
+    {"arquivo": "fauna/tucano", "evento": "entity.tucano.ambient", "pico": 0.85, "fade": [0.005, 0.1], "partes": [{"freesound": 845715, "trecho": [0.0, 1.78]}]},
+    {"arquivo": "fauna/ema", "evento": "entity.ema.ambient", "pico": 0.85, "fade": [0.005, 0.1], "partes": [{"freesound": 861145, "trecho": [0.0, 1.16]}]},
+    {"arquivo": "fauna/mico_leao", "evento": "entity.mico_leao.ambient", "pico": 0.8, "fade": [0.005, 0.1], "partes": [{"freesound": 871018, "trecho": [0.05, 1.7]}]},
+    {"arquivo": "fauna/jacare", "evento": "entity.jacare.ambient", "pico": 0.85, "fade": [0.02, 0.3], "partes": [{"freesound": 527844, "trecho": [0.1, 2.6]}]},
+    {"arquivo": "fauna/tuiuiu_bico", "evento": "entity.tuiuiu.bico", "pico": 0.8, "fade": [0.005, 0.2], "partes": [{"freesound": 705861, "trecho": [0.3, 2.3]}]}
+  ]
+}

@@ -770,9 +770,7 @@
     "subtitle": "subtitles.irineu.entity.ema.ambient",
     "sounds": [
       {
-        "name": "minecraft:entity.chicken.ambient",
-        "type": "event",
-        "pitch": 0.55
+        "name": "irineu:fauna/ema"
       }
     ]
   },
@@ -800,9 +798,7 @@
     "subtitle": "subtitles.irineu.entity.mico_leao.ambient",
     "sounds": [
       {
-        "name": "minecraft:entity.fox.ambient",
-        "type": "event",
-        "pitch": 1.8
+        "name": "irineu:fauna/mico_leao"
       }
     ]
   },
@@ -830,9 +826,7 @@
     "subtitle": "subtitles.irineu.entity.tucano.ambient",
     "sounds": [
       {
-        "name": "minecraft:entity.parrot.ambient",
-        "type": "event",
-        "pitch": 0.8
+        "name": "irineu:fauna/tucano"
       }
     ]
   },
@@ -980,9 +974,7 @@
     "subtitle": "subtitles.irineu.entity.jacare.ambient",
     "sounds": [
       {
-        "name": "minecraft:entity.cat.hiss",
-        "type": "event",
-        "pitch": 0.45
+        "name": "irineu:fauna/jacare"
       }
     ]
   },
@@ -1051,9 +1043,7 @@
     "subtitle": "subtitles.irineu.entity.tuiuiu.bico",
     "sounds": [
       {
-        "name": "minecraft:block.note_block.hat",
-        "type": "event",
-        "pitch": 1.7
+        "name": "irineu:fauna/tuiuiu_bico"
       }
     ]
   },

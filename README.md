@@ -557,6 +557,8 @@ As variações ficam em `assets/irineu/sounds.json`, que combina os trechos com 
 ## Para desenvolvedores
 O código é Java (Fabric Loom, Java 25). Texturas, sons, modelos e dados são gerados por scripts Python em `tools/` (precisam de Pillow, numpy, nbtlib e soundfile). Em vez de editar à mão os JSON e PNG gerados, mude o script e rode-o de novo, como diz o cabeçalho de cada um.
 
+Os sons que viraram gravações CC0 do Freesound estão em `tools/sons_cc0/sons_cc0.json` (de qual som sai cada trecho). O `sons_cc0.py` confere a licença de cada um, baixa, corta e grava os `.ogg` (precisa também do ffmpeg). Os outros geradores não sobrescrevem esses sons.
+
 ```
 gradlew build               # gera build/libs/irineu-<versão>+26.3.jar
 gradlew runClient           # abre o jogo com o mod
@@ -589,6 +591,7 @@ A cada push na `main` o fluxo `build.yml` compila e guarda o jar como artefato.
 - **Feito inteiramente com vibe coding:** o Claude Code (Anthropic) escreveu o projeto inteiro; o Mazzega deu as ideias, testou e dirigiu.
 - Mod de **paródia e humor**, feito por fã, sem ligação com a Mojang, a Microsoft nem com as pessoas, programas e marcas citados. Os personagens são caricaturas de memes e figuras públicas brasileiras.
 - **Licença:** o código e os recursos feitos para o mod (texturas, modelos, sons sintetizados, estruturas) são [CC0 1.0](LICENSE).
+- **Sons do Freesound:** os efeitos gravados (bestiário, maquininha, caixa, bichos e outros) são gravações em domínio público (CC0) de vários autores do [Freesound](https://freesound.org/). A lista com o link e o autor de cada um está em [`tools/sons_cc0/CREDITOS.md`](tools/sons_cc0/CREDITOS.md).
 - **Áudios de terceiros:** as falas tiradas de vídeos (Irineu, Jailson, BamBam, Davi, Manoel Gomes, Luva de Pedreiro, Lula, Bolsonaro, Padre Kelmon e o som da urna) pertencem aos seus autores e são usadas como paródia. Elas não estão sob a CC0. Se você é dono de algum desses áudios e quer que ele saia do mod, abra uma issue.
 - As falas do Ednaldo Pereira e do E.T. de Varginha ainda não têm áudio (veja "Falas dos chefões").
 - Feito com [Fabric](https://fabricmc.net/) e [GeckoLib](https://github.com/bernie-g/geckolib).
