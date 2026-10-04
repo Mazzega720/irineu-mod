@@ -357,7 +357,7 @@
   "subtitles.irineu.entity.chupa_cu.hurt": "Chupa-Cu hurts",
   "subtitles.irineu.entity.chupa_cu.death": "Chupa-Cu dies",
   "subtitles.irineu.entity.flanelinha.assobio": "Parking guy whistles",
-  "subtitles.irineu.entity.flanelinha.pago": "Parking guy thanks you",
+  "subtitles.irineu.entity.flanelinha.pago": "Thanks, boss!",
   "subtitles.irineu.entity.flanelinha.bravo": "Angry parking guy",
   "subtitles.irineu.entity.flanelinha.arremesso": "Rock thrown",
   "subtitles.irineu.entity.mosquito_dengue.zumbido": "Mosquito buzzing",
@@ -434,5 +434,6 @@
   "item.irineu.ednaldo_pereira_spawn_egg": "Ednaldo Pereira Spawn Egg",
   "item.irineu.et_varginha_spawn_egg": "The Varginha E.T. Spawn Egg",
   "effect.irineu.repelente": "Repellent",
-  "effect.irineu.grudado": "Stuck"
+  "effect.irineu.grudado": "Stuck",
+  "subtitles.irineu.item.disco_vale_tudo.ritual": "\"Vale Nada Vale Tudo\" plays"
 }

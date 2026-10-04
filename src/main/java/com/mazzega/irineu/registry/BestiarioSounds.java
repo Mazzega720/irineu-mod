@@ -10,9 +10,12 @@ import net.minecraft.sounds.SoundEvent;
  * Sons do bestiário do Brasil (gravações CC0 de {@code tools/sons_cc0}; os que faltam são sintetizados em
  * {@code tools/bestiario/bestiario.py}) e as falas dos dois chefões lendários.
  * <p>
- * As falas ({@code irineu:fala.ednaldo.*} e {@code irineu:fala.et.*}) estão registradas mas vazias no {@code sounds.json}:
- * para pôr a voz, coloque o .ogg em {@code assets/irineu/sounds/falas/<chefe>/<fala>.ogg}, aponte a entrada para ele e
- * acerte a duração em {@link com.mazzega.irineu.bestiario.chefes.FalaChefe} (a boca mexe esse tempo).
+ * Vozes reais de terceiros ({@code tools/audios_terceiros}, com crédito): o "Perdeu, playboy!" do assalto da moto, o
+ * "Valeu, patrão!" do flanelinha pago e, nas falas do Ednaldo, o "BANIDO!" e os trechos de "Vale Nada Vale Tudo".
+ * As outras falas ({@code irineu:fala.ednaldo.*} e todas as {@code irineu:fala.et.*}) estão registradas mas vazias no
+ * {@code sounds.json}: a voz entra pelo {@code tools/audios_terceiros} (que grava o .ogg em
+ * {@code assets/irineu/sounds/falas/<chefe>/<fala>.ogg} e aponta a entrada para ele), e a duração vai em
+ * {@link com.mazzega.irineu.bestiario.chefes.FalaChefe} (a boca mexe esse tempo).
  */
 public final class BestiarioSounds {
 	// ---------------------------------------------------------------- Dois Caras numa Moto
@@ -60,7 +63,7 @@ public final class BestiarioSounds {
 	public static final SoundEvent MODULO_PUXAR = register("item.modulo_antigravitacional.puxar");
 	public static final SoundEvent ZARABATANA = register("item.zarabatana.sopro");
 
-	// ---------------------------------------------------------------- Falas dos chefões (vazias até o usuário pôr as vozes)
+	// ---------------------------------------------------------------- Falas dos chefões (as sem voz real ficam vazias)
 	public static final SoundEvent FALA_EDNALDO_CHEGADA = register("fala.ednaldo.chegada");
 	public static final SoundEvent FALA_EDNALDO_VALE_TUDO = register("fala.ednaldo.vale_tudo");
 	public static final SoundEvent FALA_EDNALDO_NAO_VALE_NADA = register("fala.ednaldo.nao_vale_nada");

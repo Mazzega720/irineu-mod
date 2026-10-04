@@ -1425,15 +1425,27 @@
     "subtitle": "subtitles.irineu.fala.ednaldo.chegada"
   },
   "fala.ednaldo.vale_tudo": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/vale_tudo"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.vale_tudo"
   },
   "fala.ednaldo.nao_vale_nada": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/nao_vale_nada"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.nao_vale_nada"
   },
   "fala.ednaldo.banimento": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/banimento"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.banimento"
   },
   "fala.ednaldo.furia": {
@@ -1475,5 +1487,14 @@
   "fala.et.derrota": {
     "sounds": [],
     "subtitle": "subtitles.irineu.fala.et.derrota"
+  },
+  "item.disco_vale_tudo.ritual": {
+    "sounds": [
+      {
+        "name": "irineu:item/disco_vale_tudo",
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.disco_vale_tudo.ritual"
   }
 }

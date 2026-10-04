@@ -357,7 +357,7 @@
   "subtitles.irineu.entity.chupa_cu.hurt": "Chupa-Cu apanha",
   "subtitles.irineu.entity.chupa_cu.death": "Chupa-Cu morre",
   "subtitles.irineu.entity.flanelinha.assobio": "Flanelinha assobia",
-  "subtitles.irineu.entity.flanelinha.pago": "Flanelinha agradece",
+  "subtitles.irineu.entity.flanelinha.pago": "Valeu, patrão!",
   "subtitles.irineu.entity.flanelinha.bravo": "Flanelinha bravo",
   "subtitles.irineu.entity.flanelinha.arremesso": "Pedra arremessada",
   "subtitles.irineu.entity.mosquito_dengue.zumbido": "Zumbido de mosquito",
@@ -434,5 +434,6 @@
   "item.irineu.ednaldo_pereira_spawn_egg": "Ovo Gerador de Ednaldo Pereira",
   "item.irineu.et_varginha_spawn_egg": "Ovo Gerador de E.T. de Varginha",
   "effect.irineu.repelente": "Repelente",
-  "effect.irineu.grudado": "Grudado"
+  "effect.irineu.grudado": "Grudado",
+  "subtitles.irineu.item.disco_vale_tudo.ritual": "Toca \"Vale Nada Vale Tudo\""
 }

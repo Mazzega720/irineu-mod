@@ -78,6 +78,12 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			if (runs("cultura")) BrasilV3GameTests.testCultura(context, singleplayer);
 			if (runs("estruturas")) BrasilV3GameTests.testEstruturas(context, singleplayer);
 			if (runs("bestiario")) BestiarioGameTests.testBestiario(context, singleplayer);
+			// A Jornada pelo Brasil (versão 4.0).
+			if (runs("monstros")) MonstrosGameTests.testMonstros(context, singleplayer);
+			if (runs("reliquias")) ReliquiasGameTests.testReliquias(context, singleplayer);
+			if (runs("praca")) PracaGameTests.testPraca(context, singleplayer);
+			if (runs("camara")) CamaraGameTests.testCamara(context, singleplayer);
+			if (runs("jornada")) JornadaGameTests.testJornada(context, singleplayer);
 		}
 	}
 
@@ -1225,9 +1231,9 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 
 	// ---------------------------------------------------------------- Chefão final: Lula, Bolsonaro, dupla e Lulonaro
 
-	private static final String LULA_QUIET = "EstrelaCooldown:99999,GadoCooldown:99999,InvestidaCooldown:99999,VorticeCooldown:99999";
-	private static final String BOLSO_QUIET = "FuzilarCooldown:99999,FlexoesCooldown:99999,MitadaCooldown:99999";
-	private static final String LULONARO_QUIET = "EsferaCooldown:99999,DrenarCooldown:99999,GolpeCooldown:99999";
+	static final String LULA_QUIET = "EstrelaCooldown:99999,GadoCooldown:99999,InvestidaCooldown:99999,VorticeCooldown:99999";
+	static final String BOLSO_QUIET = "FuzilarCooldown:99999,FlexoesCooldown:99999,MitadaCooldown:99999";
+	static final String LULONARO_QUIET = "EsferaCooldown:99999,DrenarCooldown:99999,GolpeCooldown:99999";
 
 	private static void testChefao(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
 		var server = singleplayer.getServer();
@@ -1872,13 +1878,13 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		server.runOnServer(mc -> bambam(mc).setTarget(mc.getPlayerList().getPlayers().getFirst()));
 	}
 
-	private static void goTo(ClientGameTestContext context, TestSingleplayerContext singleplayer, double x, double z) {
+	static void goTo(ClientGameTestContext context, TestSingleplayerContext singleplayer, double x, double z) {
 		singleplayer.getServer().runCommand(String.format(Locale.ROOT, "tp @p %.1f -60 %.1f 0 0", x, z));
 		context.waitTicks(10);
 		singleplayer.getConnection().waitForChunksRender();
 	}
 
-	private static void heal(net.fabricmc.fabric.api.client.gametest.v1.context.TestServerContext server) {
+	static void heal(net.fabricmc.fabric.api.client.gametest.v1.context.TestServerContext server) {
 		server.runCommand("effect give @p minecraft:instant_health 1 5 true");
 	}
 

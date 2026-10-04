@@ -6,23 +6,26 @@ import net.minecraft.sounds.SoundEvent;
 /**
  * As falas dos chefões lendários: em que momento cada uma toca e quanto tempo a boca mexe.
  * <p>
- * Os sons estão registrados mas vazios no {@code sounds.json} (o espaço para as vozes). Para pôr uma fala:
+ * As vozes vêm de {@code tools/audios_terceiros} (áudios de terceiros, com crédito): o "BANIDO!" do Ednaldo e os trechos
+ * de "Vale Nada Vale Tudo" ("vale tudo" e "não vale nada"). As outras falas, e todas as do E.T., continuam registradas
+ * mas vazias no {@code sounds.json} (o espaço para as vozes). Para pôr uma fala:
  * <ol>
- * <li>coloque o arquivo em {@code assets/irineu/sounds/falas/<chefe>/<fala>.ogg} (ogg vorbis, mono);</li>
- * <li>no {@code sounds.json}, troque {@code "sounds": []} da entrada {@code fala.<chefe>.<fala>} por
- * {@code "sounds": ["irineu:falas/<chefe>/<fala>"]};</li>
- * <li>aqui, troque o 0 pela duração do áudio em segundos (com 0 a boca fica parada).</li>
+ * <li>ponha o original em {@code tools/audios_terceiros/originais/} e o trecho em {@code audios_terceiros.json}
+ * (arquivo {@code falas/<chefe>/<fala>}, evento {@code fala.<chefe>.<fala>});</li>
+ * <li>rode {@code audios_terceiros.py}, que grava o .ogg e aponta o {@code sounds.json} para ele;</li>
+ * <li>aqui, troque o 0 pela duração do áudio em segundos (com 0 a boca fica parada); {@code audios_terceiros.py
+ * --conferir} compara as durações.</li>
  * </ol>
  */
 public enum FalaChefe {
 	/** Ednaldo aparece (ou é provocado pela primeira vez). */
 	EDNALDO_CHEGADA(BestiarioSounds.FALA_EDNALDO_CHEGADA, 0.0F),
 	/** Solta o Orbe Dourado: "Você vale tudo". */
-	EDNALDO_VALE_TUDO(BestiarioSounds.FALA_EDNALDO_VALE_TUDO, 0.0F),
+	EDNALDO_VALE_TUDO(BestiarioSounds.FALA_EDNALDO_VALE_TUDO, 1.84F),
 	/** Solta o Orbe Sombrio: "Você não vale nada". */
-	EDNALDO_NAO_VALE_NADA(BestiarioSounds.FALA_EDNALDO_NAO_VALE_NADA, 0.0F),
-	/** Começa o Banimento Supremo. */
-	EDNALDO_BANIMENTO(BestiarioSounds.FALA_EDNALDO_BANIMENTO, 0.0F),
+	EDNALDO_NAO_VALE_NADA(BestiarioSounds.FALA_EDNALDO_NAO_VALE_NADA, 1.67F),
+	/** Começa o Banimento Supremo: "BANIDO!" (a sirene toca depois, no arremesso). */
+	EDNALDO_BANIMENTO(BestiarioSounds.FALA_EDNALDO_BANIMENTO, 1.3F),
 	/** Entra na Fúria do Irmão (abaixo de 30% da vida). */
 	EDNALDO_FURIA(BestiarioSounds.FALA_EDNALDO_FURIA, 0.0F),
 	/** De vez em quando, durante a luta. */

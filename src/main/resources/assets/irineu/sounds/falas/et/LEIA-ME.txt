@@ -1,3 +1,5 @@
-Coloque aqui as falas do chefão (et) em .ogg (vorbis, mono).
-Depois aponte a entrada fala.et.<fala> do sounds.json para "irineu:falas/et/<fala>"
-e acerte a duração em src/main/java/com/mazzega/irineu/bestiario/chefes/FalaChefe.java.
+As falas do chefão (et) em .ogg (vorbis, mono) saem de tools/audios_terceiros: não ponha os arquivos à mão.
+Ponha o original em tools/audios_terceiros/originais/ (fora do git), acrescente o trecho em audios_terceiros.json
+(arquivo falas/et/<fala>, evento fala.et.<fala>) e rode audios_terceiros.py; ele grava o .ogg e aponta o sounds.json.
+Depois acerte a duração em src/main/java/com/mazzega/irineu/bestiario/chefes/FalaChefe.java
+(audios_terceiros.py --conferir compara).

@@ -46,6 +46,10 @@ __pycache__/
 .venv/
 venv/
 
+# áudios originais de terceiros (tools/audios_terceiros): ficam fora do git, só os trechos .ogg entram
+
+tools/audios_terceiros/originais/
+
 # saídas soltas dos testes e logs
 
 *.log

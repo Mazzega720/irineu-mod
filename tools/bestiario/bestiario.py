@@ -4,9 +4,10 @@ Chupa-Cu de Goianinha, Flanelinha, Mosquitão da Dengue, Dançarino da Carreta F
 Pereira e o E.T. de Varginha).
 
 Gera: os modelos e animações do GeckoLib com as texturas (modelos_gente.py e modelos_criaturas.py), as texturas dos
-itens e dos ovos, os sons sintetizados (e as entradas vazias das falas dos chefões, o espaço para as vozes), as
-traduções, o loot, as receitas (dardo, zarabatana, botas de pulo duplo; a poção da sombra e o repelente no suporte de
-poções) e a tag c:bosses. Os spawns ficam nos biomas (tools/brasil/mundo.py).
+itens e dos ovos, os sons sintetizados (e as entradas das falas dos chefões: as com voz real apontam para os .ogg de
+tools/audios_terceiros, que não são sobrescritos, e as outras ficam vazias, o espaço para as vozes), as traduções, o
+loot, as receitas (dardo, zarabatana, botas de pulo duplo; a poção da sombra e o repelente no suporte de poções) e a
+tag c:bosses. Os spawns ficam nos biomas (tools/brasil/mundo.py).
 
 Uso: python bestiario.py <src/main/resources> [pasta da prévia]
 """
@@ -21,7 +22,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "..", "comum"))
 from geo import write  # noqa: E402
-from kit import Kit, concat, envelope, hexc, lowpass, noise, normalize, shade, silence, sweep, tone  # noqa: E402
+from kit import EVENTOS_TERCEIROS, Kit, concat, envelope, hexc, lowpass, noise, normalize, shade, silence, sweep, tone  # noqa: E402
 import modelos_criaturas  # noqa: E402
 import modelos_gente  # noqa: E402
 
@@ -221,7 +222,7 @@ som("entity.chupa_cu.death", "chupa_cu_death", env(sweep(1200, 150, 0.9) + noise
 fiu = concat(sweep(1800, 2600, 0.12), silence(0.06), sweep(1800, 2900, 0.18), sweep(2900, 2200, 0.12))
 som("entity.flanelinha.assobio", "flanelinha_assobio", env(fiu, 0.005, 0.04), "Flanelinha assobia", "Parking guy whistles", 0.5)
 pago = concat(env(tone(784, 0.12, (1, 0.3)), 0.005, 0.05), env(tone(1047, 0.25, (1, 0.3)), 0.005, 0.15))
-som("entity.flanelinha.pago", "flanelinha_pago", pago, "Flanelinha agradece", "Parking guy thanks you", 0.55)
+som("entity.flanelinha.pago", "flanelinha_pago", pago, "Valeu, patrão!", "Thanks, boss!", 0.55)
 vanilla("entity.flanelinha.bravo", ["minecraft:mob/villager/no1", "minecraft:mob/villager/no2", "minecraft:mob/villager/no3"], "Flanelinha bravo", "Angry parking guy", 0.85)
 som("entity.flanelinha.arremesso", "flanelinha_arremesso", env(noise(0.2, seed=12) * np.linspace(1, 0, int(0.2 * 44100)), 0.005, 0.05),
     "Pedra arremessada", "Rock thrown", 0.5)
@@ -280,7 +281,8 @@ som("item.cajado_do_julgamento.escudo", "cajado_escudo", concat(sino(659, 0.15),
 som("item.modulo_antigravitacional.puxar", "modulo_puxar", env(sweep(200, 1200, 0.45), 0.02, 0.1), "Itens puxados", "Items pulled", 0.55)
 som("item.zarabatana.sopro", "zarabatana_sopro", env(lowpass(noise(0.15, seed=18), 0.4), 0.003, 0.06), "Sopro de zarabatana", "Blowgun puff", 0.6)
 
-# As falas dos chefões: registradas e vazias (o espaço para as vozes; veja FalaChefe.java).
+# As falas dos chefões: as que têm voz real (tools/audios_terceiros) apontam para o arquivo; as outras ficam vazias, o
+# espaço para as vozes (veja FalaChefe.java).
 FALAS = {
     "ednaldo": [("chegada", "Ednaldo chega", "Ednaldo arrives"), ("vale_tudo", "Ednaldo: vale tudo", "Ednaldo: worth it all"),
                 ("nao_vale_nada", "Ednaldo: não vale nada", "Ednaldo: worth nothing"), ("banimento", "Ednaldo bane", "Ednaldo banishes"),
@@ -292,15 +294,18 @@ FALAS = {
 }
 for chefe, falas in FALAS.items():
     for nome, pt, en in falas:
-        k.sound(f"fala.{chefe}.{nome}", [], pt, en)
-# Deixa as pastas das vozes prontas (vazias) para o usuário pôr os .ogg.
+        ev = f"fala.{chefe}.{nome}"
+        k.sound(ev, [EVENTOS_TERCEIROS[ev]] if ev in EVENTOS_TERCEIROS else [], pt, en)
+# As pastas das vozes, com o LEIA-ME de como pôr uma fala (pelo tools/audios_terceiros).
 for chefe in FALAS:
     pasta = k.asset("sounds", "falas", chefe)
     os.makedirs(pasta, exist_ok=True)
     with open(os.path.join(pasta, "LEIA-ME.txt"), "w", encoding="utf-8") as f:
-        f.write(f"Coloque aqui as falas do chefão ({chefe}) em .ogg (vorbis, mono).\n"
-                f"Depois aponte a entrada fala.{chefe}.<fala> do sounds.json para \"irineu:falas/{chefe}/<fala>\"\n"
-                "e acerte a duração em src/main/java/com/mazzega/irineu/bestiario/chefes/FalaChefe.java.\n")
+        f.write(f"As falas do chefão ({chefe}) em .ogg (vorbis, mono) saem de tools/audios_terceiros: não ponha os arquivos à mão.\n"
+                "Ponha o original em tools/audios_terceiros/originais/ (fora do git), acrescente o trecho em audios_terceiros.json\n"
+                f"(arquivo falas/{chefe}/<fala>, evento fala.{chefe}.<fala>) e rode audios_terceiros.py; ele grava o .ogg e aponta o sounds.json.\n"
+                "Depois acerte a duração em src/main/java/com/mazzega/irineu/bestiario/chefes/FalaChefe.java\n"
+                "(audios_terceiros.py --conferir compara).\n")
 
 # ====================================================================== Traduções
 L = k.lang
