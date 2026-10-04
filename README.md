@@ -585,6 +585,8 @@ teste automático: spawna Irineu, Jailson e BamBam (com árvore e mobs para o BI
 2. Faça o commit e crie a tag `v<versão>` (por exemplo `git tag v3.0.0`), depois `git push` e `git push --tags`.
 3. O GitHub Actions (`.github/workflows/release.yml`) confere a tag contra `mod_version` e o CHANGELOG, compila e cria o Release com o jar e as notas da versão.
 
+Sem a tag, também dá para lançar pelo GitHub: **Actions → Release → Run workflow**, escolha a branch e digite a versão (ex.: `3.2.0`). O fluxo faz as mesmas conferências e cria a tag `v<versão>` naquele commit.
+
 A cada push na `main` o fluxo `build.yml` compila e guarda o jar como artefato.
 
 ## Créditos e avisos

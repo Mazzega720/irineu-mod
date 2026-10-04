@@ -1,11 +1,18 @@
 # Lançamento: ao enviar uma tag v<versão> (ex.: v3.0.0), confere que ela bate com mod_version e com o
 # CHANGELOG.md, compila e cria o Release do GitHub com o jar e as notas daquela versão.
+# Também roda à mão (Actions > Release > Run workflow) com a versão: aí cria a tag v<versão> no commit escolhido.
 name: Release
 
 on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
+    inputs:
+      versao:
+        description: "Versão a lançar (ex.: 3.2.0). Cria a tag v<versão> no commit da branch escolhida."
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -14,9 +21,19 @@ jobs:
   release:
     name: Release (Java 25)
     runs-on: ubuntu-24.04
+    env:
+      RELEASE_TAG: ${{ github.event_name == 'workflow_dispatch' && format('v{0}', inputs.versao) || github.ref_name }}
     steps:
       - name: Checkout tagged source
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Check the tag is new (manual run)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/${RELEASE_TAG}" >/dev/null; then
+            echo "A tag ${RELEASE_TAG} já existe" >&2
+            exit 1
+          fi
 
       - name: Validate Gradle wrapper
         uses: gradle/actions/wrapper-validation@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
@@ -31,15 +48,11 @@ jobs:
         uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
 
       - name: Validate tag and build
-        env:
-          RELEASE_TAG: ${{ github.ref_name }}
         run: |
           chmod +x gradlew
           ./gradlew verifyReleaseVersion build --no-daemon -PreleaseModVersion="${RELEASE_TAG#v}"
 
       - name: Select jar and release notes
-        env:
-          RELEASE_TAG: ${{ github.ref_name }}
         run: |
           shopt -s nullglob
           mkdir -p release-artifacts
@@ -71,7 +84,9 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          target_commitish: ${{ github.sha }}
           files: release-artifacts/*.jar
           body_path: release-notes.md
           fail_on_unmatched_files: true
-          prerelease: ${{ contains(github.ref_name, '-alpha') || contains(github.ref_name, '-beta') || contains(github.ref_name, '-rc') }}
+          prerelease: ${{ contains(env.RELEASE_TAG, '-alpha') || contains(env.RELEASE_TAG, '-beta') || contains(env.RELEASE_TAG, '-rc') }}
