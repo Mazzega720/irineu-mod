@@ -1,0 +1,3 @@
+Coloque aqui as falas do chefão (ednaldo) em .ogg (vorbis, mono).
+Depois aponte a entrada fala.ednaldo.<fala> do sounds.json para "irineu:falas/ednaldo/<fala>"
+e acerte a duração em src/main/java/com/mazzega/irineu/bestiario/chefes/FalaChefe.java.

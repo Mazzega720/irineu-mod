@@ -1,0 +1,627 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "moto.idle": {
+   "animation_length": 2.0,
+   "bones": {
+    "p_right_leg": {
+     "rotation": {
+      "0.0": [
+       -78,
+       0,
+       12
+      ]
+     }
+    },
+    "p_left_leg": {
+     "rotation": {
+      "0.0": [
+       -78,
+       0,
+       -12
+      ]
+     }
+    },
+    "p_right_shin": {
+     "rotation": {
+      "0.0": [
+       72,
+       0,
+       0
+      ]
+     }
+    },
+    "p_left_shin": {
+     "rotation": {
+      "0.0": [
+       72,
+       0,
+       0
+      ]
+     }
+    },
+    "g_right_leg": {
+     "rotation": {
+      "0.0": [
+       -78,
+       0,
+       12
+      ]
+     }
+    },
+    "g_left_leg": {
+     "rotation": {
+      "0.0": [
+       -78,
+       0,
+       -12
+      ]
+     }
+    },
+    "g_right_shin": {
+     "rotation": {
+      "0.0": [
+       72,
+       0,
+       0
+      ]
+     }
+    },
+    "g_left_shin": {
+     "rotation": {
+      "0.0": [
+       72,
+       0,
+       0
+      ]
+     }
+    },
+    "p_right_arm": {
+     "rotation": {
+      "0.0": [
+       -62,
+       0,
+       8
+      ]
+     }
+    },
+    "p_left_arm": {
+     "rotation": {
+      "0.0": [
+       -62,
+       0,
+       -8
+      ]
+     }
+    },
+    "p_right_forearm": {
+     "rotation": {
+      "0.0": [
+       -12,
+       0,
+       0
+      ]
+     }
+    },
+    "p_left_forearm": {
+     "rotation": {
+      "0.0": [
+       -12,
+       0,
+       0
+      ]
+     }
+    },
+    "p_chest": {
+     "rotation": {
+      "0.0": [
+       16,
+       0,
+       0
+      ]
+     }
+    },
+    "p_head": {
+     "rotation": {
+      "0.0": [
+       -14,
+       0,
+       0
+      ],
+      "1.0": {
+       "vector": [
+        -14,
+        -15,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "2.0": {
+       "vector": [
+        -14,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "g_right_arm": {
+     "rotation": {
+      "0.0": [
+       -20,
+       0,
+       14
+      ]
+     }
+    },
+    "g_left_arm": {
+     "rotation": {
+      "0.0": [
+       -45,
+       0,
+       -6
+      ]
+     }
+    },
+    "g_right_forearm": {
+     "rotation": {
+      "0.0": [
+       -30,
+       0,
+       0
+      ]
+     }
+    },
+    "g_left_forearm": {
+     "rotation": {
+      "0.0": [
+       -40,
+       0,
+       0
+      ]
+     }
+    },
+    "moto": {
+     "position": [
+      0,
+      "math.sin(query.anim_time * 360 * 14) * 0.12",
+      0
+     ]
+    },
+    "g_head": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.8": {
+       "vector": [
+        0,
+        30,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "1.4": {
+       "vector": [
+        0,
+        -20,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "2.0": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   },
+   "loop": true
+  },
+  "moto.andar": {
+   "animation_length": 1.0,
+   "bones": {
+    "p_right_leg": {
+     "rotation": {
+      "0.0": [
+       -78,
+       0,
+       12
+      ]
+     }
+    },
+    "p_left_leg": {
+     "rotation": {
+      "0.0": [
+       -78,
+       0,
+       -12
+      ]
+     }
+    },
+    "p_right_shin": {
+     "rotation": {
+      "0.0": [
+       72,
+       0,
+       0
+      ]
+     }
+    },
+    "p_left_shin": {
+     "rotation": {
+      "0.0": [
+       72,
+       0,
+       0
+      ]
+     }
+    },
+    "g_right_leg": {
+     "rotation": {
+      "0.0": [
+       -78,
+       0,
+       12
+      ]
+     }
+    },
+    "g_left_leg": {
+     "rotation": {
+      "0.0": [
+       -78,
+       0,
+       -12
+      ]
+     }
+    },
+    "g_right_shin": {
+     "rotation": {
+      "0.0": [
+       72,
+       0,
+       0
+      ]
+     }
+    },
+    "g_left_shin": {
+     "rotation": {
+      "0.0": [
+       72,
+       0,
+       0
+      ]
+     }
+    },
+    "p_right_arm": {
+     "rotation": {
+      "0.0": [
+       -62,
+       0,
+       8
+      ]
+     }
+    },
+    "p_left_arm": {
+     "rotation": {
+      "0.0": [
+       -62,
+       0,
+       -8
+      ]
+     }
+    },
+    "p_right_forearm": {
+     "rotation": {
+      "0.0": [
+       -12,
+       0,
+       0
+      ]
+     }
+    },
+    "p_left_forearm": {
+     "rotation": {
+      "0.0": [
+       -12,
+       0,
+       0
+      ]
+     }
+    },
+    "p_chest": {
+     "rotation": [
+      "16 + 10 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    },
+    "p_head": {
+     "rotation": {
+      "0.0": [
+       -14,
+       0,
+       0
+      ]
+     }
+    },
+    "g_right_arm": {
+     "rotation": {
+      "0.0": [
+       -20,
+       0,
+       14
+      ]
+     }
+    },
+    "g_left_arm": {
+     "rotation": {
+      "0.0": [
+       -45,
+       0,
+       -6
+      ]
+     }
+    },
+    "g_right_forearm": {
+     "rotation": {
+      "0.0": [
+       -30,
+       0,
+       0
+      ]
+     }
+    },
+    "g_left_forearm": {
+     "rotation": {
+      "0.0": [
+       -40,
+       0,
+       0
+      ]
+     }
+    },
+    "moto": {
+     "position": [
+      0,
+      "math.sin(query.anim_time * 360 * 14) * 0.12",
+      0
+     ],
+     "rotation": [
+      "-1.5 * query.limb_swing_amount",
+      0,
+      "math.sin(query.anim_time * 180) * 3 * query.limb_swing_amount"
+     ]
+    },
+    "roda_frente": {
+     "rotation": [
+      "-query.limb_swing * 90",
+      0,
+      0
+     ]
+    },
+    "roda_tras": {
+     "rotation": [
+      "-query.limb_swing * 90",
+      0,
+      0
+     ]
+    },
+    "guidao": {
+     "rotation": [
+      0,
+      "math.sin(query.anim_time * 180) * 6 * query.limb_swing_amount",
+      0
+     ]
+    },
+    "g_chest": {
+     "rotation": [
+      "8 * query.limb_swing_amount",
+      0,
+      0
+     ]
+    }
+   },
+   "loop": true
+  },
+  "moto.golpe": {
+   "animation_length": 0.55,
+   "bones": {
+    "g_right_arm": {
+     "rotation": {
+      "0.0": [
+       -20,
+       0,
+       14
+      ],
+      "0.15": {
+       "vector": [
+        -150,
+        -20,
+        50
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.3": {
+       "vector": [
+        -60,
+        30,
+        -20
+       ],
+       "easing": "easeInExpo"
+      },
+      "0.55": {
+       "vector": [
+        -20,
+        0,
+        14
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "g_right_forearm": {
+     "rotation": {
+      "0.0": [
+       -30,
+       0,
+       0
+      ],
+      "0.15": {
+       "vector": [
+        -70,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.3": {
+       "vector": [
+        -5,
+        0,
+        0
+       ],
+       "easing": "easeInExpo"
+      },
+      "0.55": {
+       "vector": [
+        -30,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "g_chest": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.15": {
+       "vector": [
+        -6,
+        30,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.3": {
+       "vector": [
+        8,
+        -35,
+        0
+       ],
+       "easing": "easeInExpo"
+      },
+      "0.55": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   }
+  },
+  "moto.empinar": {
+   "animation_length": 1.0,
+   "bones": {
+    "moto": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.3": {
+       "vector": [
+        -26,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.7": {
+       "vector": [
+        -22,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      },
+      "1.0": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInQuad"
+      }
+     }
+    },
+    "roda_frente": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "1.0": {
+       "vector": [
+        -720,
+        0,
+        0
+       ],
+       "easing": "linear"
+      }
+     }
+    },
+    "g_left_arm": {
+     "rotation": {
+      "0.0": [
+       -45,
+       0,
+       -6
+      ],
+      "0.3": {
+       "vector": [
+        -170,
+        0,
+        -20
+       ],
+       "easing": "easeOutBack"
+      },
+      "0.8": {
+       "vector": [
+        -170,
+        0,
+        -20
+       ],
+       "easing": "linear"
+      },
+      "1.0": {
+       "vector": [
+        -45,
+        0,
+        -6
+       ],
+       "easing": "easeInQuad"
+      }
+     }
+    }
+   }
+  }
+ }
+}

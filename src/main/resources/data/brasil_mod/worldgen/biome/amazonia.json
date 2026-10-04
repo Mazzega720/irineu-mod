@@ -112,6 +112,20 @@
                 "max_inclusive": 2
               },
               "weight": 4
+            },
+            {
+              "type": "irineu:chupa_cu",
+              "count": 1,
+              "weight": 25
+            },
+            {
+              "type": "irineu:mosquito_dengue",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 3
+              },
+              "weight": 40
             }
           ],
           "water_creature": [

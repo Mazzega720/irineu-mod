@@ -1120,5 +1120,370 @@
       }
     ],
     "subtitle": "subtitles.irineu.item.gambiarra_universal.fita"
+  },
+  "entity.dois_caras_moto.motor": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/moto_motor"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.dois_caras_moto.motor"
+  },
+  "entity.dois_caras_moto.escapamento": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/moto_escapamento"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.dois_caras_moto.escapamento"
+  },
+  "entity.dois_caras_moto.assalto": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/moto_assalto"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.dois_caras_moto.assalto"
+  },
+  "entity.dois_caras_moto.hurt": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/villager/hit1",
+        "pitch": 0.9,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/villager/hit2",
+        "pitch": 0.9,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.dois_caras_moto.hurt"
+  },
+  "entity.dois_caras_moto.death": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/villager/death",
+        "pitch": 0.85,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.dois_caras_moto.death"
+  },
+  "entity.chupa_cu.ambient": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/chupa_cu_ambient"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.chupa_cu.ambient"
+  },
+  "entity.chupa_cu.grito": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/chupa_cu_grito"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.chupa_cu.grito"
+  },
+  "entity.chupa_cu.hurt": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/chupa_cu_hurt"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.chupa_cu.hurt"
+  },
+  "entity.chupa_cu.death": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/chupa_cu_death"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.chupa_cu.death"
+  },
+  "entity.flanelinha.assobio": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/flanelinha_assobio"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.flanelinha.assobio"
+  },
+  "entity.flanelinha.pago": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/flanelinha_pago"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.flanelinha.pago"
+  },
+  "entity.flanelinha.bravo": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/villager/no1",
+        "pitch": 0.85,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/villager/no2",
+        "pitch": 0.85,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/villager/no3",
+        "pitch": 0.85,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.flanelinha.bravo"
+  },
+  "entity.flanelinha.arremesso": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/flanelinha_arremesso"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.flanelinha.arremesso"
+  },
+  "entity.mosquito_dengue.zumbido": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/mosquito_zumbido"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.mosquito_dengue.zumbido"
+  },
+  "entity.mosquito_dengue.picada": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/mosquito_picada"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.mosquito_dengue.picada"
+  },
+  "entity.mosquito_dengue.death": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/mosquito_death"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.mosquito_dengue.death"
+  },
+  "entity.dancarino_carreta.batida": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/dancarino_batida"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.dancarino_carreta.batida"
+  },
+  "entity.dancarino_carreta.voadora": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/dancarino_voadora"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.dancarino_carreta.voadora"
+  },
+  "entity.dancarino_carreta.pulo": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/dancarino_pulo"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.dancarino_carreta.pulo"
+  },
+  "entity.ednaldo_pereira.orbe": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/ednaldo_orbe"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.ednaldo_pereira.orbe"
+  },
+  "entity.ednaldo_pereira.vale_tudo": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/ednaldo_vale_tudo"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.ednaldo_pereira.vale_tudo"
+  },
+  "entity.ednaldo_pereira.nao_vale_nada": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/ednaldo_nao_vale_nada"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.ednaldo_pereira.nao_vale_nada"
+  },
+  "entity.ednaldo_pereira.banido": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/ednaldo_banido"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.ednaldo_pereira.banido"
+  },
+  "entity.ednaldo_pereira.nota": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/ednaldo_nota"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.ednaldo_pereira.nota"
+  },
+  "entity.ednaldo_pereira.furia": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/ednaldo_furia"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.ednaldo_pereira.furia"
+  },
+  "entity.et_varginha.ambient": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/et_ambient"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.et_varginha.ambient"
+  },
+  "entity.et_varginha.hurt": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/et_hurt"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.et_varginha.hurt"
+  },
+  "entity.et_varginha.death": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/et_death"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.et_varginha.death"
+  },
+  "entity.et_varginha.telecinese": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/et_telecinese"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.et_varginha.telecinese"
+  },
+  "entity.et_varginha.raio": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/et_raio"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.et_varginha.raio"
+  },
+  "entity.et_varginha.raio_quebrado": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/et_raio_quebrado"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.et_varginha.raio_quebrado"
+  },
+  "entity.et_varginha.lodo": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/et_lodo"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.et_varginha.lodo"
+  },
+  "item.cajado_do_julgamento.banir": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/cajado_banir"
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.cajado_do_julgamento.banir"
+  },
+  "item.cajado_do_julgamento.escudo": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/cajado_escudo"
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.cajado_do_julgamento.escudo"
+  },
+  "item.modulo_antigravitacional.puxar": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/modulo_puxar"
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.modulo_antigravitacional.puxar"
+  },
+  "item.zarabatana.sopro": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/zarabatana_sopro"
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.zarabatana.sopro"
+  },
+  "fala.ednaldo.chegada": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.ednaldo.chegada"
+  },
+  "fala.ednaldo.vale_tudo": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.ednaldo.vale_tudo"
+  },
+  "fala.ednaldo.nao_vale_nada": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.ednaldo.nao_vale_nada"
+  },
+  "fala.ednaldo.banimento": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.ednaldo.banimento"
+  },
+  "fala.ednaldo.furia": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.ednaldo.furia"
+  },
+  "fala.ednaldo.ambiente": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.ednaldo.ambiente"
+  },
+  "fala.ednaldo.derrota": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.ednaldo.derrota"
+  },
+  "fala.et.chegada": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.et.chegada"
+  },
+  "fala.et.telecinese": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.et.telecinese"
+  },
+  "fala.et.abducao": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.et.abducao"
+  },
+  "fala.et.lodo": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.et.lodo"
+  },
+  "fala.et.raio_quebrado": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.et.raio_quebrado"
+  },
+  "fala.et.ambiente": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.et.ambiente"
+  },
+  "fala.et.derrota": {
+    "sounds": [],
+    "subtitle": "subtitles.irineu.fala.et.derrota"
   }
 }

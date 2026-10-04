@@ -1,0 +1,168 @@
+{
+ "format_version": "1.8.0",
+ "animations": {
+  "mosquito.voar": {
+   "animation_length": 2.0,
+   "bones": {
+    "leg_r0": {
+     "rotation": [
+      "-35 + math.sin((query.anim_time + 0.0) * 240) * 8",
+      0,
+      "25 + math.cos(query.anim_time * 200) * 5"
+     ]
+    },
+    "leg_r1": {
+     "rotation": [
+      "0 + math.sin((query.anim_time + 0.3) * 240) * 8",
+      0,
+      "25 + math.cos(query.anim_time * 200) * 5"
+     ]
+    },
+    "leg_r2": {
+     "rotation": [
+      "35 + math.sin((query.anim_time + 0.6) * 240) * 8",
+      0,
+      "25 + math.cos(query.anim_time * 200) * 5"
+     ]
+    },
+    "leg_l0": {
+     "rotation": [
+      "-35 + math.sin((query.anim_time + 0.0) * 240) * 8",
+      0,
+      "-25 + math.cos(query.anim_time * 200) * 5"
+     ]
+    },
+    "leg_l1": {
+     "rotation": [
+      "0 + math.sin((query.anim_time + 0.3) * 240) * 8",
+      0,
+      "-25 + math.cos(query.anim_time * 200) * 5"
+     ]
+    },
+    "leg_l2": {
+     "rotation": [
+      "35 + math.sin((query.anim_time + 0.6) * 240) * 8",
+      0,
+      "-25 + math.cos(query.anim_time * 200) * 5"
+     ]
+    },
+    "wing_r": {
+     "rotation": [
+      0,
+      "math.sin(query.anim_time * 360 * 9) * 12",
+      "-10 + math.sin(query.anim_time * 360 * 18) * 55"
+     ]
+    },
+    "wing_l": {
+     "rotation": [
+      0,
+      "-math.sin(query.anim_time * 360 * 9) * 12",
+      "10 - math.sin(query.anim_time * 360 * 18) * 55"
+     ]
+    },
+    "abdomen": {
+     "rotation": [
+      "-18 + math.sin(query.anim_time * 180) * 6",
+      0,
+      0
+     ]
+    },
+    "body": {
+     "rotation": [
+      "math.sin(query.anim_time * 360) * 4",
+      0,
+      "math.cos(query.anim_time * 270) * 6"
+     ]
+    },
+    "head": {
+     "rotation": [
+      "math.sin(query.anim_time * 540) * 5",
+      "math.cos(query.anim_time * 300) * 10",
+      0
+     ]
+    }
+   },
+   "loop": true
+  },
+  "mosquito.picada": {
+   "animation_length": 0.5,
+   "bones": {
+    "body": {
+     "rotation": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.2": {
+       "vector": [
+        35,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.5": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "probocide": {
+     "position": {
+      "0.0": [
+       0,
+       0,
+       0
+      ],
+      "0.2": {
+       "vector": [
+        0,
+        0,
+        -2
+       ],
+       "easing": "easeInExpo"
+      },
+      "0.5": {
+       "vector": [
+        0,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    },
+    "abdomen": {
+     "rotation": {
+      "0.0": [
+       -18,
+       0,
+       0
+      ],
+      "0.2": {
+       "vector": [
+        -40,
+        0,
+        0
+       ],
+       "easing": "easeOutQuad"
+      },
+      "0.5": {
+       "vector": [
+        -18,
+        0,
+        0
+       ],
+       "easing": "easeInOutSine"
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "minecraft:potion",
+    "potion_contents": {
+      "potions": "minecraft:awkward"
+    }
+  },
+  "reagent": {
+    "item": "irineu:ferrao_dengue"
+  },
+  "output": {
+    "id": "minecraft:potion",
+    "components": {
+      "minecraft:potion_contents": {
+        "custom_color": 13232234,
+        "custom_effects": [
+          {
+            "id": "irineu:repelente",
+            "duration": 6000
+          }
+        ]
+      },
+      "minecraft:item_name": {
+        "translate": "item.irineu.repelente"
+      }
+    }
+  }
+}

@@ -9,7 +9,7 @@ Mod para **Minecraft 26.3 / Fabric** (Loader 0.19.5, Fabric API 0.161.0+26.3, Ja
 
 **Precisa do [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib) 5.5.7+ para Fabric 26.3** na pasta `mods` (é ele que anima o BamBam e o Manoel Gomes).
 
-Adiciona a dimensão **Brasil** (com Amazônia, Cerrado, Mata Atlântica, Caatinga, Pampa e Pantanal, plantas e bichos brasileiros) e, morando nela, o **Irineu** e o **Jailson Mendes** como mobs neutros, o **BamBam** (com fase 2 e a **academia** dele) e o **Manoel Gomes** (com 3 fases) como bosses, o **Luva de Pedreiro** com o empresário **Allan Jesus** (desafios valendo prêmio), o **chefão final Lula e Bolsonaro** (4 fases, com a fusão no Lulonaro), o item **Suco de Laranja** e **quiosques de praia** com mesas e cadeiras de plástico. Desde a versão 3: a **economia do Real** (notas, Pix na maquininha, inflação semanal e a nota de 3 reais), **minérios brasileiros** (nióbio, turmalina Paraíba, hematita de Carajás, ágata e ametista, topázio imperial e o cascalho de aluvião) com o que se faz com eles, **itens da cultura popular** (Havaiana de Pau, Bambu do Silvio, gambiarra, óculos Juliet, filtro de barro, comidas) e **estruturas** com comerciantes (favela, buteco, vila de cangaceiros, estância gaúcha, palafitas e as ruínas de Carajás).
+Adiciona a dimensão **Brasil** (com Amazônia, Cerrado, Mata Atlântica, Caatinga, Pampa e Pantanal, plantas e bichos brasileiros) e, morando nela, o **Irineu** e o **Jailson Mendes** como mobs neutros, o **BamBam** (com fase 2 e a **academia** dele) e o **Manoel Gomes** (com 3 fases) como bosses, o **Luva de Pedreiro** com o empresário **Allan Jesus** (desafios valendo prêmio), o **chefão final Lula e Bolsonaro** (4 fases, com a fusão no Lulonaro), o item **Suco de Laranja** e **quiosques de praia** com mesas e cadeiras de plástico. Desde a versão 3: a **economia do Real** (notas, Pix na maquininha, inflação semanal e a nota de 3 reais), **minérios brasileiros** (nióbio, turmalina Paraíba, hematita de Carajás, ágata e ametista, topázio imperial e o cascalho de aluvião) com o que se faz com eles, **itens da cultura popular** (Havaiana de Pau, Bambu do Silvio, gambiarra, óculos Juliet, filtro de barro, comidas) e **estruturas** com comerciantes (favela, buteco, vila de cangaceiros, estância gaúcha, palafitas e as ruínas de Carajás). Na versão 3.2: o **bestiário** com 5 mobs novos (Dois Caras numa Moto, Chupa-Cu de Goianinha, Flanelinha, Mosquitão da Dengue e o Dançarino da Carreta Furacão) e 2 chefões lendários (**Ednaldo Pereira** e o **E.T. de Varginha**).
 
 ## Instalação
 1. Instale o **Fabric Loader 0.19.5+** para o **Minecraft 26.3** (Java 25).
@@ -183,6 +183,49 @@ Os alagados do Pantanal não aparecem dentro delas, e árvores, mandacarus, xiqu
 ### Vira-lata caramelo
 É uma variante nova de lobo (pelo caramelo) que aparece na favela e no buteco. Doma e cuida como qualquer lobo.
 
+## Bestiário do Brasil (versão 3.2)
+Mobs novos que nascem nos biomas do Brasil, todos animados no GeckoLib. Cada um tem ovo gerador na aba **Brasil**.
+
+| Mob | Onde nasce | Como age | O que deixa |
+|---|---|---|---|
+| **Dois Caras numa Moto** | Cerrado, Mata Atlântica e Pampa | **Bate e foge:** acelera em linha reta, passa raspando e golpeia, foge uns 14 blocos e volta **empinando** a moto. Em 40% dos golpes é **assalto**: leva de 1 a 3 notas do seu inventário (elas caem de volta quando a moto morre) ou, se você não tiver nota, derruba o item da sua mão. | Pepitas de ferro, notas e, às vezes, um capacete colorido |
+| **Chupa-Cu de Goianinha** | Cavernas escuras (abaixo do y 50, sem céu) de todos os biomas, menos o Litoral | **Só anda quando você está de costas.** Se você olha para ele, ele congela; se tem luz demais ou você chega perto, ele recua para o canto mais escuro. O bote **pelas costas** dá **dano triplo** e **Cegueira**. Os olhos brilham no escuro. | Couro Sombrio (só se morrer para um jogador) e ossos |
+| **Flanelinha** | Cerrado, Mata Atlântica, Pampa e Litoral | **Neutro**, com o paninho na mão. Clique nele com uma **moeda de 1 real** e ele vigia você por **10 minutos** (e briga com os monstros por perto). Se você **montar** (barco, cavalo, carrinho) perto dele **sem pagar**, ele fica bravo e **joga pedras** (a pedra pode te derrubar da montaria). | Paninho Sujo, moedas e pedras |
+| **Mosquitão da Dengue** | Amazônia e Pantanal, em bandos de 2 ou 3 | Voa em **zigue-zague**, difícil de acertar. A picada dá **Veneno II**, **Náusea** e **Fadiga de Mineração**. Quem tomou **Repelente** é ignorado. | Ferrão da Dengue |
+| **Dançarino da Carreta Furacão** | Mata Atlântica e Litoral | **Escala paredes**, faz **parkour** com mortal e não toma dano de queda até 8 blocos. Ataca com uma **voadora** que arremessa o alvo; se o alvo bater numa parede logo depois, toma dano extra. | Mola Saltadora (só para jogador) e linha |
+
+### Ednaldo Pereira, o Juiz Supremo (chefão)
+**600 de vida**, barra **roxa em 10 partes**, imune a fogo e a empurrão. Só aparece pelo ovo gerador.
+- **O Vale Tudo e o Não Vale Nada:** conjura orbes. O **dourado** ("vale tudo") cura quem pegar com **Regeneração II** e **Força**. O **sombrio** ("não vale nada") persegue o alvo, dá 16 de dano e **tira 5 níveis de experiência**. Dá para destruir o sombrio no golpe; o escudo segura, mas fica 5 segundos desativado.
+- **Banimento Supremo:** prende o jogador com **Lentidão X**, mostra **"BANIDO!"** na tela e o joga até **35 blocos para cima**. O tombo do banimento tira no máximo 7,5 corações.
+- **Fúria do Irmão** (abaixo de 30% da vida): flutua, a barra pisca vermelha e branca e ele solta **espirais de 12 notas musicais** que explodem (sem quebrar blocos).
+- **Deixa:** o **Cajado do Julgamento**, notas de 100 e 200 e frascos de experiência.
+
+### E.T. de Varginha (chefão)
+**500 de vida**, barra **verde em 6 partes**. Só aparece pelo ovo gerador.
+- **Telecinese:** arranca de 3 a 5 blocos do chão, gira com eles em volta e arremessa no jogador.
+- **Raio de Abdução:** um feixe que faz o jogador **levitar** e vai drenando a vida. Uma **flechada crítica na cabeça** dele quebra o raio: o E.T. fica tonto e a vítima desce devagar (Queda Lenta).
+- **Lodo:** cospe uma poça que dá **Lentidão IV**, **Fadiga de Mineração III** e **Grudado** (não dá para pular).
+- **Teleporte:** se levar dois tiros de longe em seguida, some e aparece perto.
+- **Deixa:** o **Módulo Antigravitacional**, redstone, pérolas do Fim e notas de 100.
+
+### Itens do bestiário
+| Item | Como consegue | O que faz |
+|---|---|---|
+| **Cajado do Julgamento** | Ednaldo Pereira | Clique num **monstro** para **bani-lo** do mundo (não funciona em chefão nem em jogador). Clique num aliado (aldeão, bicho, outro jogador) para dar **Absorção II** por 30 s. |
+| **Módulo Antigravitacional** | E.T. de Varginha | Vai no peito. Vestido: **sem dano de queda** e você **plana** caindo devagar. Clique com ele na mão para **puxar** itens e experiência num raio de 16 blocos (agachado, ele veste). |
+| **Zarabatana** | 3 bambus na diagonal | Sopra **dardos envenenados** (3 de dano e Veneno). |
+| **Dardo Envenenado** | Ferrão da Dengue + graveto + pena (sai 4) | Munição da zarabatana. |
+| **Botas de Pulo Duplo** | Botas de couro + 2 Molas Saltadoras | Aperte pular de novo no ar para dar o **segundo pulo**. |
+| **Poção da Sombra** | Poção estranha + Couro Sombrio no suporte de poções | **Invisibilidade** e **Velocidade** (3 min). |
+| **Repelente** | Poção estranha + Ferrão da Dengue | 5 min em que os mosquitos não te perseguem. |
+
+### Falas dos chefões (espaço para vozes)
+O Ednaldo e o E.T. já têm as falas ligadas, só que **sem áudio**: chegada, cada habilidade, a fúria/raio quebrado, falas soltas e a derrota. Para colocar as vozes:
+1. Ponha o `.ogg` (vorbis, mono) em `src/main/resources/assets/irineu/sounds/falas/ednaldo/` ou `.../falas/et/` (cada pasta tem um `LEIA-ME.txt`).
+2. No `sounds.json`, aponte a entrada `fala.ednaldo.<fala>` (ou `fala.et.<fala>`) para `"irineu:falas/ednaldo/<fala>"`.
+3. Em `bestiario/chefes/FalaChefe.java`, troque o `0F` da fala pela duração em segundos: a mandíbula do chefão passa a mexer enquanto ele fala.
+
 ## Irineu
 Mob neutro. Ele anda por aí soltando as falas icônicas e só briga se apanhar.
 
@@ -259,7 +302,7 @@ Recortadas do vídeo de referência (`src/main/resources/assets/irineu/sounds/en
 | Morte | "Não vai dar, pai? Não vai dar essa porra?" / "Não vai dar não." |
 
 ## Animações (GeckoLib)
-O BamBam, o Manoel Gomes (e os clones dele), o Luva de Pedreiro, o Allan Jesus e o chefão final usam modelos e animações do **GeckoLib** (formato do Blockbench), gerados por `tools/geckolib/build_models.py` em `assets/irineu/geckolib/`:
+Desde a 3.2 **todo mob do mod é animado no GeckoLib**, inclusive o Irineu e o Jailson (soco, gestos nas falas, o presente, o suco), os bichos do Brasil, a gente das estruturas e o bestiário. Os bichos e a gente ganharam um andar com o corpo balançando, a cabeça compensando e o rabo indo atrás, e um parado que respira e olha em volta. O BamBam, o Manoel Gomes (e os clones dele), o Luva de Pedreiro, o Allan Jesus e o chefão final usam modelos e animações do **GeckoLib** (formato do Blockbench), gerados por `tools/geckolib/build_models.py` em `assets/irineu/geckolib/`:
 
 | Quem | Animações |
 |---|---|
@@ -520,7 +563,7 @@ gradlew runClient           # abre o jogo com o mod
 ```
 
 ### Testes automáticos
-O teste do cliente (`gradlew runClientGameTest`) é dividido em fases: irineu, jailson, bambam, birl, quiosque, manoel, manoel_fases, totem, luva, chefao, academia, fase2, animacoes, brasil, economia, minerios, cultura e estruturas.
+O teste do cliente (`gradlew runClientGameTest`) é dividido em fases: irineu, jailson, bambam, birl, quiosque, manoel, manoel_fases, totem, luva, chefao, academia, fase2, animacoes, brasil, economia, minerios, cultura, estruturas e bestiario.
 
 **Rode uma fase por vez.** A bateria inteira de uma vez pesa muito (são uns 10 minutos de jogo aberto) e pode derrubar o computador.
 
@@ -532,7 +575,7 @@ gradlew runClientGameTest
 <details>
 <summary>O que os testes conferem</summary>
 
-teste automático: spawna Irineu, Jailson e BamBam (com árvore e mobs para o BIRL), testa habilidades e IA, senta na cadeira, negocia com o Davi, coloca os 5 quiosques (conferindo o Davi no balcão) e gera um pelo worldgen, testa cada caneta do Manoel Gomes (inclusive o quanto as pretas empurram) e uma briga de 15s com ele, monta o totem do Manoel com as anilhas que o BamBam deixa, acende as velas com o isqueiro e confere as cinco canetas aparecendo uma por uma (e que quebrar o totem cancela e só aparece um Manoel por vez), confere o nerf da caneta amarela, testa as fases 2 e 3 dele (caneta verde explodindo, teleporte, campo de força, fusão na caneta colorida, golpe com teleporte e clones, armadura da fase 3 e clones ao apanhar), traz a visita do Luva e do Allan, abre a proposta clicando no Allan, aceita pelo botão, confere as embaixadinhas do Luva, bate na bola até ganhar (e confere o prêmio no inventário) e testa a derrota, joga a luta inteira do chefão final (urna, cada habilidade das 4 fases, o Padre Kelmon, a fusão e a Faixa Presidencial), coloca a academia (e gera uma pelo worldgen), testa a transformação e cada golpe da fase 2 do BamBam, confere se o GeckoLib carregou os modelos e se cada pose toca a animação certa (galeria de poses), constrói o portal do Brasil, acende com a Bandeira Nacional, vai e volta (chegando na superfície, em chão firme, com o portal de volta), confere que um portal enterrado num morro do Brasil é ignorado, faz crescer as três mudas e confere que as folhas delas dão muda, confere que os quiosques e a academia só nascem no Brasil, mede a fatia de cada bioma num mapa de 8192 blocos, fotografa cada bioma, a galeria de plantas e árvores e os bichos, testa o câmbio, a maquininha (depósito, nota falsa recusada e saque), o Pix no buteco, a inflação mudando os preços e o sorteio semanal, a nota de 3 (recusa com os vira-latas e o desconto quando cola), as notas dos micos no Brasil, cada minério e as receitas (fornalha, alto-forno e ferraria), o peitoral de nióbio, o cajado no seco e na chuva, a picareta 3x3, o amuleto, a bateia e a armadura imperial, confere que cada minério só gera no seu bioma e acha cada um no terreno, testa a havaiana (bumerangue e crítico pelas costas), o bambu, a cadeira (regenerar e escudo contra fogo), o filtro e a água filtrada, a gambiarra, os óculos e cada comida, confere que os mobs desviam do mandacaru, do xique-xique e do capim-navalha, coloca as 6 estruturas no Brasil (no primeiro lugar que o terreno aceitar, mostrando as peças que cada uma montou) e uma sala de spawner das ruínas e fotografa tudo e a galeria de gente, armaduras e itens, tira screenshots
+teste automático: spawna Irineu, Jailson e BamBam (com árvore e mobs para o BIRL), testa habilidades e IA, senta na cadeira, negocia com o Davi, coloca os 5 quiosques (conferindo o Davi no balcão) e gera um pelo worldgen, testa cada caneta do Manoel Gomes (inclusive o quanto as pretas empurram) e uma briga de 15s com ele, monta o totem do Manoel com as anilhas que o BamBam deixa, acende as velas com o isqueiro e confere as cinco canetas aparecendo uma por uma (e que quebrar o totem cancela e só aparece um Manoel por vez), confere o nerf da caneta amarela, testa as fases 2 e 3 dele (caneta verde explodindo, teleporte, campo de força, fusão na caneta colorida, golpe com teleporte e clones, armadura da fase 3 e clones ao apanhar), traz a visita do Luva e do Allan, abre a proposta clicando no Allan, aceita pelo botão, confere as embaixadinhas do Luva, bate na bola até ganhar (e confere o prêmio no inventário) e testa a derrota, joga a luta inteira do chefão final (urna, cada habilidade das 4 fases, o Padre Kelmon, a fusão e a Faixa Presidencial), coloca a academia (e gera uma pelo worldgen), testa a transformação e cada golpe da fase 2 do BamBam, confere se o GeckoLib carregou os modelos e se cada pose toca a animação certa (galeria de poses), constrói o portal do Brasil, acende com a Bandeira Nacional, vai e volta (chegando na superfície, em chão firme, com o portal de volta), confere que um portal enterrado num morro do Brasil é ignorado, faz crescer as três mudas e confere que as folhas delas dão muda, confere que os quiosques e a academia só nascem no Brasil, mede a fatia de cada bioma num mapa de 8192 blocos, fotografa cada bioma, a galeria de plantas e árvores e os bichos, testa o câmbio, a maquininha (depósito, nota falsa recusada e saque), o Pix no buteco, a inflação mudando os preços e o sorteio semanal, a nota de 3 (recusa com os vira-latas e o desconto quando cola), as notas dos micos no Brasil, cada minério e as receitas (fornalha, alto-forno e ferraria), o peitoral de nióbio, o cajado no seco e na chuva, a picareta 3x3, o amuleto, a bateia e a armadura imperial, confere que cada minério só gera no seu bioma e acha cada um no terreno, testa a havaiana (bumerangue e crítico pelas costas), o bambu, a cadeira (regenerar e escudo contra fogo), o filtro e a água filtrada, a gambiarra, os óculos e cada comida, confere que os mobs desviam do mandacaru, do xique-xique e do capim-navalha, coloca as 6 estruturas no Brasil (no primeiro lugar que o terreno aceitar, mostrando as peças que cada uma montou) e uma sala de spawner das ruínas e fotografa tudo e a galeria de gente, armaduras e itens, confere cada mob do bestiário (o assalto da moto, o bote do Chupa-Cu pelas costas, o flanelinha pago e o bravo, a picada e o repelente, a voadora) e os dois chefões (orbes, banimento, Fúria do Irmão, telecinese, raio quebrado pela flechada, lodo, teleporte e o que eles deixam), tira screenshots
 </details>
 
 ### Lançando uma versão
@@ -547,4 +590,5 @@ A cada push na `main` o fluxo `build.yml` compila e guarda o jar como artefato.
 - Mod de **paródia e humor**, feito por fã, sem ligação com a Mojang, a Microsoft nem com as pessoas, programas e marcas citados. Os personagens são caricaturas de memes e figuras públicas brasileiras.
 - **Licença:** o código e os recursos feitos para o mod (texturas, modelos, sons sintetizados, estruturas) são [CC0 1.0](LICENSE).
 - **Áudios de terceiros:** as falas tiradas de vídeos (Irineu, Jailson, BamBam, Davi, Manoel Gomes, Luva de Pedreiro, Lula, Bolsonaro, Padre Kelmon e o som da urna) pertencem aos seus autores e são usadas como paródia. Elas não estão sob a CC0. Se você é dono de algum desses áudios e quer que ele saia do mod, abra uma issue.
+- As falas do Ednaldo Pereira e do E.T. de Varginha ainda não têm áudio (veja "Falas dos chefões").
 - Feito com [Fabric](https://fabricmc.net/) e [GeckoLib](https://github.com/bernie-g/geckolib).

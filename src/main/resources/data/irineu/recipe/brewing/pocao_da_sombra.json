@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:brewing",
+  "input": {
+    "item": "minecraft:potion",
+    "potion_contents": {
+      "potions": "minecraft:awkward"
+    }
+  },
+  "reagent": {
+    "item": "irineu:couro_sombrio"
+  },
+  "output": {
+    "id": "minecraft:potion",
+    "components": {
+      "minecraft:potion_contents": {
+        "custom_color": 3811930,
+        "custom_effects": [
+          {
+            "id": "minecraft:invisibility",
+            "duration": 3600
+          },
+          {
+            "id": "minecraft:speed",
+            "duration": 3600
+          }
+        ]
+      },
+      "minecraft:item_name": {
+        "translate": "item.irineu.pocao_da_sombra"
+      }
+    }
+  }
+}

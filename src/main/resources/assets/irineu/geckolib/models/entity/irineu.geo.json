@@ -1,0 +1,344 @@
+{
+ "format_version": "1.12.0",
+ "minecraft:geometry": [
+  {
+   "description": {
+    "identifier": "geometry.irineu.irineu",
+    "texture_width": 64,
+    "texture_height": 64,
+    "visible_bounds_width": 2,
+    "visible_bounds_height": 3,
+    "visible_bounds_offset": [
+     0,
+     1.5,
+     0
+    ]
+   },
+   "bones": [
+    {
+     "name": "irineu",
+     "pivot": [
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "name": "right_leg",
+     "pivot": [
+      -1.9,
+      12,
+      0
+     ],
+     "parent": "irineu",
+     "cubes": [
+      {
+       "origin": [
+        -3.9,
+        6,
+        -2
+       ],
+       "size": [
+        4,
+        6,
+        4
+       ],
+       "uv": [
+        0,
+        16
+       ]
+      }
+     ]
+    },
+    {
+     "name": "right_shin",
+     "pivot": [
+      -1.9,
+      6,
+      0
+     ],
+     "parent": "right_leg",
+     "cubes": [
+      {
+       "origin": [
+        -3.9,
+        0,
+        -2
+       ],
+       "size": [
+        4,
+        6,
+        4
+       ],
+       "uv": [
+        0,
+        22
+       ]
+      }
+     ]
+    },
+    {
+     "name": "left_leg",
+     "pivot": [
+      1.9,
+      12,
+      0
+     ],
+     "parent": "irineu",
+     "cubes": [
+      {
+       "origin": [
+        -0.1,
+        6,
+        -2
+       ],
+       "size": [
+        4,
+        6,
+        4
+       ],
+       "uv": [
+        16,
+        48
+       ]
+      }
+     ]
+    },
+    {
+     "name": "left_shin",
+     "pivot": [
+      1.9,
+      6,
+      0
+     ],
+     "parent": "left_leg",
+     "cubes": [
+      {
+       "origin": [
+        -0.1,
+        0,
+        -2
+       ],
+       "size": [
+        4,
+        6,
+        4
+       ],
+       "uv": [
+        16,
+        54
+       ]
+      }
+     ]
+    },
+    {
+     "name": "body",
+     "pivot": [
+      0,
+      12,
+      0
+     ],
+     "parent": "irineu",
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        12,
+        -2
+       ],
+       "size": [
+        8,
+        6,
+        4
+       ],
+       "uv": [
+        16,
+        22
+       ]
+      }
+     ]
+    },
+    {
+     "name": "chest",
+     "pivot": [
+      0,
+      18,
+      0
+     ],
+     "parent": "body",
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        18,
+        -2
+       ],
+       "size": [
+        8,
+        6,
+        4
+       ],
+       "uv": [
+        16,
+        16
+       ]
+      }
+     ]
+    },
+    {
+     "name": "head",
+     "pivot": [
+      0,
+      24,
+      0
+     ],
+     "parent": "chest",
+     "cubes": [
+      {
+       "origin": [
+        -4,
+        24,
+        -4
+       ],
+       "size": [
+        8,
+        8,
+        8
+       ],
+       "uv": [
+        0,
+        0
+       ]
+      }
+     ]
+    },
+    {
+     "name": "right_arm",
+     "pivot": [
+      -5,
+      22,
+      0
+     ],
+     "parent": "chest",
+     "cubes": [
+      {
+       "origin": [
+        -8,
+        18,
+        -2
+       ],
+       "size": [
+        4,
+        6,
+        4
+       ],
+       "uv": [
+        40,
+        16
+       ]
+      }
+     ]
+    },
+    {
+     "name": "right_forearm",
+     "pivot": [
+      -6,
+      18,
+      0
+     ],
+     "parent": "right_arm",
+     "cubes": [
+      {
+       "origin": [
+        -8,
+        12,
+        -2
+       ],
+       "size": [
+        4,
+        6,
+        4
+       ],
+       "uv": [
+        40,
+        22
+       ]
+      }
+     ]
+    },
+    {
+     "name": "RightHandItem",
+     "pivot": [
+      -6,
+      12,
+      0
+     ],
+     "parent": "right_forearm"
+    },
+    {
+     "name": "left_arm",
+     "pivot": [
+      5,
+      22,
+      0
+     ],
+     "parent": "chest",
+     "cubes": [
+      {
+       "origin": [
+        4,
+        18,
+        -2
+       ],
+       "size": [
+        4,
+        6,
+        4
+       ],
+       "uv": [
+        32,
+        48
+       ]
+      }
+     ]
+    },
+    {
+     "name": "left_forearm",
+     "pivot": [
+      6,
+      18,
+      0
+     ],
+     "parent": "left_arm",
+     "cubes": [
+      {
+       "origin": [
+        4,
+        12,
+        -2
+       ],
+       "size": [
+        4,
+        6,
+        4
+       ],
+       "uv": [
+        32,
+        54
+       ]
+      }
+     ]
+    },
+    {
+     "name": "LeftHandItem",
+     "pivot": [
+      6,
+      12,
+      0
+     ],
+     "parent": "left_forearm"
+    }
+   ]
+  }
+ ]
+}

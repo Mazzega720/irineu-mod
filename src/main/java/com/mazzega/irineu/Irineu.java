@@ -2,6 +2,7 @@ package com.mazzega.irineu;
 
 import com.mazzega.irineu.block.ManoelTotem;
 import com.mazzega.irineu.brasil.EstruturaNoTerreno;
+import com.mazzega.irineu.bestiario.ModuloAntigravitacionalItem;
 import com.mazzega.irineu.cultura.CulturaEventos;
 import com.mazzega.irineu.economia.Inflacao;
 import com.mazzega.irineu.economia.NotasDrop;
@@ -11,6 +12,9 @@ import com.mazzega.irineu.minerio.PicaretaIndustrial;
 import com.mazzega.irineu.minerio.Sorte;
 import com.mazzega.irineu.desafio.DesafioPayloads;
 import com.mazzega.irineu.entity.LuvaVisitas;
+import com.mazzega.irineu.registry.BestiarioEntities;
+import com.mazzega.irineu.registry.BestiarioItems;
+import com.mazzega.irineu.registry.BestiarioSounds;
 import com.mazzega.irineu.registry.BrasilBlocks;
 import com.mazzega.irineu.registry.BrasilEffects;
 import com.mazzega.irineu.registry.BrasilItems;
@@ -40,10 +44,13 @@ public class Irineu implements ModInitializer {
 		BrasilBlocks.init();
 		BrasilEffects.init();
 		BrasilItems.init();
+		BestiarioSounds.init();
+		BestiarioItems.init();
 		BrasilMenus.init();
 		EstruturaNoTerreno.init();
 		ModEntities.init();
 		BrasilEntities.init();
+		BestiarioEntities.init();
 		ModItems.init();
 		DesafioPayloads.register();
 		LuvaVisitas.register();
@@ -56,6 +63,7 @@ public class Irineu implements ModInitializer {
 		PicaretaIndustrial.register();
 		ArmaduraImperial.register();
 		CulturaEventos.register();
+		ModuloAntigravitacionalItem.register();
 		LOGGER.info("Irineu, você não sabe nem eu!");
 	}
 }

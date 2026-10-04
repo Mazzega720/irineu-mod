@@ -131,7 +131,8 @@ class Bicho:
                             "visible_bounds_width": self.bounds[0], "visible_bounds_height": self.bounds[1],
                             "visible_bounds_offset": [0, self.bounds[1] / 2, 0]},
             "bones": self.bones}]}, indent=1)
-        wj(os.path.join(ANIMS, self.id + ".animation.json"), {"format_version": "1.8.0", "animations": self.anims}, indent=1)
+        wj(os.path.join(ANIMS, self.id + ".animation.json"), {"format_version": "1.8.0", "animations": vivo(self.id, self.anims, set(self.index))},
+           indent=1)
         return img
 
 
@@ -193,6 +194,48 @@ def biped_walk(amp, legs=("leg_r", "leg_l"), extra=None):
 def flap(amp, period, right="wing_r", left="wing_l"):
     return {right: {"rotation": [0, 0, f"math.sin({T} * {360.0 / period}) * {amp} + {amp * 0.4}"]},
             left: {"rotation": [0, 0, f"-math.sin({T} * {360.0 / period}) * {amp} - {amp * 0.4}"]}}
+
+
+def vivo(ident, anims, ossos):
+    """
+    Movimento secundário que todo bicho ganha por cima da animação própria (só nos canais que ela não usa), para o
+    andar e o parado não ficarem duros: no passo o corpo balança de lado e sobe um tiquinho, a cabeça compensa, o rabo e
+    o pescoço vão atrás e as asas se acomodam; parado, o bicho respira, olha em volta e mexe o rabo. As oscilações do
+    parado usam a duração da animação como período (o loop emenda sem pulo).
+    """
+    def add(anim, bone, channel, value):
+        if anim is None or bone not in ossos:
+            return
+        b = anim["bones"].setdefault(bone, {})
+        if channel not in b:
+            b[channel] = value
+
+    walk, idle = anims.get(f"{ident}.walk"), anims.get(f"{ident}.idle")
+    quadrupede = "leg_fl" in ossos
+    rebolado = 2.5 if quadrupede else 6.0         # as aves bípedes gingam mais
+    if walk:
+        add(walk, "body", "position", [0, f"math.abs(math.sin({SWING})) * 0.3 * {AMT}", 0])
+        add(walk, "body", "rotation", [f"math.sin({SWING} * 2) * 2 * {AMT}", f"math.cos({SWING}) * 3 * {AMT}", f"math.cos({SWING}) * {rebolado} * {AMT}"])
+        add(walk, "head", "rotation", [f"-math.sin({SWING} * 2) * 5 * {AMT}", f"-math.cos({SWING}) * 4 * {AMT}", f"-math.cos({SWING}) * {rebolado * 0.6} * {AMT}"])
+        add(walk, "neck", "rotation", [f"math.sin({SWING} * 2) * 5 * {AMT}", 0, 0])
+        for tail in ("tail", "tail1"):
+            add(walk, tail, "rotation", [f"8 * {AMT}", f"math.cos({SWING}) * 16 * {AMT}", 0])
+        add(walk, "tail2", "rotation", [0, f"math.cos({SWING} - 40) * 22 * {AMT}", 0])
+        add(walk, "wing_r", "rotation", [0, 0, f"-math.abs(math.sin({SWING})) * 6 * {AMT}"])
+        add(walk, "wing_l", "rotation", [0, 0, f"math.abs(math.sin({SWING})) * 6 * {AMT}"])
+    if idle:
+        dur = idle["animation_length"]
+        w = 360.0 / dur
+        add(idle, "body", "position", [0, f"math.sin({T} * {w * 2}) * 0.12", 0])
+        add(idle, "body", "rotation", [f"math.sin({T} * {w * 2}) * 0.8", 0, 0])
+        add(idle, "head", "rotation", [f"math.sin({T} * {w}) * 4", f"math.sin({T} * {w} + 40) * 18", f"math.sin({T} * {w * 2}) * 3"])
+        add(idle, "neck", "rotation", [f"math.sin({T} * {w}) * 5", 0, 0])
+        for tail in ("tail", "tail1"):
+            add(idle, tail, "rotation", [0, f"math.sin({T} * {w * 2}) * 10", 0])
+        add(idle, "tail2", "rotation", [0, f"math.sin({T} * {w * 2} - 50) * 14", 0])
+        add(idle, "wing_r", "rotation", [0, 0, f"-math.abs(math.sin({T} * {w})) * 4"])
+        add(idle, "wing_l", "rotation", [0, 0, f"math.abs(math.sin({T} * {w})) * 4"])
+    return anims
 
 
 BICHOS = []

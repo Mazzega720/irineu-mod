@@ -168,20 +168,32 @@
      "rotation": [
       "-math.cos(query.limb_swing * 38.17) * 30 * query.limb_swing_amount",
       0,
-      4
+      "4 + math.abs(math.cos(query.limb_swing * 38.17)) * 3 * query.limb_swing_amount"
      ]
     },
     "left_arm": {
      "rotation": [
       "math.cos(query.limb_swing * 38.17) * 30 * query.limb_swing_amount",
       0,
-      -4
+      "-4 - math.abs(math.cos(query.limb_swing * 38.17)) * 3 * query.limb_swing_amount"
      ]
     },
     "body": {
      "position": [
       0,
       "math.abs(math.sin(query.limb_swing * 38.17)) * 0.4 * query.limb_swing_amount",
+      0
+     ],
+     "rotation": [
+      "2 * query.limb_swing_amount",
+      "math.cos(query.limb_swing * 38.17) * 6 * query.limb_swing_amount",
+      "math.cos(query.limb_swing * 38.17) * 2 * query.limb_swing_amount"
+     ]
+    },
+    "head": {
+     "rotation": [
+      "math.abs(math.cos(query.limb_swing * 38.17)) * 3 * query.limb_swing_amount",
+      "-math.cos(query.limb_swing * 38.17) * 5 * query.limb_swing_amount",
       0
      ]
     }

@@ -1,5 +1,12 @@
 package com.mazzega.irineu.entity;
 
+import com.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.util.GeckoLibUtil;
 import com.mazzega.irineu.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -13,6 +20,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -48,7 +56,10 @@ import org.jspecify.annotations.Nullable;
  *     <li>Segue quem estiver segurando pão; dar pão para ele cura.</li>
  * </ul>
  */
-public class IrineuEntity extends PathfinderMob {
+public class IrineuEntity extends PathfinderMob implements GeoEntity {
+	private static final String ACAO = "acao";
+	private static final String[] GESTOS = {"ataque", "falar", "presente"};
+	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 	private static final int CONFUSE_COOLDOWN_TICKS = 200;
 	private static final int VANISH_COOLDOWN_TICKS = 400;
 	private static final int GIFT_COOLDOWN_TICKS = 6000;
@@ -212,6 +223,8 @@ public class IrineuEntity extends PathfinderMob {
 	/** Toca uma fala e segura a próxima fala aleatória para as vozes não se atropelarem. */
 	private void speak(SoundEvent sound) {
 		this.playSound(sound, this.getSoundVolume(), this.getVoicePitch());
+		String gesto = this.gestoDa(sound);
+		if (gesto != null) this.triggerAnim(ACAO, gesto);
 		this.ambientSoundTime = -this.getAmbientSoundInterval();
 	}
 
@@ -254,5 +267,49 @@ public class IrineuEntity extends PathfinderMob {
 		this.giftCooldown = input.getIntOr("GiftCooldown", 0);
 		this.vanishCooldown = input.getIntOr("VanishCooldown", 0);
 		this.confuseCooldown = input.getIntOr("ConfuseCooldown", 0);
+	}
+
+	/** O gesto (animação "irineu.<gesto>") que acompanha cada fala. */
+	private @Nullable String gestoDa(SoundEvent sound) {
+		if (sound == ModSounds.IRINEU_GIFT) return "presente";
+		return "falar";
+	}
+
+	@Override
+	public void playAmbientSound() {
+		super.playAmbientSound();
+		this.triggerAnim(ACAO, "falar");
+	}
+
+	@Override
+	public boolean doHurtTarget(ServerLevel level, Entity target) {
+		this.triggerAnim(ACAO, "ataque");
+		return super.doHurtTarget(level, target);
+	}
+
+	// ---------------------------------------------------------------- Animações (GeckoLib, tools/geckolib/irineu_jailson.py)
+
+	/**
+	 * Parado, andando e correndo (quando briga); os gestos: soco, dar de ombros nas falas ("você não sabe? nem eu!") e jogar o presente.
+	 */
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+		RawAnimation idle = RawAnimation.begin().thenLoop("irineu.idle");
+		RawAnimation walk = RawAnimation.begin().thenLoop("irineu.walk");
+		RawAnimation correr = RawAnimation.begin().thenLoop("irineu.correr");
+		controllers.add(new AnimationController<IrineuEntity>("corpo", 4, test -> {
+			if (!test.isMoving()) return test.setAndContinue(idle);
+			return test.setAndContinue(test.animatable().isAggressive() ? correr : walk);
+		}));
+		AnimationController<IrineuEntity> acao = new AnimationController<>(ACAO, 3, test -> PlayState.STOP);
+		for (String nome : GESTOS) {
+			acao.triggerableAnim(nome, RawAnimation.begin().thenPlay("irineu." + nome));
+		}
+		controllers.add(acao);
+	}
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return this.geoCache;
 	}
 }

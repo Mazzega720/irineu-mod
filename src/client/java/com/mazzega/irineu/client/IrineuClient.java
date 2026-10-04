@@ -3,6 +3,7 @@ package com.mazzega.irineu.client;
 import com.mazzega.irineu.Irineu;
 import com.mazzega.irineu.client.bambam.ShockwaveBlockRenderer;
 import com.mazzega.irineu.client.bambam.ThrownTreeRenderer;
+import com.mazzega.irineu.client.bestiario.BestiarioClient;
 import com.mazzega.irineu.client.brasil.BichoGeoRenderer;
 import com.mazzega.irineu.client.brasil.BotoRenderer;
 import com.mazzega.irineu.client.brasil.HavaianaRenderer;
@@ -34,26 +35,22 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 
 public class IrineuClient implements ClientModInitializer {
-	public static final ModelLayerLocation HUMANOID_LAYER = new ModelLayerLocation(Irineu.id("humanoid"), "main");
 	public static final ModelLayerLocation DAVI_LAYER = new ModelLayerLocation(Irineu.id("davi"), "main");
 	public static final ModelLayerLocation PEN_LAYER = new ModelLayerLocation(Irineu.id("caneta"), "main");
 
 	@Override
 	public void onInitializeClient() {
-		ModelLayerRegistry.registerModelLayer(HUMANOID_LAYER, () -> LayerDefinition.create(HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F), 64, 64));
 		ModelLayerRegistry.registerModelLayer(DAVI_LAYER, DaviModel::createBodyLayer);
 		ModelLayerRegistry.registerModelLayer(PEN_LAYER, PenModels::createLayer);
-		EntityRenderers.register(ModEntities.IRINEU, context -> new SkinnedHumanoidRenderer<>(context, Irineu.id("textures/entity/irineu.png")));
-		EntityRenderers.register(ModEntities.JAILSON, context -> new SkinnedHumanoidRenderer<>(context, Irineu.id("textures/entity/jailson.png")));
+		// Irineu e Jailson no GeckoLib (tools/geckolib/irineu_jailson.py), com as mesmas skins.
+		EntityRenderers.register(ModEntities.IRINEU, context -> new NpcGeoRenderer<>(context, ModEntities.IRINEU));
+		EntityRenderers.register(ModEntities.JAILSON, context -> new NpcGeoRenderer<>(context, ModEntities.JAILSON));
 		// BamBam e Manoel Gomes: modelos e animações do GeckoLib.
 		EntityRenderers.register(ModEntities.BAMBAM, BamBamGeoRenderer::new);
 		EntityRenderers.register(ModEntities.THROWN_TREE, ThrownTreeRenderer::new);
@@ -106,5 +103,6 @@ public class IrineuClient implements ClientModInitializer {
 		EntityRenderers.register(ModEntities.SUPER_MITADA, SuperMitadaRenderer::new);
 		EntityRenderers.register(ModEntities.CANETA_PROJETIL, PenProjectileRenderer::new);
 		EntityRenderers.register(ModEntities.CANETA_VOADORA, FlyingPenRenderer::new);
+		BestiarioClient.init();
 	}
 }

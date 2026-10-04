@@ -3,6 +3,27 @@
 Todas as versões são para **Minecraft 26.3 / Fabric** e precisam da Fabric API e do GeckoLib 5.5.7+.
 O jar de cada versão sai como `irineu-<versão>+26.3.jar`.
 
+## [3.2.0] — 2026-10-03
+### Adicionado
+- **Bestiário do Brasil:** 5 mobs novos, que nascem nos biomas da dimensão:
+  - **Dois Caras numa Moto:** bate e foge, volta empinando; 40% dos golpes são assalto (leva de 1 a 3 notas, devolvidas quando a moto morre, ou derruba o item da mão).
+  - **Chupa-Cu de Goianinha:** nas cavernas escuras; só anda quando você está de costas, congela quando é encarado e foge da luz. Bote pelas costas com dano triplo e Cegueira.
+  - **Flanelinha:** neutro. Pago com a moeda de 1 real, vigia você por 10 minutos; se você montar perto dele sem pagar, joga pedras (que podem te derrubar da montaria).
+  - **Mosquitão da Dengue:** bandos de 2 ou 3 voando em zigue-zague; picada com Veneno II, Náusea e Fadiga de Mineração.
+  - **Dançarino da Carreta Furacão:** escala paredes, faz parkour com mortal e dá voadora (com dano extra se o alvo bater na parede).
+- **Chefões lendários** (só pelo ovo gerador):
+  - **Ednaldo Pereira, o Juiz Supremo** (600 de vida, barra roxa): orbes do Vale Tudo (dourado cura, sombrio persegue e tira 5 níveis), Banimento Supremo ("BANIDO!" e 35 blocos para cima) e, abaixo de 30%, a Fúria do Irmão (flutua e solta espirais de notas que explodem).
+  - **E.T. de Varginha** (500 de vida, barra verde): telecinese com blocos do chão, raio de abdução (a flechada crítica na cabeça quebra o raio), cuspe de lodo que gruda no chão e teleporte.
+  - As falas dos dois já estão ligadas, mas **sem áudio**, esperando as vozes (o README explica onde pôr os .ogg).
+- **Itens:** Cajado do Julgamento (bane monstros, dá Absorção aos aliados), Módulo Antigravitacional (sem dano de queda, plana e puxa itens), Zarabatana com Dardos Envenenados, Botas de Pulo Duplo, Poção da Sombra e Repelente (no suporte de poções), mais Paninho Sujo, Couro Sombrio, Ferrão da Dengue e Mola Saltadora.
+
+### Mudado
+- **Animações mais soltas:**
+  - O **Irineu** e o **Jailson** agora são animados no GeckoLib: andar, correr na briga, soco, gestos nas falas, o presente e o suco.
+  - Os **bichos do Brasil** gingam no passo (corpo, cabeça, rabo e pescoço) e, parados, respiram e olham em volta.
+  - A **gente das estruturas** (comerciantes, cangaceiro, gaúcho, pescador) anda no ritmo do passo e tem um parado mais vivo.
+  - O andar do Allan Jesus, dos gados, do Padre Kelmon e do Lulonaro ficou menos duro.
+
 ## [3.1.0] — 2026-10-03
 ### Corrigido
 - Os mobs passavam encostados no **capim-navalha**, no **xique-xique** e no **mandacaru** e tomavam dano como se fosse um bloco qualquer. Agora o caminho deles trata essas plantas como o cacto: não entram nelas e evitam passar raspando.

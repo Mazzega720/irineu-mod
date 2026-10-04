@@ -46,6 +46,32 @@
        "easing": "easeInOutSine"
       }
      }
+    },
+    "body": {
+     "position": [
+      0,
+      "math.sin(query.anim_time * 120.0) * 0.12",
+      0
+     ],
+     "rotation": [
+      "math.sin(query.anim_time * 120.0) * 0.8",
+      0,
+      0
+     ]
+    },
+    "wing_r": {
+     "rotation": [
+      0,
+      0,
+      "-math.abs(math.sin(query.anim_time * 60.0)) * 4"
+     ]
+    },
+    "wing_l": {
+     "rotation": [
+      0,
+      0,
+      "math.abs(math.sin(query.anim_time * 60.0)) * 4"
+     ]
     }
    },
    "loop": true
@@ -72,6 +98,39 @@
       0,
       "math.abs(math.sin(query.limb_swing * 38.17)) * 0.8 * query.limb_swing_amount",
       0
+     ]
+    },
+    "body": {
+     "position": [
+      0,
+      "math.abs(math.sin(query.limb_swing * 38.17)) * 0.3 * query.limb_swing_amount",
+      0
+     ],
+     "rotation": [
+      "math.sin(query.limb_swing * 38.17 * 2) * 2 * query.limb_swing_amount",
+      "math.cos(query.limb_swing * 38.17) * 3 * query.limb_swing_amount",
+      "math.cos(query.limb_swing * 38.17) * 6.0 * query.limb_swing_amount"
+     ]
+    },
+    "head": {
+     "rotation": [
+      "-math.sin(query.limb_swing * 38.17 * 2) * 5 * query.limb_swing_amount",
+      "-math.cos(query.limb_swing * 38.17) * 4 * query.limb_swing_amount",
+      "-math.cos(query.limb_swing * 38.17) * 3.5999999999999996 * query.limb_swing_amount"
+     ]
+    },
+    "wing_r": {
+     "rotation": [
+      0,
+      0,
+      "-math.abs(math.sin(query.limb_swing * 38.17)) * 6 * query.limb_swing_amount"
+     ]
+    },
+    "wing_l": {
+     "rotation": [
+      0,
+      0,
+      "math.abs(math.sin(query.limb_swing * 38.17)) * 6 * query.limb_swing_amount"
      ]
     }
    },

@@ -1,5 +1,12 @@
 package com.mazzega.irineu.entity;
 
+import com.geckolib.animatable.GeoEntity;
+import com.geckolib.animatable.instance.AnimatableInstanceCache;
+import com.geckolib.animatable.manager.AnimatableManager;
+import com.geckolib.animation.AnimationController;
+import com.geckolib.animation.RawAnimation;
+import com.geckolib.animation.object.PlayState;
+import com.geckolib.util.GeckoLibUtil;
 import com.mazzega.irineu.registry.ModEntities;
 import com.mazzega.irineu.registry.ModItems;
 import com.mazzega.irineu.registry.ModSounds;
@@ -14,6 +21,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -49,7 +57,10 @@ import org.jspecify.annotations.Nullable;
  *     <li>Segue quem estiver segurando Suco de Laranja.</li>
  * </ul>
  */
-public class JailsonEntity extends PathfinderMob {
+public class JailsonEntity extends PathfinderMob implements GeoEntity {
+	private static final String ACAO = "acao";
+	private static final String[] GESTOS = {"ataque", "falar", "presente", "beber"};
+	private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
 	private static final int DUPLICATE_COOLDOWN_TICKS = 2400;
 	private static final int PECA_COOLDOWN_TICKS = 6000;
 	/** Limite de Jailsons num raio de 32 blocos, para a família não travar o mundo. */
@@ -204,6 +215,8 @@ public class JailsonEntity extends PathfinderMob {
 	/** Toca uma fala e segura a próxima fala aleatória para as vozes não se atropelarem. */
 	private void speak(SoundEvent sound) {
 		this.playSound(sound, this.getSoundVolume(), this.getVoicePitch());
+		String gesto = this.gestoDa(sound);
+		if (gesto != null) this.triggerAnim(ACAO, gesto);
 		this.ambientSoundTime = -this.getAmbientSoundInterval();
 	}
 
@@ -244,5 +257,51 @@ public class JailsonEntity extends PathfinderMob {
 		super.readAdditionalSaveData(input);
 		this.duplicateCooldown = input.getIntOr("DuplicateCooldown", 0);
 		this.pecaCooldown = input.getIntOr("PecaCooldown", 0);
+	}
+
+	/** O gesto (animação "jailson.<gesto>") que acompanha cada fala. */
+	private @Nullable String gestoDa(SoundEvent sound) {
+		if (sound == ModSounds.JAILSON_DRINK) return "beber";
+		if (sound == ModSounds.JAILSON_PECA) return "presente";
+		if (sound == ModSounds.JAILSON_ANGRY) return null;
+		return "falar";
+	}
+
+	@Override
+	public void playAmbientSound() {
+		super.playAmbientSound();
+		this.triggerAnim(ACAO, "falar");
+	}
+
+	@Override
+	public boolean doHurtTarget(ServerLevel level, Entity target) {
+		this.triggerAnim(ACAO, "ataque");
+		return super.doHurtTarget(level, target);
+	}
+
+	// ---------------------------------------------------------------- Animações (GeckoLib, tools/geckolib/irineu_jailson.py)
+
+	/**
+	 * Parado, andando e correndo (quando briga); os gestos: soco, gesticular nas falas, jogar a peça e beber o suco.
+	 */
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+		RawAnimation idle = RawAnimation.begin().thenLoop("jailson.idle");
+		RawAnimation walk = RawAnimation.begin().thenLoop("jailson.walk");
+		RawAnimation correr = RawAnimation.begin().thenLoop("jailson.correr");
+		controllers.add(new AnimationController<JailsonEntity>("corpo", 4, test -> {
+			if (!test.isMoving()) return test.setAndContinue(idle);
+			return test.setAndContinue(test.animatable().isAggressive() ? correr : walk);
+		}));
+		AnimationController<JailsonEntity> acao = new AnimationController<>(ACAO, 3, test -> PlayState.STOP);
+		for (String nome : GESTOS) {
+			acao.triggerableAnim(nome, RawAnimation.begin().thenPlay("jailson." + nome));
+		}
+		controllers.add(acao);
+	}
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return this.geoCache;
 	}
 }
