@@ -273,7 +273,9 @@ final class BrasilV3GameTests {
 		// Notas dos bichos no Brasil (com o amuleto, mico-leão dá nota de 20 em ~8% das vezes).
 		server.runCommand("gamemode spectator @p");
 		server.runCommand("execute in brasil_mod:brasil run tp @p 0 160 0");
-		context.waitTicks(20);
+		// Espera o chunk ficar com as entidades carregadas: com o servidor atrasado gerando o terreno, os micos e as
+		// notas postos num chunk que ainda não carregou não aparecem na busca.
+		server.waitFor(mc -> BrasilGameTests.brasil(mc).isPositionEntityTicking(new BlockPos(0, 158, 0)), 600);
 		server.runOnServer(mc -> {
 			ServerLevel brasil = BrasilGameTests.brasil(mc);
 			ServerPlayer player = player(mc);
