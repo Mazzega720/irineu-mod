@@ -1,0 +1,50 @@
+{
+  "type": "minecraft:cache",
+  "input": {
+    "type": "minecraft:slice",
+    "axis": "y",
+    "coordinate": 0,
+    "input": {
+      "type": "minecraft:clamp",
+      "min": -6.0,
+      "max": 3.0,
+      "input": {
+        "type": "minecraft:min",
+        "left": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": 140.0,
+            "right": {
+              "type": "minecraft:distance_to_point",
+              "metric": "euclidean",
+              "point": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "right": 0.03
+        },
+        "right": {
+          "type": "minecraft:mul",
+          "left": {
+            "type": "minecraft:sub",
+            "left": 160.0,
+            "right": {
+              "type": "minecraft:distance_to_point",
+              "metric": "euclidean",
+              "point": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "right": 0.1
+        }
+      }
+    }
+  }
+}

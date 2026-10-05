@@ -1,8 +1,9 @@
 """
-Itens da cultura popular: Havaiana de Pau, Bambu do Silvio, Gambiarra Universal, Óculos Juliet (com a camada no rosto),
-Filtro de Barro (bloco) e água filtrada (com o ícone do efeito Imunidade), as comidas e bebidas (pão de queijo curado,
-copão de Guaraná Jesus, marmita de feijoada, Corote Místico, coxinha, cafezinho, cerveja gelada e chimarrão), os sons
-(mola e fita isolante), as receitas e as traduções. Também renomeia a cadeira amarela para Cadeira de Bar Amarela.
+Itens da cultura popular: Havaiana de Pau, Bambu do Silvio, Gambiarra Universal, Óculos Juliet (com a camada no rosto,
+também no bebê), Filtro de Barro (bloco) e água filtrada (com o ícone do efeito Imunidade), as comidas e bebidas (pão de
+queijo curado, copão de Guaraná Jesus, marmita de feijoada, Corote Místico, coxinha, cafezinho, cerveja gelada e
+chimarrão), os sons (mola e fita isolante), as receitas e as traduções. Também renomeia a cadeira amarela para Cadeira de
+Bar Amarela.
 
 Uso: python cultura.py <src/main/resources> [pasta da prévia]
 """
@@ -113,6 +114,22 @@ for x in range(0, 8):
 for x in range(16, 24):
     lp[x, 11] = hexc("5a5e66") + (255,)
 k.save(layer, "entity/equipment/humanoid", "juliet")
+# A mesma camada no bebê (humanoid_baby, 64 x 64 no molde do HumanoidModel.createBabyArmorMesh do 26.3): a cabeça do
+# bebê é uma caixa de 9 x 8 x 8 em (0, 0), com o lado direito em (0..7, 8..15), a frente, de 9 de largura, em
+# (8..16, 8..15) e o lado esquerdo em (17..24, 8..15). As lentes ficam nas pontas da frente e a ponte no meio; sem ela, o
+# zumbi bebê que pega os óculos ficaria com a textura que falta.
+baby = Image.new("RGBA", (64, 64), (0, 0, 0, 0))
+bp = baby.load()
+for x in range(0, 25):
+    bp[x, 11] = hexc("5a5e66") + (255,)
+for (x0, x1) in ((8, 11), (14, 17)):
+    for x in range(x0, x1):
+        bp[x, 12] = hexc(LENS[x % len(LENS)]) + (255,)
+        if x not in (x0, x1 - 1):
+            bp[x, 11] = hexc(LENS[(x + 1) % len(LENS)]) + (255,)
+for x in range(11, 14):
+    bp[x, 12] = hexc("5a5e66") + (255,)
+k.save(baby, "entity/equipment/humanoid_baby", "juliet")
 k.wj(k.asset("equipment", "juliet.json"), {"layers": {"humanoid": [{"texture": "irineu:juliet"}], "humanoid_baby": [{"texture": "irineu:juliet"}]}})
 
 # ====================================================================== Água filtrada (frasco com água clarinha) e o ícone do efeito

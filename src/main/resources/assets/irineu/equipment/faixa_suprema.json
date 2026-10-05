@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "irineu:faixa_suprema"
+      }
+    ],
+    "humanoid_baby": [
+      {
+        "texture": "irineu:faixa_suprema"
+      }
+    ]
+  }
+}

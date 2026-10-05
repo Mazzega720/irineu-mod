@@ -12,6 +12,10 @@ import com.mazzega.irineu.minerio.PicaretaIndustrial;
 import com.mazzega.irineu.minerio.Sorte;
 import com.mazzega.irineu.desafio.DesafioPayloads;
 import com.mazzega.irineu.entity.LuvaVisitas;
+import com.mazzega.irineu.jornada.CamaraDosTresPoderes;
+import com.mazzega.irineu.jornada.Creditos;
+import com.mazzega.irineu.jornada.FaixaSuprema;
+import com.mazzega.irineu.jornada.PracaTresPoderes;
 import com.mazzega.irineu.registry.BestiarioEntities;
 import com.mazzega.irineu.registry.BestiarioItems;
 import com.mazzega.irineu.registry.BestiarioSounds;
@@ -20,6 +24,10 @@ import com.mazzega.irineu.registry.BrasilEffects;
 import com.mazzega.irineu.registry.BrasilItems;
 import com.mazzega.irineu.registry.BrasilMenus;
 import com.mazzega.irineu.registry.BrasilEntities;
+import com.mazzega.irineu.registry.JornadaBlocks;
+import com.mazzega.irineu.registry.JornadaGatilhos;
+import com.mazzega.irineu.registry.JornadaItems;
+import com.mazzega.irineu.registry.JornadaSounds;
 import com.mazzega.irineu.registry.ModBlocks;
 import com.mazzega.irineu.registry.ModEntities;
 import com.mazzega.irineu.registry.ModItems;
@@ -42,10 +50,13 @@ public class Irineu implements ModInitializer {
 		ModSounds.init();
 		ModBlocks.init();
 		BrasilBlocks.init();
+		JornadaBlocks.init();
 		BrasilEffects.init();
 		BrasilItems.init();
 		BestiarioSounds.init();
+		JornadaSounds.init();
 		BestiarioItems.init();
+		JornadaItems.init();
 		BrasilMenus.init();
 		EstruturaNoTerreno.init();
 		ModEntities.init();
@@ -64,6 +75,13 @@ public class Irineu implements ModInitializer {
 		ArmaduraImperial.register();
 		CulturaEventos.register();
 		ModuloAntigravitacionalItem.register();
+		// A Jornada pelo Brasil (versão 4.0): gatilhos de avanço, a Praça dos Três Poderes, os feixes da Câmara dos Três
+		// Poderes, a Faixa Presidencial Suprema e os créditos do portal da vitória.
+		JornadaGatilhos.init();
+		PracaTresPoderes.register();
+		CamaraDosTresPoderes.register();
+		FaixaSuprema.register();
+		Creditos.register();
 		LOGGER.info("Irineu, você não sabe nem eu!");
 	}
 }

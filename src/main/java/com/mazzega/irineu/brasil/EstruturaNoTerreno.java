@@ -43,6 +43,11 @@ import org.jspecify.annotations.Nullable;
  * outras peças que cairiam na água ficam de fora, e se for gente demais na água o lugar é descartado;</li>
  * <li>{@link Terreno#AGUA} (palafitas): a peça inicial precisa de água embaixo, e as peças que bateriam numa margem
  * mais alta que o deck ficam de fora.</li>
+ * <li>{@code altura_minima} (opcional): o chão embaixo da peça inicial não pode ficar abaixo desse Y, para estruturas
+ * que só nascem nos picos (o altar do Ednaldo).</li>
+ * <li>{@code margem_do_terreno} (opcional): quantos blocos da borda da peça inicial ficam fora da conferência do
+ * desnível e da altura mínima (a clareira do altar, que o beard_box acomoda no terreno): a água ainda conta na peça
+ * inteira.</li>
  * </ul>
  * Se o lugar não serve, tenta de novo um chunk para cada lado antes de desistir.
  */
@@ -76,7 +81,9 @@ public class EstruturaNoTerreno extends Structure {
 		Codec.floatRange(0.0F, 1.0F).optionalFieldOf("min_agua_no_inicio", 0.5F).forGetter(s -> s.minAgua),
 		Codec.intRange(0, 64).optionalFieldOf("max_desnivel", 6).forGetter(s -> s.maxDesnivel),
 		Codec.BOOL.optionalFieldOf("so_o_inicio", false).forGetter(s -> s.soOInicio),
-		Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(s -> s.poolAliases)
+		Codec.list(PoolAliasBinding.CODEC).optionalFieldOf("pool_aliases", List.of()).forGetter(s -> s.poolAliases),
+		Codec.INT.optionalFieldOf("altura_minima", Integer.MIN_VALUE).forGetter(s -> s.alturaMinima),
+		Codec.intRange(0, 32).optionalFieldOf("margem_do_terreno", 0).forGetter(s -> s.margemDoTerreno)
 	).apply(i, EstruturaNoTerreno::new));
 	public static final StructureType<EstruturaNoTerreno> TYPE = Registry.register(BuiltInRegistries.STRUCTURE_TYPE, Brasil.id("encaixe_no_terreno"),
 		() -> CODEC);
@@ -97,9 +104,14 @@ public class EstruturaNoTerreno extends Structure {
 	private final boolean soOInicio;
 	/** Troca de pools (o quiosque de estrada usa os mesmos moldes do de praia, com outros anexos). */
 	private final List<PoolAliasBinding> poolAliases;
+	/** O chão mais baixo embaixo da peça inicial precisa estar nesse Y ou acima (o altar do Ednaldo, só nos picos). */
+	private final int alturaMinima;
+	/** A borda da peça inicial que não entra na conferência do desnível e da altura (a clareira em volta do altar). */
+	private final int margemDoTerreno;
 
 	public EstruturaNoTerreno(StructureSettings settings, Holder<StructureTemplatePool> startPool, int size, int startHeight, int maxDistance,
-		LiquidSettings liquidSettings, Terreno terreno, float maxAgua, float minAgua, int maxDesnivel, boolean soOInicio, List<PoolAliasBinding> poolAliases) {
+		LiquidSettings liquidSettings, Terreno terreno, float maxAgua, float minAgua, int maxDesnivel, boolean soOInicio, List<PoolAliasBinding> poolAliases,
+		int alturaMinima, int margemDoTerreno) {
 		super(settings);
 		this.startPool = startPool;
 		this.size = size;
@@ -112,6 +124,13 @@ public class EstruturaNoTerreno extends Structure {
 		this.maxDesnivel = maxDesnivel;
 		this.soOInicio = soOInicio;
 		this.poolAliases = poolAliases;
+		this.alturaMinima = alturaMinima;
+		this.margemDoTerreno = margemDoTerreno;
+	}
+
+	/** O Y mínimo do chão embaixo da peça inicial ({@code altura_minima}; sem ele, qualquer altura serve). */
+	public int alturaMinima() {
+		return this.alturaMinima;
 	}
 
 	@Override
@@ -139,17 +158,26 @@ public class EstruturaNoTerreno extends Structure {
 		List<StructurePiece> pecas = montadas.build().pieces();
 		if (pecas.isEmpty()) return null;
 		BoundingBox inicio = pecas.getFirst().getBoundingBox();
+		// A água conta na peça inteira; o desnível e a altura mínima, só no miolo (a clareira em volta pode descer pela
+		// encosta: o beard_box acerta o terreno).
+		int m = Math.min(this.margemDoTerreno, Math.min(inicio.getXSpan(), inicio.getZSpan()) / 2 - 1);
+		BoundingBox miolo = m > 0 ? new BoundingBox(inicio.minX() + m, inicio.minY(), inicio.minZ() + m, inicio.maxX() - m, inicio.maxY(),
+			inicio.maxZ() - m) : inicio;
 		int total = 0;
 		int molhadas = 0;
+		for (long coluna : grade(inicio, 6)) {
+			total++;
+			if (chao.em(BlockPos.getX(coluna), BlockPos.getZ(coluna)).agua()) molhadas++;
+		}
 		int baixo = Integer.MAX_VALUE;
 		int alto = Integer.MIN_VALUE;
-		for (long coluna : grade(inicio, 6)) {
-			Coluna c = chao.em(BlockPos.getX(coluna), BlockPos.getZ(coluna));
-			total++;
-			if (c.agua()) molhadas++;
-			baixo = Math.min(baixo, c.chao());
-			alto = Math.max(alto, c.chao());
+		for (long coluna : grade(miolo, 6)) {
+			int y = chao.em(BlockPos.getX(coluna), BlockPos.getZ(coluna)).chao();
+			baixo = Math.min(baixo, y);
+			alto = Math.max(alto, y);
 		}
+		// Picos (o altar do Ednaldo): nem um canto da peça inicial abaixo da altura mínima.
+		if (baixo < this.alturaMinima) return null;
 		float agua = molhadas / (float) total;
 		if (this.terreno == Terreno.SECO ? agua > this.maxAgua || alto - baixo > this.maxDesnivel : agua < this.minAgua) return null;
 		StructurePiecesBuilder escolhidas = new StructurePiecesBuilder();

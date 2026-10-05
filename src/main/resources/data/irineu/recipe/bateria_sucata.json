@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CRC",
+    "CIC",
+    "CRC"
+  ],
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "R": "minecraft:redstone",
+    "I": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "irineu:bateria_sucata",
+    "count": 1
+  }
+}

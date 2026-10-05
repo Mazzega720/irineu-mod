@@ -61,48 +61,27 @@
           ],
           "monster": [
             {
-              "type": "minecraft:spider",
-              "count": 4,
-              "weight": 100
+              "type": "irineu:corpo_seco",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 2,
+                "max_inclusive": 4
+              },
+              "weight": 90
             },
             {
-              "type": "minecraft:zombie",
-              "count": 4,
-              "weight": 95
-            },
-            {
-              "type": "minecraft:zombie_villager",
-              "count": 1,
-              "weight": 5
-            },
-            {
-              "type": "minecraft:skeleton",
-              "count": 4,
-              "weight": 100
-            },
-            {
-              "type": "minecraft:creeper",
-              "count": 4,
-              "weight": 100
-            },
-            {
-              "type": "minecraft:slime",
-              "count": 4,
-              "weight": 100
-            },
-            {
-              "type": "minecraft:enderman",
+              "type": "irineu:botijao_gas",
               "count": {
                 "type": "minecraft:uniform",
                 "min_inclusive": 1,
-                "max_inclusive": 4
+                "max_inclusive": 2
               },
-              "weight": 10
+              "weight": 60
             },
             {
-              "type": "minecraft:witch",
+              "type": "irineu:cuca_feiticeira",
               "count": 1,
-              "weight": 5
+              "weight": 8
             },
             {
               "type": "minecraft:ocelot",
@@ -193,10 +172,7 @@
     [
       "minecraft:amethyst_geode"
     ],
-    [
-      "minecraft:monster_room",
-      "minecraft:monster_room_deep"
-    ],
+    [],
     [],
     [],
     [

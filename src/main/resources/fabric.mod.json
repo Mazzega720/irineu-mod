@@ -3,7 +3,7 @@
 	"id": "irineu",
 	"version": "${version}",
 	"name": "Irineu, Jailson & BamBam",
-	"description": "Irineu, você não sabe nem eu! A dimensão Brasil (6 biomas, plantas e bichos), o Irineu e o Jailson, o BamBam e o Manoel Gomes como bosses animados com o GeckoLib, o Luva de Pedreiro, o chefão final Lula e Bolsonaro, quiosques com o Davi Brito, a economia do Real (notas, Pix, maquininha, inflação e a nota de 3), minérios brasileiros (nióbio, turmalina, hematita, ágata, topázio, aluvião), itens da cultura popular (Havaiana de Pau, Bambu do Silvio, gambiarra, óculos Juliet, filtro de barro, comidas) e estruturas com comerciantes (favela, buteco, vila de cangaceiros, estância gaúcha, palafitas e as ruínas de Carajás). Projeto 100% vibecodado com o Claude Code.",
+	"description": "Irineu, você não sabe nem eu! A dimensão Brasil (6 biomas, plantas e bichos), o Irineu e o Jailson, o BamBam e o Manoel Gomes como bosses animados com o GeckoLib, o Luva de Pedreiro, o chefão final Lula e Bolsonaro, quiosques com o Davi Brito, a economia do Real (notas, Pix, maquininha, inflação e a nota de 3), minérios brasileiros (nióbio, turmalina, hematita, ágata, topázio, aluvião), itens da cultura popular (Havaiana de Pau, Bambu do Silvio, gambiarra, óculos Juliet, filtro de barro, comidas) e estruturas com comerciantes (favela, buteco, vila de cangaceiros, estância gaúcha, palafitas e as ruínas de Carajás). Na 4.0, a Jornada pelo Brasil: os monstros do folclore (Corpo Seco, Botijão de Gás, Bacamarteiro, Aranha Armadeira e Cuca Feiticeira) no lugar dos do jogo, as relíquias dos 4 chefões (E.T. de Varginha, Ednaldo Pereira, Manoel Gomes e BamBam), a Câmara dos Três Poderes com os pedestais e o portal, e a dimensão Praça dos Três Poderes, onde a urna chama o chefão final e a vitória dá a Faixa Presidencial Suprema. Projeto 100% vibecodado com o Claude Code.",
 	"authors": [
 		"Mazzega"
 	],
@@ -18,6 +18,9 @@
 			"com.mazzega.irineu.client.IrineuClient"
 		]
 	},
+	"mixins": [
+		"irineu.mixins.json"
+	],
 	"depends": {
 		"fabricloader": ">=0.19.5",
 		"minecraft": "~26.3",

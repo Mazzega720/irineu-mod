@@ -48,7 +48,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "brasil_mod:ruinas_carajas/sala_zumbi",
+        "location": "brasil_mod:ruinas_carajas/sala_corpo_seco",
         "processors": "minecraft:empty",
         "projection": "rigid"
       },
@@ -57,7 +57,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "brasil_mod:ruinas_carajas/sala_esqueleto",
+        "location": "brasil_mod:ruinas_carajas/sala_bacamarteiro",
         "processors": "minecraft:empty",
         "projection": "rigid"
       },
@@ -66,7 +66,7 @@
     {
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "brasil_mod:ruinas_carajas/sala_aranha",
+        "location": "brasil_mod:ruinas_carajas/sala_armadeira",
         "processors": "minecraft:empty",
         "projection": "rigid"
       },

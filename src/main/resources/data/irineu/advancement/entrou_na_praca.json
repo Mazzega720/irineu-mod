@@ -1,0 +1,27 @@
+{
+  "parent": "irineu:raiz",
+  "criteria": {
+    "praca": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "brasil_mod:praca_tres_poderes"
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "irineu:urna_eleitoral_sagrada"
+    },
+    "title": {
+      "translate": "advancements.irineu.entrou_na_praca.title"
+    },
+    "description": {
+      "translate": "advancements.irineu.entrou_na_praca.description"
+    }
+  },
+  "requirements": [
+    [
+      "praca"
+    ]
+  ]
+}

@@ -19,6 +19,12 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), 
 # Sons que viraram gravações CC0 (tools/sons_cc0): os geradores não sobrescrevem esses .ogg.
 with open(os.path.join(ROOT, "tools", "sons_cc0", "sons_cc0.json"), encoding="utf-8") as _f:
     SONS_CC0 = {s["arquivo"] for s in json.load(_f)["sons"]}
+# Áudios de terceiros (tools/audios_terceiros: vozes reais e trechos de música): os geradores também não sobrescrevem
+# esses .ogg, e as entradas dos eventos deles no sounds.json apontam para os arquivos (EVENTOS_TERCEIROS).
+with open(os.path.join(ROOT, "tools", "audios_terceiros", "audios_terceiros.json"), encoding="utf-8") as _f:
+    _TERCEIROS = json.load(_f)["sons"]
+SONS_TERCEIROS = {s["arquivo"] for s in _TERCEIROS}
+EVENTOS_TERCEIROS = {s["evento"]: "irineu:" + s["arquivo"] for s in _TERCEIROS}
 
 
 def hexc(s):
@@ -253,7 +259,7 @@ class Kit:
         self.sound_defs[event] = data
 
     def ogg(self, rel, samples, rate=44100):
-        if rel in SONS_CC0:
+        if rel in SONS_CC0 or rel in SONS_TERCEIROS:
             return f"irineu:{rel}"
         import soundfile as sf
         path = self.asset("sounds", *rel.split("/")) + ".ogg"

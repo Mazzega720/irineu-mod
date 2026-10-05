@@ -1,9 +1,12 @@
 package com.mazzega.irineu.brasil.portal;
 
+import com.mazzega.irineu.jornada.PracaTresPoderes;
 import java.util.Optional;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 /**
  * Bandeira Nacional: usada numa moldura de terracota amarela ou verde, acende o portal do Brasil (como o isqueiro no
- * portal do Nether). Não gasta.
+ * portal do Nether). Não gasta. Na Praça dos Três Poderes não acende nada (só avisa): de lá só se sai vencendo.
  */
 public class BandeiraNacionalItem extends Item {
 	public BandeiraNacionalItem(Properties properties) {
@@ -27,6 +30,12 @@ public class BandeiraNacionalItem extends Item {
 		BlockPos inside = context.getClickedPos().relative(context.getClickedFace());
 		Optional<BrasilPortalShape> shape = BrasilPortalShape.findEmpty(level, inside, context.getHorizontalDirection().getClockWise().getAxis());
 		if (shape.isEmpty()) return InteractionResult.PASS;
+		if (PracaTresPoderes.isPraca(level)) {
+			if (!level.isClientSide() && context.getPlayer() != null) {
+				context.getPlayer().sendOverlayMessage(Component.translatable("item.irineu.bandeira_nacional.na_praca").withStyle(ChatFormatting.RED));
+			}
+			return InteractionResult.FAIL;
+		}
 		if (level instanceof ServerLevel server) {
 			BrasilPortalShape portal = shape.get();
 			portal.createPortalBlocks(level);

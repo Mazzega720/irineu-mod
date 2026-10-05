@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.border.WorldBorder;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.Heightmap;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Acha o portal de volta (pelos pontos de interesse) ou constrói um na superfície. O chão de cada coluna é procurado de
@@ -34,6 +35,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
  * Prefere um lugar plano e livre. Se não houver, usa o menos acidentado: a moldura fica no chão mais alto e a plataforma
  * é completada com terracota embaixo, abrindo espaço em cima (nunca cava o terreno). Se só houver água, faz uma
  * plataforma de terracota na superfície.
+ * <p>
+ * A mesma procura do chão serve à volta pelo portal da vitória da Praça dos Três Poderes ({@link #chaoSeco}).
  */
 public final class BrasilPortalForcer {
 	public static final ResourceKey<PoiType> POI = ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, Irineu.id("portal_brasil"));
@@ -43,6 +46,8 @@ public final class BrasilPortalForcer {
 	private static final int BUILD_RADIUS = 16;
 	/** Até quantos blocos de terracota põe embaixo da plataforma para apoiá-la num barranco. */
 	private static final int MAX_FILL = 12;
+	/** Até onde o {@link #chaoSeco} procura chão seco nos chunks já carregados (sem gerar terreno). */
+	public static final int RAIO_CARREGADOS = 48;
 
 	private BrasilPortalForcer() {
 	}
@@ -166,6 +171,56 @@ public final class BrasilPortalForcer {
 			}
 		}
 		return new BlockUtil.FoundRectangle(base.immutable(), 2, 3);
+	}
+
+	/**
+	 * Um lugar seco na superfície perto da coluna (x, z), para chegar a pé (a volta pelo portal da vitória da Praça): a
+	 * coluna seca mais perto, com o chão firme e espaço para o corpo (debaixo de árvore não serve). Procura primeiro só
+	 * nos chunks já carregados, até {@link #RAIO_CARREGADOS} blocos (sem gerar nada), e depois até {@code raio} blocos,
+	 * gerando o terreno que falta: são até (2 x raio / 16 + 1)² chunks gerados na hora, na thread do servidor, então o
+	 * raio fica pequeno. Se só houver água, põe uma plataforma 3 x 3 de terracota amarela boiando (que a próxima procura
+	 * já acha). Devolve onde ficam os pés.
+	 */
+	public static BlockPos chaoSeco(ServerLevel level, int x, int z, int raio) {
+		WorldBorder border = level.getWorldBorder();
+		int maxY = Math.min(level.getMaxY(), level.getMinY() + level.getLogicalHeight() - 1) - 2;
+		Surface surface = new Surface(level);
+		BlockPos.MutableBlockPos cursor = new BlockPos.MutableBlockPos();
+		BlockPos achado = procurarSeco(level, surface, x, z, Math.max(raio, RAIO_CARREGADOS), true, maxY, cursor);
+		if (achado == null) achado = procurarSeco(level, surface, x, z, raio, false, maxY, cursor);
+		if (achado != null) return achado;
+		// Só água por perto: a plataforma na superfície.
+		BlockPos at = border.clampToBounds(new BlockPos(x, 0, z));
+		int y = Math.min(Math.max(surface.y(at.getX(), at.getZ()), level.getSeaLevel() + 1), maxY);
+		for (int dx = -1; dx <= 1; dx++) {
+			for (int dz = -1; dz <= 1; dz++) {
+				level.setBlockAndUpdate(cursor.set(at.getX() + dx, y - 1, at.getZ() + dz), Blocks.DYED_TERRACOTTA.yellow().defaultBlockState());
+				for (int h = 0; h < 2; h++) {
+					if (!level.getBlockState(cursor.set(at.getX() + dx, y + h, at.getZ() + dz)).isAir()) level.setBlockAndUpdate(cursor, Blocks.AIR.defaultBlockState());
+				}
+			}
+		}
+		return new BlockPos(at.getX(), y, at.getZ());
+	}
+
+	/** A espiral do {@link #chaoSeco}: a primeira coluna seca e livre; com {@code soCarregados}, pula os chunks que não estão na memória. */
+	private static @Nullable BlockPos procurarSeco(ServerLevel level, Surface surface, int x, int z, int raio, boolean soCarregados, int maxY,
+		BlockPos.MutableBlockPos cursor) {
+		WorldBorder border = level.getWorldBorder();
+		for (BlockPos.MutableBlockPos column : BlockPos.spiralAround(new BlockPos(x, 0, z), raio, Direction.EAST, Direction.SOUTH)) {
+			if (!border.isWithinBounds(column)) continue;
+			if (soCarregados && level.getChunkSource().getChunkNow(SectionPos.blockToSectionCoord(column.getX()), SectionPos.blockToSectionCoord(column.getZ())) == null) continue;
+			if (surface.wet(column.getX(), column.getZ())) continue;
+			int y = surface.y(column.getX(), column.getZ());
+			if (y > maxY || y <= level.getMinY() + 1) continue;
+			boolean livre = true;
+			for (int h = 0; h < 2 && livre; h++) {
+				BlockState state = level.getBlockState(cursor.set(column.getX(), y + h, column.getZ()));
+				livre = state.getFluidState().isEmpty() && state.getCollisionShape(level, cursor).isEmpty();
+			}
+			if (livre) return new BlockPos(column.getX(), y, column.getZ());
+		}
+		return null;
 	}
 
 	private static double horizontalDistanceSqr(BlockPos a, BlockPos b) {

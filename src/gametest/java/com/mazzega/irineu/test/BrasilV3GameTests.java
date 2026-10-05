@@ -1,5 +1,8 @@
 package com.mazzega.irineu.test;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mazzega.irineu.brasil.Brasil;
 import com.mazzega.irineu.cultura.BambuDoSilvioItem;
 import com.mazzega.irineu.cultura.CulturaEventos;
@@ -21,6 +24,10 @@ import com.mazzega.irineu.registry.BrasilEffects;
 import com.mazzega.irineu.registry.BrasilEntities;
 import com.mazzega.irineu.registry.BrasilItems;
 import com.mazzega.irineu.registry.ModBlocks;
+import com.mojang.blaze3d.platform.NativeImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,6 +44,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -265,7 +273,9 @@ final class BrasilV3GameTests {
 		// Notas dos bichos no Brasil (com o amuleto, mico-leão dá nota de 20 em ~8% das vezes).
 		server.runCommand("gamemode spectator @p");
 		server.runCommand("execute in brasil_mod:brasil run tp @p 0 160 0");
-		context.waitTicks(20);
+		// Espera o chunk ficar com as entidades carregadas: com o servidor atrasado gerando o terreno, os micos e as
+		// notas postos num chunk que ainda não carregou não aparecem na busca.
+		server.waitFor(mc -> BrasilGameTests.brasil(mc).isPositionEntityTicking(new BlockPos(0, 158, 0)), 600);
 		server.runOnServer(mc -> {
 			ServerLevel brasil = BrasilGameTests.brasil(mc);
 			ServerPlayer player = player(mc);
@@ -443,6 +453,40 @@ final class BrasilV3GameTests {
 			for (EquipmentSlot slot : new EquipmentSlot[] {EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET}) {
 				player.setItemSlot(slot, ItemStack.EMPTY);
 			}
+		});
+
+		// As camadas de equipamento do mod (nióbio, imperial, óculos Juliet e a faixa suprema): cada camada declarada tem a
+		// textura, do tamanho da do jogo (a do bebê, humanoid_baby, é 64 x 64; as outras, 64 x 32). Sem ela, o zumbi bebê
+		// que veste a peça aparece com a textura que falta.
+		context.runOnClient(mc -> {
+			Map<String, int[]> tamanhos = Map.of("humanoid", new int[] {64, 32}, "humanoid_baby", new int[] {64, 64},
+				"humanoid_leggings", new int[] {64, 32});
+			Map<Identifier, Resource> equipamentos = mc.getResourceManager().listResources("equipment",
+				id -> id.getNamespace().equals("irineu") && id.getPath().endsWith(".json"));
+			int bebes = 0;
+			for (var e : equipamentos.entrySet()) {
+				try (BufferedReader leitor = e.getValue().openAsReader()) {
+					JsonObject camadas = JsonParser.parseReader(leitor).getAsJsonObject().getAsJsonObject("layers");
+					for (String camada : camadas.keySet()) {
+						int[] tamanho = tamanhos.get(camada);
+						check(tamanho != null, e.getKey() + " declara a camada " + camada + ", que o teste não conhece");
+						for (JsonElement el : camadas.getAsJsonArray(camada)) {
+							Identifier tex = Identifier.parse(el.getAsJsonObject().get("texture").getAsString());
+							Identifier png = tex.withPath("textures/entity/equipment/" + camada + "/" + tex.getPath() + ".png");
+							check(mc.getResourceManager().getResource(png).isPresent(), e.getKey() + " declara " + camada + " sem a textura " + png);
+							try (InputStream in = mc.getResourceManager().open(png); NativeImage img = NativeImage.read(in)) {
+								check(img.getWidth() == tamanho[0] && img.getHeight() == tamanho[1], png + " tem " + img.getWidth() + " x "
+									+ img.getHeight() + ", e a camada " + camada + " pede " + tamanho[0] + " x " + tamanho[1]);
+							}
+							if (camada.equals("humanoid_baby")) bebes++;
+						}
+					}
+				} catch (IOException ex) {
+					throw new AssertionError("Não deu para ler " + e.getKey(), ex);
+				}
+			}
+			log("MineriosTest", equipamentos.size() + " equipamentos do mod com as texturas certas (" + bebes + " camadas do bebê)");
+			check(equipamentos.size() >= 4 && bebes >= 4, "Faltam equipamentos do mod: " + equipamentos.keySet());
 		});
 
 		// Geração: cada minério só no seu bioma, e achado de verdade no terreno.
@@ -776,7 +820,8 @@ final class BrasilV3GameTests {
 			}
 			server.runCommand("execute in brasil_mod:brasil run forceload remove " + carregar);
 		}
-		// Uma sala de spawner das ruínas (o sorteio pode não trazer nenhuma): o molde direto no mundo plano.
+		// Uma sala de spawner das ruínas (o sorteio pode não trazer nenhuma): o molde direto no mundo plano. Desde a 4.0 os
+		// spawners das ruínas são dos monstros do Brasil (a sala do Corpo Seco no lugar da do zumbi).
 		server.runCommand("gamemode survival @p");
 		server.runCommand("tp @p 16004.5 -60 -6.5 0 20");
 		context.waitTicks(20);
@@ -785,17 +830,20 @@ final class BrasilV3GameTests {
 			var source = mc.createCommandSourceStack().withLevel(level).withPosition(new Vec3(16004.5, -60, -6.5))
 				.withPermission(net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER);
 			try {
-				mc.getCommands().getDispatcher().execute("place template brasil_mod:ruinas_carajas/sala_zumbi 16000 -61 0", source);
+				mc.getCommands().getDispatcher().execute("place template brasil_mod:ruinas_carajas/sala_corpo_seco 16000 -61 0", source);
 			} catch (com.mojang.brigadier.exceptions.CommandSyntaxException ex) {
 				throw new AssertionError(ex.getMessage());
 			}
 			BlockPos spawner = new BlockPos(16004, -60, 4);
 			boolean ok = level.getBlockState(spawner).is(Blocks.SPAWNER)
 				&& level.getBlockEntity(spawner) instanceof net.minecraft.world.level.block.entity.SpawnerBlockEntity;
+			String dados = ok ? level.getBlockEntity(spawner).saveWithoutMetadata(level.registryAccess()).toString() : "";
+			boolean corpoSeco = dados.contains("irineu:corpo_seco");
 			int baus = 0;
 			for (BlockPos p : BlockPos.betweenClosed(16000, -60, 0, 16008, -58, 8)) if (level.getBlockState(p).is(Blocks.CHEST)) baus++;
-			log("EstruturasTest", "sala de spawner das ruínas (molde): spawner " + ok + ", baús " + baus);
+			log("EstruturasTest", "sala de spawner das ruínas (molde): spawner " + ok + " (de corpo seco: " + corpoSeco + "), baús " + baus);
 			check(ok && baus == 2, "A sala de spawner das ruínas está errada");
+			check(corpoSeco, "O spawner da sala do Corpo Seco devia ser de irineu:corpo_seco: " + dados);
 		});
 		server.runCommand("tp @p 0 -60 0");
 	}

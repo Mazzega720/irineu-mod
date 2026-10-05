@@ -1421,31 +1421,59 @@
     "subtitle": "subtitles.irineu.item.zarabatana.sopro"
   },
   "fala.ednaldo.chegada": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/chegada"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.chegada"
   },
   "fala.ednaldo.vale_tudo": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/vale_tudo"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.vale_tudo"
   },
   "fala.ednaldo.nao_vale_nada": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/nao_vale_nada"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.nao_vale_nada"
   },
   "fala.ednaldo.banimento": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/banimento"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.banimento"
   },
   "fala.ednaldo.furia": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/furia"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.furia"
   },
   "fala.ednaldo.ambiente": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/ambiente"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.ambiente"
   },
   "fala.ednaldo.derrota": {
-    "sounds": [],
+    "sounds": [
+      {
+        "name": "irineu:falas/ednaldo/derrota"
+      }
+    ],
     "subtitle": "subtitles.irineu.fala.ednaldo.derrota"
   },
   "fala.et.chegada": {
@@ -1475,5 +1503,559 @@
   "fala.et.derrota": {
     "sounds": [],
     "subtitle": "subtitles.irineu.fala.et.derrota"
+  },
+  "item.disco_vale_tudo.ritual": {
+    "sounds": [
+      {
+        "name": "irineu:item/disco_vale_tudo",
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.irineu.item.disco_vale_tudo.ritual"
+  },
+  "entity.corpo_seco.ambient": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/husk/idle1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/husk/idle2",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/husk/idle3",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.corpo_seco.ambient"
+  },
+  "entity.corpo_seco.hurt": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/husk/hurt1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/husk/hurt2",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.corpo_seco.hurt"
+  },
+  "entity.corpo_seco.death": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/husk/death1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/husk/death2",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.corpo_seco.death"
+  },
+  "entity.corpo_seco.step": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/husk/step1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/husk/step2",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/husk/step3",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/husk/step4",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/husk/step5",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.corpo_seco.step"
+  },
+  "entity.corpo_seco.ataque": {
+    "sounds": [
+      {
+        "name": "minecraft:block/vine/break1",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/vine/break2",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/vine/break3",
+        "pitch": 0.7,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/vine/break4",
+        "pitch": 0.7,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.corpo_seco.ataque"
+  },
+  "entity.botijao_gas.chiado": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/botijao_chiado"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.botijao_gas.chiado"
+  },
+  "entity.botijao_gas.passo": {
+    "sounds": [
+      {
+        "name": "minecraft:block/chain/step1",
+        "pitch": 1.1,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/chain/step2",
+        "pitch": 1.1,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/chain/step3",
+        "pitch": 1.1,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/chain/step4",
+        "pitch": 1.1,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/chain/step5",
+        "pitch": 1.1,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/chain/step6",
+        "pitch": 1.1,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.botijao_gas.passo"
+  },
+  "entity.botijao_gas.hurt": {
+    "sounds": [
+      {
+        "name": "minecraft:random/anvil_land",
+        "pitch": 1.8,
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.botijao_gas.hurt"
+  },
+  "entity.botijao_gas.death": {
+    "sounds": [
+      {
+        "name": "minecraft:block/chain/break1",
+        "pitch": 0.9,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/chain/break2",
+        "pitch": 0.9,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/chain/break3",
+        "pitch": 0.9,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:block/chain/break4",
+        "pitch": 0.9,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.botijao_gas.death"
+  },
+  "entity.bacamarteiro.tiro": {
+    "sounds": [
+      {
+        "name": "irineu:bestiario/bacamarteiro_tiro"
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.bacamarteiro.tiro"
+  },
+  "entity.bacamarteiro.recarga": {
+    "sounds": [
+      {
+        "name": "minecraft:item/crossbow/loading_middle1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item/crossbow/loading_middle2",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item/crossbow/loading_middle3",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item/crossbow/loading_middle4",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.bacamarteiro.recarga"
+  },
+  "entity.bacamarteiro.coronhada": {
+    "sounds": [
+      {
+        "name": "minecraft:entity/player/attack/strong1",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/player/attack/strong2",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/player/attack/strong3",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/player/attack/strong4",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/player/attack/strong5",
+        "pitch": 0.8,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/player/attack/strong6",
+        "pitch": 0.8,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.bacamarteiro.coronhada"
+  },
+  "entity.bacamarteiro.ambient": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/pillager/idle1",
+        "pitch": 0.95,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/pillager/idle2",
+        "pitch": 0.95,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/pillager/idle3",
+        "pitch": 0.95,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/pillager/idle4",
+        "pitch": 0.95,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.bacamarteiro.ambient"
+  },
+  "entity.bacamarteiro.hurt": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/pillager/hurt1",
+        "pitch": 0.95,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/pillager/hurt2",
+        "pitch": 0.95,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/pillager/hurt3",
+        "pitch": 0.95,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.bacamarteiro.hurt"
+  },
+  "entity.bacamarteiro.death": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/pillager/death1",
+        "pitch": 0.95,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/pillager/death2",
+        "pitch": 0.95,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.bacamarteiro.death"
+  },
+  "entity.aranha_armadeira.ambient": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/spider/say1",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/spider/say2",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/spider/say3",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/spider/say4",
+        "pitch": 1.3,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.aranha_armadeira.ambient"
+  },
+  "entity.aranha_armadeira.hurt": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/spider/say1",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/spider/say2",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/spider/say3",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/spider/say4",
+        "pitch": 1.3,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.aranha_armadeira.hurt"
+  },
+  "entity.aranha_armadeira.death": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/spider/death",
+        "pitch": 1.3,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.aranha_armadeira.death"
+  },
+  "entity.aranha_armadeira.step": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/spider/step1",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/spider/step2",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/spider/step3",
+        "pitch": 1.3,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:mob/spider/step4",
+        "pitch": 1.3,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.aranha_armadeira.step"
+  },
+  "entity.aranha_armadeira.bote": {
+    "sounds": [
+      {
+        "name": "minecraft:mob/spider/say3",
+        "pitch": 1.7,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.aranha_armadeira.bote"
+  },
+  "entity.cuca_feiticeira.ambient": {
+    "sounds": [
+      {
+        "name": "minecraft:entity/witch/ambient1",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/ambient2",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/ambient3",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/ambient4",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/ambient5",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "irineu:fauna/jacare",
+        "pitch": 0.9,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.cuca_feiticeira.ambient"
+  },
+  "entity.cuca_feiticeira.hurt": {
+    "sounds": [
+      {
+        "name": "minecraft:entity/witch/hurt1",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/hurt2",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/hurt3",
+        "pitch": 0.75,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.cuca_feiticeira.hurt"
+  },
+  "entity.cuca_feiticeira.death": {
+    "sounds": [
+      {
+        "name": "minecraft:entity/witch/death1",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/death2",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/death3",
+        "pitch": 0.75,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.cuca_feiticeira.death"
+  },
+  "entity.cuca_feiticeira.arremesso": {
+    "sounds": [
+      {
+        "name": "minecraft:entity/witch/throw1",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/throw2",
+        "pitch": 0.75,
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:entity/witch/throw3",
+        "pitch": 0.75,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.cuca_feiticeira.arremesso"
+  },
+  "entity.cuca_feiticeira.risada": {
+    "sounds": [
+      {
+        "name": "minecraft:entity/witch/celebrate",
+        "pitch": 0.75,
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.entity.cuca_feiticeira.risada"
+  },
+  "block.nucleo_nave.reparo": {
+    "sounds": [
+      {
+        "name": "minecraft:block/beacon/activate",
+        "pitch": 1.4
+      },
+      {
+        "name": "minecraft:block/respawn_anchor/charge1",
+        "pitch": 0.8
+      },
+      {
+        "name": "minecraft:block/respawn_anchor/charge2",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.irineu.block.nucleo_nave.reparo"
+  },
+  "block.urna_eleitoral_sagrada.pirililili": {
+    "sounds": [
+      {
+        "name": "irineu:item/urna_confirma",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.block.urna_eleitoral_sagrada.pirililili"
+  },
+  "block.pedestal_reliquia.triunfo": {
+    "sounds": [
+      {
+        "name": "irineu:jornada/triunfo"
+      }
+    ],
+    "subtitle": "subtitles.irineu.block.pedestal_reliquia.triunfo"
   }
 }

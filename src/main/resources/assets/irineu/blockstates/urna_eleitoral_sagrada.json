@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "irineu:block/urna_eleitoral_sagrada"
+    },
+    "facing=east": {
+      "model": "irineu:block/urna_eleitoral_sagrada",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "irineu:block/urna_eleitoral_sagrada",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "irineu:block/urna_eleitoral_sagrada",
+      "y": 270
+    }
+  }
+}

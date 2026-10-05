@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "irineu:block/nucleo_nave_topo_carregando",
+    "bottom": "irineu:block/nucleo_nave_fundo",
+    "side": "irineu:block/nucleo_nave_lado_carregando"
+  }
+}

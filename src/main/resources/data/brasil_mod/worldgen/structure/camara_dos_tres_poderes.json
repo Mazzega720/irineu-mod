@@ -1,0 +1,16 @@
+{
+  "type": "brasil_mod:encaixe_no_terreno",
+  "biomes": "#brasil_mod:has_structure/camara_dos_tres_poderes",
+  "spawn_overrides": {},
+  "step": "underground_structures",
+  "terrain_adaptation": "none",
+  "start_pool": "brasil_mod:camara_dos_tres_poderes/inicio",
+  "size": 5,
+  "start_height": -25,
+  "max_distance_from_center": 64,
+  "terreno": "seco",
+  "max_desnivel": 6,
+  "max_agua_no_inicio": 0.0,
+  "so_o_inicio": true,
+  "liquid_settings": "ignore_waterlogging"
+}

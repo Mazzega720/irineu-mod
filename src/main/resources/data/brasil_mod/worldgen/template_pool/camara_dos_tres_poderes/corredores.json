@@ -1,0 +1,50 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "brasil_mod:camara_dos_tres_poderes/corredor",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 3
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "brasil_mod:camara_dos_tres_poderes/corredor_longo",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "brasil_mod:camara_dos_tres_poderes/curva",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "brasil_mod:camara_dos_tres_poderes/cela",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "brasil_mod:camara_dos_tres_poderes/biblioteca",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 3
+    }
+  ],
+  "fallback": "brasil_mod:camara_dos_tres_poderes/fins"
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "carregando=false": {
+      "model": "irineu:block/nucleo_nave"
+    },
+    "carregando=true": {
+      "model": "irineu:block/nucleo_nave_carregando"
+    }
+  }
+}

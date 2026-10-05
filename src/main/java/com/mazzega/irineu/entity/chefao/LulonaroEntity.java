@@ -300,7 +300,7 @@ public class LulonaroEntity extends ChefaoEntity {
 		this.playSound(SoundEvents.EVOKER_PREPARE_SUMMON, 3.0F, 0.6F);
 	}
 
-	static final String HORDE_TAG = "irineu_horda_lulonaro";
+	public static final String HORDE_TAG = "irineu_horda_lulonaro";
 
 	private <T extends Mob> T spawnVanilla(ServerLevel level, EntityType<T> type, Vec3 pos, LivingEntity target) {
 		T mob = type.create(level, EntitySpawnReason.MOB_SUMMONED);
@@ -416,6 +416,8 @@ public class LulonaroEntity extends ChefaoEntity {
 			}
 			level.playSound(null, c.x, c.y, c.z, SoundEvents.WITHER_DEATH, this.getSoundSource(), 3.0F, 1.2F);
 			level.playSound(null, c.x, c.y, c.z, SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, this.getSoundSource(), 2.0F, 1.0F);
+			// Na Praça dos Três Poderes é a vitória da Jornada: a festa, o XP, o avanço e o portal de volta ao Brasil.
+			if (com.mazzega.irineu.jornada.PracaTresPoderes.isPraca(level)) com.mazzega.irineu.jornada.PracaTresPoderes.vitoria(level, this);
 		}
 	}
 

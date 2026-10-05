@@ -1,0 +1,83 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gunpowder",
+          "weight": 1,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0,
+                "max": 2
+              }
+            },
+            {
+              "type": "minecraft:enchanted_count_increase",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0.0,
+                "max": 1.0
+              },
+              "enchantment": "minecraft:looting"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:canos_de_ferro",
+          "weight": 1
+        }
+      ],
+      "condition": {
+        "type": "minecraft:all_of",
+        "terms": [
+          {
+            "type": "minecraft:killed_by_player"
+          },
+          {
+            "type": "minecraft:random_chance_with_enchanted_bonus",
+            "enchantment": "minecraft:looting",
+            "unenchanted_chance": 0.3,
+            "enchanted_chance": {
+              "type": "minecraft:linear",
+              "base": 0.32,
+              "per_level_above_first": 0.02
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "irineu:balas_de_chumbo",
+          "weight": 1,
+          "modifier": [
+            {
+              "type": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 4
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "irineu:entities/bacamarteiro"
+}

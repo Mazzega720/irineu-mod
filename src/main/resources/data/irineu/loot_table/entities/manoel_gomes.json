@@ -148,6 +148,15 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "irineu:reliquia_manoel"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "irineu:nota_20_reais",
           "weight": 6,
           "modifier": [

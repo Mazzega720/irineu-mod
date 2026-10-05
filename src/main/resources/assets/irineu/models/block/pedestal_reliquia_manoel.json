@@ -1,0 +1,141 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "minecraft:block/quartz_block_side",
+    "base": "minecraft:block/chiseled_quartz_block",
+    "base_topo": "minecraft:block/quartz_block_top",
+    "emblema": "irineu:block/pedestal_reliquia_lado_manoel",
+    "tampo": "minecraft:block/gold_block",
+    "topo": "irineu:block/pedestal_reliquia_topo"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        4,
+        15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#base"
+        },
+        "south": {
+          "texture": "#base"
+        },
+        "east": {
+          "texture": "#base"
+        },
+        "west": {
+          "texture": "#base"
+        },
+        "up": {
+          "texture": "#base_topo"
+        },
+        "down": {
+          "texture": "#base_topo",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        4,
+        4
+      ],
+      "to": [
+        12,
+        12,
+        12
+      ],
+      "faces": {
+        "north": {
+          "texture": "#emblema",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#emblema",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#emblema",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#emblema",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#base_topo"
+        },
+        "down": {
+          "texture": "#base_topo"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        12,
+        2
+      ],
+      "to": [
+        14,
+        15,
+        14
+      ],
+      "faces": {
+        "north": {
+          "texture": "#tampo"
+        },
+        "south": {
+          "texture": "#tampo"
+        },
+        "east": {
+          "texture": "#tampo"
+        },
+        "west": {
+          "texture": "#tampo"
+        },
+        "up": {
+          "texture": "#topo",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#tampo"
+        }
+      }
+    }
+  ]
+}

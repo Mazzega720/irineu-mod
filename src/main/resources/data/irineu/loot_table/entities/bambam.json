@@ -115,6 +115,15 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "irineu:reliquia_bambam"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
           "name": "irineu:marmita_feijoada",
           "weight": 1,
           "modifier": [

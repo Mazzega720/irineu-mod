@@ -308,7 +308,10 @@ public class EdnaldoPereiraEntity extends ChefeLendario {
 
 	// ---------------------------------------------------------------- Banimento Supremo
 
-	/** Mira o jogador mais perto: Lentidão X, som estridente e "BANIDO!" na tela por 2 s; depois o joga 35 blocos para cima. */
+	/**
+	 * Mira o jogador mais perto: a voz do "BANIDO!", Lentidão X e "BANIDO!" na tela por 2 s; depois o joga 35 blocos para
+	 * cima, com a sirene.
+	 */
 	class BanimentoSupremoGoal extends Goal {
 		private @Nullable ServerPlayer vitima;
 		private int timer;
@@ -346,7 +349,6 @@ public class EdnaldoPereiraEntity extends ChefeLendario {
 			self.triggerAnim(ACAO, "banir");
 			self.speak(FalaChefe.EDNALDO_BANIMENTO);
 			player.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, PREPARO_BANIMENTO, 9), self);
-			player.level().playSound(null, player.blockPosition(), BestiarioSounds.EDNALDO_BANIDO, SoundSource.HOSTILE, 2.0F, 1.0F);
 			player.connection.send(new ClientboundSetTitlesAnimationPacket(4, PREPARO_BANIMENTO, 10));
 			player.connection.send(new ClientboundSetTitleTextPacket(
 				Component.translatable("entity.irineu.ednaldo_pereira.banido").withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD)));
@@ -376,6 +378,9 @@ public class EdnaldoPereiraEntity extends ChefeLendario {
 				subida = dy;
 			}
 			level.sendParticles(ParticleTypes.REVERSE_PORTAL, player.getX(), player.getY() + 1.0, player.getZ(), 60, 0.4, 1.0, 0.4, 0.1);
+			// A sirene toca no arremesso, não no começo (lá é a voz do "BANIDO!", e as duas se cobririam). Vai presa à
+			// vítima: num som parado no chão ela, 35 blocos acima, ficaria fora do alcance (32) e não ouviria nada.
+			level.playSound(null, player, BestiarioSounds.EDNALDO_BANIDO, SoundSource.HOSTILE, 2.0F, 1.0F);
 			player.teleportTo(player.getX(), player.getY() + subida, player.getZ());
 			player.setDeltaMovement(Vec3.ZERO);
 			player.fallDistance = 0.0;

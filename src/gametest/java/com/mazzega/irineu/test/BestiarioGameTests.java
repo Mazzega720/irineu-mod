@@ -13,6 +13,7 @@ import com.mazzega.irineu.bestiario.PedraProjetilEntity;
 import com.mazzega.irineu.bestiario.chefes.BlocoTelecineticoEntity;
 import com.mazzega.irineu.bestiario.chefes.ETVarginhaEntity;
 import com.mazzega.irineu.bestiario.chefes.EdnaldoPereiraEntity;
+import com.mazzega.irineu.bestiario.chefes.FalaChefe;
 import com.mazzega.irineu.bestiario.chefes.NotaMusicalEntity;
 import com.mazzega.irineu.bestiario.chefes.OrbeJulgamentoEntity;
 import com.mazzega.irineu.bestiario.chefes.LodoProjetilEntity;
@@ -22,20 +23,29 @@ import com.mazzega.irineu.registry.BestiarioEntities;
 import com.mazzega.irineu.registry.BestiarioItems;
 import com.mazzega.irineu.registry.BrasilEffects;
 import com.mazzega.irineu.registry.BrasilItems;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
+import javax.sound.sampled.AudioFormat;
 import net.fabricmc.fabric.api.client.gametest.v1.context.ClientGameTestContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestServerContext;
 import net.fabricmc.fabric.api.client.gametest.v1.context.TestSingleplayerContext;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.Sound;
+import net.minecraft.client.sounds.JOrbisAudioStream;
+import net.minecraft.client.sounds.WeighedSoundEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -60,8 +70,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * Fase "bestiario": os 5 mobs e os 2 chefões lendários (registros, loot, receitas, a galeria com o GeckoLib tocando a
- * animação de cada um, e cada mecânica), os itens (cajado, módulo, zarabatana) e o Irineu e o Jailson no GeckoLib.
+ * Fase "bestiario": os 5 mobs e os 2 chefões lendários (registros, loot, receitas, as vozes reais, a galeria com o
+ * GeckoLib tocando a animação de cada um, e cada mecânica), os itens (cajado, módulo, zarabatana) e o Irineu e o Jailson
+ * no GeckoLib.
  * No mundo plano do Overworld, perto de x = 24000.
  */
 public final class BestiarioGameTests {
@@ -71,19 +82,24 @@ public final class BestiarioGameTests {
 	private BestiarioGameTests() {
 	}
 
-	private static void check(boolean ok, String message) {
+	static void check(boolean ok, String message) {
 		if (!ok) throw new AssertionError(message);
 	}
 
-	private static void log(String text) {
-		System.out.println("[" + TAG + "] " + text);
+	static void log(String text) {
+		log(TAG, text);
 	}
 
-	private static ServerPlayer player(MinecraftServer mc) {
+	/** Log com a etiqueta de outra fase ("[MonstrosTest] ..."): as fases da 4.0 usam os ajudantes daqui. */
+	static void log(String tag, String text) {
+		System.out.println("[" + tag + "] " + text);
+	}
+
+	static ServerPlayer player(MinecraftServer mc) {
 		return mc.getPlayerList().getPlayers().getFirst();
 	}
 
-	private static <T extends Entity> T spawn(ServerLevel level, EntityType<T> type, double x, double y, double z, float yaw, boolean ai) {
+	static <T extends Entity> T spawn(ServerLevel level, EntityType<T> type, double x, double y, double z, float yaw, boolean ai) {
 		T entity = type.create(level, EntitySpawnReason.COMMAND);
 		entity.snapTo(x, y, z, yaw, 0.0F);
 		if (entity instanceof Mob mob) {
@@ -97,12 +113,12 @@ public final class BestiarioGameTests {
 		return entity;
 	}
 
-	private static <T extends Entity> int contar(ServerLevel level, Class<T> cls, Vec3 centro, double raio) {
+	static <T extends Entity> int contar(ServerLevel level, Class<T> cls, Vec3 centro, double raio) {
 		return level.getEntitiesOfClass(cls, new AABB(centro, centro).inflate(raio), Entity::isAlive).size();
 	}
 
 	/** Muda um campo privado (as recargas das habilidades, para não esperar no teste). */
-	private static void campo(Object alvo, String nome, Object valor) {
+	static void campo(Object alvo, String nome, Object valor) {
 		try {
 			for (Class<?> c = alvo.getClass(); c != null; c = c.getSuperclass()) {
 				try {
@@ -120,7 +136,7 @@ public final class BestiarioGameTests {
 		}
 	}
 
-	private static void limpar(TestServerContext server) {
+	static void limpar(TestServerContext server) {
 		server.runCommand("kill @e[type=!minecraft:player]");
 		server.runCommand("clear @p");
 		server.runCommand("effect clear @p");
@@ -137,6 +153,7 @@ public final class BestiarioGameTests {
 		server.runCommand(String.format(Locale.ROOT, "tp @p %d.5 -60 0.5 0 0", X));
 		context.waitTicks(20);
 		registros(server);
+		audios(context);
 		galeria(context, singleplayer);
 		moto(context, server);
 		chupaCu(context, server);
@@ -173,6 +190,67 @@ public final class BestiarioGameTests {
 				"Falas dos chefões não registradas");
 			log("7 entidades com ovo e loot, os 2 chefões em c:bosses, 5 receitas (2 de poção) e as 14 falas registradas");
 		});
+	}
+
+	// ====================================================================== Vozes reais (tools/audios_terceiros)
+	/**
+	 * Os eventos com áudio de terceiros apontam para o .ogg cortado (que existe, com a duração do recorte: os sons
+	 * sintetizados de antes, no mesmo caminho, tinham menos de 1 s), e a boca do Ednaldo mexe nas 7 falas (todas com voz,
+	 * os trechos de "Vale Nada Vale Tudo" achados pelo Whisper), cada uma com a duração do .ogg (a mesma conta do
+	 * audios_terceiros.py --conferir). As falas do E.T. continuam vazias, esperando a voz.
+	 */
+	private static void audios(ClientGameTestContext context) {
+		// evento, caminho, duração mínima e máxima do .ogg (s)
+		Object[][] eventos = {
+			{"entity.dois_caras_moto.assalto", "bestiario/moto_assalto", 1.0F, 3.0F},
+			{"entity.flanelinha.pago", "bestiario/flanelinha_pago", 1.0F, 3.0F},
+			{"fala.ednaldo.chegada", "falas/ednaldo/chegada", FalaChefe.EDNALDO_CHEGADA},
+			{"fala.ednaldo.banimento", "falas/ednaldo/banimento", FalaChefe.EDNALDO_BANIMENTO},
+			{"fala.ednaldo.vale_tudo", "falas/ednaldo/vale_tudo", FalaChefe.EDNALDO_VALE_TUDO},
+			{"fala.ednaldo.nao_vale_nada", "falas/ednaldo/nao_vale_nada", FalaChefe.EDNALDO_NAO_VALE_NADA},
+			{"fala.ednaldo.furia", "falas/ednaldo/furia", FalaChefe.EDNALDO_FURIA},
+			{"fala.ednaldo.ambiente", "falas/ednaldo/ambiente", FalaChefe.EDNALDO_AMBIENTE},
+			{"fala.ednaldo.derrota", "falas/ednaldo/derrota", FalaChefe.EDNALDO_DERROTA},
+			{"item.disco_vale_tudo.ritual", "item/disco_vale_tudo", 12.0F, 15.5F},
+		};
+		context.runOnClient(mc -> {
+			for (Object[] ev : eventos) {
+				String evento = (String) ev[0];
+				WeighedSoundEvents sons = mc.getSoundManager().getSoundEvent(Irineu.id(evento));
+				check(sons != null, "Som não carregado: " + evento);
+				Sound som = sons.getSound(RandomSource.create());
+				check(som.getLocation().equals(Irineu.id((String) ev[1])), evento + " aponta para " + som.getLocation() + ", não para irineu:" + ev[1]);
+				check(mc.getResourceManager().getResource(som.getPath()).isPresent(), "Falta o arquivo " + som.getPath());
+				float seg = segundosOgg(mc, som.getPath());
+				float min, max;
+				if (ev[2] instanceof FalaChefe fala) {
+					check(fala.jawAnimation() != null, "A boca do Ednaldo não mexe em " + fala + " (duração 0 no FalaChefe)");
+					min = fala.seconds - 0.2F;
+					max = fala.seconds + 0.2F;
+				} else {
+					min = (float) ev[2];
+					max = (float) ev[3];
+				}
+				check(seg >= min && seg <= max, String.format(Locale.ROOT, "%s dura %.2f s, fora de %.2f a %.2f s", som.getPath(), seg, min, max));
+			}
+			check(mc.getSoundManager().getSoundEvent(Irineu.id("item.disco_vale_tudo.ritual")).getSound(RandomSource.create()).shouldStream(),
+				"O refrão do disco devia tocar em streaming");
+		});
+		log("vozes reais: moto, flanelinha, as 7 falas do Ednaldo e o refrão do disco apontam para os .ogg com a duração certa; boca no "
+			+ FalaChefe.EDNALDO_BANIMENTO.jawAnimation());
+	}
+
+	/** Quantos segundos dura o .ogg (decodificado inteiro), no cliente. As fases da 4.0 também usam. */
+	static float segundosOgg(Minecraft mc, Identifier caminho) {
+		try (InputStream in = mc.getResourceManager().open(caminho); JOrbisAudioStream ogg = new JOrbisAudioStream(in)) {
+			AudioFormat formato = ogg.getFormat();
+			long[] amostras = {0};
+			while (ogg.readChunk(x -> amostras[0]++)) {
+			}
+			return amostras[0] / (formato.getSampleRate() * formato.getChannels());
+		} catch (IOException e) {
+			throw new AssertionError("Não deu para ler " + caminho, e);
+		}
 	}
 
 	// ====================================================================== Galeria (GeckoLib tocando a animação de cada um)
@@ -592,13 +670,16 @@ public final class BestiarioGameTests {
 			log("raio deu levitação e a flechada crítica na cabeça o quebrou (E.T. tonto, vítima descendo devagar); lodo deu Lentidão IV, "
 				+ "Fadiga III e tirou o pulo; teleporte curto ok");
 		});
-		context.waitTicks(30);
-		server.runOnServer(mc -> {
-			boolean drop = !mc.overworld().getEntitiesOfClass(ItemEntity.class, player(mc).getBoundingBox().inflate(40),
-				e -> e.getItem().is(BestiarioItems.MODULO_ANTIGRAVITACIONAL)).isEmpty();
-			check(drop, "O E.T. derrotado devia deixar o Módulo Antigravitacional");
-			log("E.T. derrotado deixou o Módulo Antigravitacional");
-		});
+		// Espera o drop (até 5 s) no chão ou já no inventário: o jogador perto pode pegá-lo antes da conferência.
+		boolean drop = false;
+		for (int i = 0; i < 20 && !drop; i++) {
+			context.waitTicks(5);
+			drop = server.computeOnServer(mc -> player(mc).getInventory().countItem(BestiarioItems.MODULO_ANTIGRAVITACIONAL) > 0
+				|| !mc.overworld().getEntitiesOfClass(ItemEntity.class, player(mc).getBoundingBox().inflate(40),
+					e -> e.getItem().is(BestiarioItems.MODULO_ANTIGRAVITACIONAL)).isEmpty());
+		}
+		check(drop, "O E.T. derrotado devia deixar o Módulo Antigravitacional");
+		log("E.T. derrotado deixou o Módulo Antigravitacional");
 		limpar(server);
 	}
 

@@ -116,7 +116,7 @@ def table_set(t, rng, x, z, table, chairs):
 
 def umbrella(t, x, z, accent):
     """Guarda-sol listrado: mastro de corrente, copa 5x5 (sem as quinas) e topo de tapete formando uma cúpula."""
-    t.fill(x, 1, z, x, 3, z, "minecraft:chain", {"axis": "y", "waterlogged": "false"})
+    t.fill(x, 1, z, x, 3, z, "minecraft:iron_chain", {"axis": "y", "waterlogged": "false"})
     carpet = accent.replace("_wool", "_carpet")
     for dx in range(-2, 3):
         for dz in range(-2, 3):
@@ -369,7 +369,7 @@ fecha(m, "barraca_coco", AREIA)
 # Guarda-sóis com as cadeiras de praia e as cangas.
 m = anexo(9, 6, 5, AREIA)
 for (cx, cor) in ((2, "minecraft:orange_wool"), (6, "minecraft:light_blue_wool")):
-    m.fill(cx, 1, 2, cx, 3, 2, "minecraft:chain", {"axis": "y", "waterlogged": "false"})
+    m.fill(cx, 1, 2, cx, 3, 2, "minecraft:iron_chain", {"axis": "y", "waterlogged": "false"})
     for dx in (-1, 0, 1):
         for dz in (-1, 0, 1):
             m.set(cx + dx, 4, 2 + dz, cor if (dx + dz) % 2 == 0 else "minecraft:white_wool")

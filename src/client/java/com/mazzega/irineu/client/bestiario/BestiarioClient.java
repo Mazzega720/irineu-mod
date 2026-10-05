@@ -42,6 +42,14 @@ public final class BestiarioClient {
 		EntityRenderers.register(BestiarioEntities.DANCARINO_CARRETA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.DANCARINO_CARRETA, 0.5F, "head", false, false));
 		EntityRenderers.register(BestiarioEntities.EDNALDO_PEREIRA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.EDNALDO_PEREIRA, 0.6F, "head", false, true));
 		EntityRenderers.register(BestiarioEntities.ET_VARGINHA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.ET_VARGINHA, 0.5F, "head", false, true));
+		// Monstros da 4.0: o Corpo Seco com os olhos verde-pálidos brilhando; o Botijão não tem cabeça (vira o corpo todo).
+		EntityRenderers.register(BestiarioEntities.CORPO_SECO, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.CORPO_SECO, 0.5F, "head", false, true));
+		EntityRenderers.register(BestiarioEntities.BOTIJAO_GAS, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.BOTIJAO_GAS, 0.45F, null, false, false));
+		// O bacamarte faz parte do modelo do Bacamarteiro (sem item na mão); a Armadeira (sem cabeça separada: vira o corpo
+		// todo) e a Cuca com os olhos brilhando.
+		EntityRenderers.register(BestiarioEntities.BACAMARTEIRO, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.BACAMARTEIRO, 0.5F, "head", false, false));
+		EntityRenderers.register(BestiarioEntities.ARANHA_ARMADEIRA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.ARANHA_ARMADEIRA, 0.6F, null, false, true));
+		EntityRenderers.register(BestiarioEntities.CUCA_FEITICEIRA, c -> new BestiarioGeoRenderer<>(c, BestiarioEntities.CUCA_FEITICEIRA, 0.5F, "head", false, true));
 
 		EntityRenderers.register(BestiarioEntities.PEDRA_PROJETIL, c -> new ThrownItemRenderer<>(c, 0.9F, false));
 		EntityRenderers.register(BestiarioEntities.ORBE_JULGAMENTO, c -> new ThrownItemRenderer<>(c, 1.6F, true));
@@ -49,6 +57,7 @@ public final class BestiarioClient {
 		EntityRenderers.register(BestiarioEntities.BLOCO_TELECINETICO, c -> new ThrownItemRenderer<>(c, 2.4F, false));
 		EntityRenderers.register(BestiarioEntities.LODO_PROJETIL, c -> new ThrownItemRenderer<>(c, 1.0F, false));
 		EntityRenderers.register(BestiarioEntities.DARDO_ENVENENADO, c -> new ThrownItemRenderer<>(c, 0.7F, false));
+		EntityRenderers.register(BestiarioEntities.TIRO_PAIOL, c -> new ThrownItemRenderer<>(c, 0.5F, false));
 
 		ClientTickEvents.END_CLIENT_TICK.register(BestiarioClient::tick);
 	}
@@ -57,7 +66,9 @@ public final class BestiarioClient {
 		LocalPlayer player = mc.player;
 		if (player == null || mc.isPaused()) return;
 		boolean pulo = mc.options.keyJump.isDown();
-		boolean livre = !player.getAbilities().flying && !player.isPassenger() && !player.isInWater() && !player.isFallFlying() && !player.onClimbable();
+		// Quem pode voar (o criativo, a Faixa Presidencial Suprema) usa o duplo toque do pulo para voar: as botas e o
+		// módulo ficam quietos, senão o segundo pulo e o voo brigam pelo mesmo toque.
+		boolean livre = !player.getAbilities().mayfly && !player.getAbilities().flying && !player.isPassenger() && !player.isInWater() && !player.isFallFlying() && !player.onClimbable();
 		if (player.onGround() || !livre) {
 			puloSolto = false;
 			puloDuploUsado = false;

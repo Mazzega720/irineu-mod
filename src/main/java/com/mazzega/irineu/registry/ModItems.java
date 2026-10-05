@@ -39,12 +39,17 @@ public final class ModItems {
 	public static final Item PADRE_KELMON_SPAWN_EGG = register("padre_kelmon_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.PADRE_KELMON));
 	public static final Item GADO_SPAWN_EGG = register("gado_spawn_egg", SpawnEggItem::new, new Item.Properties().spawnEgg(ModEntities.GADO));
 
-	/** Invoca o chefão final (o Lula chega com um raio). */
 	/** Acende o portal do Brasil numa moldura de terracota amarela ou verde. */
 	public static final Item BANDEIRA_NACIONAL = register("bandeira_nacional", com.mazzega.irineu.brasil.portal.BandeiraNacionalItem::new,
 		new Item.Properties().stacksTo(1).rarity(Rarity.RARE));
-	public static final Item URNA_ELETRONICA = register("urna_eletronica", UrnaEletronicaItem::new, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
-	/** Troféu de quem derrota o Lulonaro. */
+	/** Invoca o chefão final (o Lula chega com um raio), só dentro da Praça dos Três Poderes. */
+	public static final Item URNA_ELETRONICA = register("urna_eletronica", UrnaEletronicaItem::new, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)
+		.component(DataComponents.LORE, new net.minecraft.world.item.component.ItemLore(List.of(
+			net.minecraft.network.chat.Component.translatable("item.irineu.urna_eletronica.dica").withStyle(net.minecraft.ChatFormatting.GRAY)))));
+	/**
+	 * O troféu antigo de quem derrotava o Lulonaro (até a 3.2). Desde a 4.0 ele deixa a Faixa Presidencial Suprema
+	 * ({@link JornadaItems#FAIXA_PRESIDENCIAL_SUPREMA}); esta continua registrada para os mundos antigos.
+	 */
 	public static final Item FAIXA_PRESIDENCIAL = register("faixa_presidencial", Item::new,
 		new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true));
 

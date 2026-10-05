@@ -10,9 +10,12 @@ import net.minecraft.sounds.SoundEvent;
  * Sons do bestiário do Brasil (gravações CC0 de {@code tools/sons_cc0}; os que faltam são sintetizados em
  * {@code tools/bestiario/bestiario.py}) e as falas dos dois chefões lendários.
  * <p>
- * As falas ({@code irineu:fala.ednaldo.*} e {@code irineu:fala.et.*}) estão registradas mas vazias no {@code sounds.json}:
- * para pôr a voz, coloque o .ogg em {@code assets/irineu/sounds/falas/<chefe>/<fala>.ogg}, aponte a entrada para ele e
- * acerte a duração em {@link com.mazzega.irineu.bestiario.chefes.FalaChefe} (a boca mexe esse tempo).
+ * Vozes reais de terceiros ({@code tools/audios_terceiros}, com crédito): o "Perdeu, playboy!" do assalto da moto, o
+ * "Valeu, patrão!" do flanelinha pago e todas as falas do Ednaldo (o "BANIDO!" e seis trechos de "Vale Nada Vale Tudo",
+ * achados pela transcrição do Whisper). As falas do E.T. ({@code irineu:fala.et.*}) estão registradas mas vazias no
+ * {@code sounds.json}: a voz entra pelo {@code tools/audios_terceiros} (que grava o .ogg em
+ * {@code assets/irineu/sounds/falas/<chefe>/<fala>.ogg} e aponta a entrada para ele), e a duração vai em
+ * {@link com.mazzega.irineu.bestiario.chefes.FalaChefe} (a boca mexe esse tempo).
  */
 public final class BestiarioSounds {
 	// ---------------------------------------------------------------- Dois Caras numa Moto
@@ -60,7 +63,39 @@ public final class BestiarioSounds {
 	public static final SoundEvent MODULO_PUXAR = register("item.modulo_antigravitacional.puxar");
 	public static final SoundEvent ZARABATANA = register("item.zarabatana.sopro");
 
-	// ---------------------------------------------------------------- Falas dos chefões (vazias até o usuário pôr as vozes)
+	// ---------------------------------------------------------------- Monstros da 4.0
+	// Corpo Seco: sons do husk mais graves e o estalo de cipó do golpe.
+	public static final SoundEvent CORPO_SECO_AMBIENT = register("entity.corpo_seco.ambient");
+	public static final SoundEvent CORPO_SECO_HURT = register("entity.corpo_seco.hurt");
+	public static final SoundEvent CORPO_SECO_DEATH = register("entity.corpo_seco.death");
+	public static final SoundEvent CORPO_SECO_STEP = register("entity.corpo_seco.step");
+	public static final SoundEvent CORPO_SECO_ATAQUE = register("entity.corpo_seco.ataque");
+	// Botijão de Gás: o "tsiiii" do vazamento (gravação CC0), passos de metal, a lata amassando.
+	public static final SoundEvent BOTIJAO_CHIADO = register("entity.botijao_gas.chiado");
+	public static final SoundEvent BOTIJAO_PASSO = register("entity.botijao_gas.passo");
+	public static final SoundEvent BOTIJAO_HURT = register("entity.botijao_gas.hurt");
+	public static final SoundEvent BOTIJAO_DEATH = register("entity.botijao_gas.death");
+	// Bacamarteiro: o tiro do bacamarte (gravação CC0), a recarga, a coronhada e a voz do saqueador mais grave.
+	public static final SoundEvent BACAMARTEIRO_AMBIENT = register("entity.bacamarteiro.ambient");
+	public static final SoundEvent BACAMARTEIRO_HURT = register("entity.bacamarteiro.hurt");
+	public static final SoundEvent BACAMARTEIRO_DEATH = register("entity.bacamarteiro.death");
+	public static final SoundEvent BACAMARTEIRO_TIRO = register("entity.bacamarteiro.tiro");
+	public static final SoundEvent BACAMARTEIRO_RECARGA = register("entity.bacamarteiro.recarga");
+	public static final SoundEvent BACAMARTEIRO_CORONHADA = register("entity.bacamarteiro.coronhada");
+	// Aranha Armadeira: a aranha do jogo mais aguda; o bote, o chiado mais agudo.
+	public static final SoundEvent ARMADEIRA_AMBIENT = register("entity.aranha_armadeira.ambient");
+	public static final SoundEvent ARMADEIRA_HURT = register("entity.aranha_armadeira.hurt");
+	public static final SoundEvent ARMADEIRA_DEATH = register("entity.aranha_armadeira.death");
+	public static final SoundEvent ARMADEIRA_STEP = register("entity.aranha_armadeira.step");
+	public static final SoundEvent ARMADEIRA_BOTE = register("entity.aranha_armadeira.bote");
+	// Cuca Feiticeira: a bruxa do jogo mais grave (e o rosnado do jacaré), o arremesso e a gargalhada.
+	public static final SoundEvent CUCA_AMBIENT = register("entity.cuca_feiticeira.ambient");
+	public static final SoundEvent CUCA_HURT = register("entity.cuca_feiticeira.hurt");
+	public static final SoundEvent CUCA_DEATH = register("entity.cuca_feiticeira.death");
+	public static final SoundEvent CUCA_ARREMESSO = register("entity.cuca_feiticeira.arremesso");
+	public static final SoundEvent CUCA_RISADA = register("entity.cuca_feiticeira.risada");
+
+	// ---------------------------------------------------------------- Falas dos chefões (as do E.T. ainda vazias)
 	public static final SoundEvent FALA_EDNALDO_CHEGADA = register("fala.ednaldo.chegada");
 	public static final SoundEvent FALA_EDNALDO_VALE_TUDO = register("fala.ednaldo.vale_tudo");
 	public static final SoundEvent FALA_EDNALDO_NAO_VALE_NADA = register("fala.ednaldo.nao_vale_nada");

@@ -88,48 +88,31 @@
           ],
           "monster": [
             {
-              "type": "minecraft:spider",
-              "count": 4,
-              "weight": 100
-            },
-            {
-              "type": "minecraft:zombie",
-              "count": 4,
-              "weight": 95
-            },
-            {
-              "type": "minecraft:zombie_villager",
-              "count": 1,
-              "weight": 5
-            },
-            {
-              "type": "minecraft:skeleton",
-              "count": 4,
-              "weight": 100
-            },
-            {
-              "type": "minecraft:creeper",
-              "count": 4,
-              "weight": 100
-            },
-            {
-              "type": "minecraft:slime",
-              "count": 4,
-              "weight": 100
-            },
-            {
-              "type": "minecraft:enderman",
+              "type": "irineu:botijao_gas",
               "count": {
                 "type": "minecraft:uniform",
                 "min_inclusive": 1,
-                "max_inclusive": 4
+                "max_inclusive": 2
               },
-              "weight": 10
+              "weight": 60
             },
             {
-              "type": "minecraft:witch",
-              "count": 1,
-              "weight": 5
+              "type": "irineu:aranha_armadeira",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 3
+              },
+              "weight": 80
+            },
+            {
+              "type": "irineu:cuca_feiticeira",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 30
             },
             {
               "type": "irineu:chupa_cu",
@@ -190,10 +173,7 @@
       "minecraft:amethyst_geode",
       "brasil_mod:alagados"
     ],
-    [
-      "minecraft:monster_room",
-      "minecraft:monster_room_deep"
-    ],
+    [],
     [],
     [],
     [

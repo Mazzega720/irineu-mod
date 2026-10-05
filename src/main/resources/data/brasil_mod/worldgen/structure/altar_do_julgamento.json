@@ -1,0 +1,16 @@
+{
+  "type": "brasil_mod:encaixe_no_terreno",
+  "biomes": "#brasil_mod:has_structure/altar_do_julgamento",
+  "spawn_overrides": {},
+  "step": "surface_structures",
+  "terrain_adaptation": "beard_box",
+  "start_pool": "brasil_mod:altar_do_julgamento/inicio",
+  "size": 1,
+  "start_height": -1,
+  "max_distance_from_center": 64,
+  "terreno": "seco",
+  "max_desnivel": 10,
+  "max_agua_no_inicio": 0.0,
+  "altura_minima": 100,
+  "margem_do_terreno": 5
+}

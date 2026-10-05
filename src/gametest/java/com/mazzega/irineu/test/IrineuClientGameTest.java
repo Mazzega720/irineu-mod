@@ -43,6 +43,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -78,6 +79,12 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			if (runs("cultura")) BrasilV3GameTests.testCultura(context, singleplayer);
 			if (runs("estruturas")) BrasilV3GameTests.testEstruturas(context, singleplayer);
 			if (runs("bestiario")) BestiarioGameTests.testBestiario(context, singleplayer);
+			// A Jornada pelo Brasil (versão 4.0).
+			if (runs("monstros")) MonstrosGameTests.testMonstros(context, singleplayer);
+			if (runs("reliquias")) ReliquiasGameTests.testReliquias(context, singleplayer);
+			if (runs("praca")) PracaGameTests.testPraca(context, singleplayer);
+			if (runs("camara")) CamaraGameTests.testCamara(context, singleplayer);
+			if (runs("jornada")) JornadaGameTests.testJornada(context, singleplayer);
 		}
 	}
 
@@ -432,7 +439,11 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			int davis = server.computeOnServer(mc -> mc.overworld().getEntitiesOfClass(DaviEntity.class,
 				new AABB(x, -61, 0, x + w, -50, d)).size());
 			if (davis != 1) throw new AssertionError(variants[i] + ": esperava 1 Davi no balcão, achei " + davis);
-			System.out.println("[QuiosqueTest] " + variants[i] + " OK (" + furniture + " mesas/cadeiras, Davi no balcão)");
+			// O mastro dos guarda-sóis é corrente: no 26.3 o bloco se chama minecraft:iron_chain (o nome velho, minecraft:chain,
+			// saía como ar, porque o molde é gravado já na versão nova e o DataFixer não converte).
+			int chains = server.computeOnServer(mc -> countBlock(mc.overworld(), new BlockPos(x, -60, 0), new BlockPos(x + w, -50, d), Blocks.IRON_CHAIN));
+			if (chains == 0) throw new AssertionError(variants[i] + ": guarda-sóis sem o mastro de corrente (minecraft:iron_chain)");
+			System.out.println("[QuiosqueTest] " + variants[i] + " OK (" + furniture + " mesas/cadeiras, Davi no balcão, " + chains + " correntes)");
 		}
 
 		// De perto, na altura dos olhos: mesas com as marcas no quiosque misto (x = 260)
@@ -468,6 +479,14 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		if (generatedDavis != 1) throw new AssertionError("Quiosque gerado pelo worldgen sem o Davi: " + generatedDavis);
 		System.out.println("[QuiosqueTest] /place structure gerou quiosque (" + generated + " móveis, com o Davi)");
 		server.runCommand("gamemode survival @p");
+	}
+
+	private static int countBlock(ServerLevel level, BlockPos from, BlockPos to, Block block) {
+		int count = 0;
+		for (BlockPos pos : BlockPos.betweenClosed(from, to)) {
+			if (level.getBlockState(pos).is(block)) count++;
+		}
+		return count;
 	}
 
 	private static int countFurniture(ServerLevel level, BlockPos from, BlockPos to) {
@@ -624,8 +643,13 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		int plates = server.computeOnServer(mc -> mc.overworld().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
 				new AABB(5190, -64, -10, 5210, -50, 20), item -> item.getItem().is(ModBlocks.ANILHA_BAMBAM.asItem()))
 			.stream().mapToInt(item -> item.getItem().getCount()).sum());
-		System.out.println("[TotemTest] o BamBam deixou " + plates + " anilhas");
+		// Desde a 4.0, também a relíquia dele (o Haltere do Trapézio Descendente), sempre uma.
+		int reliquias = server.computeOnServer(mc -> mc.overworld().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+				new AABB(5190, -64, -10, 5210, -50, 20), item -> item.getItem().is(com.mazzega.irineu.registry.JornadaItems.RELIQUIA_BAMBAM))
+			.stream().mapToInt(item -> item.getItem().getCount()).sum());
+		System.out.println("[TotemTest] o BamBam deixou " + plates + " anilhas e " + reliquias + " relíquia(s)");
 		if (plates < 4) throw new AssertionError("O BamBam devia deixar 4 anilhas: " + plates);
+		if (reliquias != 1) throw new AssertionError("O BamBam devia deixar a relíquia dele: " + reliquias);
 		server.runCommand("kill @e[type=!minecraft:player]");
 		// Espera a animação de morte do BamBam acabar (a barra dele some junto).
 		context.waitTicks(25);
@@ -1225,9 +1249,9 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 
 	// ---------------------------------------------------------------- Chefão final: Lula, Bolsonaro, dupla e Lulonaro
 
-	private static final String LULA_QUIET = "EstrelaCooldown:99999,GadoCooldown:99999,InvestidaCooldown:99999,VorticeCooldown:99999";
-	private static final String BOLSO_QUIET = "FuzilarCooldown:99999,FlexoesCooldown:99999,MitadaCooldown:99999";
-	private static final String LULONARO_QUIET = "EsferaCooldown:99999,DrenarCooldown:99999,GolpeCooldown:99999";
+	static final String LULA_QUIET = "EstrelaCooldown:99999,GadoCooldown:99999,InvestidaCooldown:99999,VorticeCooldown:99999";
+	static final String BOLSO_QUIET = "FuzilarCooldown:99999,FlexoesCooldown:99999,MitadaCooldown:99999";
+	static final String LULONARO_QUIET = "EsferaCooldown:99999,DrenarCooldown:99999,GolpeCooldown:99999";
 
 	private static void testChefao(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
 		var server = singleplayer.getServer();
@@ -1240,14 +1264,20 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			if (mc.getSoundManager().getSoundEvent(Irineu.id("item.urna.confirma")) == null) throw new AssertionError("Som da urna não carregou");
 		});
 
-		// 1) Urna eletrônica: o Lula chega fazendo joinha e o raio cai
+		// 1) A urna eletrônica só vale na Praça dos Três Poderes: aqui ela falha e continua na mão. A luta do teste é
+		// chamada pela Eleicao (o mesmo que a urna faz lá): o Lula chega fazendo joinha e o raio cai.
 		goTo(context, singleplayer, 4000.5, 0.5);
 		server.runOnServer(mc -> {
 			ServerPlayer player = player(mc);
 			player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.URNA_ELETRONICA));
 			var hit = new BlockHitResult(new Vec3(4000.5, -61.0, 8.5), Direction.UP, new BlockPos(4000, -61, 8), false);
 			var result = player.getMainHandItem().useOn(new net.minecraft.world.item.context.UseOnContext(player, InteractionHand.MAIN_HAND, hit));
-			if (!result.consumesAction()) throw new AssertionError("A urna não invocou o chefão: " + result);
+			if (result != net.minecraft.world.InteractionResult.FAIL) throw new AssertionError("A urna devia falhar fora da Praça: " + result);
+			if (!player.getMainHandItem().is(ModItems.URNA_ELETRONICA)) throw new AssertionError("A urna foi gasta fora da Praça");
+			if (!mc.overworld().getEntities(ModEntities.LULA, LulaEntity::isAlive).isEmpty()) throw new AssertionError("A urna invocou fora da Praça");
+			if (com.mazzega.irineu.entity.chefao.Eleicao.comecar(mc.overworld(), new BlockPos(4000, -60, 8), player) == null) {
+				throw new AssertionError("A Eleicao não invocou o chefão");
+			}
 		});
 		server.runCommand("tp @p 4000.5 -60 1.5 facing 4000.5 -58.5 8.5");
 		context.waitTicks(42);
@@ -1258,8 +1288,9 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			if (lula.getBossBarColor() != net.minecraft.world.BossEvent.BossBarColor.RED) throw new AssertionError("Barra do Lula não é vermelha");
 			String title = lula.getBossBarName().getString();
 			if (!title.contains("3%")) throw new AssertionError("Título da fase 1 errado: " + title);
-			if (!player(mc).getMainHandItem().isEmpty()) throw new AssertionError("A urna não foi gasta");
-			System.out.println("[ChefaoTest] urna invocou o Lula: barra vermelha \"" + title + "\"");
+			if (!player(mc).getMainHandItem().is(ModItems.URNA_ELETRONICA)) throw new AssertionError("A urna não devia ter sido gasta");
+			player(mc).setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+			System.out.println("[ChefaoTest] fora da Praça a urna falhou e ficou na mão; a Eleicao invocou o Lula: barra vermelha \"" + title + "\"");
 		});
 		server.waitFor(mc -> lula(mc).getAcao() == LulaEntity.Acao.NENHUMA, 40);
 
@@ -1569,19 +1600,45 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		context.waitTicks(60);
 		heal(server);
 
-		// 16) Fim: o Lulonaro morre e deixa a Faixa Presidencial
+		// 16) Fim: o Lulonaro morre e deixa a Faixa Presidencial Suprema (a antiga não cai mais). Fora da Praça não há
+		// vitória da Jornada: nem o portal nem o avanço (a fase "jornada" confere a vitória na Praça).
+		int vitoriasAntes = server.computeOnServer(IrineuClientGameTest::vitoriasNaPraca);
 		server.runOnServer(mc -> {
 			LulonaroEntity boss = lulonaro(mc);
 			boss.setInvulnerableTime(0);
 			boss.hurtServer(mc.overworld(), mc.overworld().damageSources().playerAttack(player(mc)), 2000.0F);
 		});
 		context.waitTicks(30);
-		boolean sash = server.computeOnServer(mc -> player(mc).getInventory().countItem(ModItems.FAIXA_PRESIDENCIAL) > 0
+		var suprema = com.mazzega.irineu.registry.JornadaItems.FAIXA_PRESIDENCIAL_SUPREMA;
+		boolean sash = server.computeOnServer(mc -> player(mc).getInventory().countItem(suprema) > 0
+			|| !mc.overworld().getEntitiesOfClass(ItemEntity.class, player(mc).getBoundingBox().inflate(40.0), e -> e.getItem().is(suprema)).isEmpty());
+		boolean old = server.computeOnServer(mc -> player(mc).getInventory().countItem(ModItems.FAIXA_PRESIDENCIAL) > 0
 			|| !mc.overworld().getEntitiesOfClass(ItemEntity.class, player(mc).getBoundingBox().inflate(40.0), e -> e.getItem().is(ModItems.FAIXA_PRESIDENCIAL)).isEmpty());
-		System.out.println("[ChefaoTest] Lulonaro derrotado, deixou a Faixa Presidencial: " + sash);
-		if (!sash) throw new AssertionError("O Lulonaro não deixou a Faixa Presidencial");
+		boolean won = server.computeOnServer(mc -> mc.getAdvancements().get(Irineu.id("salvou_o_brasil")) != null
+			&& player(mc).getAdvancements().getOrStartProgress(mc.getAdvancements().get(Irineu.id("salvou_o_brasil"))).isDone());
+		System.out.println("[ChefaoTest] Lulonaro derrotado, deixou a Faixa Presidencial Suprema: " + sash + " (a antiga: " + old
+			+ "; avanço fora da Praça: " + won + ")");
+		if (!sash) throw new AssertionError("O Lulonaro não deixou a Faixa Presidencial Suprema");
+		if (old) throw new AssertionError("A Faixa Presidencial antiga não devia cair mais");
+		if (won) throw new AssertionError("Fora da Praça o Lulonaro não pode dar o avanço salvou_o_brasil");
+		int vitoriasDepois = server.computeOnServer(IrineuClientGameTest::vitoriasNaPraca);
+		if (vitoriasDepois != vitoriasAntes) throw new AssertionError("Fora da Praça o Lulonaro não pode contar vitória na Praça: " + vitoriasAntes + " -> " + vitoriasDepois);
+		boolean portalAqui = server.computeOnServer(mc -> {
+			for (BlockPos c : com.mazzega.irineu.jornada.PracaTresPoderes.celulasVitoria()) {
+				if (mc.overworld().getBlockState(c).is(com.mazzega.irineu.registry.JornadaBlocks.PORTAL_VITORIA)) return true;
+			}
+			return false;
+		});
+		if (portalAqui) throw new AssertionError("Fora da Praça o Lulonaro não pode abrir o portal da vitória");
 		server.runCommand("kill @e[type=!minecraft:player]");
 		server.runCommand("effect give @p minecraft:resistance infinite 4 true");
+	}
+
+	/** Quantas vezes o Lulonaro foi vencido na Praça dos Três Poderes (0 se ela nunca foi usada). */
+	private static int vitoriasNaPraca(net.minecraft.server.MinecraftServer mc) {
+		var praca = mc.getLevel(com.mazzega.irineu.jornada.PracaTresPoderes.DIMENSAO);
+		var estado = praca == null ? null : praca.getAttached(com.mazzega.irineu.jornada.PracaTresPoderes.ESTADO);
+		return estado == null ? 0 : estado.vitorias();
 	}
 
 	private static LulaEntity lula(net.minecraft.server.MinecraftServer mc) {
@@ -1872,13 +1929,13 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		server.runOnServer(mc -> bambam(mc).setTarget(mc.getPlayerList().getPlayers().getFirst()));
 	}
 
-	private static void goTo(ClientGameTestContext context, TestSingleplayerContext singleplayer, double x, double z) {
+	static void goTo(ClientGameTestContext context, TestSingleplayerContext singleplayer, double x, double z) {
 		singleplayer.getServer().runCommand(String.format(Locale.ROOT, "tp @p %.1f -60 %.1f 0 0", x, z));
 		context.waitTicks(10);
 		singleplayer.getConnection().waitForChunksRender();
 	}
 
-	private static void heal(net.fabricmc.fabric.api.client.gametest.v1.context.TestServerContext server) {
+	static void heal(net.fabricmc.fabric.api.client.gametest.v1.context.TestServerContext server) {
 		server.runCommand("effect give @p minecraft:instant_health 1 5 true");
 	}
 

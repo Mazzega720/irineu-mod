@@ -3,6 +3,53 @@
 Todas as versões são para **Minecraft 26.3 / Fabric** e precisam da Fabric API e do GeckoLib 5.5.7+.
 O jar de cada versão sai como `irineu-<versão>+26.3.jar`.
 
+## [4.0.0] — 2026-10-05
+A Jornada pelo Brasil: o mod agora tem um fim. Vença os 4 chefões, junte as relíquias, abra o portal da Câmara dos Três Poderes e salve o país na Praça dos Três Poderes.
+
+### Adicionado
+- **Monstros do Brasil** (no lugar dos do jogo, com modelo e animações do GeckoLib, ovo gerador e drops próprios):
+  - **Corpo Seco:** o morto que nem a terra quis, mumificado e enrolado em cipós. Bate rápido (quase o dobro do zumbi), e cada golpe dá **Ressecamento** e Lentidão; queima ao sol. Deixa casca podre (vira carvão vegetal), carvão e, às vezes, sementes ancestrais (viram farinha de osso).
+  - **Ressecamento** (efeito novo): o corpo vai secando, com dano contínuo como o wither, que passa pela armadura.
+  - **Botijão de Gás:** o botijão com perninhas. Chegando perto, abre a válvula e corre atrás de você chiando "tsiiii" e soltando gás por 2,5 s, até explodir com 1,5 vez o raio do creeper. Fogo, explosão ou isqueiro acendem na hora. Deixa chapa de metal e, às vezes, o botijão vazio (que vira ferro no alto-forno).
+  - **Bacamarteiro:** o bandido do sertão de chapéu de couro. De longe dispara o bacamarte (cinco chumbos em leque, que às vezes acendem o alvo) e soca a pólvora para recarregar; de perto, dá coronhada. Deixa pólvora, balas de chumbo e, às vezes, os canos de ferro.
+  - **Aranha Armadeira:** sobe parede, anda pela teia sem prender e, a até 5 blocos, se ergue nas patas de trás e dá o **bote**. A picada dá Veneno II e Lentidão IV. Deixa teia reforçada e, às vezes, a glândula de veneno (no suporte de poções, vira o Veneno da Armadeira, de arremesso).
+  - **Cuca Feiticeira:** a bruxa com cara de jacaré, no brejo do Pantanal à noite e nas cavernas úmidas do resto do Brasil. Arremessa a **Garrafada Sinistra** (Fraqueza, Cegueira e Lentidão) e gargalha quando você fica cego. Deixa ervas pantaneiras (no suporte de poções, viram a Garrafada da Cura), frascos e, às vezes, escamas duras (duas fazem uma escama de tatu).
+- **As 4 relíquias**, que caem sempre dos 4 chefões: o **Circuito de Antimatéria** (E.T. de Varginha), o **Selo do Juízo Universal** (Ednaldo Pereira), a **Caneta Azul Primordial** (Manoel Gomes) e o **Haltere do Trapézio Descendente** (BamBam). São épicas, brilham e aguentam fogo, lava e explosão.
+- **Os rituais** que chamam o E.T. e o Ednaldo:
+  - **Cratera de Varginha** (Cerrado): o disco voador caído com o **Núcleo da Nave**. Use a **Bateria de Sucata** no núcleo e o E.T. surge na bacia da cratera.
+  - **Altar do Julgamento** (nos picos da Mata Atlântica): o tribunal do Ednaldo, com o trono e a **Mesa do Julgamento**. Toque o **Disco Vale Tudo** na mesa: o refrão toca e o Ednaldo surge entre a mesa e o trono.
+  - Uma luta por vez: com o chefão vivo por perto, ou com o ritual já em andamento, ele avisa e não gasta o item. O baú de cada arena tem a bateria (ou o disco), o livro **"Profecia dos Três Poderes"** e o mapa até a Câmara. Também há receitas de reserva, e o disco toca na jukebox.
+  - O Manoel Gomes (pelo totem) e o BamBam (na Academia) soltam a relíquia deles quando morrem.
+- **Câmara dos Três Poderes** (no subsolo do Cerrado, em anéis como a fortaleza do Fim): a ruína de uma coluna do Alvorada na superfície e uma escada em caracol até o salão, com o poço do portal, os **4 pedestais** das relíquias, corredores, cela, biblioteca (com o livro "Ata da Sessão Secreta") e um spawner de Corpo Seco numa jaula.
+  - Cada pedestal aceita só a sua relíquia: a errada dá um aviso e não é gasta.
+  - Com as 4 no lugar, toca a fanfarra, os feixes verde-amarelos sobem e o **portal** acende. Ele leva só jogadores.
+- **Dimensão Praça dos Três Poderes** (`brasil_mod:praca_tres_poderes`): uma ilha flutuante no vazio com a réplica da Praça (o Congresso com as torres gêmeas e as cúpulas, o Palácio do Planalto, o STF, o Mastro da Bandeira e o espelho d'água), num **crepúsculo eterno**, sem chuva e com a **cama que explode**, como no Fim. Dela só se sai vencendo (ou morrendo).
+- **Urna Eleitoral Sagrada**, no centro da Praça: um clique, o "pirililili" ecoa pela Praça toda e o Lula chega para a luta em 4 fases. Uma eleição por vez.
+- **As regras da luta na Praça:** enquanto o chefão vive, **Fadiga do Minerador V** em quem está lá, as explosões não quebram blocos, ninguém quebra bloco na mão, e o chefão que cai da ilha volta para a praça.
+- **A vitória:** derrotado o Lulonaro na Praça, uma festa de partículas verdes, amarelas, azuis e brancas com fogos de artifício, cerca de **5000 de XP**, o fim da Fadiga e o **portal da vitória** no meio do espelho d'água. Pulando nele vêm os **créditos** (o título "ORDEM E PROGRESSO" e as linhas no chat) e a volta ao Brasil (ao seu ponto de renascer, se ele estiver no Brasil, ou ao chão seco perto do spawn).
+- **Faixa Presidencial Suprema** (cai do Lulonaro): peitoral épico e inquebrável que, vestido, dá **voo** como no criativo, +20 de vida, +4 de dano, +20% de velocidade, sorte, resistência total a empurrão, nenhum dano de queda e Regeneração, Resistência ao Fogo, Visão Noturna, Pressa II e Respiração Aquática fixos. Tirando a faixa, o voo vai embora.
+- **Aba de avanços do mod:** entrar no Brasil, uma para cada relíquia, "A Praça É do Povo" e o desafio **"Ordem e Progresso: Você Salvou o País!"**.
+- **Vozes de verdade:**
+  - O **Ednaldo Pereira** fala com a voz dele: trechos de **"Vale Nada Vale Tudo"** ("Eu sou Ednaldo Pereira", "Você vale tudo", "Você não vale nada", "Não jogue para perder!", "Você topa qualquer parada", "A vida é assim, cheia de dificuldades"), achados pela transcrição do Whisper, e o **"Banido!"** no Banimento Supremo. A boca dele mexe junto.
+  - **"Perdeu, playboy!"** no assalto dos Dois Caras numa Moto e **"Valeu, patrão!"** do Flanelinha pago.
+  - Os créditos desses áudios estão em `tools/audios_terceiros/CREDITOS.md` (fora da CC0).
+
+### Mudado
+- **Os monstros do jogo saíram do Brasil** (zumbi, esqueleto, creeper, aranha, bruxa, enderman, slime e aldeão zumbi): cada bioma tem os monstros novos (no oceano, só o afogado). As **masmorras** do jogo também não nascem mais no subsolo do Brasil.
+- As **ruínas de Carajás** têm salas de spawner de Corpo Seco, Bacamarteiro e Aranha Armadeira no lugar das de zumbi, esqueleto e aranha da caverna.
+- O **E.T. de Varginha** e o **Ednaldo Pereira** agora são chamados pelos rituais (o ovo gerador continua funcionando).
+- A **Urna Eletrônica** antiga só funciona dentro da Praça dos Três Poderes; fora dela avisa e não é gasta.
+- O **Lulonaro** deixa a Faixa Presidencial Suprema no lugar da Faixa Presidencial antiga (que continua no jogo para os mundos antigos).
+- O chefão final, os gados e o Padre Kelmon **não atravessam portais**.
+- A **Bandeira Nacional** não acende portal na Praça dos Três Poderes.
+- As **Botas de Pulo Duplo** e o **Módulo Antigravitacional** ficam quietos para quem pode voar (no criativo ou com a faixa), para o segundo pulo não brigar com o voo.
+- No Banimento Supremo, a sirene passou para o arremesso (no começo vem a voz do "Banido!") e acompanha a vítima no ar.
+
+### Corrigido
+- As **correntes** voltaram aos quiosques, à Academia do BamBam e à churrasqueira da Estância (no 26.3 o bloco mudou de nome, de `minecraft:chain` para `minecraft:iron_chain`, e elas tinham sumido).
+- O **altar do Julgamento** não fica mais escondido pelas árvores da Mata Atlântica: ele nasce numa clareira de pedra.
+- O nióbio, a armadura imperial e os óculos Juliet ganharam a textura no **zumbi bebê** (a camada do bebê estava declarada sem a imagem). A fase minerios dos testes confere a textura de cada camada de equipamento do mod.
+
 ## [3.2.0] — 2026-10-04
 ### Adicionado
 - **Bestiário do Brasil:** 5 mobs novos, que nascem nos biomas da dimensão:

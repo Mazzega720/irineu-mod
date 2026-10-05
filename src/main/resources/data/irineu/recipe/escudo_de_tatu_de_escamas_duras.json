@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "irineu:escamas_duras",
+    "irineu:escamas_duras"
+  ],
+  "result": {
+    "id": "minecraft:armadillo_scute",
+    "count": 1
+  }
+}

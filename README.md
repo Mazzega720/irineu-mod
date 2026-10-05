@@ -9,7 +9,7 @@ Mod para **Minecraft 26.3 / Fabric** (Loader 0.19.5, Fabric API 0.161.0+26.3, Ja
 
 **Precisa do [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib) 5.5.7+ para Fabric 26.3** na pasta `mods` (é ele que anima o BamBam e o Manoel Gomes).
 
-Adiciona a dimensão **Brasil** (com Amazônia, Cerrado, Mata Atlântica, Caatinga, Pampa e Pantanal, plantas e bichos brasileiros) e, morando nela, o **Irineu** e o **Jailson Mendes** como mobs neutros, o **BamBam** (com fase 2 e a **academia** dele) e o **Manoel Gomes** (com 3 fases) como bosses, o **Luva de Pedreiro** com o empresário **Allan Jesus** (desafios valendo prêmio), o **chefão final Lula e Bolsonaro** (4 fases, com a fusão no Lulonaro), o item **Suco de Laranja** e **quiosques de praia** com mesas e cadeiras de plástico. Desde a versão 3: a **economia do Real** (notas, Pix na maquininha, inflação semanal e a nota de 3 reais), **minérios brasileiros** (nióbio, turmalina Paraíba, hematita de Carajás, ágata e ametista, topázio imperial e o cascalho de aluvião) com o que se faz com eles, **itens da cultura popular** (Havaiana de Pau, Bambu do Silvio, gambiarra, óculos Juliet, filtro de barro, comidas) e **estruturas** com comerciantes (favela, buteco, vila de cangaceiros, estância gaúcha, palafitas e as ruínas de Carajás). Na versão 3.2: o **bestiário** com 5 mobs novos (Dois Caras numa Moto, Chupa-Cu de Goianinha, Flanelinha, Mosquitão da Dengue e o Dançarino da Carreta Furacão) e 2 chefões lendários (**Ednaldo Pereira** e o **E.T. de Varginha**).
+Adiciona a dimensão **Brasil** (com Amazônia, Cerrado, Mata Atlântica, Caatinga, Pampa e Pantanal, plantas e bichos brasileiros) e, morando nela, o **Irineu** e o **Jailson Mendes** como mobs neutros, o **BamBam** (com fase 2 e a **academia** dele) e o **Manoel Gomes** (com 3 fases) como bosses, o **Luva de Pedreiro** com o empresário **Allan Jesus** (desafios valendo prêmio), o **chefão final Lula e Bolsonaro** (4 fases, com a fusão no Lulonaro), o item **Suco de Laranja** e **quiosques de praia** com mesas e cadeiras de plástico. Desde a versão 3: a **economia do Real** (notas, Pix na maquininha, inflação semanal e a nota de 3 reais), **minérios brasileiros** (nióbio, turmalina Paraíba, hematita de Carajás, ágata e ametista, topázio imperial e o cascalho de aluvião) com o que se faz com eles, **itens da cultura popular** (Havaiana de Pau, Bambu do Silvio, gambiarra, óculos Juliet, filtro de barro, comidas) e **estruturas** com comerciantes (favela, buteco, vila de cangaceiros, estância gaúcha, palafitas e as ruínas de Carajás). Na versão 3.2: o **bestiário** com 5 mobs novos (Dois Caras numa Moto, Chupa-Cu de Goianinha, Flanelinha, Mosquitão da Dengue e o Dançarino da Carreta Furacão) e 2 chefões lendários (**Ednaldo Pereira** e o **E.T. de Varginha**). Na versão 4.0, **[A Jornada pelo Brasil](#a-jornada-pelo-brasil)**: o mod ganhou um fim. Os monstros do jogo saíram do Brasil e no lugar deles vieram os do folclore e do dia a dia (**Corpo Seco**, **Botijão de Gás**, **Bacamarteiro**, **Aranha Armadeira** e **Cuca Feiticeira**); os 4 chefões (E.T., Ednaldo, Manoel e BamBam) deixam **relíquias** que abrem o portal da **Câmara dos Três Poderes**, e ele leva à dimensão **Praça dos Três Poderes**, onde a urna chama o chefão final e a vitória dá a **Faixa Presidencial Suprema**.
 
 ## Instalação
 1. Instale o **Fabric Loader 0.19.5+** para o **Minecraft 26.3** (Java 25).
@@ -26,20 +26,24 @@ Funciona em mundo de um jogador e em servidor (o mod precisa estar no servidor e
 ![Versão 3: gente, favela, vila de cangaceiros, palafitas, buteco e as ruínas de Carajás](docs/imagens/versao3.jpg)
 
 ## A dimensão Brasil
-Tudo o que o mod tem acontece lá: o Irineu e o Jailson nascem nos biomas do Brasil, os quiosques ficam no Litoral e nas estradas do Pampa e do Cerrado, a academia do BamBam no Cerrado, no Pampa e na Mata Atlântica, e o Luva de Pedreiro só aparece para quem está no Brasil. No Overworld não nasce mais nada do mod (os ovos geradores, a urna e o totem do Manoel funcionam em qualquer lugar).
+Quase tudo o que o mod tem acontece lá (o fim da Jornada é na Praça dos Três Poderes, a dimensão do chefão final): o Irineu e o Jailson nascem nos biomas do Brasil, os quiosques ficam no Litoral e nas estradas do Pampa e do Cerrado, a academia do BamBam no Cerrado, no Pampa e na Mata Atlântica, e o Luva de Pedreiro só aparece para quem está no Brasil. No Overworld não nasce mais nada do mod (os ovos geradores e o totem do Manoel funcionam em qualquer lugar; a urna do chefão final, só na Praça dos Três Poderes).
 
 - **Dimensão** `brasil_mod:brasil`: terreno de superfície como o do Overworld (com menos mar), dia e noite, céu limpo.
 - **Portal:** faça uma moldura como a do Nether (de 4x5 até 23x23) com **terracota amarela** e/ou **terracota verde** e use a **Bandeira Nacional** dentro dela. A bandeira não gasta; receita: 3 lãs verdes em cima, lã amarela, lã azul e lã amarela no meio e um graveto embaixo à esquerda. Fique no portal verde-amarelo e azul uns segundos (como no Nether) e você chega no Brasil, **sempre na superfície e em chão firme**: do outro lado ele usa o portal mais perto ou constrói um de volta em cima do terreno (nunca dentro do morro). Prefere um lugar plano; num barranco, completa o chão com terracota, e em cima d'água faz uma plataforma. Um portal que tenha ficado enterrado no Brasil (versões antigas podiam fazer isso) é ignorado na chegada e um novo é feito na superfície. O portal do Brasil leva de volta para o Overworld.
+- **Câmara dos Três Poderes** (versão 4.0): escondida no subsolo do **Cerrado**, guarda o portal para a Praça dos Três Poderes, que só acende com as 4 relíquias nos pedestais (veja [A Jornada pelo Brasil](#a-jornada-pelo-brasil)).
+- **Praça dos Três Poderes** (`brasil_mod:praca_tres_poderes`, versão 4.0): a dimensão do chefão final. Uma ilha flutuando no vazio, num **crepúsculo que não acaba**, sem chuva e com a cama que explode (como no Fim), com a réplica da Praça de Brasília. De lá só se sai vencendo (pelo portal da vitória) ou morrendo; a Bandeira Nacional não acende portal ali.
 
-| Bioma | Terreno e clima | Plantas | Bichos |
-|---|---|---|---|
-| **Amazônia** | Planícies de mata fechada cortadas por rios; água verde-turva; quente e úmido, com garoa sempre caindo e névoa | Árvores da selva, **castanheiras** gigantes (tronco altíssimo e copa em guarda-chuva), cipós, **vitórias-régias** nos rios, **orquídeas**, melancias | Papagaios e araras, **tucanos**, jaguatiricas, **botos-cor-de-rosa** nos rios, peixes tropicais |
-| **Cerrado** | Savana aberta com platôs, grama amarelada e solo vermelho (barro e terracota); seco | **Pau-Terra** (madeira nova: tronco retorcido de casca clara e folhas floridas), **ipê-amarelo**, arbustos secos, capim alto, **capim-navalha** e **cupinzeiros** | **Tamanduás-bandeira**, **lobos-guarás**, **emas**, tatus, coelhos |
-| **Mata Atlântica** | Serras íngremes com paredões de pedra, vales úmidos e muitas **cachoeiras**; verde vivo, névoa e garoa | Árvores altas com cipós, **ipês amarelos e rosas** (soltam pétalas), **bromélias**, orquídeas, samambaias grandes e bambus | **Micos-leões-dourados**, tucanos, papagaios, jaguatiricas |
-| **Caatinga** | Terreno pedregoso com **lajedos** de pedra, terra seca cinza e marrom; **nunca chove** e **não tem água corrente** (os rios viram leitos secos) | **Mandacarus** (cactos de braços que espetam), **xique-xique**, arbustos espinhentos sem folhas | **Tatus-bola**, cabras, **carcarás** (ave de rapina) |
-| **Pampa** | Coxilhas: colinas verdes e suaves sem fim, horizonte aberto | Grama rasteira e flores, quase sem árvores (raros **capões**) | Cavalos, ovelhas, vacas, **corujas-buraqueiras**, **veados-campeiros** |
-| **Pantanal** | Baixadas **alagadas** (metade do chão vira lagoas rasas com ilhas de terra e beiras de lama), água límpida | **Buritis** (palmeiras), **aguapés**, vitórias-régias, **juncos**, capim-navalha | **Capivaras**, **jacarés**, **tuiuiús**, sapos |
-| Litoral e Oceano | Praias com **coqueiros** (com coco) e os quiosques; mar tropical azul-turquesa | | Tartarugas; golfinhos e peixes no mar |
+Os monstros do jogo (zumbi, esqueleto, creeper, aranha, bruxa, enderman, slime e aldeão zumbi) **não nascem no Brasil** desde a 4.0, e as masmorras do jogo também não: cada bioma tem os monstros do [bestiário](#bestiário-do-brasil-versões-32-e-40), que nascem no escuro como os do jogo. Embaixo da terra, em todos os biomas menos o Litoral, nasce o **Chupa-Cu de Goianinha** e, nas cavernas com água, a **Cuca Feiticeira**.
+
+| Bioma | Terreno e clima | Plantas | Bichos | Monstros |
+|---|---|---|---|---|
+| **Amazônia** | Planícies de mata fechada cortadas por rios; água verde-turva; quente e úmido, com garoa sempre caindo e névoa | Árvores da selva, **castanheiras** gigantes (tronco altíssimo e copa em guarda-chuva), cipós, **vitórias-régias** nos rios, **orquídeas**, melancias | Papagaios e araras, **tucanos**, jaguatiricas, **botos-cor-de-rosa** nos rios, peixes tropicais | Corpo Seco, Botijão de Gás, Mosquitão da Dengue |
+| **Cerrado** | Savana aberta com platôs, grama amarelada e solo vermelho (barro e terracota); seco | **Pau-Terra** (madeira nova: tronco retorcido de casca clara e folhas floridas), **ipê-amarelo**, arbustos secos, capim alto, **capim-navalha** e **cupinzeiros** | **Tamanduás-bandeira**, **lobos-guarás**, **emas**, tatus, coelhos | Corpo Seco, Bacamarteiro, Botijão de Gás, Dois Caras numa Moto |
+| **Mata Atlântica** | Serras íngremes com paredões de pedra, vales úmidos e muitas **cachoeiras**; verde vivo, névoa e garoa | Árvores altas com cipós, **ipês amarelos e rosas** (soltam pétalas), **bromélias**, orquídeas, samambaias grandes e bambus | **Micos-leões-dourados**, tucanos, papagaios, jaguatiricas | Corpo Seco, Botijão de Gás, **Aranha Armadeira**, Dois Caras numa Moto, Dançarino da Carreta Furacão |
+| **Caatinga** | Terreno pedregoso com **lajedos** de pedra, terra seca cinza e marrom; **nunca chove** e **não tem água corrente** (os rios viram leitos secos) | **Mandacarus** (cactos de braços que espetam), **xique-xique**, arbustos espinhentos sem folhas | **Tatus-bola**, cabras, **carcarás** (ave de rapina) | Bacamarteiro, Botijão de Gás |
+| **Pampa** | Coxilhas: colinas verdes e suaves sem fim, horizonte aberto | Grama rasteira e flores, quase sem árvores (raros **capões**) | Cavalos, ovelhas, vacas, **corujas-buraqueiras**, **veados-campeiros** | Bacamarteiro, Botijão de Gás, Dois Caras numa Moto |
+| **Pantanal** | Baixadas **alagadas** (metade do chão vira lagoas rasas com ilhas de terra e beiras de lama), água límpida | **Buritis** (palmeiras), **aguapés**, vitórias-régias, **juncos**, capim-navalha | **Capivaras**, **jacarés**, **tuiuiús**, sapos | Botijão de Gás, **Aranha Armadeira**, **Cuca Feiticeira** (no brejo, à noite), Mosquitão da Dengue |
+| Litoral e Oceano | Praias com **coqueiros** (com coco) e os quiosques; mar tropical azul-turquesa | | Tartarugas; golfinhos e peixes no mar | Corpo Seco, Bacamarteiro, Botijão de Gás e o Dançarino na praia; no mar, só o afogado |
 
 ### Plantas e madeiras novas
 | Bloco | O que é |
@@ -74,6 +78,62 @@ Os mobs enxergam o capim-navalha, o xique-xique e o mandacaru como enxergam o ca
 | **Boto-Cor-de-Rosa** | Rios da Amazônia | O golfinho de rio, rosado, que nada com você | — |
 
 Cada um tem modelo e animações próprios (GeckoLib; o tatu-bola e o boto usam o tatu e o golfinho do jogo com a pele deles), sons, ovo gerador (aba Ovos Geradores) e drops (couro, penas, carne).
+
+## A Jornada pelo Brasil
+Desde a versão 4.0 o mod tem um fim: salvar o país na Praça dos Três Poderes. O caminho completo:
+
+1. **Vença os 4 chefões** e pegue a **relíquia** de cada um (elas caem sempre). O E.T. e o Ednaldo são chamados por rituais nas arenas deles; o Manoel, pelo totem; o BamBam mora na Academia.
+2. **Ache a Câmara dos Três Poderes**, no subsolo do Cerrado. O **mapa** está nos baús da cratera e do altar.
+3. **Encaixe as 4 relíquias** nos pedestais da Câmara. Com a quarta, o **portal** acende no poço do salão.
+4. **Atravesse o portal**: você chega à **Praça dos Três Poderes**, no Eixo Monumental, de frente para o Congresso.
+5. **Vote na Urna Eleitoral Sagrada**, no centro da Praça: o "pirililili" ecoa e começa a eleição, a luta em **4 fases** contra o [chefão final](#chefão-final-lula-e-bolsonaro-4-fases) (Lula, Bolsonaro, os dois juntos e o Lulonaro).
+6. **Derrote o Lulonaro**: vem a festa, a experiência, a **Faixa Presidencial Suprema** e o **portal da vitória** no espelho d'água.
+7. **Pule no portal da vitória**: os créditos e a volta ao Brasil.
+
+O livro **"Profecia dos Três Poderes"**, nos baús da cratera e do altar, conta o mesmo caminho dentro do jogo.
+
+### As relíquias
+São épicas, brilham e aguentam fogo, lava e explosão (não somem caindo na lava). Os rituais podem ser repetidos, então uma relíquia perdida pode ser conseguida de novo.
+
+| Relíquia | Chefão | Como chamar o chefão | Onde |
+|---|---|---|---|
+| **Circuito de Antimatéria** | [E.T. de Varginha](#et-de-varginha-chefão) | A **Bateria de Sucata** no **Núcleo da Nave** | Cratera de Varginha, no **Cerrado** |
+| **Selo do Juízo Universal** | [Ednaldo Pereira](#ednaldo-pereira-o-juiz-supremo-chefão) | O **Disco Vale Tudo** na **Mesa do Julgamento** | Altar do Julgamento, nos **picos da Mata Atlântica** |
+| **Caneta Azul Primordial** | [Manoel Gomes](#manoel-gomes-boss) | O [totem](#totem-do-manoel-gomes) com as anilhas do BamBam | Onde você montar o totem |
+| **Haltere do Trapézio Descendente** | [BamBam](#bambam-boss) | Ele já está lá | Na [Academia do BamBam](#academia-do-bambam-estrutura) (Cerrado, Pampa e Mata Atlântica) |
+
+### Os rituais
+- **Cratera de Varginha:** o disco voador caído, meio enterrado numa bacia de detritos, com o **Núcleo da Nave** lá dentro. Use a **Bateria de Sucata** no núcleo: ele carrega por 3 segundos, brilhando verde e soltando faíscas, e o **E.T.** aparece na bacia da cratera, fora do disco. A bateria vem garantida no baú da cratera (ou na mesa de trabalho: 6 lingotes de cobre nas colunas dos lados, redstone em cima e embaixo do meio e um lingote de ferro no centro).
+- **Altar do Julgamento:** o Tribunal do Juízo Universal, uma plataforma redonda com pilares de quartzo e ouro, o trono roxo e dourado e a **Mesa do Julgamento** virada para a plateia. Toque o **Disco Vale Tudo** na mesa: o refrão de "Vale Nada Vale Tudo" toca alto, as notas sobem e o **Ednaldo** surge entre a mesa e o trono. O disco vem garantido no baú do altar (ou na mesa de trabalho: lingotes de ouro nas bordas, corante roxo nos cantos e um bloco musical no centro) e também toca na jukebox.
+- **Uma luta por vez:** com o mesmo chefão vivo a até 64 blocos, ou com o ritual já em andamento, o núcleo e a mesa só avisam (na barra de ação) e não gastam o item. Os dois blocos são inquebráveis.
+
+### A Câmara dos Três Poderes
+Nasce como a fortaleza do Fim, em anéis em volta do centro do Brasil (até 24, as 3 primeiras a uns 640 blocos), mas só no **Cerrado**: cada ponto do anel procura um Cerrado por perto e, se não acha (ou se o chão ali é alagado ou acidentado demais), fica sem Câmara. O mapa dos baús da cratera e do altar aponta para a mais perto (ou use `/locate structure brasil_mod:camara_dos_tres_poderes`).
+- **Na superfície:** as ruínas de uma coluna do Palácio da Alvorada e a boca do poço. Uma **escada em caracol** desce 25 blocos até o salão.
+- **O salão:** o poço do portal no meio e os **4 pedestais** em volta, cada um com a placa e o emblema da sua relíquia. Tem também corredores, a cela, a biblioteca (com o baú e o livro "Ata da Sessão Secreta") e um **spawner de Corpo Seco** numa jaula.
+- **Os pedestais:** cada um aceita só a sua relíquia; a errada mostra "Este pedestal pede: ..." e não é gasta. Encaixada, a relíquia flutua sobre o pedestal e não sai mais.
+- **O portal:** com as 4 no lugar, toca uma fanfarra para o servidor inteiro, feixes verdes e amarelos saem dos pedestais e o portal acende no poço. Se faltar um pedaço do portal, um clique num pedestal cheio o conserta. **Só jogadores** passam por ele (itens e monstros ficam).
+
+### A Praça dos Três Poderes
+- A dimensão é uma **ilha no céu de crepúsculo**, com a réplica da Praça: o **Congresso** (as torres gêmeas com a passarela, a cúpula do Senado e a tigela da Câmara sobre a laje), o **Palácio do Planalto** e o **STF** com as colunas, o **Mastro da Bandeira** e o **espelho d'água**. Na primeira chegada a Praça é montada (uma travadinha só dessa vez).
+- Não chove, a **cama explode** e a âncora de renascimento não funciona, como no Fim. Morreu, volta ao seu ponto de renascer; o portal da Câmara continua aceso para voltar.
+- **A Urna Eleitoral Sagrada**, no centro, chama o chefão sem gastar nada. A **Urna Eletrônica** antiga (a da receita com a Caneta Colorida) também funciona, mas só aqui dentro. Uma eleição por vez; depois da vitória (ou da derrota) dá para votar de novo.
+- **Durante a luta:** **Fadiga do Minerador V** em quem está na Praça (fora do criativo), nenhuma **explosão quebra bloco**, ninguém quebra bloco na mão e o chefão que cai da ilha volta para a praça. O chefão, os gados e o Padre Kelmon não atravessam portais.
+
+### A vitória e a Faixa Presidencial Suprema
+Derrotado o Lulonaro na Praça:
+- **Festa:** partículas verdes, amarelas, azuis e brancas, fogos de artifício e cerca de **5000 de experiência**. A Fadiga acaba.
+- **O desafio "Ordem e Progresso: Você Salvou o País!"** para quem está na Praça, anunciado no chat.
+- **O portal da vitória** abre no meio do espelho d'água. Quem pula nele vê os **créditos** (o título "ORDEM E PROGRESSO" e as linhas no chat) e volta ao Brasil: ao seu ponto de renascer, se ele fica no Brasil, ou ao chão seco do Brasil perto do X/Z do spawn do mundo. Só jogadores passam; uma nova eleição fecha o portal.
+- **A Faixa Presidencial Suprema** cai do Lulonaro (no lugar da Faixa Presidencial antiga). É um peitoral épico e **inquebrável**, com 10 de proteção, que vestido dá:
+  - **voo** como no criativo (dois toques no pulo), sem dano de queda;
+  - **+20 de vida**, **+4 de dano**, **+20% de velocidade**, sorte e resistência total a empurrão;
+  - **Regeneração**, **Resistência ao Fogo**, **Visão Noturna**, **Pressa II** e **Respiração Aquática** sem parar.
+
+  Tirando a faixa, o voo e os efeitos vão embora (quem estava voando desce com Queda Lenta). Com ela, as Botas de Pulo Duplo e o Módulo Antigravitacional ficam quietos, para não brigar com o voo.
+
+### Avanços
+O mod tem uma aba própria de avanços, **"A Jornada pelo Brasil"**: entrar no Brasil pelo portal, uma meta para cada relíquia ("Eles Estão Entre Nós", "Vale Nada, Vale Tudo", "Caneta Azul, Azul Caneta" e "Birl! Trapézio Descendente"), **"A Praça É do Povo"** (chegar à Praça) e o desafio **"Ordem e Progresso: Você Salvou o País!"**.
 
 ## Economia do Real (versão 3)
 Tudo fica na aba **Brasil** do modo criativo.
@@ -163,7 +223,7 @@ Use com o **Dono do Buteco** ou os **comerciantes da favela**:
 | **Chimarrão** | Regeneração e Resistência (1 min) | — |
 
 ## Estruturas do Brasil
-Todas são **montadas por peças que se encaixam**, como as vilas do jogo: cada uma sai diferente, com mais ou menos casas, ruas e anexos.
+As vilas e as masmorras são **montadas por peças que se encaixam**, como as vilas do jogo: cada uma sai diferente, com mais ou menos casas, ruas e anexos (as arenas da Jornada, a cratera e o altar, são de uma peça só).
 Antes de nascer, a estrutura olha o terreno:
 - não nasce em rio, lago ou mar, nem em barranco;
 - as peças que cairiam na água ficam de fora;
@@ -178,13 +238,18 @@ Os alagados do Pantanal não aparecem dentro delas, e árvores, mandacarus, xiqu
 | **Vila de Cangaceiros** | **Caatinga** | O **terreiro** com a fogueira, os bancos, o poço seco, o cruzeiro e o jumento; **trilhas** de terra batida que seguem o chão e terminam numa porteira. Nos lados das trilhas: **casas de taipa** com telhado de palha, a **casa do capitão** (com o baú do bando), a **casa de farinha**, a **capelinha** com o sino, o **curral de bodes** e a **cisterna**. Os **cangaceiros** andam com peixeira: são neutros, mas mexeu com um, o bando inteiro vem atrás |
 | **Estância Gaúcha** | **Pampa** | O **galpão** com o **fogo de chão** e o **gaúcho**; dele saem **corredores** de chão batido com moirões até a **mangueira** (cavalos), a **casa sede** com varanda, o **aprisco** (ovelhas), o **cata-vento**, a **churrasqueira**, a **horta** com espantalho e o **capão** de árvores |
 | **Palafitas** | Rios e lagos da **Amazônia** e do **Pantanal** | O **trapiche** no meio da água com a banca de peixe e o **pescador**; dele saem **passarelas** sobre esteios (retas e em L) até as **cabanas** de tábua com telhado de folha de palmeira (do pescador, da família, o depósito) e plataformas de pesca |
-| **Ruínas de Carajás** | Debaixo da **Amazônia** | A boca da mina (com alçapão) na superfície e a escada até as galerias. Corredores escorados, cheios de veios de **ferro e hematita**, salas de minério, **salas com spawner** (zumbi, esqueleto ou aranha da caverna) e a sala do tesouro (aço pesado, notas de 100 e 200, a picareta industrial) |
+| **Ruínas de Carajás** | Debaixo da **Amazônia** | A boca da mina (com alçapão) na superfície e a escada até as galerias. Corredores escorados, cheios de veios de **ferro e hematita**, salas de minério, **salas com spawner** (desde a 4.0, de Corpo Seco, Bacamarteiro ou Aranha Armadeira) e a sala do tesouro (aço pesado, notas de 100 e 200, a picareta industrial) |
+| **Cratera de Varginha** (versão 4.0) | **Cerrado** | A bacia de detritos com o **disco voador caído**, inclinado e meio enterrado (casco de ferro e concreto, anel de luzes, domo de vidro rachado e um rombo de um lado), o **Núcleo da Nave** lá dentro, poças de lodo, pedaços do casco espalhados e a barreira "ÁREA RESTRITA - EXÉRCITO". O baú tem a **Bateria de Sucata**, o mapa até a Câmara e o livro "Profecia dos Três Poderes" |
+| **Altar do Julgamento** (versão 4.0) | Picos da **Mata Atlântica** (com o chão a partir do y 100) | O tribunal do Ednaldo: plataforma redonda de calcita com degraus, 8 pilares de quartzo com ouro, o **trono** roxo e dourado, a **Mesa do Julgamento**, jukeboxes e blocos musicais de caixa de som e a plateia, numa **clareira de pedra** que deixa as árvores da mata longe. O baú tem o **Disco Vale Tudo**, o mapa e o livro |
+| **Câmara dos Três Poderes** (versão 4.0) | Debaixo do **Cerrado**, em anéis como a fortaleza do Fim | A ruína da coluna do Alvorada na superfície, a escada em caracol e o salão com o **poço do portal** e os **4 pedestais**, mais corredores, cela, biblioteca e o spawner de Corpo Seco (veja [A Jornada pelo Brasil](#a-câmara-dos-três-poderes)) |
+
+Para achar: `/locate structure brasil_mod:cratera_varginha`, `brasil_mod:altar_do_julgamento` ou `brasil_mod:camara_dos_tres_poderes`.
 
 ### Vira-lata caramelo
 É uma variante nova de lobo (pelo caramelo) que aparece na favela e no buteco. Doma e cuida como qualquer lobo.
 
-## Bestiário do Brasil (versão 3.2)
-Mobs novos que nascem nos biomas do Brasil, todos animados no GeckoLib. Cada um tem ovo gerador na aba **Brasil**.
+## Bestiário do Brasil (versões 3.2 e 4.0)
+Mobs novos que nascem nos biomas do Brasil, todos animados no GeckoLib. Cada um tem ovo gerador na aba **Brasil**. Desde a 4.0 os monstros do jogo não nascem mais no Brasil: os 5 últimos da tabela tomaram o lugar deles.
 
 | Mob | Onde nasce | Como age | O que deixa |
 |---|---|---|---|
@@ -193,21 +258,28 @@ Mobs novos que nascem nos biomas do Brasil, todos animados no GeckoLib. Cada um 
 | **Flanelinha** | Cerrado, Mata Atlântica, Pampa e Litoral | **Neutro**, com o paninho na mão. Clique nele com uma **moeda de 1 real** e ele vigia você por **10 minutos** (e briga com os monstros por perto). Se você **montar** (barco, cavalo, carrinho) perto dele **sem pagar**, ele fica bravo e **joga pedras** (a pedra pode te derrubar da montaria). | Paninho Sujo, moedas e pedras |
 | **Mosquitão da Dengue** | Amazônia e Pantanal, em bandos de 2 ou 3 | Voa em **zigue-zague**, difícil de acertar. A picada dá **Veneno II**, **Náusea** e **Fadiga de Mineração**. Quem tomou **Repelente** é ignorado. | Ferrão da Dengue |
 | **Dançarino da Carreta Furacão** | Mata Atlântica e Litoral | **Escala paredes**, faz **parkour** com mortal e não toma dano de queda até 8 blocos. Ataca com uma **voadora** que arremessa o alvo; se o alvo bater numa parede logo depois, toma dano extra. | Mola Saltadora (só para jogador) e linha |
+| **Corpo Seco** (4.0) | Amazônia, Cerrado, Mata Atlântica e Litoral; o spawner da Câmara e das ruínas de Carajás | O morto que nem a terra quis, mumificado e enrolado em cipós. Anda duro e **bate rápido** (um golpe a cada 0,6 s): cada golpe dá **Ressecamento** (5 s) e Lentidão. **Queima ao sol**, como o zumbi. | Casca Podre, carvão e, às vezes, Sementes Ancestrais |
+| **Botijão de Gás** (4.0) | Em todo o Brasil (menos no mar) | O botijão azul com perninhas. A menos de 3 blocos abre a válvula: **chia "tsiiii"** soltando gás e continua correndo atrás de você por 2,5 s, até **explodir** com 1,5 vez o raio do creeper. Se você se afasta mais de 8 blocos antes, o pavio volta. **Fogo, explosão ou isqueiro** acendem na hora, e aí não tem volta. | Chapa de Metal e, às vezes, o Botijão Vazio (nada, se explodir) |
+| **Bacamarteiro** (4.0) | Cerrado, Caatinga, Pampa e Litoral; as ruínas de Carajás | O bandido do sertão de chapéu de couro em meia-lua e gibão. De longe (até 14 blocos) dispara o **bacamarte**: cinco chumbos em leque (2,5 de dano cada, às vezes acendem o alvo) e soca a pólvora para recarregar. De perto, **coronhada** com um empurrão forte. | Pólvora, Balas de Chumbo e, às vezes, os Canos de Ferro |
+| **Aranha Armadeira** (4.0) | Mata Atlântica e Pantanal; as ruínas de Carajás | **Sobe parede**, anda pela teia sem prender e não sente veneno. Com o alvo entre 2,5 e 5 blocos, **se ergue nas patas de trás** (a postura de ameaça) e dá o **bote**, saltando até ele. A picada dá **Veneno II** e **Lentidão IV** (a paralisia). | Teia Reforçada e, às vezes, a Glândula de Veneno |
+| **Cuca Feiticeira** (4.0) | Brejo do **Pantanal** à noite; no resto do Brasil, só nas **cavernas úmidas** (abaixo do y 50, com água perto) | A bruxa velha com cara de jacaré. De até 10 blocos arremessa a **Garrafada Sinistra** (Fraqueza, Cegueira e Lentidão) a cada 3 s e **gargalha** quando você fica cego. | Ervas Pantaneiras, frascos e, às vezes, Escamas Duras |
+
+**Ressecamento** (o toque do Corpo Seco): o corpo vai secando, com 1 de dano a cada 2 s (mais rápido nos níveis acima), como o wither, mas passando pela armadura.
 
 ### Ednaldo Pereira, o Juiz Supremo (chefão)
-**600 de vida**, barra **roxa em 10 partes**, imune a fogo e a empurrão. Só aparece pelo ovo gerador.
+**600 de vida**, barra **roxa em 10 partes**, imune a fogo e a empurrão. Aparece pelo ritual do **Altar do Julgamento** (o Disco Vale Tudo na Mesa do Julgamento; veja [A Jornada pelo Brasil](#os-rituais)) ou pelo ovo gerador.
 - **O Vale Tudo e o Não Vale Nada:** conjura orbes. O **dourado** ("vale tudo") cura quem pegar com **Regeneração II** e **Força**. O **sombrio** ("não vale nada") persegue o alvo, dá 16 de dano e **tira 5 níveis de experiência**. Dá para destruir o sombrio no golpe; o escudo segura, mas fica 5 segundos desativado.
-- **Banimento Supremo:** prende o jogador com **Lentidão X**, mostra **"BANIDO!"** na tela e o joga até **35 blocos para cima**. O tombo do banimento tira no máximo 7,5 corações.
+- **Banimento Supremo:** grita **"Banido!"**, prende o jogador com **Lentidão X**, mostra **"BANIDO!"** na tela e o joga até **35 blocos para cima**, com a sirene. O tombo do banimento tira no máximo 7,5 corações.
 - **Fúria do Irmão** (abaixo de 30% da vida): flutua, a barra pisca vermelha e branca e ele solta **espirais de 12 notas musicais** que explodem (sem quebrar blocos).
-- **Deixa:** o **Cajado do Julgamento**, notas de 100 e 200 e frascos de experiência.
+- **Deixa:** o **Selo do Juízo Universal** (a relíquia, sempre), o **Cajado do Julgamento**, notas de 100 e 200 e frascos de experiência.
 
 ### E.T. de Varginha (chefão)
-**500 de vida**, barra **verde em 6 partes**. Só aparece pelo ovo gerador.
+**500 de vida**, barra **verde em 6 partes**. Aparece pelo ritual da **Cratera de Varginha** (a Bateria de Sucata no Núcleo da Nave; veja [A Jornada pelo Brasil](#os-rituais)) ou pelo ovo gerador.
 - **Telecinese:** arranca de 3 a 5 blocos do chão, gira com eles em volta e arremessa no jogador.
 - **Raio de Abdução:** um feixe que faz o jogador **levitar** e vai drenando a vida. Uma **flechada crítica na cabeça** dele quebra o raio: o E.T. fica tonto e a vítima desce devagar (Queda Lenta).
 - **Lodo:** cospe uma poça que dá **Lentidão IV**, **Fadiga de Mineração III** e **Grudado** (não dá para pular).
 - **Teleporte:** se levar dois tiros de longe em seguida, some e aparece perto.
-- **Deixa:** o **Módulo Antigravitacional**, redstone, pérolas do Fim e notas de 100.
+- **Deixa:** o **Circuito de Antimatéria** (a relíquia, sempre), o **Módulo Antigravitacional**, redstone, pérolas do Fim e notas de 100.
 
 ### Itens do bestiário
 | Item | Como consegue | O que faz |
@@ -219,12 +291,19 @@ Mobs novos que nascem nos biomas do Brasil, todos animados no GeckoLib. Cada um 
 | **Botas de Pulo Duplo** | Botas de couro + 2 Molas Saltadoras | Aperte pular de novo no ar para dar o **segundo pulo**. |
 | **Poção da Sombra** | Poção estranha + Couro Sombrio no suporte de poções | **Invisibilidade** e **Velocidade** (3 min). |
 | **Repelente** | Poção estranha + Ferrão da Dengue | 5 min em que os mosquitos não te perseguem. |
+| **Veneno da Armadeira** (4.0) | Poção estranha + Glândula de Veneno (da Armadeira) | Poção de **arremesso** com Veneno II (22 s). |
+| **Garrafada da Cura** (4.0) | Poção estranha + Ervas Pantaneiras (da Cuca) | Regeneração (45 s). |
+| **Casca Podre**, **Sementes Ancestrais** (4.0) | Corpo Seco | A casca assa em carvão vegetal; as sementes viram 2 farinhas de osso. |
+| **Chapa de Metal**, **Botijão Vazio** (4.0) | Botijão de Gás | A chapa derrete numa pepita de ferro; o botijão, no alto-forno, num lingote. |
+| **Canos de Ferro** (4.0) | Bacamarteiro | No alto-forno, um lingote de ferro. |
+| **Teia Reforçada** (4.0) | Aranha Armadeira | Vira uma teia. |
+| **Escamas Duras** (4.0) | Cuca Feiticeira | Duas fazem uma escama de tatu. |
 
 ### Falas dos chefões (espaço para vozes)
-O Ednaldo e o E.T. já têm as falas ligadas, só que **sem áudio**: chegada, cada habilidade, a fúria/raio quebrado, falas soltas e a derrota. Para colocar as vozes:
-1. Ponha o `.ogg` (vorbis, mono) em `src/main/resources/assets/irineu/sounds/falas/ednaldo/` ou `.../falas/et/` (cada pasta tem um `LEIA-ME.txt`).
-2. No `sounds.json`, aponte a entrada `fala.ednaldo.<fala>` (ou `fala.et.<fala>`) para `"irineu:falas/ednaldo/<fala>"`.
-3. Em `bestiario/chefes/FalaChefe.java`, troque o `0F` da fala pela duração em segundos: a mandíbula do chefão passa a mexer enquanto ele fala.
+O Ednaldo fala com a voz dele, e a boca mexe junto: trechos de "Vale Nada Vale Tudo" achados pela transcrição do Whisper ("Eu sou Ednaldo Pereira" ao chegar, "Você vale tudo" e "Você não vale nada" nos orbes, "Não jogue para perder!" na Fúria do Irmão, "Você topa qualquer parada" de vez em quando e "A vida é assim, cheia de dificuldades" na derrota) e o **"Banido!"** no Banimento Supremo. São cortados pelo `tools/audios_terceiros`, com crédito no [`CREDITOS.md`](tools/audios_terceiros/CREDITOS.md). O E.T. tem as falas ligadas (chegada, cada habilidade, a fúria/raio quebrado, falas soltas e a derrota), só que ainda **sem áudio**. Para colocar uma voz:
+1. Ponha o original em `tools/audios_terceiros/originais/` (fica fora do git).
+2. Em `tools/audios_terceiros/audios_terceiros.json`, acrescente o trecho com `arquivo` `falas/et/<fala>` e `evento` `fala.et.<fala>`, e rode `audios_terceiros.py`: ele grava o `.ogg` (vorbis, mono) e aponta o `sounds.json` (não edite o `sounds.json` à mão).
+3. Em `bestiario/chefes/FalaChefe.java`, troque o `0F` da fala pela duração em segundos (o `audios_terceiros.py --conferir` compara): a mandíbula do chefão passa a mexer enquanto ele fala.
 
 ## Irineu
 Mob neutro. Ele anda por aí soltando as falas icônicas e só briga se apanhar.
@@ -268,7 +347,7 @@ Mob neutro e meio preguiçoso: anda devagar e fala as frases dele de vez em quan
 
 - **Só arranca árvores naturais**: precisa ter folhas que não foram colocadas por jogador, então casas de madeira ficam a salvo. Se a regra `mob_griefing` estiver desligada, ele arremessa a árvore sem tirá-la do mundo (e sem dropar madeira).
 - Mora na **Academia do BamBam** (veja abaixo). Também dá para chamar com o **ovo gerador** (aba Ovos Geradores) ou `/summon irineu:bambam`. Some no Pacífico, como os outros bosses.
-- Ao morrer: **4 Anilhas do BamBam** (o material do [totem do Manoel Gomes](#totem-do-manoel-gomes); +1 com Saque), maçã dourada, esmeraldas, ferro, mudas de carvalho e 100 de XP.
+- Ao morrer: o **Haltere do Trapézio Descendente** (a relíquia da [Jornada](#a-jornada-pelo-brasil), sempre), **4 Anilhas do BamBam** (o material do [totem do Manoel Gomes](#totem-do-manoel-gomes); +1 com Saque), maçã dourada, esmeraldas, ferro, mudas de carvalho e 100 de XP.
 
 ### Fase 2: "o monstro saiu da jaula"
 Nenhum golpe tira mais que a metade da vida dele de uma vez: com **125 de vida** ele sempre para, grita "Tá saindo da jaula o monstro!" tremendo de raiva (3s, **invencível**, olhos ficam vermelhos) e **explode**: todo mundo num raio de 12 blocos toma até 4 corações e **voa ~20 blocos**. A partir daí:
@@ -340,7 +419,7 @@ O tronco de todos dobra na cintura e a cabeça acompanha o olhar por cima de qua
 | **Preta** (1) | Mais lenta; espeta fraco (1 coração) e **empurra o jogador** uns 2 blocos, a cada 3s |
 
 - Depois de jogado por uma caneta preta (arremessada ou voadora), o jogador fica **3s sem ser jogado de novo** (nada de ficar quicando no ar), e a resistência a repulsão (armadura de netherita) diminui o empurrão.
-- Não nasce sozinho: [totem](#totem-do-manoel-gomes), ovo gerador ou `/summon irineu:manoel_gomes`. Ao morrer, as canetas e os clones somem junto e ele deixa canetas de todas as cores (inclusive a **verde** e a **caneta colorida**), maçã dourada, esmeraldas e 100 de XP.
+- Não nasce sozinho: [totem](#totem-do-manoel-gomes), ovo gerador ou `/summon irineu:manoel_gomes`. Ao morrer, as canetas e os clones somem junto e ele deixa a **Caneta Azul Primordial** (a relíquia da [Jornada](#a-jornada-pelo-brasil), sempre), canetas de todas as cores (inclusive a **verde** e a **caneta colorida**), maçã dourada, esmeraldas e 100 de XP.
 - **Falas** (recortadas do vídeo): refrão completo ao começar a briga; "Caneta azul, azul caneta" ao invocar as azuis; "...com a caneta azul e uma caneta amarela" ao invocar as amarelas; "Não brigue professora..." e "caneta azul, caneta azul..." nas outras invocações; "A professora ela veio brigar comigo..." e outros trechos de vez em quando; "**Vamos rebentar todo o Brasil inteiro**" na fase 2; "**Eu vou comprar outra canetinha**" na fusão da fase 3; "**Tchau pra você aí**" ao morrer.
 
 ### Totem do Manoel Gomes
@@ -393,7 +472,9 @@ Nenhum golpe pula a fase: a vida para na metade. Ele para, canta "**Vamos rebent
 - O prêmio é a loot table `irineu:gameplay/desafio_embaixadinhas`. Os próximos desafios entram no mesmo sistema (`Desafio`).
 
 ## Chefão final: Lula e Bolsonaro (4 fases)
-Invocado com a **Urna Eletrônica**: use num bloco e ela toca o **som original da urna** (as teclas e o "confirma"); o Lula chega fazendo joinha e cai um raio. Receita: lingotes de ferro, painel de vidro, redstone, um botão de pedra e a **Caneta Colorida** do Manoel Gomes no meio (é preciso ter vencido o Manoel). Só uma luta por vez num raio de 64 blocos. Nenhuma fase pode ser pulada: a vida para em cada transição.
+Desde a 4.0 a luta é **só na [Praça dos Três Poderes](#a-praça-dos-três-poderes)**, o fim da [Jornada pelo Brasil](#a-jornada-pelo-brasil). Clique na **Urna Eleitoral Sagrada**, no centro da Praça: o **som original da urna** (as teclas e o "confirma") ecoa para todo mundo na Praça, o Lula chega fazendo joinha na frente do Congresso e cai um raio. A **Urna Eletrônica** antiga (receita: lingotes de ferro, painel de vidro, redstone, um botão de pedra e a **Caneta Colorida** do Manoel Gomes no meio) faz o mesmo, mas só dentro da Praça: fora dela avisa e não é gasta. Uma eleição por vez na Praça. Nenhuma fase pode ser pulada: a vida para em cada transição.
+
+Enquanto o chefão vive, a Praça tem as regras da luta: **Fadiga do Minerador V**, explosões que não quebram blocos, nada de quebrar bloco na mão, e o chefão que cai da ilha volta para a praça. Ele, os gados e o Padre Kelmon não atravessam portais.
 
 ### Fase 1: Lula (o Companheiro), barra vermelha "Lula - 3% de Poder"
 Camisa vermelha com a estrela, barba branca, chapéu panamá e uma aura vermelha discreta. Vem para o soco.
@@ -419,7 +500,8 @@ Os dois sobem girando, se chocam no ar e explodem em partículas metade vermelha
 - **Super Mitada Vermelha**: junta a Estrela Vermelha com a Mitada numa **esfera colossal e lenta** que atravessa paredes perseguindo o jogador. Encostou: dano enorme e **Decomposição III**.
 - **Corte de Gastos & Auxílio Emergencial**: drena a vida de **todos os jogadores da arena** (32 blocos, ignora armadura) e se cura com ela, e invoca uma **horda mista** (gados vermelhos e amarelos, zumbi, zumbi do deserto e esqueleto) com **Velocidade III**.
 - **O Golpe Eleitoral** (ultimate): sobe ~9 blocos, fica **imune por 5 segundos** enquanto feixes de energia **puxam** os jogadores para baixo dele e então **despenca**: impacto em área que joga todo mundo para cima com **Levitação**.
-- Derrotado, deixa a **Faixa Presidencial** (troféu), estrela do Nether, diamantes, blocos de esmeralda, maçãs douradas e uma maçã encantada, e 500 de XP.
+- Derrotado, deixa a **[Faixa Presidencial Suprema](#a-vitória-e-a-faixa-presidencial-suprema)** (voo, +20 de vida e os efeitos; desde a 4.0 ela cai no lugar da Faixa Presidencial antiga), estrela do Nether, diamantes, blocos de esmeralda, maçãs douradas e uma maçã encantada, e 500 de XP.
+- **Na Praça, é a vitória:** a festa de partículas e fogos, cerca de **5000 de XP**, o fim da Fadiga, o desafio **"Ordem e Progresso: Você Salvou o País!"** e o **portal da vitória** no espelho d'água, com os créditos e a volta ao Brasil.
 
 ### Falas
 Recortadas do vídeo **"E se Lula e Bolsonaro lutassem usando 100% de seus poderes"** (Voice Makers), com a boca mexendo durante cada fala. Elas aparecem nas legendas, nunca no chat.
@@ -559,15 +641,34 @@ O código é Java (Fabric Loom, Java 25). Texturas, sons, modelos e dados são g
 
 Os sons que viraram gravações CC0 do Freesound estão em `tools/sons_cc0/sons_cc0.json` (de qual som sai cada trecho). O `sons_cc0.py` confere a licença de cada um, baixa, corta e grava os `.ogg` (precisa também do ffmpeg). Os outros geradores não sobrescrevem esses sons.
 
+Desde a 4.0:
+- **`tools/audios_terceiros`:** as vozes reais e os trechos de música (fora da CC0). O `audios_terceiros.json` diz de qual original sai cada trecho; o `audios_terceiros.py` corta com o ffmpeg, grava os `.ogg`, aponta o `sounds.json` e escreve o `CREDITOS.md` (com `--conferir`, compara as durações com as do `FalaChefe.java`). Os originais ficam fora do git, em `tools/audios_terceiros/originais/`. Os trechos de "Vale Nada Vale Tudo" foram achados com o **Whisper**: o `transcrever.py` (faster-whisper, num `.venv`) transcreve o áudio palavra por palavra e mostra os candidatos.
+- **`tools/jornada`:** `reliquias.py` (as relíquias, a bateria, o disco, o núcleo da nave e a mesa do julgamento), `praca.py` (a dimensão Praça dos Três Poderes, a réplica da Praça e a urna sagrada), `pedestais.py` (os pedestais, o portal da Praça e a fanfarra) e `vitoria.py` (a faixa suprema, o portal da vitória e a aba de avanços).
+- **`tools/estruturas`:** além do `estruturas.py`, o `encaixe.py` (ajudantes de worldgen das estruturas novas: moldes, pools, anéis como os da fortaleza, o mapa de explorador e o livro dos baús), o `arenas.py` (a cratera de Varginha e o altar do julgamento) e o `camara.py` (a Câmara dos Três Poderes).
+- **`tools/comum/reverter_iguais.py`:** rodar um gerador de novo muda os bytes dos `.nbt`, `.ogg` e `.png` sem mudar o conteúdo; ele compara com o último commit e desfaz essas mudanças.
+
+Quando vários geradores rodam, a ordem é esta (cada um recebe `src/main/resources`; veja o cabeçalho de cada um):
+
+1. `bestiario/bestiario.py`
+2. `sons_cc0/sons_cc0.py` (só se a lista mudou)
+3. `audios_terceiros/audios_terceiros.py`
+4. `brasil/mundo.py`
+5. `estruturas/estruturas.py`, `estruturas/arenas.py` e `estruturas/camara.py`
+6. `manoel/totem.py` e `manoel/fases.py` (se mudaram)
+7. `jornada/reliquias.py`, `jornada/praca.py` e `jornada/pedestais.py`
+8. `chefao/build_chefao.py` e `jornada/vitoria.py`
+9. `economia/loot_antigo.py`
+10. `comum/reverter_iguais.py`
+
 ```
 gradlew build               # gera build/libs/irineu-<versão>+26.3.jar
 gradlew runClient           # abre o jogo com o mod
 ```
 
 ### Testes automáticos
-O teste do cliente (`gradlew runClientGameTest`) é dividido em fases: irineu, jailson, bambam, birl, quiosque, manoel, manoel_fases, totem, luva, chefao, academia, fase2, animacoes, brasil, economia, minerios, cultura, estruturas e bestiario.
+O teste do cliente (`gradlew runClientGameTest`) é dividido em fases: irineu, jailson, bambam, birl, quiosque, manoel, manoel_fases, totem, luva, chefao, academia, fase2, animacoes, brasil, economia, minerios, cultura, estruturas, bestiario e, da 4.0, monstros, reliquias, praca, camara e jornada.
 
-**Rode uma fase por vez.** A bateria inteira de uma vez pesa muito (são uns 10 minutos de jogo aberto) e pode derrubar o computador.
+**Rode uma fase por vez.** A bateria inteira de uma vez pesa muito (são uns 30 minutos de jogo aberto) e pode derrubar o computador.
 
 ```
 set IRINEU_TEST_ONLY=economia
@@ -577,7 +678,14 @@ gradlew runClientGameTest
 <details>
 <summary>O que os testes conferem</summary>
 
-teste automático: spawna Irineu, Jailson e BamBam (com árvore e mobs para o BIRL), testa habilidades e IA, senta na cadeira, negocia com o Davi, coloca os 5 quiosques (conferindo o Davi no balcão) e gera um pelo worldgen, testa cada caneta do Manoel Gomes (inclusive o quanto as pretas empurram) e uma briga de 15s com ele, monta o totem do Manoel com as anilhas que o BamBam deixa, acende as velas com o isqueiro e confere as cinco canetas aparecendo uma por uma (e que quebrar o totem cancela e só aparece um Manoel por vez), confere o nerf da caneta amarela, testa as fases 2 e 3 dele (caneta verde explodindo, teleporte, campo de força, fusão na caneta colorida, golpe com teleporte e clones, armadura da fase 3 e clones ao apanhar), traz a visita do Luva e do Allan, abre a proposta clicando no Allan, aceita pelo botão, confere as embaixadinhas do Luva, bate na bola até ganhar (e confere o prêmio no inventário) e testa a derrota, joga a luta inteira do chefão final (urna, cada habilidade das 4 fases, o Padre Kelmon, a fusão e a Faixa Presidencial), coloca a academia (e gera uma pelo worldgen), testa a transformação e cada golpe da fase 2 do BamBam, confere se o GeckoLib carregou os modelos e se cada pose toca a animação certa (galeria de poses), constrói o portal do Brasil, acende com a Bandeira Nacional, vai e volta (chegando na superfície, em chão firme, com o portal de volta), confere que um portal enterrado num morro do Brasil é ignorado, faz crescer as três mudas e confere que as folhas delas dão muda, confere que os quiosques e a academia só nascem no Brasil, mede a fatia de cada bioma num mapa de 8192 blocos, fotografa cada bioma, a galeria de plantas e árvores e os bichos, testa o câmbio, a maquininha (depósito, nota falsa recusada e saque), o Pix no buteco, a inflação mudando os preços e o sorteio semanal, a nota de 3 (recusa com os vira-latas e o desconto quando cola), as notas dos micos no Brasil, cada minério e as receitas (fornalha, alto-forno e ferraria), o peitoral de nióbio, o cajado no seco e na chuva, a picareta 3x3, o amuleto, a bateia e a armadura imperial, confere que cada minério só gera no seu bioma e acha cada um no terreno, testa a havaiana (bumerangue e crítico pelas costas), o bambu, a cadeira (regenerar e escudo contra fogo), o filtro e a água filtrada, a gambiarra, os óculos e cada comida, confere que os mobs desviam do mandacaru, do xique-xique e do capim-navalha, coloca as 6 estruturas no Brasil (no primeiro lugar que o terreno aceitar, mostrando as peças que cada uma montou) e uma sala de spawner das ruínas e fotografa tudo e a galeria de gente, armaduras e itens, confere cada mob do bestiário (o assalto da moto, o bote do Chupa-Cu pelas costas, o flanelinha pago e o bravo, a picada e o repelente, a voadora) e os dois chefões (orbes, banimento, Fúria do Irmão, telecinese, raio quebrado pela flechada, lodo, teleporte e o que eles deixam), tira screenshots
+teste automático: spawna Irineu, Jailson e BamBam (com árvore e mobs para o BIRL), testa habilidades e IA, senta na cadeira, negocia com o Davi, coloca os 5 quiosques (conferindo o Davi no balcão) e gera um pelo worldgen, testa cada caneta do Manoel Gomes (inclusive o quanto as pretas empurram) e uma briga de 15s com ele, monta o totem do Manoel com as anilhas que o BamBam deixa, acende as velas com o isqueiro e confere as cinco canetas aparecendo uma por uma (e que quebrar o totem cancela e só aparece um Manoel por vez), confere o nerf da caneta amarela, testa as fases 2 e 3 dele (caneta verde explodindo, teleporte, campo de força, fusão na caneta colorida, golpe com teleporte e clones, armadura da fase 3 e clones ao apanhar), traz a visita do Luva e do Allan, abre a proposta clicando no Allan, aceita pelo botão, confere as embaixadinhas do Luva, bate na bola até ganhar (e confere o prêmio no inventário) e testa a derrota, joga a luta inteira do chefão final (urna, cada habilidade das 4 fases, o Padre Kelmon, a fusão e a Faixa Presidencial Suprema no lugar da antiga), coloca a academia (e gera uma pelo worldgen), testa a transformação e cada golpe da fase 2 do BamBam, confere se o GeckoLib carregou os modelos e se cada pose toca a animação certa (galeria de poses), constrói o portal do Brasil, acende com a Bandeira Nacional, vai e volta (chegando na superfície, em chão firme, com o portal de volta), confere que um portal enterrado num morro do Brasil é ignorado, faz crescer as três mudas e confere que as folhas delas dão muda, confere que os quiosques e a academia só nascem no Brasil, mede a fatia de cada bioma num mapa de 8192 blocos, fotografa cada bioma, a galeria de plantas e árvores e os bichos, testa o câmbio, a maquininha (depósito, nota falsa recusada e saque), o Pix no buteco, a inflação mudando os preços e o sorteio semanal, a nota de 3 (recusa com os vira-latas e o desconto quando cola), as notas dos micos no Brasil, cada minério e as receitas (fornalha, alto-forno e ferraria), o peitoral de nióbio, o cajado no seco e na chuva, a picareta 3x3, o amuleto, a bateia e a armadura imperial, as texturas de cada equipamento do mod (também a do zumbi bebê), confere que cada minério só gera no seu bioma e acha cada um no terreno, testa a havaiana (bumerangue e crítico pelas costas), o bambu, a cadeira (regenerar e escudo contra fogo), o filtro e a água filtrada, a gambiarra, os óculos e cada comida, confere que os mobs desviam do mandacaru, do xique-xique e do capim-navalha, coloca as 6 estruturas no Brasil (no primeiro lugar que o terreno aceitar, mostrando as peças que cada uma montou) e uma sala de spawner das ruínas e fotografa tudo e a galeria de gente, armaduras e itens, confere cada mob do bestiário (o assalto da moto, o bote do Chupa-Cu pelas costas, o flanelinha pago e o bravo, a picada e o repelente, a voadora) e os dois chefões (orbes, banimento, Fúria do Irmão, telecinese, raio quebrado pela flechada, lodo, teleporte e o que eles deixam), tira screenshots.
+
+Da 4.0:
+- **monstros:** os 5 monstros novos (o golpe do Corpo Seco que resseca e deixa lento e a queima ao sol; o pavio do Botijão, a cratera maior que a do creeper e o fogo que acende na hora; os chumbos e a coronhada do Bacamarteiro; a Armadeira escalando, andando na teia e dando o bote que envenena e paralisa; a Garrafada Sinistra da Cuca e onde ela nasce), o Ressecamento e a troca dos spawns nos biomas do Brasil, com a galeria no GeckoLib;
+- **reliquias:** as relíquias (épicas, brilhando, sobrevivem à lava e à explosão) e o loot dos 4 chefões; a cratera e o altar postos no mundo, a bateria no núcleo e o disco na mesa (o clique de verdade) chamando o E.T. e o Ednaldo, e os rituais que não gastam o item com o chefão por perto; as receitas de reserva; a cratera no Cerrado e um altar gerado pelo worldgen, sem tronco nem folha sobre a plataforma;
+- **praca:** a dimensão (tempo parado, céu do crepúsculo, sem chuva mesmo com trovoada lá fora, a cama que explode), a Praça posta na primeira chegada e a ilha, a urna antiga que falha fora da Praça, a urna sagrada chamando o Lula, a Fadiga V, as explosões e a mão que não quebram blocos na luta, os chefões que não usam portal e voltam quando caem da ilha, a Bandeira que não acende portal, e tudo voltando ao normal no fim da luta;
+- **camara:** os 4 pedestais (a relíquia errada recusada com o aviso, as certas encaixando e a quarta acendendo o portal com a fanfarra), o conserto do portal, o portal que só leva jogadores até a Praça, o mapa que acha a Câmara e a Câmara gerada no Cerrado com os pedestais, o spawner e a ruína na superfície;
+- **jornada:** a jornada inteira numa sequência só: o E.T. e o Ednaldo mortos no golpe, o loot do Manoel e do BamBam, as 4 relíquias com os avanços, os pedestais, a chegada à Praça, a urna, as 4 fases até o Lulonaro, a vitória (o portal no espelho d'água, a faixa, a experiência, os fogos, o desafio), a faixa vestida (voo, vida, efeitos) e tirada, e o portal da vitória levando de volta ao Brasil com os créditos (sem ponto de renascer, com ele no Overworld e com uma cama no Brasil).
 </details>
 
 ### Lançando uma versão
@@ -594,6 +702,6 @@ A cada push na `main` o fluxo `build.yml` compila e guarda o jar como artefato.
 - Mod de **paródia e humor**, feito por fã, sem ligação com a Mojang, a Microsoft nem com as pessoas, programas e marcas citados. Os personagens são caricaturas de memes e figuras públicas brasileiras.
 - **Licença:** o código e os recursos feitos para o mod (texturas, modelos, sons sintetizados, estruturas) são [CC0 1.0](LICENSE).
 - **Sons do Freesound:** os efeitos gravados (bestiário, maquininha, caixa, bichos e outros) são gravações em domínio público (CC0) de vários autores do [Freesound](https://freesound.org/). A lista com o link e o autor de cada um está em [`tools/sons_cc0/CREDITOS.md`](tools/sons_cc0/CREDITOS.md).
-- **Áudios de terceiros:** as falas tiradas de vídeos (Irineu, Jailson, BamBam, Davi, Manoel Gomes, Luva de Pedreiro, Lula, Bolsonaro, Padre Kelmon e o som da urna) pertencem aos seus autores e são usadas como paródia. Elas não estão sob a CC0. Se você é dono de algum desses áudios e quer que ele saia do mod, abra uma issue.
-- As falas do Ednaldo Pereira e do E.T. de Varginha ainda não têm áudio (veja "Falas dos chefões").
+- **Áudios de terceiros:** as falas tiradas de vídeos (Irineu, Jailson, BamBam, Davi, Manoel Gomes, Luva de Pedreiro, Lula, Bolsonaro, Padre Kelmon e o som da urna) pertencem aos seus autores e são usadas como paródia. Desde a 4.0, também: a voz de **Ednaldo Pereira** (trechos da música "Vale Nada Vale Tudo", de Ednaldo Pereira, nas falas dele e no refrão do Disco Vale Tudo, e o áudio do **"Banido!"**), o **"Perdeu, playboy!"** dos Dois Caras numa Moto e o **"Valeu, patrão!"** do Flanelinha. A origem de cada um desses trechos está em [`tools/audios_terceiros/CREDITOS.md`](tools/audios_terceiros/CREDITOS.md). Nenhum deles está sob a CC0. Se você é dono de algum desses áudios e quer que ele saia do mod, abra uma issue.
+- As falas do E.T. de Varginha ainda não têm áudio (veja "Falas dos chefões").
 - Feito com [Fabric](https://fabricmc.net/) e [GeckoLib](https://github.com/bernie-g/geckolib).

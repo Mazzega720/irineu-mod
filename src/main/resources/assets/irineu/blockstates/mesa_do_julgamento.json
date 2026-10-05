@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,tocando=false": {
+      "model": "irineu:block/mesa_do_julgamento"
+    },
+    "facing=north,tocando=true": {
+      "model": "irineu:block/mesa_do_julgamento_tocando"
+    },
+    "facing=east,tocando=false": {
+      "model": "irineu:block/mesa_do_julgamento",
+      "y": 90
+    },
+    "facing=east,tocando=true": {
+      "model": "irineu:block/mesa_do_julgamento_tocando",
+      "y": 90
+    },
+    "facing=south,tocando=false": {
+      "model": "irineu:block/mesa_do_julgamento",
+      "y": 180
+    },
+    "facing=south,tocando=true": {
+      "model": "irineu:block/mesa_do_julgamento_tocando",
+      "y": 180
+    },
+    "facing=west,tocando=false": {
+      "model": "irineu:block/mesa_do_julgamento",
+      "y": 270
+    },
+    "facing=west,tocando=true": {
+      "model": "irineu:block/mesa_do_julgamento_tocando",
+      "y": 270
+    }
+  }
+}
