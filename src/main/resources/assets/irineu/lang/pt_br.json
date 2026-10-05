@@ -524,5 +524,17 @@
   "book.irineu.profecia.1": "Profecia dos Três Poderes\n\nQuando o Brasil estiver por um fio, quatro relíquias, tiradas de quatro lendas, abrirão o caminho até a Praça dos Três Poderes.",
   "book.irineu.profecia.2": "O Circuito de Antimatéria, do E.T. de Varginha: a nave dele caiu numa cratera do Cerrado.\n\nO Selo do Juízo Universal, de Ednaldo Pereira: o tribunal dele fica nos picos da Mata Atlântica.",
   "book.irineu.profecia.3": "A Caneta Azul Primordial, de Manoel Gomes: chame-o com o totem das anilhas e das velas azuis.\n\nO Haltere do Trapézio Descendente, de Kléber BamBam: ele treina na Academia.",
-  "book.irineu.profecia.4": "Leve as quatro à Câmara dos Três Poderes, escondida sob o Cerrado. Cada uma no seu pedestal, e o portal se abre.\n\nNa Praça, a urna decide o destino do país."
+  "book.irineu.profecia.4": "Leve as quatro à Câmara dos Três Poderes, escondida sob o Cerrado. Cada uma no seu pedestal, e o portal se abre.\n\nNa Praça, a urna decide o destino do país.",
+  "subtitles.irineu.block.urna_eleitoral_sagrada.pirililili": "Urna: pirililili!",
+  "dimension.brasil_mod.praca_tres_poderes": "Praça dos Três Poderes",
+  "biome.brasil_mod.planalto_central": "Planalto Central",
+  "block.irineu.urna_eleitoral_sagrada": "Urna Eleitoral Sagrada",
+  "block.irineu.urna_eleitoral_sagrada.dica_1": "O coração da Praça dos Três Poderes",
+  "block.irineu.urna_eleitoral_sagrada.dica_2": "Vote nela e o chefão final aparece",
+  "block.irineu.urna_eleitoral_sagrada.comecou": "Pirililili! A eleição começou!",
+  "block.irineu.urna_eleitoral_sagrada.em_andamento": "A eleição já está em andamento!",
+  "block.irineu.urna_eleitoral_sagrada.fora": "A urna sagrada só vale na Praça dos Três Poderes.",
+  "item.irineu.urna_eletronica.so_na_praca": "A urna só vale na Praça dos Três Poderes!",
+  "item.irineu.urna_eletronica.dica": "Só vale na Praça dos Três Poderes",
+  "item.irineu.bandeira_nacional.na_praca": "Aqui a bandeira não abre portal: da Praça só se sai vencendo."
 }

@@ -1,0 +1,11 @@
+{
+  "type": "brasil_mod:praca_tres_poderes",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "brasil_mod:praca_tres_poderes",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "brasil_mod:planalto_central"
+    }
+  }
+}

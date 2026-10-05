@@ -21,6 +21,8 @@ public final class JornadaSounds {
 	public static final SoundEvent DISCO_VALE_TUDO_RITUAL = register("item.disco_vale_tudo.ritual");
 
 	// ---------------------------------------------------------------- M5 Praça
+	/** O "pirililili" da urna (o som original da urna eletrônica), que a Praça manda para cada jogador dela (tools/jornada/praca.py). */
+	public static final SoundEvent PIRILILILI = register("block.urna_eleitoral_sagrada.pirililili");
 
 	// ---------------------------------------------------------------- M6 câmara
 

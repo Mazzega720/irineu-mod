@@ -2040,5 +2040,14 @@
       }
     ],
     "subtitle": "subtitles.irineu.block.nucleo_nave.reparo"
+  },
+  "block.urna_eleitoral_sagrada.pirililili": {
+    "sounds": [
+      {
+        "name": "irineu:item/urna_confirma",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.irineu.block.urna_eleitoral_sagrada.pirililili"
   }
 }

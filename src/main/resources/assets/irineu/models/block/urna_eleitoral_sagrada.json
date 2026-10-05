@@ -1,0 +1,138 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "irineu:block/urna_eleitoral_sagrada_lado",
+    "lado": "irineu:block/urna_eleitoral_sagrada_lado",
+    "painel": "irineu:block/urna_eleitoral_sagrada_painel",
+    "base": "irineu:block/urna_eleitoral_sagrada_base"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        2
+      ],
+      "to": [
+        15,
+        7,
+        14
+      ],
+      "faces": {
+        "north": {
+          "texture": "#lado",
+          "uv": [
+            1,
+            4,
+            15,
+            11
+          ]
+        },
+        "south": {
+          "texture": "#lado",
+          "uv": [
+            1,
+            4,
+            15,
+            11
+          ]
+        },
+        "east": {
+          "texture": "#lado",
+          "uv": [
+            2,
+            4,
+            14,
+            11
+          ]
+        },
+        "west": {
+          "texture": "#lado",
+          "uv": [
+            2,
+            4,
+            14,
+            11
+          ]
+        },
+        "up": {
+          "texture": "#base"
+        },
+        "down": {
+          "texture": "#base"
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        6,
+        2.5
+      ],
+      "to": [
+        15,
+        8,
+        13.5
+      ],
+      "rotation": {
+        "origin": [
+          8,
+          7,
+          8
+        ],
+        "axis": "x",
+        "angle": 22.5
+      },
+      "faces": {
+        "north": {
+          "texture": "#base",
+          "uv": [
+            1,
+            0,
+            15,
+            2
+          ]
+        },
+        "south": {
+          "texture": "#base",
+          "uv": [
+            1,
+            0,
+            15,
+            2
+          ]
+        },
+        "east": {
+          "texture": "#base",
+          "uv": [
+            2,
+            0,
+            13,
+            2
+          ]
+        },
+        "west": {
+          "texture": "#base",
+          "uv": [
+            2,
+            0,
+            13,
+            2
+          ]
+        },
+        "up": {
+          "texture": "#painel",
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ]
+        },
+        "down": {
+          "texture": "#base"
+        }
+      }
+    }
+  ]
+}

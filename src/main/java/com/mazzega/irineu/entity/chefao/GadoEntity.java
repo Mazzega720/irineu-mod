@@ -113,6 +113,12 @@ public class GadoEntity extends Monster implements GeoEntity {
 		}
 	}
 
+	/** O gado do Lula também não atravessa portal: fica na luta. */
+	@Override
+	public boolean canUsePortal(boolean ignorePassenger) {
+		return false;
+	}
+
 	@Override
 	public boolean isLeftHanded() {
 		return false;

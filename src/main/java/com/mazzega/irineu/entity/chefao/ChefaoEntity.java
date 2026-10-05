@@ -517,6 +517,12 @@ public abstract class ChefaoEntity extends Monster implements GeoEntity {
 		return false;
 	}
 
+	/** O chefão final não atravessa portal: a luta fica na Praça (ou onde ele foi chamado). */
+	@Override
+	public boolean canUsePortal(boolean ignorePassenger) {
+		return false;
+	}
+
 	@Override
 	public void checkDespawn() {
 		if (this.level().getDifficulty() == Difficulty.PEACEFUL) {

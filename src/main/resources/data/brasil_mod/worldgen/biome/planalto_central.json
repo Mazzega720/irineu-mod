@@ -1,0 +1,13 @@
+{
+  "attributes": {},
+  "carvers": [],
+  "downfall": 0.0,
+  "effects": {
+    "water_color": "#3fa9e0",
+    "grass_color": "#6fbf3a",
+    "foliage_color": "#5aa830"
+  },
+  "features": [],
+  "has_precipitation": false,
+  "temperature": 0.8
+}

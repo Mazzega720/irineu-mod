@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 /**
  * Blocos da Jornada pelo Brasil (versão 4.0): os rituais de invocação (núcleo da nave e mesa do julgamento), a Urna
  * Eleitoral Sagrada da Praça, os pedestais das relíquias e os portais da Câmara e da vitória. Os que têm item entram na
- * aba Brasil; os portais são só bloco.
+ * aba Brasil (sem receita: a urna sagrada só se pega no criativo); os portais são só bloco.
  * <p>
  * Cada marco acrescenta os seus abaixo do comentário da sua seção.
  */
@@ -52,6 +52,10 @@ public final class JornadaBlocks {
 	}
 
 	// ---------------------------------------------------------------- M5 Praça
+	/** Urna Eleitoral Sagrada (no centro da Praça dos Três Poderes): o "pirililili" e o chefão final. Inquebrável e sem loot. */
+	public static final Block URNA_ELEITORAL_SAGRADA = register("urna_eleitoral_sagrada", com.mazzega.irineu.jornada.UrnaSagradaBlock::new,
+		ritual(net.minecraft.world.level.material.MapColor.SAND, net.minecraft.world.level.block.SoundType.STONE).noOcclusion().lightLevel(s -> 10),
+		itemDoRitual("urna_eleitoral_sagrada"));
 
 	// ---------------------------------------------------------------- M6 câmara
 

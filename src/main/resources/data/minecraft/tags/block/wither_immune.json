@@ -1,6 +1,7 @@
 {
   "values": [
     "irineu:nucleo_nave",
-    "irineu:mesa_do_julgamento"
+    "irineu:mesa_do_julgamento",
+    "irineu:urna_eleitoral_sagrada"
   ]
 }

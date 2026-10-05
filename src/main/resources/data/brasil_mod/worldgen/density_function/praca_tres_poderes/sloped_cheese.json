@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:add",
+  "left": "brasil_mod:praca_tres_poderes/ilha",
+  "right": "minecraft:end/base_3d_noise"
+}

@@ -129,6 +129,12 @@ public class PadreKelmonEntity extends Monster implements GeoEntity {
 		return false;
 	}
 
+	/** O Padre Kelmon também não atravessa portal: fica na luta. */
+	@Override
+	public boolean canUsePortal(boolean ignorePassenger) {
+		return false;
+	}
+
 	@Override
 	public boolean isLeftHanded() {
 		return false;

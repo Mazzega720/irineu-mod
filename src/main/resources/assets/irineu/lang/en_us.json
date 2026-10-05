@@ -524,5 +524,17 @@
   "book.irineu.profecia.1": "Prophecy of the Three Powers\n\nWhen Brazil hangs by a thread, four relics, taken from four legends, will open the way to the Three Powers Square.",
   "book.irineu.profecia.2": "The Antimatter Circuit, from the Varginha E.T.: his ship crashed into a crater in the Cerrado.\n\nThe Seal of Universal Judgment, from Ednaldo Pereira: his court sits on the peaks of the Atlantic Forest.",
   "book.irineu.profecia.3": "The Primordial Blue Pen, from Manoel Gomes: call him with the totem of weight plates and blue candles.\n\nThe Descending Trapezius Dumbbell, from Kléber BamBam: he trains at the Gym.",
-  "book.irineu.profecia.4": "Bring all four to the Chamber of the Three Powers, hidden beneath the Cerrado. Each on its pedestal, and the portal opens.\n\nIn the Square, the ballot box decides the nation's fate."
+  "book.irineu.profecia.4": "Bring all four to the Chamber of the Three Powers, hidden beneath the Cerrado. Each on its pedestal, and the portal opens.\n\nIn the Square, the ballot box decides the nation's fate.",
+  "subtitles.irineu.block.urna_eleitoral_sagrada.pirililili": "Ballot box: beep-beep-beep!",
+  "dimension.brasil_mod.praca_tres_poderes": "Three Powers Square",
+  "biome.brasil_mod.planalto_central": "Central Plateau",
+  "block.irineu.urna_eleitoral_sagrada": "Sacred Ballot Box",
+  "block.irineu.urna_eleitoral_sagrada.dica_1": "The heart of the Three Powers Square",
+  "block.irineu.urna_eleitoral_sagrada.dica_2": "Vote on it and the final boss appears",
+  "block.irineu.urna_eleitoral_sagrada.comecou": "Beep-beep-beep! The election has begun!",
+  "block.irineu.urna_eleitoral_sagrada.em_andamento": "The election is already under way!",
+  "block.irineu.urna_eleitoral_sagrada.fora": "The sacred ballot box only works in the Three Powers Square.",
+  "item.irineu.urna_eletronica.so_na_praca": "The ballot box only works in the Three Powers Square!",
+  "item.irineu.urna_eletronica.dica": "Only works in the Three Powers Square",
+  "item.irineu.bandeira_nacional.na_praca": "The flag opens no portal here: the only way out of the Square is to win."
 }

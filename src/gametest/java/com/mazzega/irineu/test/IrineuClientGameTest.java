@@ -1264,14 +1264,20 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			if (mc.getSoundManager().getSoundEvent(Irineu.id("item.urna.confirma")) == null) throw new AssertionError("Som da urna não carregou");
 		});
 
-		// 1) Urna eletrônica: o Lula chega fazendo joinha e o raio cai
+		// 1) A urna eletrônica só vale na Praça dos Três Poderes: aqui ela falha e continua na mão. A luta do teste é
+		// chamada pela Eleicao (o mesmo que a urna faz lá): o Lula chega fazendo joinha e o raio cai.
 		goTo(context, singleplayer, 4000.5, 0.5);
 		server.runOnServer(mc -> {
 			ServerPlayer player = player(mc);
 			player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(ModItems.URNA_ELETRONICA));
 			var hit = new BlockHitResult(new Vec3(4000.5, -61.0, 8.5), Direction.UP, new BlockPos(4000, -61, 8), false);
 			var result = player.getMainHandItem().useOn(new net.minecraft.world.item.context.UseOnContext(player, InteractionHand.MAIN_HAND, hit));
-			if (!result.consumesAction()) throw new AssertionError("A urna não invocou o chefão: " + result);
+			if (result != net.minecraft.world.InteractionResult.FAIL) throw new AssertionError("A urna devia falhar fora da Praça: " + result);
+			if (!player.getMainHandItem().is(ModItems.URNA_ELETRONICA)) throw new AssertionError("A urna foi gasta fora da Praça");
+			if (!mc.overworld().getEntities(ModEntities.LULA, LulaEntity::isAlive).isEmpty()) throw new AssertionError("A urna invocou fora da Praça");
+			if (com.mazzega.irineu.entity.chefao.Eleicao.comecar(mc.overworld(), new BlockPos(4000, -60, 8), player) == null) {
+				throw new AssertionError("A Eleicao não invocou o chefão");
+			}
 		});
 		server.runCommand("tp @p 4000.5 -60 1.5 facing 4000.5 -58.5 8.5");
 		context.waitTicks(42);
@@ -1282,8 +1288,9 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			if (lula.getBossBarColor() != net.minecraft.world.BossEvent.BossBarColor.RED) throw new AssertionError("Barra do Lula não é vermelha");
 			String title = lula.getBossBarName().getString();
 			if (!title.contains("3%")) throw new AssertionError("Título da fase 1 errado: " + title);
-			if (!player(mc).getMainHandItem().isEmpty()) throw new AssertionError("A urna não foi gasta");
-			System.out.println("[ChefaoTest] urna invocou o Lula: barra vermelha \"" + title + "\"");
+			if (!player(mc).getMainHandItem().is(ModItems.URNA_ELETRONICA)) throw new AssertionError("A urna não devia ter sido gasta");
+			player(mc).setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+			System.out.println("[ChefaoTest] fora da Praça a urna falhou e ficou na mão; a Eleicao invocou o Lula: barra vermelha \"" + title + "\"");
 		});
 		server.waitFor(mc -> lula(mc).getAcao() == LulaEntity.Acao.NENHUMA, 40);
 
