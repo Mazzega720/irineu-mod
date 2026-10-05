@@ -144,13 +144,15 @@ mp[8, 8] = hexc("f2c84a") + (255,)
 k.save(amu, "item", "amuleto_sorte")
 k.item_flat("amuleto_sorte")
 
-# Armaduras: ícones e as camadas do corpo (nióbio = a netherite azulada; imperial = o ouro cor de topázio).
+# Armaduras: ícones e as camadas do corpo (nióbio = a netherite azulada; imperial = o ouro cor de topázio). A camada do
+# bebê (humanoid_baby, 64 x 64 no molde do HumanoidModel.createBabyArmorMesh) sai da do jogo, recolorida igual: sem ela,
+# o zumbi bebê que veste a peça ficaria com a textura que falta.
 IMPERIAL = ["4a2205", "b8661a", "f0b04a", "fff0b8"]
 for piece, vpiece in (("capacete", "helmet"), ("peitoral", "chestplate"), ("calca", "leggings"), ("botas", "boots")):
     item(f"{piece}_niobio", f"item/netherite_{vpiece}", NIOBIO)
     item(f"{piece}_imperial", f"item/golden_{vpiece}", IMPERIAL)
 for asset, vanilla, palette in (("niobio", "netherite", NIOBIO), ("imperial", "gold", IMPERIAL)):
-    for layer in ("humanoid", "humanoid_leggings"):
+    for layer in ("humanoid", "humanoid_baby", "humanoid_leggings"):
         k.save(Kit.ramp(k.vanilla(f"entity/equipment/{layer}/{vanilla}"), palette), f"entity/equipment/{layer}", asset)
     k.wj(k.asset("equipment", asset + ".json"), {"layers": {
         "humanoid": [{"texture": f"irineu:{asset}"}], "humanoid_baby": [{"texture": f"irineu:{asset}"}],

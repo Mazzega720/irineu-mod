@@ -15,7 +15,7 @@ minecraft de damage_type (bypasses_armor, bypasses_wolf_armor, no_knockback e pa
 tags minecraft de entity_type do Corpo Seco (undead, burn_in_daylight, sensitive_to_smite), as da Armadeira (arthropod,
 sensitive_to_bane_of_arthropods), a tradução da Garrafada Sinistra (a poção de arremesso do jogo com o nome próprio, que
 a Cuca joga) e as receitas dos drops (casca podre e chapa de metal no forno, botijão vazio e canos de ferro no
-alto-forno, sementes ancestrais em farinha de osso, teia reforçada em teia, escamas duras em escudo de tatu; no suporte
+alto-forno, sementes ancestrais em farinha de osso, teia reforçada em teia, escamas duras em escama de tatu; no suporte
 de poções, o Veneno da Armadeira e a Garrafada da Cura). O tiro do bacamarte é gravação CC0 (tools/sons_cc0); o
 sintetizado daqui é a reserva. Os spawns ficam nos biomas (tools/brasil/mundo.py).
 
@@ -700,8 +700,8 @@ loot("cuca_feiticeira", [pool([it("minecraft:glass_bottle", 0, 2)]), pool([it("e
 for tag in ("arthropod", "sensitive_to_bane_of_arthropods"):
     k.tag("minecraft", "entity_type", tag, ["irineu:aranha_armadeira"])
 
-# Usos: a teia vira teia do jogo; os canos derretem num lingote; duas escamas fazem um escudo de tatu; e duas poções no
-# suporte (a partir da poção estranha). O veneno já sai de arremesso: é para jogar nos outros, não para beber.
+# Usos: a teia vira teia do jogo; os canos derretem num lingote; duas escamas duras fazem uma escama de tatu; e duas
+# poções no suporte (a partir da poção estranha). O veneno já sai de arremesso: é para jogar nos outros, não para beber.
 k.shapeless("teia_de_teia_reforcada", ["irineu:teia_reforcada"], "minecraft:cobweb")
 k.cooking("ferro_de_canos_de_ferro", "blasting", "irineu:canos_de_ferro", "minecraft:iron_ingot", 0.3, time=100)
 k.shapeless("escudo_de_tatu_de_escamas_duras", ["irineu:escamas_duras", "irineu:escamas_duras"], "minecraft:armadillo_scute")

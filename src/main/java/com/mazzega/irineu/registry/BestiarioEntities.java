@@ -45,7 +45,8 @@ import net.minecraft.world.level.levelgen.Heightmap;
  * Dançarino da Carreta Furacão), os 2 chefões lendários (Ednaldo Pereira e o E.T. de Varginha), os projéteis e os
  * monstros da 4.0 (Corpo Seco, Botijão de Gás, Bacamarteiro, Aranha Armadeira e Cuca Feiticeira). Os spawns ficam nos
  * biomas do Brasil ({@code tools/brasil/mundo.py}): desde a 4.0, os monstros do Brasil substituem os do jogo (zumbi,
- * esqueleto, creeper, aranha, bruxa...), que não nascem mais lá. Os chefões só nascem pelo ovo.
+ * esqueleto, creeper, aranha, bruxa...), que não nascem mais lá. Os chefões nascem pelos rituais da cratera e do altar
+ * ({@code RitualDeInvocacao}) ou pelo ovo.
  */
 public final class BestiarioEntities {
 	public static final EntityType<DoisCarasMotoEntity> DOIS_CARAS_MOTO = register("dois_caras_moto",

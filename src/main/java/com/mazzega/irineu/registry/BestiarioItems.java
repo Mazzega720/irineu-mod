@@ -66,7 +66,7 @@ public final class BestiarioItems {
 	public static final Item TEIA_REFORCADA = register("teia_reforcada", Item::new, new Item.Properties(), true);
 	/** Da Cuca Feiticeira: no suporte de poções, vira a Garrafada da Cura. */
 	public static final Item ERVAS_PANTANEIRAS = register("ervas_pantaneiras", Item::new, new Item.Properties(), true);
-	/** Da Cuca Feiticeira (às vezes): duas fazem um escudo de tatu. */
+	/** Da Cuca Feiticeira (às vezes): duas fazem uma escama de tatu (do jogo). */
 	public static final Item ESCAMAS_DURAS = register("escamas_duras", Item::new, new Item.Properties(), true);
 
 	// Ícones dos projéteis.
