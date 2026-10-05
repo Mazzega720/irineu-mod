@@ -66,7 +66,9 @@ public final class BestiarioClient {
 		LocalPlayer player = mc.player;
 		if (player == null || mc.isPaused()) return;
 		boolean pulo = mc.options.keyJump.isDown();
-		boolean livre = !player.getAbilities().flying && !player.isPassenger() && !player.isInWater() && !player.isFallFlying() && !player.onClimbable();
+		// Quem pode voar (o criativo, a Faixa Presidencial Suprema) usa o duplo toque do pulo para voar: as botas e o
+		// módulo ficam quietos, senão o segundo pulo e o voo brigam pelo mesmo toque.
+		boolean livre = !player.getAbilities().mayfly && !player.getAbilities().flying && !player.isPassenger() && !player.isInWater() && !player.isFallFlying() && !player.onClimbable();
 		if (player.onGround() || !livre) {
 			puloSolto = false;
 			puloDuploUsado = false;

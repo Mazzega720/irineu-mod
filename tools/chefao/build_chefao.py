@@ -1,7 +1,8 @@
 """
 Recursos do chefão final: skins do Lula (com o chapéu panamá), Bolsonaro, Lulonaro (meio a meio; os três no corpo
 detalhado de corpo_detalhado.py), Padre Kelmon e dos Gados; a Estrela Vermelha, as esferas de energia, os ícones da
-Urna Eletrônica e da Faixa Presidencial, os ovos, traduções, loot e a receita da urna. Os modelos e animações do GeckoLib ficam em
+Urna Eletrônica e da Faixa Presidencial (a antiga, que não cai mais), os ovos, traduções, loot (o Lulonaro deixa a Faixa
+Presidencial Suprema) e a receita da urna. Os modelos e animações do GeckoLib ficam em
 tools/geckolib/build_models.py.
 
 Uso: python build_chefao.py <src/main/resources> <pasta da prévia>
@@ -401,7 +402,8 @@ LOOT = os.path.join(RES, "data", "irineu", "loot_table", "entities")
 wj(os.path.join(LOOT, "lulonaro.json"), {
     "type": "minecraft:entity",
     "pools": [
-        {"rolls": 1, "entries": [item("irineu:faixa_presidencial")]},
+        # Desde a 4.0 o Lulonaro deixa a Faixa Presidencial Suprema (tools/jornada/vitoria.py); a antiga não cai mais.
+        {"rolls": 1, "entries": [item("irineu:faixa_presidencial_suprema")]},
         {"rolls": 1, "entries": [item("minecraft:nether_star")]},
         {"rolls": 1, "entries": [item("minecraft:diamond", 8, 16)]},
         {"rolls": 1, "entries": [item("minecraft:emerald_block", 2, 4)]},

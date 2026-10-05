@@ -13,6 +13,7 @@ import com.mazzega.irineu.minerio.Sorte;
 import com.mazzega.irineu.desafio.DesafioPayloads;
 import com.mazzega.irineu.entity.LuvaVisitas;
 import com.mazzega.irineu.jornada.CamaraDosTresPoderes;
+import com.mazzega.irineu.jornada.Creditos;
 import com.mazzega.irineu.jornada.FaixaSuprema;
 import com.mazzega.irineu.jornada.PracaTresPoderes;
 import com.mazzega.irineu.registry.BestiarioEntities;
@@ -75,11 +76,12 @@ public class Irineu implements ModInitializer {
 		CulturaEventos.register();
 		ModuloAntigravitacionalItem.register();
 		// A Jornada pelo Brasil (versão 4.0): gatilhos de avanço, a Praça dos Três Poderes, os feixes da Câmara dos Três
-		// Poderes e a Faixa Presidencial Suprema.
+		// Poderes, a Faixa Presidencial Suprema e os créditos do portal da vitória.
 		JornadaGatilhos.init();
 		PracaTresPoderes.register();
 		CamaraDosTresPoderes.register();
 		FaixaSuprema.register();
+		Creditos.register();
 		LOGGER.info("Irineu, você não sabe nem eu!");
 	}
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "irineu:raiz",
+  "criteria": {
+    "reliquia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "irineu:reliquia_varginha"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "irineu:reliquia_varginha"
+    },
+    "title": {
+      "translate": "advancements.irineu.reliquias.varginha.title"
+    },
+    "description": {
+      "translate": "advancements.irineu.reliquias.varginha.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "reliquia"
+    ]
+  ]
+}

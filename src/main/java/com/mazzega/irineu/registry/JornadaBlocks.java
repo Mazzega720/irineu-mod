@@ -74,6 +74,15 @@ public final class JornadaBlocks {
 	}
 
 	// ---------------------------------------------------------------- M7 vitória
+	/** Portal da vitória (abre no meio do espelho d'água da Praça quando o Lulonaro cai): leva de volta ao Brasil. Só bloco. */
+	public static final Block PORTAL_VITORIA = registerBlockOnly("portal_vitoria", com.mazzega.irineu.jornada.PortalVitoriaBlock::new,
+		BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.GOLD).noCollision()
+			.strength(-1.0F, 3600000.0F).lightLevel(s -> 15).noLootTable().pushReaction(net.minecraft.world.level.material.PushReaction.IMMOVEABLE));
+
+	static {
+		// O céu estrelado do portal do End, como o da Praça.
+		net.minecraft.world.level.block.entity.BlockEntityTypes.END_PORTAL.addValidBlock(PORTAL_VITORIA);
+	}
 
 	private JornadaBlocks() {
 	}

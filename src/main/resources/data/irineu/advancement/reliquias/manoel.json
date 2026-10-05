@@ -1,0 +1,32 @@
+{
+  "parent": "irineu:raiz",
+  "criteria": {
+    "reliquia": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "irineu:reliquia_manoel"
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "irineu:reliquia_manoel"
+    },
+    "title": {
+      "translate": "advancements.irineu.reliquias.manoel.title"
+    },
+    "description": {
+      "translate": "advancements.irineu.reliquias.manoel.description"
+    },
+    "frame": "goal"
+  },
+  "requirements": [
+    [
+      "reliquia"
+    ]
+  ]
+}

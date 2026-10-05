@@ -14,6 +14,13 @@ public final class JornadaGatilhos {
 	// ---------------------------------------------------------------- M6 câmara
 
 	// ---------------------------------------------------------------- M7 vitória
+	/**
+	 * O Lulonaro caiu na Praça dos Três Poderes: dispara para os jogadores da Praça (o avanço desafio
+	 * {@code irineu:salvou_o_brasil}, "Ordem e Progresso: Você Salvou o País!").
+	 */
+	public static final net.minecraft.advancements.triggers.PlayerTrigger SALVOU_O_BRASIL = net.minecraft.core.Registry.register(
+		net.minecraft.core.registries.BuiltInRegistries.TRIGGER_TYPES, com.mazzega.irineu.Irineu.id("salvou_o_brasil"),
+		new net.minecraft.advancements.triggers.PlayerTrigger());
 
 	private JornadaGatilhos() {
 	}

@@ -46,7 +46,10 @@ public final class ModItems {
 	public static final Item URNA_ELETRONICA = register("urna_eletronica", UrnaEletronicaItem::new, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)
 		.component(DataComponents.LORE, new net.minecraft.world.item.component.ItemLore(List.of(
 			net.minecraft.network.chat.Component.translatable("item.irineu.urna_eletronica.dica").withStyle(net.minecraft.ChatFormatting.GRAY)))));
-	/** Troféu de quem derrota o Lulonaro. */
+	/**
+	 * O troféu antigo de quem derrotava o Lulonaro (até a 3.2). Desde a 4.0 ele deixa a Faixa Presidencial Suprema
+	 * ({@link JornadaItems#FAIXA_PRESIDENCIAL_SUPREMA}); esta continua registrada para os mundos antigos.
+	 */
 	public static final Item FAIXA_PRESIDENCIAL = register("faixa_presidencial", Item::new,
 		new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true));
 

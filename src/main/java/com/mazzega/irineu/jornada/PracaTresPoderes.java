@@ -4,30 +4,56 @@ import com.mazzega.irineu.Irineu;
 import com.mazzega.irineu.brasil.Brasil;
 import com.mazzega.irineu.entity.chefao.ChefaoEntity;
 import com.mazzega.irineu.entity.chefao.Eleicao;
+import com.mazzega.irineu.entity.chefao.GadoEntity;
 import com.mazzega.irineu.entity.chefao.LulaEntity;
+import com.mazzega.irineu.entity.chefao.LulonaroEntity;
+import com.mazzega.irineu.entity.chefao.PadreKelmonEntity;
+import com.mazzega.irineu.registry.JornadaBlocks;
+import com.mazzega.irineu.registry.JornadaGatilhos;
 import com.mazzega.irineu.registry.JornadaSounds;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import it.unimi.dsi.fastutil.ints.IntList;
+import java.util.ArrayList;
+import java.util.List;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.fabricmc.fabric.api.entity.event.v1.ServerEntityLevelChangeEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
+import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
+import net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.FireworkExplosion;
+import net.minecraft.world.item.component.Fireworks;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -36,6 +62,7 @@ import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -57,6 +84,11 @@ import org.jspecify.annotations.Nullable;
  * a Bandeira Nacional não acende portal: daqui só se sai vencendo (ou morrendo).</li>
  * </ul>
  * Chega-se pelo portal da Câmara dos Três Poderes ({@link PortalPracaBlock}, que usa {@link #destino}) ou por comando.
+ * <p>
+ * A vitória ({@link #vitoria}, quando o Lulonaro cai aqui): a festa verde, amarela, azul e branca com fogos de
+ * artifício, as esferas de experiência, o avanço {@code irineu:salvou_o_brasil} para quem está na Praça, e o portal da
+ * vitória ({@link PortalVitoriaBlock}) no meio do espelho d'água, que leva de volta ao Brasil. Uma nova eleição fecha o
+ * portal (volta a água).
  */
 public final class PracaTresPoderes {
 	public static final ResourceKey<Level> DIMENSAO = ResourceKey.create(Registries.DIMENSION, Brasil.id("praca_tres_poderes"));
@@ -78,8 +110,17 @@ public final class PracaTresPoderes {
 	public static final BlockPos VOLTA_DO_CHEFAO = LULA;
 	/** A base do Mastro da Bandeira, no meio da praça (a haste vai até y 105). */
 	public static final BlockPos MASTRO = new BlockPos(-8, 65, -8);
-	/** O meio do espelho d'água (a água fica no y do piso, x -10..10, z 6..18). */
+	/** O meio do espelho d'água (a água fica no y do piso, x -10..10, z 6..18): ali abre o portal da vitória, 3 x 3. */
 	public static final BlockPos ESPELHO = new BlockPos(0, 64, 12);
+	/** As cores da festa da vitória (as da bandeira). */
+	public static final int VERDE = 0x009C3B;
+	public static final int AMARELO = 0xFFDF00;
+	public static final int AZUL = 0x002776;
+	public static final int BRANCO = 0xFFFFFF;
+	/** A experiência da vitória, em esferas (fora os 500 do próprio Lulonaro). */
+	public static final int XP_DA_VITORIA = 5000;
+	/** Quantos ticks duram os fogos depois da vitória (uma salva a cada 8 ticks). */
+	private static final int FESTA_TICKS = 120;
 	/** A chegada: no Eixo Monumental, olhando para o norte (o Congresso de frente). */
 	public static final Vec3 CHEGADA = new Vec3(0.5, 65.0, 40.5);
 	public static final float CHEGADA_YAW = 180.0F;
@@ -89,7 +130,7 @@ public final class PracaTresPoderes {
 	private static final int FADIGA_NIVEL = 4;
 	private static final int FADIGA_TICKS = 60;
 
-	/** Se a Praça já foi posta e quantas vezes o Lulonaro foi vencido aqui (a vitória entra no M7). */
+	/** Se a Praça já foi posta e quantas vezes o Lulonaro foi vencido aqui. */
 	public record Estado(boolean colocada, int vitorias) {
 		public static final Codec<Estado> CODEC = RecordCodecBuilder.create(i -> i.group(
 			Codec.BOOL.fieldOf("colocada").forGetter(Estado::colocada),
@@ -101,6 +142,8 @@ public final class PracaTresPoderes {
 		.persistent(Estado.CODEC)
 		.initializer(() -> new Estado(false, 0))
 		.buildAndRegister(Irineu.id("praca"));
+	/** Os ticks de fogos que ainda faltam (só na memória: depois de um reinício a festa já acabou). */
+	private static int festa;
 
 	private PracaTresPoderes() {
 	}
@@ -203,13 +246,129 @@ public final class PracaTresPoderes {
 	public static @Nullable LulaEntity comecarEleicao(ServerLevel level, BlockPos onde, @Nullable Player player) {
 		if (lutaAtiva(level)) return null;
 		LulaEntity lula = Eleicao.comecar(level, onde, player);
-		if (lula != null) pirililili(level);
+		if (lula != null) {
+			pirililili(level);
+			fecharPortalVitoria(level);
+		}
 		return lula;
 	}
 
-	/** As regras da luta, a cada tick do nível da Praça. */
+	// ---------------------------------------------------------------- A vitória
+
+	/** As 9 células do portal da vitória, no meio do espelho d'água (no y da água). */
+	public static List<BlockPos> celulasVitoria() {
+		List<BlockPos> celulas = new ArrayList<>(9);
+		for (int dx = -1; dx <= 1; dx++) {
+			for (int dz = -1; dz <= 1; dz++) celulas.add(ESPELHO.offset(dx, 0, dz));
+		}
+		return celulas;
+	}
+
+	/** Põe o portal da vitória no meio do espelho d'água (a água em volta não entra nele). */
+	public static void abrirPortalVitoria(ServerLevel level) {
+		BlockState portal = JornadaBlocks.PORTAL_VITORIA.defaultBlockState();
+		for (BlockPos p : celulasVitoria()) level.setBlockAndUpdate(p, portal);
+	}
+
+	/**
+	 * Quem ainda está nas 9 células do portal (lutando dentro do espelho d'água) e o que caiu nelas (a faixa) vão para a
+	 * beira do portal antes de ele abrir: a travessia é na hora, e o jogador iria embora sem a faixa e as esferas.
+	 */
+	private static void afastarDoPortal(ServerLevel level) {
+		AABB celulas = new AABB(ESPELHO.getX() - 1, ESPELHO.getY(), ESPELHO.getZ() - 1, ESPELHO.getX() + 2, ESPELHO.getY() + 1, ESPELHO.getZ() + 2);
+		double cx = ESPELHO.getX() + 0.5;
+		double cz = ESPELHO.getZ() + 0.5;
+		for (Entity e : level.getEntitiesOfClass(Entity.class, celulas, e -> e instanceof Player p && !p.isSpectator() || e instanceof ItemEntity)) {
+			// Para o lado mais perto, 2,4 blocos do meio (as células vão até 1,5): ainda dentro do espelho d'água.
+			double dx = e.getX() - cx;
+			double dz = e.getZ() - cz;
+			if (Math.abs(dx) >= Math.abs(dz)) {
+				e.teleportTo(cx + (dx < 0.0 ? -2.4 : 2.4), e.getY(), e.getZ());
+			} else {
+				e.teleportTo(e.getX(), e.getY(), cz + (dz < 0.0 ? -2.4 : 2.4));
+			}
+		}
+	}
+
+	/** Fecha o portal da vitória: a água volta (nada muda se ele não está aberto). */
+	public static void fecharPortalVitoria(ServerLevel level) {
+		for (BlockPos p : celulasVitoria()) {
+			if (level.getBlockState(p).is(JornadaBlocks.PORTAL_VITORIA)) level.setBlockAndUpdate(p, Blocks.WATER.defaultBlockState());
+		}
+	}
+
+	/** O portal da vitória está aberto (as 9 células)? */
+	public static boolean portalVitoriaAberto(ServerLevel level) {
+		return celulasVitoria().stream().allMatch(p -> level.getBlockState(p).is(JornadaBlocks.PORTAL_VITORIA));
+	}
+
+	/**
+	 * O Lulonaro caiu na Praça (o {@code die} dele chama, depois do loot, que já tem a Faixa Presidencial Suprema): a festa
+	 * de partículas e os fogos, as esferas de experiência, o portal da vitória, o avanço e o título para quem está na
+	 * Praça (sem a Fadiga), e o gado, o Padre Kelmon e a horda que sobraram vão embora.
+	 */
+	public static void vitoria(ServerLevel level, LulonaroEntity lulonaro) {
+		Vec3 c = lulonaro.position().add(0.0, lulonaro.getBbHeight() * 0.5, 0.0);
+		// A esfera de poeira nas cores da bandeira, e a primeira salva de fogos em volta do espelho d'água.
+		int[] cores = {VERDE, AMARELO, AZUL, BRANCO};
+		for (int i = 0; i < 300; i++) {
+			double yaw = level.getRandom().nextDouble() * Math.PI * 2.0;
+			double pitch = Math.asin(level.getRandom().nextDouble() * 2.0 - 1.0);
+			double r = 1.5 + level.getRandom().nextDouble() * 4.0;
+			level.sendParticles(new DustParticleOptions(cores[i % cores.length], 2.0F), c.x + Math.cos(yaw) * Math.cos(pitch) * r,
+				c.y + Math.sin(pitch) * r, c.z + Math.sin(yaw) * Math.cos(pitch) * r, 1, 0.0, 0.0, 0.0, 0.0);
+		}
+		level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING, c.x, c.y, c.z, 120, 1.5, 2.0, 1.5, 0.6);
+		for (int i = 0; i < 8; i++) fogos(level, i);
+		festa = FESTA_TICKS;
+		ExperienceOrb.award(level, lulonaro.position().add(0.0, 0.5, 0.0), XP_DA_VITORIA);
+		afastarDoPortal(level);
+		abrirPortalVitoria(level);
+		PortalVitoriaBlock.preparar(level.getServer());
+		Vec3 portal = Vec3.atCenterOf(ESPELHO);
+		level.playSound(null, portal.x, portal.y, portal.z, SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 2.0F, 1.0F);
+		for (ServerPlayer p : level.players()) {
+			if (p.isSpectator()) continue;
+			JornadaGatilhos.SALVOU_O_BRASIL.trigger(p);
+			p.removeEffect(MobEffects.MINING_FATIGUE);
+			p.connection.send(new ClientboundSetTitlesAnimationPacket(10, 80, 20));
+			p.connection.send(new ClientboundSetTitleTextPacket(
+				Component.translatable("jornada.irineu.vitoria.titulo").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)));
+			p.connection.send(new ClientboundSetSubtitleTextPacket(Component.translatable("jornada.irineu.vitoria.subtitulo").withStyle(ChatFormatting.GREEN)));
+		}
+		for (Mob resto : level.getEntities(EntityTypeTest.forClass(Mob.class),
+			m -> m instanceof GadoEntity || m instanceof PadreKelmonEntity || m.entityTags().contains(LulonaroEntity.HORDE_TAG))) {
+			level.sendParticles(ParticleTypes.POOF, resto.getX(), resto.getY() + 0.5, resto.getZ(), 10, 0.3, 0.4, 0.3, 0.02);
+			resto.discard();
+		}
+		Estado estado = level.getAttachedOrCreate(ESTADO);
+		level.setAttached(ESTADO, new Estado(estado.colocada(), estado.vitorias() + 1));
+		Irineu.LOGGER.info("O Lulonaro caiu na Praça dos Três Poderes (vitória {}): o portal da vitória abriu", estado.vitorias() + 1);
+	}
+
+	/** Um foguete de artifício em volta do espelho d'água, nas cores da bandeira (a explosão grande, com rastro e brilho). */
+	private static void fogos(ServerLevel level, int i) {
+		RandomSource random = level.getRandom();
+		double a = i * Math.PI / 4.0 + random.nextDouble() * 0.5;
+		double r = 8.0 + random.nextDouble() * 6.0;
+		ItemStack foguete = new ItemStack(Items.FIREWORK_ROCKET);
+		int cor = new int[] {VERDE, AMARELO, AZUL, BRANCO}[i % 4];
+		int outra = new int[] {AMARELO, VERDE, BRANCO, AZUL}[i % 4];
+		FireworkExplosion.Shape forma = i % 3 == 0 ? FireworkExplosion.Shape.STAR : FireworkExplosion.Shape.LARGE_BALL;
+		foguete.set(DataComponents.FIREWORKS, new Fireworks(1 + random.nextInt(2),
+			List.of(new FireworkExplosion(forma, IntList.of(cor, outra), IntList.of(BRANCO), true, true))));
+		level.addFreshEntity(new FireworkRocketEntity(level, ESPELHO.getX() + 0.5 + Math.cos(a) * r, ESPELHO.getY() + 1.5,
+			ESPELHO.getZ() + 0.5 + Math.sin(a) * r, foguete));
+	}
+
+	/** As regras da luta (e os fogos da vitória), a cada tick do nível da Praça. */
 	private static void tick(ServerLevel level) {
-		if (!isPraca(level) || level.getGameTime() % 10 != 0) return;
+		if (!isPraca(level)) return;
+		if (festa > 0) {
+			festa--;
+			if (festa % 8 == 0) fogos(level, festa / 8);
+		}
+		if (level.getGameTime() % 10 != 0) return;
 		var chefoes = level.getEntities(EntityTypeTest.forClass(ChefaoEntity.class), LivingEntity::isAlive);
 		if (chefoes.isEmpty()) return;
 		// O chefão que caiu da ilha (empurrado, ou na fusão) volta para a praça, no piso livre na frente do Congresso.

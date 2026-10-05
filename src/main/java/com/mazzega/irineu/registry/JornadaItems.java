@@ -71,6 +71,30 @@ public final class JornadaItems {
 	// ---------------------------------------------------------------- M6 câmara
 
 	// ---------------------------------------------------------------- M7 vitória
+	/**
+	 * Faixa Presidencial Suprema: cai do Lulonaro (no lugar da faixa antiga). Peitoral inquebrável, épico, brilhando e à
+	 * prova de fogo: +20 de vida, +4 de dano, +20% de velocidade, firme contra empurrão e +5 de sorte. Vestida, dá voo e
+	 * os efeitos fixos ({@link com.mazzega.irineu.jornada.FaixaSuprema}).
+	 */
+	public static final Item FAIXA_PRESIDENCIAL_SUPREMA = register("faixa_presidencial_suprema", Item::new, new Item.Properties()
+		.humanoidArmor(com.mazzega.irineu.minerio.Materiais.FAIXA_SUPREMA, net.minecraft.world.item.equipment.ArmorType.CHESTPLATE)
+		.attributes(com.mazzega.irineu.minerio.Materiais.FAIXA_SUPREMA.createAttributes(net.minecraft.world.item.equipment.ArmorType.CHESTPLATE)
+			.withModifierAdded(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH, faixa(20.0, false), net.minecraft.world.entity.EquipmentSlotGroup.CHEST)
+			.withModifierAdded(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, faixa(4.0, false), net.minecraft.world.entity.EquipmentSlotGroup.CHEST)
+			.withModifierAdded(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, faixa(0.2, true), net.minecraft.world.entity.EquipmentSlotGroup.CHEST)
+			.withModifierAdded(net.minecraft.world.entity.ai.attributes.Attributes.KNOCKBACK_RESISTANCE, faixa(1.0, false), net.minecraft.world.entity.EquipmentSlotGroup.CHEST)
+			.withModifierAdded(net.minecraft.world.entity.ai.attributes.Attributes.LUCK, faixa(5.0, false), net.minecraft.world.entity.EquipmentSlotGroup.CHEST))
+		.rarity(net.minecraft.world.item.Rarity.EPIC).fireResistant()
+		.component(net.minecraft.core.component.DataComponents.UNBREAKABLE, net.minecraft.util.Unit.INSTANCE)
+		.component(net.minecraft.core.component.DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)
+		.component(net.minecraft.core.component.DataComponents.LORE, dicas("faixa_presidencial_suprema", 3)), true);
+
+	/** Um modificador da faixa (o id é o da faixa; a velocidade soma sobre a base, os outros somam o valor). */
+	private static net.minecraft.world.entity.ai.attributes.AttributeModifier faixa(double valor, boolean sobreABase) {
+		return new net.minecraft.world.entity.ai.attributes.AttributeModifier(Irineu.id("faixa_presidencial_suprema"), valor, sobreABase
+			? net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE
+			: net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE);
+	}
 
 	private JornadaItems() {
 	}

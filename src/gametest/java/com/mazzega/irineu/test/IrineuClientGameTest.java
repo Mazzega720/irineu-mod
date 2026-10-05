@@ -1600,19 +1600,45 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		context.waitTicks(60);
 		heal(server);
 
-		// 16) Fim: o Lulonaro morre e deixa a Faixa Presidencial
+		// 16) Fim: o Lulonaro morre e deixa a Faixa Presidencial Suprema (a antiga não cai mais). Fora da Praça não há
+		// vitória da Jornada: nem o portal nem o avanço (a fase "jornada" confere a vitória na Praça).
+		int vitoriasAntes = server.computeOnServer(IrineuClientGameTest::vitoriasNaPraca);
 		server.runOnServer(mc -> {
 			LulonaroEntity boss = lulonaro(mc);
 			boss.setInvulnerableTime(0);
 			boss.hurtServer(mc.overworld(), mc.overworld().damageSources().playerAttack(player(mc)), 2000.0F);
 		});
 		context.waitTicks(30);
-		boolean sash = server.computeOnServer(mc -> player(mc).getInventory().countItem(ModItems.FAIXA_PRESIDENCIAL) > 0
+		var suprema = com.mazzega.irineu.registry.JornadaItems.FAIXA_PRESIDENCIAL_SUPREMA;
+		boolean sash = server.computeOnServer(mc -> player(mc).getInventory().countItem(suprema) > 0
+			|| !mc.overworld().getEntitiesOfClass(ItemEntity.class, player(mc).getBoundingBox().inflate(40.0), e -> e.getItem().is(suprema)).isEmpty());
+		boolean old = server.computeOnServer(mc -> player(mc).getInventory().countItem(ModItems.FAIXA_PRESIDENCIAL) > 0
 			|| !mc.overworld().getEntitiesOfClass(ItemEntity.class, player(mc).getBoundingBox().inflate(40.0), e -> e.getItem().is(ModItems.FAIXA_PRESIDENCIAL)).isEmpty());
-		System.out.println("[ChefaoTest] Lulonaro derrotado, deixou a Faixa Presidencial: " + sash);
-		if (!sash) throw new AssertionError("O Lulonaro não deixou a Faixa Presidencial");
+		boolean won = server.computeOnServer(mc -> mc.getAdvancements().get(Irineu.id("salvou_o_brasil")) != null
+			&& player(mc).getAdvancements().getOrStartProgress(mc.getAdvancements().get(Irineu.id("salvou_o_brasil"))).isDone());
+		System.out.println("[ChefaoTest] Lulonaro derrotado, deixou a Faixa Presidencial Suprema: " + sash + " (a antiga: " + old
+			+ "; avanço fora da Praça: " + won + ")");
+		if (!sash) throw new AssertionError("O Lulonaro não deixou a Faixa Presidencial Suprema");
+		if (old) throw new AssertionError("A Faixa Presidencial antiga não devia cair mais");
+		if (won) throw new AssertionError("Fora da Praça o Lulonaro não pode dar o avanço salvou_o_brasil");
+		int vitoriasDepois = server.computeOnServer(IrineuClientGameTest::vitoriasNaPraca);
+		if (vitoriasDepois != vitoriasAntes) throw new AssertionError("Fora da Praça o Lulonaro não pode contar vitória na Praça: " + vitoriasAntes + " -> " + vitoriasDepois);
+		boolean portalAqui = server.computeOnServer(mc -> {
+			for (BlockPos c : com.mazzega.irineu.jornada.PracaTresPoderes.celulasVitoria()) {
+				if (mc.overworld().getBlockState(c).is(com.mazzega.irineu.registry.JornadaBlocks.PORTAL_VITORIA)) return true;
+			}
+			return false;
+		});
+		if (portalAqui) throw new AssertionError("Fora da Praça o Lulonaro não pode abrir o portal da vitória");
 		server.runCommand("kill @e[type=!minecraft:player]");
 		server.runCommand("effect give @p minecraft:resistance infinite 4 true");
+	}
+
+	/** Quantas vezes o Lulonaro foi vencido na Praça dos Três Poderes (0 se ela nunca foi usada). */
+	private static int vitoriasNaPraca(net.minecraft.server.MinecraftServer mc) {
+		var praca = mc.getLevel(com.mazzega.irineu.jornada.PracaTresPoderes.DIMENSAO);
+		var estado = praca == null ? null : praca.getAttached(com.mazzega.irineu.jornada.PracaTresPoderes.ESTADO);
+		return estado == null ? 0 : estado.vitorias();
 	}
 
 	private static LulaEntity lula(net.minecraft.server.MinecraftServer mc) {

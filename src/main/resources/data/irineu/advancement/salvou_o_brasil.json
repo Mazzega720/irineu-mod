@@ -1,0 +1,28 @@
+{
+  "parent": "irineu:entrou_na_praca",
+  "criteria": {
+    "salvou": {
+      "trigger": "irineu:salvou_o_brasil",
+      "conditions": {}
+    }
+  },
+  "display": {
+    "icon": {
+      "id": "irineu:faixa_presidencial_suprema"
+    },
+    "title": {
+      "translate": "advancements.irineu.salvou_o_brasil.title"
+    },
+    "description": {
+      "translate": "advancements.irineu.salvou_o_brasil.description"
+    },
+    "frame": "challenge",
+    "announce_to_chat": true,
+    "show_toast": true
+  },
+  "requirements": [
+    [
+      "salvou"
+    ]
+  ]
+}
