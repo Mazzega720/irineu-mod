@@ -536,5 +536,19 @@
   "block.irineu.urna_eleitoral_sagrada.fora": "A urna sagrada só vale na Praça dos Três Poderes.",
   "item.irineu.urna_eletronica.so_na_praca": "A urna só vale na Praça dos Três Poderes!",
   "item.irineu.urna_eletronica.dica": "Só vale na Praça dos Três Poderes",
-  "item.irineu.bandeira_nacional.na_praca": "Aqui a bandeira não abre portal: da Praça só se sai vencendo."
+  "item.irineu.bandeira_nacional.na_praca": "Aqui a bandeira não abre portal: da Praça só se sai vencendo.",
+  "subtitles.irineu.block.pedestal_reliquia.triunfo": "Fanfarra triunfal",
+  "block.irineu.pedestal_reliquia": "Pedestal da Relíquia",
+  "block.irineu.pedestal_reliquia.dica_1": "Um dos 4 pedestais da Câmara dos Três Poderes",
+  "block.irineu.pedestal_reliquia.dica_2": "Com as 4 relíquias, o portal da Praça se abre",
+  "block.irineu.pedestal_reliquia.pede": "Este pedestal pede: %s",
+  "block.irineu.pedestal_reliquia.ja_tem": "Este pedestal já tem a sua relíquia: %s",
+  "block.irineu.pedestal_reliquia.encaixou": "%s no lugar! (%s de 4)",
+  "block.irineu.pedestal_reliquia.no_lugar": "%s está no lugar (%s de 4)",
+  "block.irineu.portal_praca_tres_poderes": "Portal da Praça dos Três Poderes",
+  "block.irineu.portal_praca_tres_poderes.abriu": "O portal para a Praça dos Três Poderes se abriu!",
+  "item.irineu.ata_camara": "Ata da Sessão Secreta",
+  "book.irineu.ata_camara.1": "Ata da Sessão Secreta\n\nSob a terra vermelha do Cerrado, longe dos olhos do povo, os Três Poderes ergueram esta Câmara para guardar o caminho até a Praça.",
+  "book.irineu.ata_camara.2": "Quatro pedestais cercam o poço, cada um com o nome da sua relíquia: o Circuito, o Selo, a Caneta e o Haltere. A relíquia errada, o pedestal recusa.",
+  "book.irineu.ata_camara.3": "Com as quatro no lugar, o poço se acende em verde e amarelo. Quem o atravessar chega à Praça, onde a urna espera o último voto.\n\nNada mais havendo a tratar, encerrou-se a sessão."
 }

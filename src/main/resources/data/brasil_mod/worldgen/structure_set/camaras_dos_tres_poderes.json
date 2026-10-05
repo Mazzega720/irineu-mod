@@ -1,0 +1,16 @@
+{
+  "placement": {
+    "type": "minecraft:concentric_rings",
+    "count": 24,
+    "distance": 10,
+    "preferred_biomes": "#brasil_mod:has_structure/camara_dos_tres_poderes",
+    "salt": 1709300007,
+    "spread": 3
+  },
+  "structures": [
+    {
+      "structure": "brasil_mod:camara_dos_tres_poderes",
+      "weight": 1
+    }
+  ]
+}

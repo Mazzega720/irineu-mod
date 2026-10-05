@@ -2049,5 +2049,13 @@
       }
     ],
     "subtitle": "subtitles.irineu.block.urna_eleitoral_sagrada.pirililili"
+  },
+  "block.pedestal_reliquia.triunfo": {
+    "sounds": [
+      {
+        "name": "irineu:jornada/triunfo"
+      }
+    ],
+    "subtitle": "subtitles.irineu.block.pedestal_reliquia.triunfo"
   }
 }

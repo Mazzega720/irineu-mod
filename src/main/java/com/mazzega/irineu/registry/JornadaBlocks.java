@@ -58,6 +58,20 @@ public final class JornadaBlocks {
 		itemDoRitual("urna_eleitoral_sagrada"));
 
 	// ---------------------------------------------------------------- M6 câmara
+	/** Pedestal de relíquia (os 4 em volta do poço da Câmara dos Três Poderes): cada um aceita a sua. Inquebrável e sem loot. */
+	public static final Block PEDESTAL_RELIQUIA = register("pedestal_reliquia", com.mazzega.irineu.jornada.PedestalReliquiaBlock::new,
+		ritual(net.minecraft.world.level.material.MapColor.QUARTZ, net.minecraft.world.level.block.SoundType.STONE).noOcclusion()
+			.lightLevel(s -> s.getValue(com.mazzega.irineu.jornada.PedestalReliquiaBlock.CHEIO) ? 12 : 3),
+		itemDoRitual("pedestal_reliquia"));
+	/** Portal da Praça dos Três Poderes (acende no poço da Câmara com as 4 relíquias): só bloco, como o portal do End. */
+	public static final Block PORTAL_PRACA = registerBlockOnly("portal_praca_tres_poderes", com.mazzega.irineu.jornada.PortalPracaBlock::new,
+		BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.COLOR_LIGHT_GREEN).noCollision()
+			.strength(-1.0F, 3600000.0F).lightLevel(s -> 15).noLootTable().pushReaction(net.minecraft.world.level.material.PushReaction.IMMOVEABLE));
+
+	static {
+		// O portal usa o TheEndPortalBlockEntity (o céu estrelado do End): o tipo precisa aceitar o bloco (FabricBlockEntityType).
+		net.minecraft.world.level.block.entity.BlockEntityTypes.END_PORTAL.addValidBlock(PORTAL_PRACA);
+	}
 
 	// ---------------------------------------------------------------- M7 vitória
 

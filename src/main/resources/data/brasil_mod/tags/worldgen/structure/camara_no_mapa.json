@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "brasil_mod:camara_dos_tres_poderes",
-      "required": false
-    }
+    "brasil_mod:camara_dos_tres_poderes"
   ]
 }

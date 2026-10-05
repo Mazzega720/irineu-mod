@@ -25,6 +25,8 @@ public final class JornadaSounds {
 	public static final SoundEvent PIRILILILI = register("block.urna_eleitoral_sagrada.pirililili");
 
 	// ---------------------------------------------------------------- M6 câmara
+	/** A fanfarra quando os 4 pedestais da Câmara abrem o portal da Praça (sintetizada, tools/jornada/pedestais.py). */
+	public static final SoundEvent PEDESTAL_TRIUNFO = register("block.pedestal_reliquia.triunfo");
 
 	// ---------------------------------------------------------------- M7 vitória
 

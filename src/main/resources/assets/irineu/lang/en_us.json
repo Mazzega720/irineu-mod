@@ -536,5 +536,19 @@
   "block.irineu.urna_eleitoral_sagrada.fora": "The sacred ballot box only works in the Three Powers Square.",
   "item.irineu.urna_eletronica.so_na_praca": "The ballot box only works in the Three Powers Square!",
   "item.irineu.urna_eletronica.dica": "Only works in the Three Powers Square",
-  "item.irineu.bandeira_nacional.na_praca": "The flag opens no portal here: the only way out of the Square is to win."
+  "item.irineu.bandeira_nacional.na_praca": "The flag opens no portal here: the only way out of the Square is to win.",
+  "subtitles.irineu.block.pedestal_reliquia.triunfo": "Triumphant fanfare",
+  "block.irineu.pedestal_reliquia": "Relic Pedestal",
+  "block.irineu.pedestal_reliquia.dica_1": "One of the 4 pedestals of the Chamber of the Three Powers",
+  "block.irineu.pedestal_reliquia.dica_2": "With all 4 relics, the portal to the Square opens",
+  "block.irineu.pedestal_reliquia.pede": "This pedestal asks for: %s",
+  "block.irineu.pedestal_reliquia.ja_tem": "This pedestal already holds its relic: %s",
+  "block.irineu.pedestal_reliquia.encaixou": "%s in place! (%s of 4)",
+  "block.irineu.pedestal_reliquia.no_lugar": "%s is in place (%s of 4)",
+  "block.irineu.portal_praca_tres_poderes": "Three Powers Square Portal",
+  "block.irineu.portal_praca_tres_poderes.abriu": "The portal to the Three Powers Square has opened!",
+  "item.irineu.ata_camara": "Minutes of the Secret Session",
+  "book.irineu.ata_camara.1": "Minutes of the Secret Session\n\nBeneath the red earth of the Cerrado, far from the people's eyes, the Three Powers raised this Chamber to guard the way to the Square.",
+  "book.irineu.ata_camara.2": "Four pedestals ring the well, each bearing the name of its relic: the Circuit, the Seal, the Pen and the Dumbbell. The wrong relic, the pedestal refuses.",
+  "book.irineu.ata_camara.3": "With all four in place, the well lights up in green and yellow. Whoever crosses it reaches the Square, where the ballot box awaits the final vote.\n\nThere being no further business, the session was closed."
 }

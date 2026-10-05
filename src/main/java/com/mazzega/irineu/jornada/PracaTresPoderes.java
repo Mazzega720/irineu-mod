@@ -56,7 +56,7 @@ import org.jspecify.annotations.Nullable;
  * <li>Na Praça nunca chove ({@code LevelMixin}: sem clima, o céu de crepúsculo não fica cinza quando chove lá fora), e
  * a Bandeira Nacional não acende portal: daqui só se sai vencendo (ou morrendo).</li>
  * </ul>
- * Por enquanto se chega só por comando; o portal da Câmara dos Três Poderes chama {@link #levarJogador}.
+ * Chega-se pelo portal da Câmara dos Três Poderes ({@link PortalPracaBlock}, que usa {@link #destino}) ou por comando.
  */
 public final class PracaTresPoderes {
 	public static final ResourceKey<Level> DIMENSAO = ResourceKey.create(Registries.DIMENSION, Brasil.id("praca_tres_poderes"));

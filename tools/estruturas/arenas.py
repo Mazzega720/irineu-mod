@@ -10,8 +10,8 @@ As arenas dos rituais da Jornada pelo Brasil (4.0, marco M4), com o Encaixe (too
   disco) virada para o sul, jukeboxes e blocos musicais de caixa de som, a plateia, o baú com o disco garantido e a placa;
   em volta, uma clareira de pedra até o raio ~16 (a caixa larga deixa as árvores da mata longe da plataforma).
 Cada baú tem a pool garantida (bateria ou disco), o loot comum, o mapa de explorador até a Câmara dos Três Poderes (tag
-brasil_mod:camara_no_mapa, com required false: a câmara entra no M6; até lá o mapa não sai) e o livro "Profecia dos
-Três Poderes" (as traduções do mapa e do livro ficam no tools/jornada/reliquias.py). Do livro, só o nome do item e as
+brasil_mod:camara_no_mapa, que aponta para a câmara do tools/estruturas/camara.py) e o livro "Profecia dos Três Poderes"
+(as traduções do mapa e do livro ficam no tools/jornada/reliquias.py). Do livro, só o nome do item e as
 páginas se traduzem: o título e o autor de um livro escrito são texto cru no 26.3 e ficam em português.
 
 Gera: data/brasil_mod/structure/{cratera_varginha/cratera,altar_do_julgamento/altar}.nbt, as pools, as estruturas
@@ -315,7 +315,7 @@ e.structure_set("altares_do_julgamento", "altar_do_julgamento", 24, 8, 170930000
 e.biome_tag("altar_do_julgamento", ["mata_atlantica"])
 
 # ====================================================================== O mapa até a Câmara e o loot dos baús
-e.structure_tag("camara_no_mapa", ["camara_dos_tres_poderes"], required=False)
+e.structure_tag("camara_no_mapa", ["camara_dos_tres_poderes"], required=True)
 PAGINAS = [f"book.irineu.profecia.{i}" for i in range(1, 5)]
 
 

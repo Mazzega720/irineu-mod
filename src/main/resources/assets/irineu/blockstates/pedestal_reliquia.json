@@ -1,0 +1,124 @@
+{
+  "variants": {
+    "cheio=false,facing=north,reliquia=varginha": {
+      "model": "irineu:block/pedestal_reliquia_varginha"
+    },
+    "cheio=true,facing=north,reliquia=varginha": {
+      "model": "irineu:block/pedestal_reliquia_varginha_cheio"
+    },
+    "cheio=false,facing=north,reliquia=ednaldo": {
+      "model": "irineu:block/pedestal_reliquia_ednaldo"
+    },
+    "cheio=true,facing=north,reliquia=ednaldo": {
+      "model": "irineu:block/pedestal_reliquia_ednaldo_cheio"
+    },
+    "cheio=false,facing=north,reliquia=manoel": {
+      "model": "irineu:block/pedestal_reliquia_manoel"
+    },
+    "cheio=true,facing=north,reliquia=manoel": {
+      "model": "irineu:block/pedestal_reliquia_manoel_cheio"
+    },
+    "cheio=false,facing=north,reliquia=bambam": {
+      "model": "irineu:block/pedestal_reliquia_bambam"
+    },
+    "cheio=true,facing=north,reliquia=bambam": {
+      "model": "irineu:block/pedestal_reliquia_bambam_cheio"
+    },
+    "cheio=false,facing=east,reliquia=varginha": {
+      "model": "irineu:block/pedestal_reliquia_varginha",
+      "y": 90
+    },
+    "cheio=true,facing=east,reliquia=varginha": {
+      "model": "irineu:block/pedestal_reliquia_varginha_cheio",
+      "y": 90
+    },
+    "cheio=false,facing=east,reliquia=ednaldo": {
+      "model": "irineu:block/pedestal_reliquia_ednaldo",
+      "y": 90
+    },
+    "cheio=true,facing=east,reliquia=ednaldo": {
+      "model": "irineu:block/pedestal_reliquia_ednaldo_cheio",
+      "y": 90
+    },
+    "cheio=false,facing=east,reliquia=manoel": {
+      "model": "irineu:block/pedestal_reliquia_manoel",
+      "y": 90
+    },
+    "cheio=true,facing=east,reliquia=manoel": {
+      "model": "irineu:block/pedestal_reliquia_manoel_cheio",
+      "y": 90
+    },
+    "cheio=false,facing=east,reliquia=bambam": {
+      "model": "irineu:block/pedestal_reliquia_bambam",
+      "y": 90
+    },
+    "cheio=true,facing=east,reliquia=bambam": {
+      "model": "irineu:block/pedestal_reliquia_bambam_cheio",
+      "y": 90
+    },
+    "cheio=false,facing=south,reliquia=varginha": {
+      "model": "irineu:block/pedestal_reliquia_varginha",
+      "y": 180
+    },
+    "cheio=true,facing=south,reliquia=varginha": {
+      "model": "irineu:block/pedestal_reliquia_varginha_cheio",
+      "y": 180
+    },
+    "cheio=false,facing=south,reliquia=ednaldo": {
+      "model": "irineu:block/pedestal_reliquia_ednaldo",
+      "y": 180
+    },
+    "cheio=true,facing=south,reliquia=ednaldo": {
+      "model": "irineu:block/pedestal_reliquia_ednaldo_cheio",
+      "y": 180
+    },
+    "cheio=false,facing=south,reliquia=manoel": {
+      "model": "irineu:block/pedestal_reliquia_manoel",
+      "y": 180
+    },
+    "cheio=true,facing=south,reliquia=manoel": {
+      "model": "irineu:block/pedestal_reliquia_manoel_cheio",
+      "y": 180
+    },
+    "cheio=false,facing=south,reliquia=bambam": {
+      "model": "irineu:block/pedestal_reliquia_bambam",
+      "y": 180
+    },
+    "cheio=true,facing=south,reliquia=bambam": {
+      "model": "irineu:block/pedestal_reliquia_bambam_cheio",
+      "y": 180
+    },
+    "cheio=false,facing=west,reliquia=varginha": {
+      "model": "irineu:block/pedestal_reliquia_varginha",
+      "y": 270
+    },
+    "cheio=true,facing=west,reliquia=varginha": {
+      "model": "irineu:block/pedestal_reliquia_varginha_cheio",
+      "y": 270
+    },
+    "cheio=false,facing=west,reliquia=ednaldo": {
+      "model": "irineu:block/pedestal_reliquia_ednaldo",
+      "y": 270
+    },
+    "cheio=true,facing=west,reliquia=ednaldo": {
+      "model": "irineu:block/pedestal_reliquia_ednaldo_cheio",
+      "y": 270
+    },
+    "cheio=false,facing=west,reliquia=manoel": {
+      "model": "irineu:block/pedestal_reliquia_manoel",
+      "y": 270
+    },
+    "cheio=true,facing=west,reliquia=manoel": {
+      "model": "irineu:block/pedestal_reliquia_manoel_cheio",
+      "y": 270
+    },
+    "cheio=false,facing=west,reliquia=bambam": {
+      "model": "irineu:block/pedestal_reliquia_bambam",
+      "y": 270
+    },
+    "cheio=true,facing=west,reliquia=bambam": {
+      "model": "irineu:block/pedestal_reliquia_bambam_cheio",
+      "y": 270
+    }
+  }
+}
