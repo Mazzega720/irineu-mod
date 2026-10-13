@@ -81,6 +81,7 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 			if (runs("bestiario")) BestiarioGameTests.testBestiario(context, singleplayer);
 			// A Jornada pelo Brasil (versão 4.0).
 			if (runs("monstros")) MonstrosGameTests.testMonstros(context, singleplayer);
+			if (runs("bacamarteiro")) fotografarBacamarteiro(context, singleplayer);
 			if (runs("reliquias")) ReliquiasGameTests.testReliquias(context, singleplayer);
 			if (runs("praca")) PracaGameTests.testPraca(context, singleplayer);
 			if (runs("camara")) CamaraGameTests.testCamara(context, singleplayer);
@@ -2179,6 +2180,82 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		galeriaChefao(context, singleplayer, 0, ModEntities.LULA, new String[] {"NENHUMA", "COMENDO", "ESTRELA", "INVOCANDO", "INVESTIDA", "VORTICE"}, 3.0, 26);
 		galeriaChefao(context, singleplayer, 1, ModEntities.BOLSONARO, new String[] {"NENHUMA", "FUZILANDO", "FLEXOES", "MITADA", "CHEGADA", "AJOELHANDO"}, 3.0, 18);
 		galeriaChefao(context, singleplayer, 2, ModEntities.LULONARO, new String[] {"ESFERA", "GOLPE_NO_AR", "DRENANDO"}, 6.5, 30);
+		server.runCommand("gamemode survival @p");
+	}
+
+	/**
+	 * Vitrine iluminada para inspeção visual do Bacamarteiro dentro do Minecraft:
+	 * tira os screenshots {@code bacamarteiro_frente}, {@code bacamarteiro_perfil} e {@code bacamarteiro_ataque}.
+	 */
+	static void fotografarBacamarteiro(ClientGameTestContext context, TestSingleplayerContext singleplayer) {
+		var server = singleplayer.getServer();
+		server.runCommand("kill @e[type=!minecraft:player]");
+		server.runCommand("time set noon");
+		server.runCommand("weather clear");
+		server.runCommand("gamemode spectator @p");
+
+		int vx = 26500;
+		int vz = 500;
+		server.runCommand(String.format(Locale.ROOT, "tp @p %d.5 -59.0 %d.5 0 0", vx, vz));
+		context.waitTicks(10);
+		singleplayer.getConnection().waitForChunksRender();
+
+		// Monta uma vitrine clara e bem iluminada para destacar o chapéu, o gibão e o bacamarte
+		server.runCommand(String.format(Locale.ROOT, "fill %d -61 %d %d -61 %d minecraft:smooth_quartz", vx - 5, vz - 5, vx + 5, vz + 8));
+		server.runCommand(String.format(Locale.ROOT, "fill %d -60 %d %d -55 %d minecraft:white_concrete", vx - 5, vz + 7, vx + 5, vz + 7));
+		server.runCommand(String.format(Locale.ROOT, "fill %d -61 %d %d -61 %d minecraft:sea_lantern", vx - 3, vz + 1, vx + 3, vz + 1));
+
+		context.runOnClient(mc -> mc.options.hideGui = true);
+
+		// a) bacamarteiro_frente: olhando de frente para a câmera (câmera olhando para -Z, mob com yaw = 0 olhando para +Z)
+		server.runOnServer(mc -> {
+			ServerLevel level = mc.overworld();
+			var b = com.mazzega.irineu.registry.BestiarioEntities.BACAMARTEIRO.create(level, net.minecraft.world.entity.EntitySpawnReason.COMMAND);
+			b.snapTo(vx + 0.5, -60.0, vz + 3.5, 0.0F, 0.0F);
+			b.setYRot(0.0F);
+			b.setYHeadRot(0.0F);
+			b.yBodyRot = 0.0F;
+			b.setNoAi(true);
+			b.setSilent(true);
+			b.setPersistenceRequired();
+			level.addFreshEntity(b);
+		});
+		server.runCommand(String.format(Locale.ROOT, "tp @p %d.5 -59.65 %d.3 180 6", vx, vz + 6));
+		context.waitTicks(30);
+		singleplayer.getConnection().waitForChunksRender();
+		context.takeScreenshot("bacamarteiro_frente");
+
+		// b) bacamarteiro_perfil: virado de lado (yaw = 90) com a câmera no norte olhando para o braço direito e o bacamarte
+		server.runOnServer(mc -> {
+			for (var b : mc.overworld().getEntities(com.mazzega.irineu.registry.BestiarioEntities.BACAMARTEIRO, e -> true)) {
+				b.snapTo(vx + 0.5, -60.0, vz + 3.5, 90.0F, 0.0F);
+				b.setYRot(90.0F);
+				b.setYHeadRot(90.0F);
+				b.yBodyRot = 90.0F;
+			}
+		});
+		server.runCommand(String.format(Locale.ROOT, "tp @p %d.5 -59.65 %d.7 0 6", vx, vz));
+		context.waitTicks(25);
+		singleplayer.getConnection().waitForChunksRender();
+		context.takeScreenshot("bacamarteiro_perfil");
+
+		// c) bacamarteiro_ataque: estado de mira/ataque acionado (braço levantado apontando o bacamarte)
+		server.runOnServer(mc -> {
+			for (var b : mc.overworld().getEntities(com.mazzega.irineu.registry.BestiarioEntities.BACAMARTEIRO, e -> true)) {
+				b.snapTo(vx + 0.5, -60.0, vz + 3.5, 35.0F, 0.0F);
+				b.setYRot(35.0F);
+				b.setYHeadRot(35.0F);
+				b.yBodyRot = 35.0F;
+				setSynced(b, "DATA_MIRANDO", true);
+			}
+		});
+		server.runCommand(String.format(Locale.ROOT, "tp @p %d.5 -59.65 %d.3 180 6", vx, vz + 6));
+		context.waitTicks(25);
+		singleplayer.getConnection().waitForChunksRender();
+		context.takeScreenshot("bacamarteiro_ataque");
+
+		context.runOnClient(mc -> mc.options.hideGui = false);
+		server.runCommand("kill @e[type=!minecraft:player]");
 		server.runCommand("gamemode survival @p");
 	}
 
