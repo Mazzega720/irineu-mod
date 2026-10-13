@@ -2205,8 +2205,6 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		server.runCommand(String.format(Locale.ROOT, "fill %d -60 %d %d -55 %d minecraft:white_concrete", vx - 5, vz + 7, vx + 5, vz + 7));
 		server.runCommand(String.format(Locale.ROOT, "fill %d -61 %d %d -61 %d minecraft:sea_lantern", vx - 3, vz + 1, vx + 3, vz + 1));
 
-		context.runOnClient(mc -> mc.options.hideGui = true);
-
 		// a) bacamarteiro_frente: olhando de frente para a câmera (câmera olhando para -Z, mob com yaw = 0 olhando para +Z)
 		server.runOnServer(mc -> {
 			ServerLevel level = mc.overworld();
@@ -2254,7 +2252,6 @@ public class IrineuClientGameTest implements FabricClientGameTest {
 		singleplayer.getConnection().waitForChunksRender();
 		context.takeScreenshot("bacamarteiro_ataque");
 
-		context.runOnClient(mc -> mc.options.hideGui = false);
 		server.runCommand("kill @e[type=!minecraft:player]");
 		server.runCommand("gamemode survival @p");
 	}
