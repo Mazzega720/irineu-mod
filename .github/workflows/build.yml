@@ -50,7 +50,7 @@ jobs:
           timeout 5m xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +iglx" ./gradlew runClientGameTest --no-daemon
 
       - name: Upload jar
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: irineu-mod-jar
           path: |
@@ -61,7 +61,7 @@ jobs:
 
       - name: Upload in-game screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: in-game-screenshots
           path: |
